@@ -83,8 +83,12 @@ export class SendRoleFormComponent implements OnInit {
     submitForm(form: NgForm) {
         if (form.valid) {
             let editedRole = new Role();
-	    
-            this.model.saveRole(this.role);
+            editedRole.access = this.accessSelectedItems;
+            editedRole.gbu = this.gbuSelectedItems;
+            editedRole.region = this.regionSelectedItems;
+            editedRole.cogs = this.cogsSelectedItems;
+            console.log(editedRole);
+            this.model.saveRole(editedRole);
             this.router.navigateByUrl("/");
         }
     }
