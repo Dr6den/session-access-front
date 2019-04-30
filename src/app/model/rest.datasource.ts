@@ -2,8 +2,7 @@ import { Injectable, Inject, InjectionToken } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Task } from "./task.model";
-import { Tasklist } from "../model/tasklist.model";
+import { Role } from "../model/role.model";
 
 export const REST_URL = new InjectionToken("rest_url");
 
@@ -11,28 +10,18 @@ export const REST_URL = new InjectionToken("rest_url");
 export class RestDataSource {
     constructor(private http: HttpClient,
         @Inject(REST_URL) private url: string) { }
-
-    getTasklist(): Observable<Task[]> {
-        let url = this.url + "/getTasklist";
-        return this.sendRequest<Task[]>("GET", url);
+        
+    getRoles(): Observable<Role> {
+        let url = this.url + "/getRoles";
+        return this.sendRequest<Role>("GET", url);
+    }
+    
+    saveRole(role: Role): Observable<Role> {
+	let url = this.url + "/postTask";
+        return this.sendRequest<Role>("POST", url, role);
     }
 
-    getExecutors(): Observable<string[]> {
-        let url = this.url + "/getExecutors";
-        return this.sendRequest<string[]>("GET", url);
-    }
-
-    saveTask(task: Task): Observable<Task> {
-	let url = this.url + "/saveTask/" + task.name;
-        return this.sendRequest<Task>("PUT", url, task);
-    }
-
-    deleteTask(id: string): Observable<string> {
-	let url = this.url + "/deleteTask/" + id;
-        return this.sendRequest<string>("DELETE", url);
-    }
-
-    private sendRequest<T>(verb: string, url: string, body?: Task)
+    private sendRequest<T>(verb: string, url: string, body?: Object)
         : Observable<T> {
 
         let myHeaders = new HttpHeaders();

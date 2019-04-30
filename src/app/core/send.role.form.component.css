@@ -26,3 +26,43 @@ transform: rotate(45deg);
 .close:after {
 transform: rotate(-45deg);
 }
+
+:host /deep/ .multiselect-dropdown[_ngcontent-c1]  {
+    background-color: Aquamarine;
+}
+
+:host /deep/ .dropdown-list[_ngcontent-c1] {
+    background-color: Aquamarine;
+}
+
+#maindiv {
+    background-color: darkturquoise;
+}
+
+@media (min-width: 576px) {
+	#maindiv {            
+            padding: 3rem;
+        }
+}
+
+@media (min-width: 300px) {
+	#maindiv {            
+            padding: 0.5rem;
+        }
+}
+
+@media (max-width: 380px) {
+    .btn {
+        width: 3rem;
+        font-size: 0.75rem;
+        padding-left: 0.3rem;
+    }
+}
+
+@media (max-width: 340px) {
+    .btn {
+        width: 2.5rem;
+        font-size: 0.75rem;
+        padding-left: 0.1rem;
+    }
+}
