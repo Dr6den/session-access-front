@@ -40,12 +40,15 @@ export class SendRoleFormComponent implements OnInit {
                             this.accessDropdownList = this.role.access.map(value => {return {item_id: elnum++, item_text: value}});
                             this.accessSelectedItems = [{item_id: 0, item_text: this.role.access[0]}];
                             //filling in gbu dropdown from role access
+                            elnum = 0;
                             this.gbuDropdownList = this.role.gbu.map(value => {return {item_id: elnum++, item_text: value}});
                             this.gbuSelectedItems = [{item_id: 0, item_text: this.role.gbu[0]}];
                             //filling in region dropdown from role access
+                            elnum = 0;
                             this.regionDropdownList = this.role.region.map(value => {return {item_id: elnum++, item_text: value}});
                             this.regionSelectedItems = [{item_id: 0, item_text: this.role.region[0]}];
                             //filling in cogs dropdown from role access
+                            elnum = 0;
                             this.cogsDropdownList = this.role.cogs.map(value => {return {item_id: elnum++, item_text: value}});
                             this.cogsSelectedItems = [{item_id: 0, item_text: this.role.cogs[0]}];
 			}
