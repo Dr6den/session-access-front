@@ -91,7 +91,17 @@ export class SendRoleFormComponent implements OnInit {
             editedRole.region = this.regionSelectedItems;
             editedRole.cogs = this.cogsSelectedItems;
             console.log(editedRole);
-            this.model.saveRole(editedRole);
+            this.model.saveRole(editedRole).subscribe(
+                (val) => {
+                    /*console.log("POST call successful value returned in body",
+                        val);*/
+                },
+                response => {
+                    //console.log("POST call in error", response);
+                },
+                () => {
+                    //console.log("The POST observable is now completed.");
+                });
             this.router.navigateByUrl("/");
         }
     }

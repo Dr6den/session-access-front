@@ -1,5 +1,5 @@
 import { Injectable, Inject, InjectionToken } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Role } from "../model/role.model";
@@ -29,13 +29,13 @@ export class RestDataSource {
 		myHeaders = myHeaders.set("Access-Control-Allow-Origin","*");
 		myHeaders = myHeaders.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
 		myHeaders = myHeaders.set("Access-Key", "<secret>");
-		myHeaders = myHeaders.set("Application-Names", ["exampleApp", "pro"]);
-	}
+		myHeaders = myHeaders.set("Application-Names", ["exampleApp", "pro"]);        
+        }
         return this.http.request<T>(verb, url, {
             body: body,
             headers: myHeaders
         }).pipe(catchError((error: Response) => 
             throwError(`Network Error: ${error.statusText} (${error.status})`)));
-    }
+        }
 
 }

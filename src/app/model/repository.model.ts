@@ -16,7 +16,7 @@ export class Model {
         return this.dataSource.getRoles();
     }
     
-    saveRole(role: Role) {
-        this.dataSource.saveRole(role);
+    saveRole(role: Role): Observable<Role> {
+        return this.dataSource.saveRole(role);
     }
 }
