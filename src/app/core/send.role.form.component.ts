@@ -37,20 +37,20 @@ export class SendRoleFormComponent implements OnInit {
                             this.role = data;
                             let elnum = 0;
                             //filling in access dropdown from role access
-                            this.accessDropdownList = this.role.access.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.accessSelectedItems = [{item_id: 0, item_text: this.role.access[0]}];
+                            this.accessDropdownList = this.role.ACCESS.map(value => {return {item_id: elnum++, item_text: value}});
+                            this.accessSelectedItems = [{item_id: 0, item_text: this.role.ACCESS[0]}];
                             //filling in gbu dropdown from role access
                             elnum = 0;
-                            this.gbuDropdownList = this.role.gbu.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.gbuSelectedItems = [{item_id: 0, item_text: this.role.gbu[0]}];
+                            this.gbuDropdownList = this.role.GBU.map(value => {return {item_id: elnum++, item_text: value}});
+                            this.gbuSelectedItems = [{item_id: 0, item_text: this.role.GBU[0]}];
                             //filling in region dropdown from role access
                             elnum = 0;
-                            this.regionDropdownList = this.role.region.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.regionSelectedItems = [{item_id: 0, item_text: this.role.region[0]}];
+                            this.regionDropdownList = this.role.REGION.map(value => {return {item_id: elnum++, item_text: value}});
+                            this.regionSelectedItems = [{item_id: 0, item_text: this.role.REGION[0]}];
                             //filling in cogs dropdown from role access
                             elnum = 0;
-                            this.cogsDropdownList = this.role.cogs.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.cogsSelectedItems = [{item_id: 0, item_text: this.role.cogs[0]}];
+                            this.cogsDropdownList = this.role.COGS.map(value => {return {item_id: elnum++, item_text: value}});
+                            this.cogsSelectedItems = [{item_id: 0, item_text: this.role.COGS[0]}];
 			}
                     });
     }
@@ -86,10 +86,10 @@ export class SendRoleFormComponent implements OnInit {
     submitForm(form: NgForm) {
         if (form.valid) {
             let editedRole = new Role();
-            editedRole.access = this.accessSelectedItems;
-            editedRole.gbu = this.gbuSelectedItems;
-            editedRole.region = this.regionSelectedItems;
-            editedRole.cogs = this.cogsSelectedItems;
+            editedRole.ACCESS = this.accessSelectedItems;
+            editedRole.GBU = this.gbuSelectedItems;
+            editedRole.REGION = this.regionSelectedItems;
+            editedRole.COGS = this.cogsSelectedItems;
             console.log(editedRole);
             this.model.saveRole(editedRole).subscribe(
                 (val) => {

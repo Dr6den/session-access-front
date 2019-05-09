@@ -22,7 +22,7 @@ export class RestDataSource {
     }
 
     private sendRequest<T>(verb: string, url: string, body?: Object)
-        : Observable<T> {
+        : Observable<T> {console.log(body);
 
         let myHeaders = new HttpHeaders();
 	if(verb == "POST") {
