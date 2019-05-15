@@ -3,9 +3,10 @@ import { Model } from "../model/repository.model";
 
 @Component({
     selector: "paTable",
-    templateUrl: "table.component.html"
+    templateUrl: "index.component.html",
+    styleUrls: ["index.component.css"]
 })
-export class TableComponent {
+export class IndexComponent {
 
     constructor(private model: Model) { }
 
