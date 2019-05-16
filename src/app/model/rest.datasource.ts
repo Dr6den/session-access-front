@@ -12,9 +12,14 @@ export class RestDataSource {
     constructor(private http: HttpClient,
         @Inject(REST_URL) private url: string) { }
         
-    getRoles(): Observable<Role> {
-        let url = this.url + "/getRoles";
+    getRole(): Observable<Role> {
+        let url = this.url + "/getRole";
         return this.sendRequest<Role>("GET", url);
+    }
+    
+    getRoles(): Observable<Role[]> {
+        let url = this.url + "/getRoles";
+        return this.sendRequest<Role[]>("GET", url);
     }
     
     saveRole(role: Role): Observable<Role> {
@@ -25,6 +30,11 @@ export class RestDataSource {
     getUser(): Observable<User> {
         let url = this.url + "/getUser";
         return this.sendRequest<User>("GET", url);
+    }
+    
+    getUsers(): Observable<User[]> {
+        let url = this.url + "/getUsers";
+        return this.sendRequest<User[]>("GET", url);
     }
     
     saveUser(user: User): Observable<User> {

@@ -30,7 +30,7 @@ export class SendRoleFormComponent implements OnInit {
     }
                 
     getRoleData() {
-        this.model.getRoles().subscribe(data => {
+        this.model.getRole().subscribe(data => {
 			if ((data != undefined)) {
                             this.role = data;
                             let elnum = 0;

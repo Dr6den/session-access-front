@@ -3,19 +3,31 @@ import { Role } from "../model/role.model";
 import { User } from "../model/user.model";
 import { Observable, Subscription } from "rxjs";
 import { RestDataSource } from "./rest.datasource";
-import { take, first, takeUntil, map } from 'rxjs/operators';
 
 @Injectable()
 export class Model {
-    role;
+    roles;
+    users;
     model;
     subscriptions = new Subscription();
 
     constructor(private dataSource: RestDataSource) {
     }
     
-    getRoles(): Observable<Role> {
-        return this.dataSource.getRoles();
+    getRole(): Observable<Role> {
+        return this.dataSource.getRole();
+    }
+    
+    getRoles(): void {
+	this.dataSource.getRoles().subscribe((data) => {
+		if (data[0] != undefined) {
+			this.roles = data;
+		}
+	});
+    }
+    
+    getRolesArray(): Role[] {
+        return this.roles;
     }
     
     saveRole(role: Role): Observable<Role> {
@@ -24,6 +36,18 @@ export class Model {
     
     getUser(): Observable<User> {
         return this.dataSource.getUser();
+    }
+    
+    getUsersArray(): User[] {
+        return this.users;
+    }
+    
+    getUsers(): void {
+        this.dataSource.getUsers().subscribe((data) => {
+		if (data[0] != undefined) {
+			this.users = data;
+		}
+	});
     }
     
     saveUser(user: User): Observable<User> {

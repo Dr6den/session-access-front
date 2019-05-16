@@ -1,0 +1,22 @@
+<div class="button-home m-2 mt-4">
+    <button type="reset" (click)="resetForm()" class="button-gohome btn btn-block btn-outline-dark h-100 py-3 mb-5 col-4">
+        To homepage
+    </button>
+</div>
+
+<table class="table table-hover text-center">
+    <thead>
+        <tr>
+		<th>USERID</th>
+		<th>USERNAME</th><th>NTSID</th><th>Role</th>
+	</tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of getItems()">
+            <td><div class="my-3">{{item.USERID | date :'dd.MM.yyyy'}}</div></td>
+            <td><div class="my-3">{{item.USERNAME}}</div></td>
+            <td><div class="my-3">{{item.NTSID}}</div></td>
+	    <td><div class="my-3">{{item.ROLES}}</div></td>
+        </tr>         
+    </tbody>
+</table>

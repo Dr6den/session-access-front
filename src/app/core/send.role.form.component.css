@@ -31,7 +31,7 @@ transform: rotate(-45deg);
     background-color: Aquamarine;
 }
 
-:host /deep/ .dropdown-list[_ngcontent-c1] {
+:host /deep/ .dropdown-list[_ngcontent-c2] {
     background-color: Aquamarine;
 }
 
