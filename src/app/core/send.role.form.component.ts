@@ -84,6 +84,7 @@ export class SendRoleFormComponent implements OnInit {
     submitForm(form: NgForm) {
         if (form.valid) {
             let editedRole = new Role();
+            editedRole.ROLENAME = this.role.ROLENAME;
             editedRole.ACCESS = this.accessSelectedItems;
             editedRole.GBU = this.gbuSelectedItems;
             editedRole.REGION = this.regionSelectedItems;
