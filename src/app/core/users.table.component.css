@@ -6,3 +6,7 @@
 th {
     background-color: darkturquoise;
 }
+
+td {
+    border: 2px solid;
+}

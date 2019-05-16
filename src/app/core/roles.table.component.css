@@ -1,2 +1,13 @@
+.button-gohome {    
+    text-align: left;
+    background-color: darkturquoise;
+}
 
+th {
+    background-color: darkturquoise;
+}
+
+td {
+    border: 2px solid;
+}
 

@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div class="button-home m-1 mt-4">
+    <button type="reset" (click)="resetForm()" class="button-gohome btn btn-block btn-outline-dark h-100 py-3 mb-5 col-4">
+        To homepage
+    </button>
+</div>
+
+<table class="table table-hover text-center ml-1">
+    <thead>
+        <tr>
+		<th>Options</th>
+		<th>Role</th>
+	</tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of getItems()">
+            <td><div class="my-1">ACCESS: {{item.ACCESS}}</div>
+                <div class="my-1">GBU: {{item.GBU}}</div>
+                <div class="my-1">REGION: {{item.REGION}}</div>
+                <div class="my-1">COGS: {{item.COGS}}</div>
+            </td>
+            <td><div class="my-3">{{item.ROLENAME}}</div></td>
+        </tr>         
+    </tbody>
+</table>
