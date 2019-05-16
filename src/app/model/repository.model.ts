@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Role } from "../model/role.model";
-import {User} from "../model/user.model";
+import { User } from "../model/user.model";
 import { Observable, Subscription } from "rxjs";
 import { RestDataSource } from "./rest.datasource";
 import { take, first, takeUntil, map } from 'rxjs/operators';
@@ -20,5 +20,13 @@ export class Model {
     
     saveRole(role: Role): Observable<Role> {
         return this.dataSource.saveRole(role);
+    }
+    
+    getUser(): Observable<User> {
+        return this.dataSource.getUser();
+    }
+    
+    saveUser(user: User): Observable<User> {
+        return this.dataSource.saveUser(user);
     }
 }

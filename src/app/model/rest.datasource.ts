@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Role } from "../model/role.model";
+import { User } from "../model/user.model";
 
 export const REST_URL = new InjectionToken("rest_url");
 
@@ -20,9 +21,19 @@ export class RestDataSource {
 	let url = this.url + "/saveRole";
         return this.sendRequest<Role>("POST", url, role);
     }
+    
+    getUser(): Observable<User> {
+        let url = this.url + "/getUser";
+        return this.sendRequest<User>("GET", url);
+    }
+    
+    saveUser(user: User): Observable<User> {
+	let url = this.url + "/saveUser";
+        return this.sendRequest<User>("POST", url, user);
+    }
 
     private sendRequest<T>(verb: string, url: string, body?: Object)
-        : Observable<T> {console.log(body);
+        : Observable<T> {
 
         let myHeaders = new HttpHeaders();
 	if(verb == "POST") {

@@ -24,8 +24,6 @@ export class SendRoleFormComponent implements OnInit {
     
     dropdownSettings = {};
     dropdownMultiSettings = {};
-    accessOptions: Array<string>;
-    cogs: Array<IOption>;
     
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         this.getRoleData();
@@ -77,10 +75,10 @@ export class SendRoleFormComponent implements OnInit {
         };
     }
     onItemSelect(item: any) {
-        console.log(item);
+        //console.log(item);
     }
     onSelectAll(items: any) {
-        console.log(items);
+       // console.log(items);
     }
 
     submitForm(form: NgForm) {
@@ -90,7 +88,7 @@ export class SendRoleFormComponent implements OnInit {
             editedRole.GBU = this.gbuSelectedItems;
             editedRole.REGION = this.regionSelectedItems;
             editedRole.COGS = this.cogsSelectedItems;
-            console.log(editedRole);
+
             this.model.saveRole(editedRole).subscribe(
                 (val) => {
                     /*console.log("POST call successful value returned in body",
