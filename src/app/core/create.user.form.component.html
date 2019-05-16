@@ -5,40 +5,42 @@
 
   
         <form class="m-5" novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()">
-              
+
+            <div class="form-group row input-user-form">              
+                <label for="username" class="col-sm-2 col-form-label">USERNAME</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="name" name="username"
+                           [(ngModel)]="task.name" required>
+                </div>
+            </div>
+
            
-            <div class="form-group row">
-                <label for="multiselectAccess" class="col-sm-2 col-form-label text-light">Access:</label>
+            <div class="form-group row input-user-form">              
+                <label for="userid" class="col-sm-2 col-form-label">USERID</label>
                 <div class="col-sm-10">
-                    <ng-multiselect-dropdown id="multiselectAccess" class="mt-3 dropdownmulti" [placeholder]="ALL" [data]="accessDropdownList" 
-                                             [(ngModel)]="accessSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                    </ng-multiselect-dropdown>
+                    <input class="form-control" id="name"  name="userid"
+                           [(ngModel)]="task.name" required>
+                </div>
+            </div>
+              
+            <div class="form-group row input-user-form">              
+                <label for="ntsid" class="col-sm-2 col-form-label">NTSID</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="name"  name="ntsid"
+                           [(ngModel)]="task.name" required>
+                </div>
+            </div>
+              
+            <div class="form-group row input-user-form">              
+                <label for="ntdomainsid" class="col-sm-2 col-form-label">NTDOMAINSID</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="name"  name="ntdomainsid"
+                           [(ngModel)]="task.name" required>
                 </div>
             </div>
               
             <div class="form-group row">
-                <label for="multiselectGbu" class="col-sm-2 col-form-label text-light">GBU:</label>
-                <div class="col-sm-10">
-                    <ng-multiselect-dropdown id="multiselectGbu" class="mt-3" [placeholder]="ALL" [data]="gbuDropdownList" 
-                                             [(ngModel)]="gbuSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                    </ng-multiselect-dropdown>
-                </div>
-            </div>
-              
-            <div class="form-group row">
-                <label for="multiselectRegion" class="col-sm-2 col-form-label text-light">Region:</label>
-                <div class="col-sm-10">
-                    <ng-multiselect-dropdown id="multiselectRegion" class="mt-3" [placeholder]="ALL" [data]="regionDropdownList" 
-                                             [(ngModel)]="regionSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                    </ng-multiselect-dropdown>
-                </div>
-            </div>
-              
-            <div class="form-group row">
-                <label for="multiselectCogs" class="col-sm-2 col-form-label text-light">COGS:</label>
+                <label for="multiselectCogs" class="col-sm-2 col-form-label">Role</label>
                 <div class="col-sm-10">
                     <ng-multiselect-dropdown id="multiselectCogs" class="mt-3" [placeholder]="ALL" [data]="cogsDropdownList" 
                                              [(ngModel)]="cogsSelectedItems" [ngModelOptions]="{standalone: true}"
@@ -47,7 +49,7 @@
                 </div>
             </div>
 
-      <button type="button" (click)="submitForm(form)" class="btn btn-outline-dark ml-3" routerLink="/">
+            <button type="button" (click)="submitForm(form)" class="btn btn-outline-dark ml-1 mt-5" routerLink="/">
                 Send
             </button>
             

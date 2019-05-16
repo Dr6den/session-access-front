@@ -14,3 +14,15 @@ h5 {
 .button-gohome {    
     text-align: left;
 }
+
+label {
+    color: darkturquoise;
+}
+
+:host /deep/ .multiselect-dropdown[_ngcontent-c1]  {
+    background-color: Aquamarine;
+}
+
+:host /deep/ .dropdown-list[_ngcontent-c1] {
+    background-color: Aquamarine;
+}
