@@ -13,7 +13,7 @@ export class RestDataSource {
         @Inject(REST_URL) private url: string) { }
         
     getRole(): Observable<Role> {
-        let url = this.url + "/getRole";
+        let url = this.url + "/angular/getRoles";
         return this.sendRequest<Role>("GET", url);
     }
     
