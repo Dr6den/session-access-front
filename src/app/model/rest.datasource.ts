@@ -28,7 +28,7 @@ export class RestDataSource {
     }
     
     getUser(): Observable<User> {
-        let url = this.url + "/getADDate";
+        let url = this.url + "/GetUserInfo";
         return this.sendRequest<User>("GET", url);
     }
     
