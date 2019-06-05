@@ -16,9 +16,15 @@ export class CreateUserComponent {
     selectedRolesItems = [];
     
     dropdownSettings = {};
+    
+    disableForm =  true;
 
     constructor(private model: Model, private router: Router) { 
         this.getRoleData();
+    }
+    
+    toggleDisable() {
+        this.disableForm = false;
     }
     
     getRoleData() {
