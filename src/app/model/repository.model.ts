@@ -34,8 +34,8 @@ export class Model {
         return this.dataSource.saveRole(role);
     }
     
-    getUser(): Observable<User> {
-        return this.dataSource.getUser();
+    getUser(username: string): Observable<User> {
+        return this.dataSource.getUser(username);
     }
     
     getUsersArray(): User[] {

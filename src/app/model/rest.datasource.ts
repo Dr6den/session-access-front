@@ -1,5 +1,5 @@
 import { Injectable, Inject, InjectionToken } from "@angular/core";
-import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Role } from "../model/role.model";
@@ -27,9 +27,12 @@ export class RestDataSource {
         return this.sendRequest<Role>("POST", url, role);
     }
     
-    getUser(): Observable<User> {
+    getUser(username: string): Observable<User> {
+        let params = new HttpParams();
+        params = params.append('username', username);
+
         let url = this.url + "/getUser";
-        return this.sendRequest<User>("GET", url);
+        return this.http.get(url, {params: params});
     }
     
     getUsers(): Observable<User[]> {
@@ -46,8 +49,10 @@ export class RestDataSource {
         : Observable<T> {
 
         let myHeaders = new HttpHeaders();
-	if(verb == "POST") {
-		myHeaders = myHeaders.set("Access-Control-Allow-Origin","*");
+        console.log("" + myHeaders.keys() );
+	
+        if(verb == "PUT") {
+		myHeaders = myHeaders.set("Access-Control-Allow-Origin","*");        
 		myHeaders = myHeaders.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
 		myHeaders = myHeaders.set("Access-Key", "<secret>");
 		myHeaders = myHeaders.set("Application-Names", ["exampleApp", "pro"]);        

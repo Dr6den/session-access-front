@@ -3,6 +3,7 @@ import { Model } from "../model/repository.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { User } from "../model/user.model"
 import { NgForm } from "@angular/forms";
+import { Role } from "../model/role.model";
 
 @Component({
     selector: "paTable",
@@ -20,23 +21,27 @@ export class CreateUserComponent {
     disableForm =  true;
 
     constructor(private model: Model, private router: Router) { 
-        this.getRoleData();
+        this.model.getRoles();
     }
     
     toggleDisable() {
         this.disableForm = false;
+        this.getRoleData(this.user.USERNAME);
     }
     
-    getRoleData() {
-        this.model.getUser().subscribe(data => {
+    getRoleData(username: string) {
+        this.model.getUser(username).subscribe(data => {
 			if ((data != undefined)) {
-                            this.user = data;
-                            let elnum = 0;
-                            //filling in roles dropdown from user roles
-                            this.rolesDropdownList = this.user.ROLES.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.selectedRolesItems = [{item_id: 0, item_text: this.user.ROLES[0]}];
+                            this.user.USERID = data.USERID;
+                            this.user.NTSID = data.NTSID;
+                            this.user.NTDOMAINSID = data.NTDOMAINSID;                            
 			}
                     });
+        let rolesDescription: Array<Role> = this.model.getRolesArray();
+        let elnum = 0;
+        //filling in roles dropdown from user roles
+        this.rolesDropdownList = rolesDescription.map(value => {return {item_id: elnum++, item_text: value.ROLENAME}});
+        this.selectedRolesItems = [{item_id: 0, item_text: rolesDescription[0].ROLENAME}];
     }
     
     ngOnInit() {        
