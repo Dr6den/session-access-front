@@ -13,17 +13,17 @@ export class RestDataSource {
         @Inject(REST_URL) private url: string) { }
         
     getRole(): Observable<Role> {
-        let url = this.url + "/getRole";
+        let url = this.url + "/angular/getRoles";
         return this.sendRequest<Role>("GET", url);
     }
     
     getRoles(): Observable<Role[]> {
-        let url = this.url + "/getRoles";
+        let url = this.url + "/GetRecords/Roles";
         return this.sendRequest<Role[]>("GET", url);
     }
     
     saveRole(role: Role): Observable<Role> {
-	let url = this.url + "/saveRole";
+	let url = this.url + "/InsertRecord/Roles";
         return this.sendRequest<Role>("POST", url, role);
     }
     
@@ -31,17 +31,17 @@ export class RestDataSource {
         let params = new HttpParams();
         params = params.append('username', username);
 
-        let url = this.url + "/getUser";
+        let url = this.url + "/GetUserInfo";
         return this.http.get(url, {params: params});
     }
     
     getUsers(): Observable<User[]> {
-        let url = this.url + "/getUsers";
+        let url = this.url + "/GetRecords/Users";
         return this.sendRequest<User[]>("GET", url);
     }
     
     saveUser(user: User): Observable<User> {
-	let url = this.url + "/saveUser";
+	let url = this.url + "/InsertRecord/Users";
         return this.sendRequest<User>("POST", url, user);
     }
 
