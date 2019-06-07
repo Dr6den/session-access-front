@@ -28,6 +28,14 @@ export class SendRoleFormComponent implements OnInit {
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         this.getRoleData();
     }
+    
+    parseSelectedItem(item: Array<string>):Array<string> {
+        let parsedSi = item.map((element) => {
+            let elementStringified = JSON.stringify(element);
+            return elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
+        })
+        return parsedSi;
+    }
                 
     getRoleData() {
         this.model.getRole().subscribe(data => {
@@ -85,10 +93,10 @@ export class SendRoleFormComponent implements OnInit {
         if (form.valid) {
             let editedRole = new Role();
             editedRole.ROLENAME = this.role.ROLENAME;
-            editedRole.ACCESS = this.accessSelectedItems;
-            editedRole.GBU = this.gbuSelectedItems;
-            editedRole.REGION = this.regionSelectedItems;
-            editedRole.COGS = this.cogsSelectedItems;
+            editedRole.ACCESS = this.parseSelectedItem(this.accessSelectedItems);
+            editedRole.GBU = this.parseSelectedItem(this.gbuSelectedItems);
+            editedRole.REGION = this.parseSelectedItem(this.regionSelectedItems);
+            editedRole.COGS = this.parseSelectedItem(this.cogsSelectedItems);
 
             this.model.saveRole(editedRole).subscribe(
                 (val) => {
