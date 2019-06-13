@@ -20,8 +20,12 @@ export class CreateUserComponent {
     
     disableForm =  true;
 
-    constructor(private model: Model, private router: Router) { 
+    constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) { 
         this.model.getRoles();
+        if(activeRoute.snapshot.params["name"] !== undefined) {
+            this.user.USERNAME = activeRoute.snapshot.params["name"];
+            this.toggleDisable();
+        }
     }
     
     parseSelectedItem(item: Array<string>):Array<string> {

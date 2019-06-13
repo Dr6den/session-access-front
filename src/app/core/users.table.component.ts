@@ -21,4 +21,9 @@ export class UsersTableComponent {
     resetForm() {
         this.router.navigateByUrl("/");
     }
+    
+    deleteItem(item: User) {
+ 	//this.model.deleteTask(item);
+	window.location.reload();
+    }
 }

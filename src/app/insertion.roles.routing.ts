@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: "form/:mode/:id", component: SendRoleFormComponent },
     { path: "form/:mode", component: SendRoleFormComponent },
     { path: "createUser", component: CreateUserComponent },
+    { path: "createUser/:mode/:id", component: CreateUserComponent },
     { path: "showUsers", component: UsersTableComponent },
     { path: "showRoles", component: RolesTableComponent },
     { path: "", component: IndexComponent }]

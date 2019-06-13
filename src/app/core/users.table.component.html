@@ -11,6 +11,7 @@
 		<th>USERNAME</th>
                 <th>NTSID</th>
                 <th>Role</th>
+                <th></th>
 	</tr>
     </thead>
     <tbody>
@@ -19,6 +20,16 @@
             <td><div class="my-3">{{item.USERNAME}}</div></td>
             <td><div class="my-3">{{item.NTSID}}</div></td>
 	    <td><div class="my-3">{{item.ROLES}}</div></td>
+            <td>
+		<button class="btn button-gohome btn-outline-secondary my-2" 
+			[routerLink]="['/createUser', 'edit', item.USERID,
+                    {name: item.USERNAME}]">
+        		Edit
+    		</button>
+		<button class="btn btn-danger my-2 ml-2" (click)="deleteItem(item)">
+        		Delete
+    		</button>
+	    </td>
         </tr>         
     </tbody>
 </table>
