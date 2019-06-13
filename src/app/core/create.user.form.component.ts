@@ -24,6 +24,14 @@ export class CreateUserComponent {
         this.model.getRoles();
     }
     
+    parseSelectedItem(item: Array<string>):Array<string> {
+        let parsedSi = item.map((element) => {
+            let elementStringified = JSON.stringify(element);
+            return elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
+        })
+        return parsedSi;
+    }
+    
     toggleDisable() {
         this.disableForm = false;
         this.getRoleData(this.user.USERNAME);
@@ -46,7 +54,7 @@ export class CreateUserComponent {
     
     ngOnInit() {        
         this.dropdownSettings = {
-            singleSelection: true,
+            singleSelection: false,
             idField: 'item_id',
             textField: 'item_text',
             selectAllText: 'Select All',
@@ -67,7 +75,7 @@ export class CreateUserComponent {
         if (form.valid) {
             let editedUser = new User();
             editedUser = this.user;
-            editedUser.ROLES = this.selectedRolesItems;
+            editedUser.ROLES = this.parseSelectedItem(this.selectedRolesItems);
             
             this.model.saveUser(editedUser).subscribe(
                 (val) => {
