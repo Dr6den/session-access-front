@@ -6,8 +6,8 @@ import { RolesTableComponent } from "./core/roles.table.component";
 import { UsersTableComponent } from "./core/users.table.component";
 
 const routes: Routes = [
-    { path: "form/:mode/:id", component: SendRoleFormComponent },
-    { path: "form/:mode", component: SendRoleFormComponent },
+    { path: "createRole/:mode/:id", component: SendRoleFormComponent },
+    { path: "createRole", component: SendRoleFormComponent },
     { path: "createUser", component: CreateUserComponent },
     { path: "createUser/:mode/:id", component: CreateUserComponent },
     { path: "showUsers", component: UsersTableComponent },

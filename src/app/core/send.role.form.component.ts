@@ -116,4 +116,8 @@ export class SendRoleFormComponent implements OnInit {
     resetForm() {
         this.getRoleData();
     }
+    
+    goHome() {
+        this.router.navigateByUrl("/");
+    }
 }
