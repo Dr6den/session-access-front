@@ -23,7 +23,7 @@ export class UsersTableComponent {
     }
     
     deleteItem(item: User) {
- 	//this.model.deleteTask(item);
+ 	this.model.deleteUser(item);
 	window.location.reload();
     }
 }

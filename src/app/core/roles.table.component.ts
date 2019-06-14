@@ -22,4 +22,8 @@ export class RolesTableComponent {
         this.router.navigateByUrl("/");
     }
 
+    deleteItem(item: Role) {
+ 	this.model.deleteRole(item);
+	window.location.reload();
+    }
 }

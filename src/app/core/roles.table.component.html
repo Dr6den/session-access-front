@@ -12,6 +12,7 @@
         <tr>
 		<th>Options</th>
 		<th>Role</th>
+                <th></th>
 	</tr>
     </thead>
     <tbody>
@@ -22,6 +23,16 @@
                 <div class="my-1">COGS: {{item.COGS}}</div>
             </td>
             <td><div class="my-3">{{item.ROLENAME}}</div></td>
+            <td>
+		<button class="btn button-gohome btn-outline-secondary my-2" 
+			[routerLink]="['/createRole', 'edit', item.ROLENAME,
+                    {access: item.ACCESS, gbu: item.GBU, region: item.REGION, cogs: item.COGS, rolename: item.ROLENAME}]">
+        		Edit
+    		</button>
+		<button class="btn btn-danger my-2 ml-2" (click)="deleteItem(item)">
+        		Delete
+    		</button>
+	    </td>
         </tr>         
     </tbody>
 </table>

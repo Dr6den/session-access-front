@@ -53,4 +53,12 @@ export class Model {
     saveUser(user: User): Observable<User> {
         return this.dataSource.saveUser(user);
     }
+    
+    deleteUser(user: User) {
+        this.dataSource.deleteUser(user.USERNAME).subscribe();
+    }
+    
+    deleteRole(role: Role) {
+        this.dataSource.deleteRole(role.ROLENAME).subscribe();
+    }
 }

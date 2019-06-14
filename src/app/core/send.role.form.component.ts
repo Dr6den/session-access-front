@@ -26,7 +26,16 @@ export class SendRoleFormComponent implements OnInit {
     dropdownMultiSettings = {};
     
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
-        this.getRoleData();
+        if(activeRoute.snapshot.params["rolename"] === undefined) {
+            this.getRoleData();
+        } else {
+            this.role.ROLENAME = activeRoute.snapshot.params["rolename"];
+            this.role.ACCESS = (new String(activeRoute.snapshot.params["access"])).split(",");
+            this.role.GBU = (new String(activeRoute.snapshot.params["gbu"])).split(",");
+            this.role.REGION = (new String(activeRoute.snapshot.params["region"])).split(",");
+            this.role.COGS = (new String(activeRoute.snapshot.params["cogs"])).split(",");
+            this.setUpDropdowns();
+        }
     }
     
     parseSelectedItem(item: Array<string>):Array<string> {
@@ -41,7 +50,13 @@ export class SendRoleFormComponent implements OnInit {
         this.model.getRole().subscribe(data => {
 			if ((data != undefined)) {
                             this.role = data;
-                            let elnum = 0;
+                            this.setUpDropdowns();
+			}
+                    });
+    }
+    
+    setUpDropdowns() {
+        let elnum = 0;
                             //filling in access dropdown from role access
                             this.accessDropdownList = this.role.ACCESS.map(value => {return {item_id: elnum++, item_text: value}});
                             this.accessSelectedItems = [{item_id: 0, item_text: this.role.ACCESS[0]}];
@@ -57,8 +72,6 @@ export class SendRoleFormComponent implements OnInit {
                             elnum = 0;
                             this.cogsDropdownList = this.role.COGS.map(value => {return {item_id: elnum++, item_text: value}});
                             this.cogsSelectedItems = [{item_id: 0, item_text: this.role.COGS[0]}];
-			}
-                    });
     }
     
     ngOnInit() {        

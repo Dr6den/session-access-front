@@ -44,6 +44,16 @@ export class RestDataSource {
 	let url = this.url + "/InsertRecord/Users";
         return this.sendRequest<User>("POST", url, user);
     }
+    
+    deleteUser(userName: string): Observable<string> {
+	let url = this.url + "/deleteUser/" + userName;
+        return this.sendRequest<string>("DELETE", url);
+    }
+    
+    deleteRole(roleName: string): Observable<string> {
+	let url = this.url + "/deleteUser/" + roleName;
+        return this.sendRequest<string>("DELETE", url);
+    }
 
     private sendRequest<T>(verb: string, url: string, body?: Object)
         : Observable<T> {
