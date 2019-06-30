@@ -107,4 +107,8 @@ export class CreateUserComponent {
     resetForm() {
         this.router.navigateByUrl("/");
     }
+    
+    goHome() {
+        this.router.navigateByUrl("/");
+    }
 }
