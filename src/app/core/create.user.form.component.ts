@@ -21,11 +21,12 @@ export class CreateUserComponent {
     disableForm =  true;
 
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) { 
-        this.model.getRoles();
         if(activeRoute.snapshot.params["name"] !== undefined) {
             this.user.USERNAME = activeRoute.snapshot.params["name"];
             this.toggleDisable();
         }
+        
+        this.getRoleData();
     }
     
     parseSelectedItem(item: Array<string>):Array<string> {
@@ -38,10 +39,10 @@ export class CreateUserComponent {
     
     toggleDisable() {
         this.disableForm = false;
-        this.getRoleData(this.user.USERNAME);
+        this.getUserData(this.user.USERNAME);
     }
     
-    getRoleData(username: string) {
+    getUserData(username: string) {
         this.model.getUser(username).subscribe(data => {
 			if ((data != undefined)) {
                             this.user.USERID = data.USERID;
@@ -49,6 +50,9 @@ export class CreateUserComponent {
                             this.user.NTDOMAINSID = data.NTDOMAINSID;                            
 			}
                     });
+    }
+    
+    getRoleData() {
         let rolesDescription: Array<Role> = this.model.getRolesArray();
         let elnum = 0;
         //filling in roles dropdown from user roles
