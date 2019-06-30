@@ -19,11 +19,15 @@ export class CreateUserComponent {
     dropdownSettings = {};
     
     disableForm =  true;
+    title = "";
 
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) { 
         if(activeRoute.snapshot.params["name"] !== undefined) {
             this.user.USERNAME = activeRoute.snapshot.params["name"];
             this.toggleDisable();
+            this.title = "Edit Data";
+        } else {
+            this.title = "Create Data";
         }
         
         this.getRoleData();

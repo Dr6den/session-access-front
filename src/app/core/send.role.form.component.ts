@@ -24,10 +24,12 @@ export class SendRoleFormComponent implements OnInit {
     
     dropdownSettings = {};
     dropdownMultiSettings = {};
+    title = "";
     
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         if(activeRoute.snapshot.params["rolename"] === undefined) {
             this.getRoleData();
+            this.title = "Create Role";
         } else {
             this.role.ROLENAME = activeRoute.snapshot.params["rolename"];
             this.role.ACCESS = (new String(activeRoute.snapshot.params["access"])).split(",");
@@ -35,6 +37,7 @@ export class SendRoleFormComponent implements OnInit {
             this.role.REGION = (new String(activeRoute.snapshot.params["region"])).split(",");
             this.role.COGS = (new String(activeRoute.snapshot.params["cogs"])).split(",");
             this.setUpDropdowns();
+            this.title = "Edit Role";
         }
     }
     
