@@ -1,5 +1,9 @@
 <div id="maindiv" class="m-2 shadow pb-4 rounded">
-	<h5 class="mt-3 pl-5 font-weight-bold text-light">{{title}}</h5> <span class="close" (click)="goHome()"></span>
+    <div class="d-flex justify-content-between">
+	<h5 class="mt-3 pl-5 font-weight-bold text-light">{{title}}</h5> 
+        <span class="error-message mt-4">{{errorMessage}}</span><span></span>
+        <span class="close" (click)="goHome()"></span>
+    </div>
 
   
         <form class="m-5" novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()">

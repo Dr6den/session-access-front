@@ -25,6 +25,7 @@ export class SendRoleFormComponent implements OnInit {
     dropdownSettings = {};
     dropdownMultiSettings = {};
     title = "";
+    errorMessage = "error message";
     
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         if(activeRoute.snapshot.params["rolename"] === undefined) {

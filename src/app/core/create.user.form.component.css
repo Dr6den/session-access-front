@@ -48,3 +48,7 @@ label {
 .close:after {
     transform: rotate(-45deg);
 }
+
+.error-message {
+    color: #FFFFFF
+}

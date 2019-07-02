@@ -20,6 +20,7 @@ export class CreateUserComponent {
     
     disableForm =  true;
     title = "";
+    errorMessage = "error message";
 
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) { 
         if(activeRoute.snapshot.params["name"] !== undefined) {

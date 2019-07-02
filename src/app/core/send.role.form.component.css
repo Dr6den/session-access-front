@@ -43,6 +43,10 @@ transform: rotate(-45deg);
     background-color: darkturquoise;
 }
 
+.error-message {
+    color: darkturquoise;
+}
+
 @media (min-width: 576px) {
 	#maindiv {            
             padding: 3rem;

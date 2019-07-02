@@ -1,6 +1,6 @@
 <div id="maindiv" class="m-2 shadow pb-4 rounded">
     <div class="title">
-	<h5 class="pl-5 font-weight-bold text-light">{{title}}</h5> <span class="close" (click)="goHome()"></span>
+        <h5 class="pl-5 font-weight-bold text-light">{{title}}</h5> <span class="close" (click)="goHome()"></span>
     </div>
 
   
@@ -53,10 +53,17 @@
                 </div>
             </div>
 
-            <button type="button" [disabled]='disableForm' (click)="submitForm(form)" class="btn btn-outline-dark ml-1 mt-5" routerLink="/">
-                Send
-            </button>
-            
+            <div class="d-flex justify-content-between">
+                <button type="button" [disabled]='disableForm' (click)="submitForm(form)" class="btn btn-outline-dark ml-1 mt-5" routerLink="/">
+                    Send
+                </button>              
+              
+                <div class="error-message mt-5 ml-5">
+                    <h6>{{errorMessage}}</h6>
+                </div>
+                
+                <div></div>
+            </div>
 </form>
 
 </div>
