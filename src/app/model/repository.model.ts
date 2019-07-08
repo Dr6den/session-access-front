@@ -31,8 +31,12 @@ export class Model {
         return this.roles;
     }
     
-    saveRole(role: Role): Observable<Role> {
-        return this.dataSource.saveRole(role);
+    insertRole(role: Role): Observable<Role> {
+        return this.dataSource.insertRole(role);
+    }
+    
+    updateRole(role: Role): Observable<Role> {
+        return this.dataSource.updateRole(role);
     }
     
     getUser(username: string): Observable<User> {
@@ -51,8 +55,12 @@ export class Model {
 	});
     }
     
-    saveUser(user: User): Observable<User> {
-        return this.dataSource.saveUser(user);
+    insertUser(user: User): Observable<User> {
+        return this.dataSource.insertUser(user);
+    }
+    
+    updateUser(user: User): Observable<User> {
+        return this.dataSource.updateUser(user);
     }
     
     deleteUser(user: User) {

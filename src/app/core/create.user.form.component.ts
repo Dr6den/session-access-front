@@ -90,17 +90,31 @@ export class CreateUserComponent {
             editedUser = this.user;
             editedUser.ROLES = this.parseSelectedItem(this.selectedRolesItems);
             
-            this.model.saveUser(editedUser).subscribe(
-                (val) => {
+            if (this.title === "Edit Data") {
+                this.model.updateUser(editedUser).subscribe(
+                    (val) => {
                     /*console.log("POST call successful value returned in body",
                         val);*/
-                },
-                response => {
+                    },
+                    response => {
                     //console.log("POST call in error", response);
-                },
-                () => {
+                    },
+                    () => {
                     //console.log("The POST observable is now completed.");
-                });
+                    });
+            } else {
+                this.model.insertUser(editedUser).subscribe(
+                    (val) => {
+                    /*console.log("POST call successful value returned in body",
+                        val);*/
+                    },
+                    response => {
+                    //console.log("POST call in error", response);
+                    },
+                    () => {
+                    //console.log("The POST observable is now completed.");
+                    });
+            }
             this.router.navigateByUrl("/");
         }
     }

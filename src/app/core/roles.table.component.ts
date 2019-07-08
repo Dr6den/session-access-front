@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, NgModule } from "@angular/core";
 import { Router } from "@angular/router";
 import { Model } from "../model/repository.model";
 import { Role } from "../model/role.model";
@@ -9,6 +9,10 @@ import { Role } from "../model/role.model";
     styleUrls: ["roles.table.component.css"]
 })
 export class RolesTableComponent {
+public popoverTitle: string = 'Popover title';
+  public popoverMessage: string = 'Popover description';
+  public confirmClicked: boolean = false;
+  public cancelClicked: boolean = false;
 
     constructor(private model: Model, private router: Router) {
         this.model.getRoles();

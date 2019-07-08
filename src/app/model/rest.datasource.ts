@@ -18,12 +18,17 @@ export class RestDataSource {
     }
     
     getRoles(): Observable<Role[]> {
-        let url = this.url + "/GetRecords/Roles";
+        let url = this.url + "/GetRecords/Roles?parseRoleOpts=true";
         return this.sendRequest<Role[]>("GET", url);
     }
     
-    saveRole(role: Role): Observable<Role> {
+    insertRole(role: Role): Observable<Role> {
 	let url = this.url + "/InsertRecord/Roles";
+        return this.sendRequest<Role>("POST", url, role);
+    }
+    
+    updateRole(role: Role): Observable<Role> {
+	let url = this.url + "/UpdatetRecord/Roles";
         return this.sendRequest<Role>("POST", url, role);
     }
     
@@ -40,8 +45,13 @@ export class RestDataSource {
         return this.sendRequest<User[]>("GET", url);
     }
     
-    saveUser(user: User): Observable<User> {
+    insertUser(user: User): Observable<User> {
 	let url = this.url + "/InsertRecord/Users";
+        return this.sendRequest<User>("POST", url, user);
+    }
+    
+    updateUser(user: User): Observable<User> {
+	let url = this.url + "/UpdateRecord/Users";
         return this.sendRequest<User>("POST", url, user);
     }
     
