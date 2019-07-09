@@ -9,6 +9,9 @@ import { User } from "../model/user.model";
     styleUrls: ["users.table.component.css"]
 })
 export class UsersTableComponent {
+    public popoverTitle: string = 'Delete the user';
+    public popoverMessage: string = 'Are you sure you want delete the user?';
+    public cancelClicked: boolean = false;
 
     constructor(private model: Model, private router: Router) {
         this.model.getUsers();

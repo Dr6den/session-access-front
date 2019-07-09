@@ -9,10 +9,9 @@ import { Role } from "../model/role.model";
     styleUrls: ["roles.table.component.css"]
 })
 export class RolesTableComponent {
-public popoverTitle: string = 'Popover title';
-  public popoverMessage: string = 'Popover description';
-  public confirmClicked: boolean = false;
-  public cancelClicked: boolean = false;
+    public popoverTitle: string = 'Delete the role';
+    public popoverMessage: string = 'Are you sure you want delete the role?';
+    public cancelClicked: boolean = false;
 
     constructor(private model: Model, private router: Router) {
         this.model.getRoles();

@@ -29,9 +29,10 @@
                     {name: item.USERNAME}]">
         		Edit
     		</button>
-		<button class="btn btn-danger my-2 ml-2" (click)="deleteItem(item)">
-        		Delete
-    		</button>
+		<button class="btn btn-danger my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                    (confirm)="deleteItem(item)" (cancel)="cancelClicked = true">
+                        Delete
+                </button>
 	    </td>
         </tr>         
     </tbody>

@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule, Component } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { ModelModule } from "../model/model.module";
@@ -10,10 +10,16 @@ import { RolesTableComponent } from "./roles.table.component";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
+import 'bootstrap/dist/css/bootstrap.css';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule],
+    imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger'
+    })],
     declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
     exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
+    bootstrap: [RolesTableComponent]
 })
 export class CoreModule { }
