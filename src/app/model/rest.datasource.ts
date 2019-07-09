@@ -51,7 +51,7 @@ export class RestDataSource {
     }
     
     updateUser(user: User): Observable<User> {
-	let url = this.url + "/UpdateRecord/Users";
+	let url = this.url + "/UpdateRecord/Users";     
         return this.sendRequest<User>("POST", url, user);
     }
     
@@ -80,8 +80,8 @@ export class RestDataSource {
         return this.http.request<T>(verb, url, {
             body: body,
             headers: myHeaders
-        }).pipe(catchError((error: Response) => 
-            throwError(`Network Error: ${error.statusText} (${error.status})`)));
+        }).pipe(catchError(err => {
+            return throwError(err.status)}));
         }
 
 }

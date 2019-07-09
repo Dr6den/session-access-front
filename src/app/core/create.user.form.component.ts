@@ -21,8 +21,9 @@ export class CreateUserComponent {
     disableForm =  true;
     title = "";
     errorMessage = "error message";
+    errorTextColor: string = "#FFFFFF";
 
-    constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) { 
+    constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         if(activeRoute.snapshot.params["name"] !== undefined) {
             this.user.USERNAME = activeRoute.snapshot.params["name"];
             this.toggleDisable();
@@ -89,33 +90,19 @@ export class CreateUserComponent {
             let editedUser = new User();
             editedUser = this.user;
             editedUser.ROLES = this.parseSelectedItem(this.selectedRolesItems);
-            
+       
             if (this.title === "Edit Data") {
-                this.model.updateUser(editedUser).subscribe(
-                    (val) => {
-                    /*console.log("POST call successful value returned in body",
-                        val);*/
-                    },
-                    response => {
-                    //console.log("POST call in error", response);
-                    },
-                    () => {
-                    //console.log("The POST observable is now completed.");
-                    });
+                this.model.updateUser(editedUser).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             } else {
-                this.model.insertUser(editedUser).subscribe(
-                    (val) => {
-                    /*console.log("POST call successful value returned in body",
-                        val);*/
-                    },
-                    response => {
-                    //console.log("POST call in error", response);
-                    },
-                    () => {
-                    //console.log("The POST observable is now completed.");
-                    });
+                this.model.insertUser(editedUser).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             }
-            this.router.navigateByUrl("/");
+        }
+    }
+    
+    checkError(errorCode: number) {
+        this.errorTextColor = "red";
+        if (errorCode === 404) {
+            this.errorMessage = "404";            
         }
     }
 

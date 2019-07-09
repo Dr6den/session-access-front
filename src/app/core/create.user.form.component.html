@@ -54,11 +54,11 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="button" [disabled]='disableForm' (click)="submitForm(form)" class="btn btn-outline-dark ml-1 mt-5" routerLink="/">
+                <button type="button" [disabled]='disableForm' (click)="submitForm(form)" class="btn btn-outline-dark ml-1 mt-5">
                     Send
                 </button>              
               
-                <div class="error-message mt-5 ml-5">
+                <div class="error-message mt-5 ml-5" [style.color]="errorTextColor">
                     <h6>{{errorMessage}}</h6>
                 </div>
                 

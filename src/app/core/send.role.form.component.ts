@@ -26,6 +26,7 @@ export class SendRoleFormComponent implements OnInit {
     dropdownMultiSettings = {};
     title = "";
     errorMessage = "error message";
+    errorTextColor: string = "darkturquoise";
     
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         if(activeRoute.snapshot.params["rolename"] === undefined) {
@@ -116,31 +117,17 @@ export class SendRoleFormComponent implements OnInit {
             editedRole.COGS = this.parseSelectedItem(this.cogsSelectedItems);
 
             if (this.title === "Edit Role") {
-                this.model.updateRole(editedRole).subscribe(
-                    (val) => {
-                    /*console.log("POST call successful value returned in body",
-                        val);*/
-                    },
-                    response => {
-                    //console.log("POST call in error", response);
-                    },
-                    () => {
-                    //console.log("The POST observable is now completed.");
-                    });
+                this.model.updateRole(editedRole).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             } else {
-                this.model.insertRole(editedRole).subscribe(
-                    (val) => {
-                    /*console.log("POST call successful value returned in body",
-                        val);*/
-                    },
-                    response => {
-                    //console.log("POST call in error", response);
-                    },
-                    () => {
-                    //console.log("The POST observable is now completed.");
-                    });
+                this.model.insertRole(editedRole).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             }
-            this.router.navigateByUrl("/");
+        }
+    }
+    
+    checkError(errorCode: number) {
+        this.errorTextColor = "red";
+        if (errorCode === 404) {
+            this.errorMessage = "404";            
         }
     }
 
