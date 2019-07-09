@@ -28,7 +28,7 @@ export class RestDataSource {
     }
     
     updateRole(role: Role): Observable<Role> {
-	let url = this.url + "/UpdatetRecord/Roles";
+	let url = this.url + "/UpdatetRecords/Roles";
         return this.sendRequest<Role>("POST", url, role);
     }
     
@@ -51,17 +51,17 @@ export class RestDataSource {
     }
     
     updateUser(user: User): Observable<User> {
-	let url = this.url + "/UpdateRecord/Users";     
+	let url = this.url + "/UpdateRecords/Users";     
         return this.sendRequest<User>("POST", url, user);
     }
     
     deleteUser(userName: string): Observable<string> {
-	let url = this.url + "/deleteUser/" + userName;
+	let url = this.url + "/DeleteRecords/Users" + userName;
         return this.sendRequest<string>("DELETE", url);
     }
     
     deleteRole(roleName: string): Observable<string> {
-	let url = this.url + "/deleteUser/" + roleName;
+	let url = this.url + "/DeleteRecords/Roles" + roleName;
         return this.sendRequest<string>("DELETE", url);
     }
 
