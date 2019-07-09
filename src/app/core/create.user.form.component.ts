@@ -102,7 +102,13 @@ export class CreateUserComponent {
     checkError(errorCode: number) {
         this.errorTextColor = "red";
         if (errorCode === 404) {
-            this.errorMessage = "404";            
+            this.errorMessage = "Schema doesn't exist";            
+        } else if (errorCode === 400) {
+            this.errorMessage = "Schema is not specified";
+        } else if (errorCode === 500) {
+            this.errorMessage = "Unknown error";
+        } else if (errorCode === 409) {
+            this.errorMessage = "Record already exist";
         }
     }
 
