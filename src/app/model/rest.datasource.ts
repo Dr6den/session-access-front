@@ -28,7 +28,7 @@ export class RestDataSource {
     }
     
     updateRole(role: Role): Observable<Role> {
-	let url = this.url + "/UpdatetRecords/Roles";
+	let url = this.url + "/UpdateRecords/Roles";
         return this.sendRequest<Role>("POST", url, role);
     }
     
