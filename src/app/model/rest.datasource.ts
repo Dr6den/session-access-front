@@ -29,7 +29,7 @@ export class RestDataSource {
     
     updateRole(role: Role): Observable<Role> {
 	let url = this.url + "/UpdateRecords/Roles";
-        return this.sendRequest<Role>("POST", url, role);
+        return this.sendRequest<Role>("PUT", url, role);
     }
     
     getUser(username: string): Observable<User> {
@@ -71,12 +71,12 @@ export class RestDataSource {
         let myHeaders = new HttpHeaders();
         console.log("" + myHeaders.keys() );
 	
-        if(verb == "PUT") {
+        /*if(verb == "PUT") {
 		myHeaders = myHeaders.set("Access-Control-Allow-Origin","*");        
 		myHeaders = myHeaders.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
 		myHeaders = myHeaders.set("Access-Key", "<secret>");
 		myHeaders = myHeaders.set("Application-Names", ["exampleApp", "pro"]);        
-        }
+        }*/
         return this.http.request<T>(verb, url, {
             body: body,
             headers: myHeaders

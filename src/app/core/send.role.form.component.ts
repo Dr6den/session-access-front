@@ -46,8 +46,9 @@ export class SendRoleFormComponent implements OnInit {
     parseSelectedItem(item: Array<string>):Array<string> {
         let parsedSi = item.map((element) => {
             let elementStringified = JSON.stringify(element);
-            return elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
-        })
+            let cutedElementWithoutDropdownTags = elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
+            return cutedElementWithoutDropdownTags.replace(/\[\\\"/g,'').replace(/\\\"]/g,'').replace(/\\\"/g,'');
+        });
         return parsedSi;
     }
                 
@@ -115,7 +116,7 @@ export class SendRoleFormComponent implements OnInit {
             editedRole.GBU = this.parseSelectedItem(this.gbuSelectedItems);
             editedRole.REGION = this.parseSelectedItem(this.regionSelectedItems);
             editedRole.COGS = this.parseSelectedItem(this.cogsSelectedItems);
-
+console.log(JSON.stringify(editedRole));
             if (this.title === "Edit Role") {
                 this.model.updateRole(editedRole).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             } else {
