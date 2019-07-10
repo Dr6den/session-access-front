@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { User } from "../model/user.model"
 import { NgForm } from "@angular/forms";
 import { Role } from "../model/role.model";
+import { UserUpdate } from "../model/userUpdate.model";
 
 @Component({
     selector: "paTable",
@@ -12,6 +13,7 @@ import { Role } from "../model/role.model";
 })
 export class CreateUserComponent {
     user = new User();
+    reservedUser = new User();
     
     rolesDropdownList = [];
     selectedRolesItems = [];
@@ -28,6 +30,7 @@ export class CreateUserComponent {
             this.user.USERNAME = activeRoute.snapshot.params["name"];
             this.toggleDisable();
             this.title = "Edit Data";
+            this.reservedUser = this.user;
         } else {
             this.title = "Create Data";
         }
@@ -92,7 +95,8 @@ export class CreateUserComponent {
             editedUser.ROLES = this.parseSelectedItem(this.selectedRolesItems);
        
             if (this.title === "Edit Data") {
-                this.model.updateUser(editedUser).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
+                let userUpdate = new UserUpdate(this.reservedUser, this.user);
+                this.model.updateUser(userUpdate).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             } else {
                 this.model.insertUser(editedUser).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             }

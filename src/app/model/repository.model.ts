@@ -3,6 +3,8 @@ import { Role } from "../model/role.model";
 import { User } from "../model/user.model";
 import { Observable, Subscription } from "rxjs";
 import { RestDataSource } from "./rest.datasource";
+import { UserUpdate } from "../model/userUpdate.model";
+import { RoleUpdate } from "../model/roleUpdate.model";
 
 @Injectable()
 export class Model {
@@ -35,7 +37,7 @@ export class Model {
         return this.dataSource.insertRole(role);
     }
     
-    updateRole(role: Role): Observable<Role> {
+    updateRole(role: RoleUpdate): Observable<RoleUpdate> {
         return this.dataSource.updateRole(role);
     }
     
@@ -59,7 +61,7 @@ export class Model {
         return this.dataSource.insertUser(user);
     }
     
-    updateUser(user: User): Observable<User> {
+    updateUser(user: UserUpdate): Observable<UserUpdate> {
         return this.dataSource.updateUser(user);
     }
     

@@ -4,6 +4,8 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Role } from "../model/role.model";
 import { User } from "../model/user.model";
+import { UserUpdate } from "../model/userUpdate.model";
+import { RoleUpdate } from "../model/roleUpdate.model";
 
 export const REST_URL = new InjectionToken("rest_url");
 
@@ -27,9 +29,9 @@ export class RestDataSource {
         return this.sendRequest<Role>("POST", url, role);
     }
     
-    updateRole(role: Role): Observable<Role> {
+    updateRole(role: RoleUpdate): Observable<RoleUpdate> {
 	let url = this.url + "/UpdateRecords/Roles";
-        return this.sendRequest<Role>("PUT", url, role);
+        return this.sendRequest<RoleUpdate>("PUT", url, role);
     }
     
     getUser(username: string): Observable<User> {
@@ -50,9 +52,9 @@ export class RestDataSource {
         return this.sendRequest<User>("POST", url, user);
     }
     
-    updateUser(user: User): Observable<User> {
+    updateUser(user: UserUpdate): Observable<UserUpdate> {
 	let url = this.url + "/UpdateRecords/Users";     
-        return this.sendRequest<User>("POST", url, user);
+        return this.sendRequest<UserUpdate>("PUT", url, user);
     }
     
     deleteUser(userName: string): Observable<string> {

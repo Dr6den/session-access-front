@@ -4,6 +4,7 @@ import { NgForm } from "@angular/forms";
 import { Role } from "../model/role.model";
 import { Model } from "../model/repository.model";
 import { ActivatedRoute, Router } from "@angular/router";
+import { RoleUpdate } from "../model/roleUpdate.model";
 
 @Component({
     selector: "paForm",
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class SendRoleFormComponent implements OnInit {
     role = new Role();
+    reservedRole = new Role();
     accessDropdownList = [];
     gbuDropdownList = [];
     regionDropdownList = [];
@@ -40,6 +42,7 @@ export class SendRoleFormComponent implements OnInit {
             this.role.COGS = (new String(activeRoute.snapshot.params["cogs"])).split(",");
             this.setUpDropdowns();
             this.title = "Edit Role";
+            this.reservedRole = this.role;
         }
     }
     
@@ -116,9 +119,10 @@ export class SendRoleFormComponent implements OnInit {
             editedRole.GBU = this.parseSelectedItem(this.gbuSelectedItems);
             editedRole.REGION = this.parseSelectedItem(this.regionSelectedItems);
             editedRole.COGS = this.parseSelectedItem(this.cogsSelectedItems);
-console.log(JSON.stringify(editedRole));
+            
             if (this.title === "Edit Role") {
-                this.model.updateRole(editedRole).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
+                let roleUpdate = new RoleUpdate(this.reservedRole, this.role);
+                this.model.updateRole(roleUpdate).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             } else {
                 this.model.insertRole(editedRole).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             }
