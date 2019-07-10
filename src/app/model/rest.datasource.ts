@@ -58,7 +58,7 @@ export class RestDataSource {
     }
     
     deleteUser(userName: string): Observable<string> {
-	let url = this.url + "/DeleteRecords/Users" + userName;
+	let url = this.url + '/DeleteRecords/Users?filter={"USERNAME":"'+userName+'"}';
         return this.sendRequest<string>("DELETE", url);
     }
     
