@@ -31,26 +31,24 @@ export class SendRoleFormComponent implements OnInit {
     errorTextColor: string = "darkturquoise";
     
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
-        if(activeRoute.snapshot.params["rolename"] === undefined) {
-            this.getRoleData();
+        if(activeRoute.snapshot.params["rolename"] === undefined) {            
             this.title = "Create Role";
         } else {
-            this.role.ROLENAME = activeRoute.snapshot.params["rolename"];
-            this.role.ACCESS = (new String(activeRoute.snapshot.params["access"])).split(",");
-            this.role.GBU = (new String(activeRoute.snapshot.params["gbu"])).split(",");
-            this.role.REGION = (new String(activeRoute.snapshot.params["region"])).split(",");
-            this.role.COGS = (new String(activeRoute.snapshot.params["cogs"])).split(",");
-            this.setUpDropdowns();
-            this.title = "Edit Role";
-            this.reservedRole = this.role;
+            this.reservedRole.ROLENAME = activeRoute.snapshot.params["rolename"];
+            this.reservedRole.ACCESS = (new String(activeRoute.snapshot.params["access"])).split(",");
+            this.reservedRole.GBU = (new String(activeRoute.snapshot.params["gbu"])).split(",");
+            this.reservedRole.REGION = (new String(activeRoute.snapshot.params["region"])).split(",");
+            this.reservedRole.COGS = (new String(activeRoute.snapshot.params["cogs"])).split(",");
+            this.title = "Edit Role";            
         }
+        this.getRoleData();
     }
     
     parseSelectedItem(item: Array<string>):Array<string> {
         let parsedSi = item.map((element) => {
             let elementStringified = JSON.stringify(element);
             let cutedElementWithoutDropdownTags = elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
-            return cutedElementWithoutDropdownTags.replace(/\[\\\"/g,'').replace(/\\\"]/g,'').replace(/\\\"/g,'');
+            return cutedElementWithoutDropdownTags;//.replace(/\[\\\"/g,'').replace(/\\\"]/g,'').replace(/\\\"/g,'');
         });
         return parsedSi;
     }
@@ -81,6 +79,8 @@ export class SendRoleFormComponent implements OnInit {
                             elnum = 0;
                             this.cogsDropdownList = this.role.COGS.map(value => {return {item_id: elnum++, item_text: value}});
                             this.cogsSelectedItems = [{item_id: 0, item_text: this.role.COGS[0]}];
+                            //role is erasing, avoid erasure
+                            this.role.ROLENAME = this.reservedRole.ROLENAME;
     }
     
     ngOnInit() {        
