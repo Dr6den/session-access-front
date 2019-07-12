@@ -66,7 +66,7 @@ export class Model {
     }
     
     deleteUser(user: User) {
-        this.dataSource.deleteUser(user.USERNAME).subscribe();
+        this.dataSource.deleteUser(user.NTSID).subscribe();
     }
     
     deleteRole(role: Role) {

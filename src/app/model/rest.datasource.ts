@@ -57,13 +57,13 @@ export class RestDataSource {
         return this.sendRequest<UserUpdate>("PUT", url, user);
     }
     
-    deleteUser(userName: string): Observable<string> {
-	let url = this.url + '/DeleteRecords/Users?filter={"USERNAME":"'+userName+'"}';
+    deleteUser(ntsid: string): Observable<string> {
+	let url = this.url + '/DeleteRecords/Users?filter={"NTSID":"'+ntsid+'"}';
         return this.sendRequest<string>("DELETE", url);
     }
     
-    deleteRole(roleName: string): Observable<string> {
-	let url = this.url + '/DeleteRecords/Roles?filter={"ROLENAME":"'+roleName+'"}';
+    deleteRole(rolename: string): Observable<string> {
+	let url = this.url + '/DeleteRecords/Roles?filter={"NTSID":"'+rolename+'"}';
         return this.sendRequest<string>("DELETE", url);
     }
 
