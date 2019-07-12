@@ -35,11 +35,13 @@ export class SendRoleFormComponent implements OnInit {
             this.title = "Create Role";
         } else {
             this.reservedRole.ROLENAME = activeRoute.snapshot.params["rolename"];
-            this.reservedRole.ACCESS = (new String(activeRoute.snapshot.params["access"])).split(",");
-            this.reservedRole.GBU = (new String(activeRoute.snapshot.params["gbu"])).split(",");
-            this.reservedRole.REGION = (new String(activeRoute.snapshot.params["region"])).split(",");
-            this.reservedRole.COGS = (new String(activeRoute.snapshot.params["cogs"])).split(",");
-            this.title = "Edit Role";            
+            this.reservedRole.ACCESS = (new String(activeRoute.snapshot.params["access"])).replace(/"/g,'').split(",");
+            let GBUparam = (new String(activeRoute.snapshot.params["gbu"]));
+            this.reservedRole.GBU = GBUparam.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).split(",");
+            let regionParam = (new String(activeRoute.snapshot.params["region"]));
+            this.reservedRole.REGION = regionParam.substring(regionParam.lastIndexOf("[") + 2, regionParam.lastIndexOf("]") - 1).split(",");
+            this.reservedRole.COGS = (new String(activeRoute.snapshot.params["cogs"])).replace(/"/g,'').split(",");
+            this.title = "Edit Role";       
         }
         this.getRoleData();
     }
@@ -47,8 +49,7 @@ export class SendRoleFormComponent implements OnInit {
     parseSelectedItem(item: Array<string>):Array<string> {
         let parsedSi = item.map((element) => {
             let elementStringified = JSON.stringify(element);
-            let cutedElementWithoutDropdownTags = elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
-            return cutedElementWithoutDropdownTags;//.replace(/\[\\\"/g,'').replace(/\\\"]/g,'').replace(/\\\"/g,'');
+            return elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);;
         });
         return parsedSi;
     }
@@ -121,7 +122,7 @@ export class SendRoleFormComponent implements OnInit {
             editedRole.COGS = this.parseSelectedItem(this.cogsSelectedItems);
             
             if (this.title === "Edit Role") {
-                let roleUpdate = new RoleUpdate(this.reservedRole, this.role);
+                let roleUpdate = new RoleUpdate(this.reservedRole, editedRole);
                 this.model.updateRole(roleUpdate).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
             } else {
                 this.model.insertRole(editedRole).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
