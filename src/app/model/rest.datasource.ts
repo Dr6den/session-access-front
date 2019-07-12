@@ -63,7 +63,7 @@ export class RestDataSource {
     }
     
     deleteRole(rolename: string): Observable<string> {
-	let url = this.url + '/DeleteRecords/Roles?filter={"NTSID":"'+rolename+'"}';
+	let url = this.url + '/DeleteRecords/Roles?filter={"ROLENAME":"'+rolename+'"}';
         return this.sendRequest<string>("DELETE", url);
     }
 
