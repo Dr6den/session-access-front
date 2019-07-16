@@ -1,3 +1,7 @@
 td {
-    border: 2px solid;
+    border: 0.01rem solid;
+}
+
+th {
+    color: white;
 }

@@ -12,13 +12,14 @@ import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { HeaderComponent } from "./common/app.header.component"
 
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
     })],
-    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
+    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent],
     exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
     bootstrap: [RolesTableComponent]
 })
