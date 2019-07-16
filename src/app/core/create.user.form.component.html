@@ -1,17 +1,17 @@
 <div id="maindiv" class="m-2 shadow pb-4 rounded">
-    <div class="title">
+    <div class="title color-class">
         <h5 class="pl-5 font-weight-bold text-light">{{title}}</h5> <span class="close" (click)="goHome()"></span>
     </div>
 
   
         <form class="m-5" novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()">
               
-            <button type="button" (click)="toggleDisable()" class="btn float-right btn-outline-dark mr-1">
+            <button type="button" (click)="toggleDisable()" class="button-aqua float-right mr-1 color-class">
                     Find User
             </button>
 
             <div class="form-group row input-user-form">              
-                <label for="username" class="col-sm-2 col-form-label">USERNAME</label>
+                <label for="username" class="col-sm-2 col-form-label color-text">USERNAME</label>
                 <div class="col-sm-9 ml-4">
                     <input class="form-control" id="name" name="username"
                            [(ngModel)]="user.USERNAME" required>
@@ -20,7 +20,7 @@
 
            
             <div class="form-group row input-user-form">              
-                <label for="userid" class="col-sm-2 col-form-label">USERID</label>
+                <label for="userid" class="col-sm-2 col-form-label color-text">USERID</label>
                 <div class="col-sm-10">
                     <input disabled class="form-control" id="name"  name="userid"
                            [(ngModel)]="user.USERID" required>
@@ -28,7 +28,7 @@
             </div>
               
             <div class="form-group row input-user-form">              
-                <label for="ntsid" class="col-sm-2 col-form-label">NTSID</label>
+                <label for="ntsid" class="col-sm-2 col-form-label color-text">NTSID</label>
                 <div class="col-sm-10">
                     <input disabled class="form-control" id="name"  name="ntsid"
                            [(ngModel)]="user.NTSID" required>
@@ -36,7 +36,7 @@
             </div>
               
             <div class="form-group row input-user-form">              
-                <label for="ntdomainsid" class="col-sm-2 col-form-label">NTDOMAINSID</label>
+                <label for="ntdomainsid" class="col-sm-2 col-form-label color-text">NTDOMAINSID</label>
                 <div class="col-sm-10">
                     <input disabled class="form-control" id="name"  name="ntdomainsid"
                            [(ngModel)]="user.NTDOMAINSID" required>
@@ -44,7 +44,7 @@
             </div>
               
             <div class="form-group row">
-                <label for="multiselectCogs" class="col-sm-2 col-form-label">Role</label>
+                <label for="multiselectCogs" class="col-sm-2 col-form-label color-text">Role</label>
                 <div class="col-sm-10">
                     <ng-multiselect-dropdown id="multiselectCogs" class="mt-3" [placeholder]="ALL" [data]="rolesDropdownList" 
                                              [disabled]='disableForm' [(ngModel)]="selectedRolesItems" [ngModelOptions]="{standalone: true}"
@@ -54,7 +54,7 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="button" [disabled]='disableForm' (click)="submitForm(form)" class="btn btn-outline-dark ml-1 mt-5">
+                <button type="button" [disabled]='disableForm' (click)="submitForm(form)" class="button-aqua ml-1 mt-5 color-class">
                     Send
                 </button>              
               

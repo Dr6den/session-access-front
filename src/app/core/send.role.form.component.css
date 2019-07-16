@@ -35,12 +35,10 @@ transform: rotate(-45deg);
     background-color: Aquamarine;
 }
 
-.role-name {
-    background-color: aquamarine;
-}
-
-#maindiv {
-    background-color: darkturquoise;
+.button-aqua {
+    width: 4rem;
+    height: 2rem;
+    background-color: #0074D9;
 }
 
 @media (min-width: 576px) {

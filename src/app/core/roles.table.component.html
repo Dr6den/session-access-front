@@ -1,8 +1,8 @@
 <div class="button-home m-1 mt-4">
-    <button type="reset" (click)="resetForm()" class="button-gohome btn btn-outline-dark h-100 py-3 mb-5 col-4">
+    <button type="reset" (click)="resetForm()" class="h-100 py-3 mb-5 col-4 button-aqua">
         To homepage
     </button>
-    <button routerLink="/createRole" class="button-gohome btn btn-outline-dark ml-3 h-100 py-3 mb-5 col-4">
+    <button routerLink="/createRole" class="ml-3 h-100 py-3 mb-5 col-4 button-aqua">
         Create Role
     </button>
 </div>
@@ -10,9 +10,9 @@
 <table class="table table-hover text-center ml-1">
     <thead>
         <tr>
-		<th>Options</th>
-		<th>Role</th>
-                <th></th>
+            <th class="color-class">Options</th>
+            <th class="color-class">Role</th>
+            <th class="color-class"></th>
 	</tr>
     </thead>
     <tbody>
@@ -24,12 +24,12 @@
             </td>
             <td><div class="my-3">{{item.ROLENAME}}</div></td>
             <td>
-		<button class="btn button-gohome btn-outline-secondary my-2" 
+		<button class="my-2 button-aqua" 
 			[routerLink]="['/createRole', 'edit', item.ROLENAME,
                     {access: item.ACCESS, gbu: item.GBU, region: item.REGION, cogs: item.COGS, rolename: item.ROLENAME}]">
         		Edit
     		</button>
-                <button class="btn btn-danger my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
                     (confirm)="deleteItem(item)" (cancel)="cancelClicked = true">
                         Delete
                 </button>

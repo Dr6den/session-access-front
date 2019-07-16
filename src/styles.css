@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+.color-class {
+    background-color: darkturquoise;
+}
+
+.color-text {
+    color: darkturquoise;
+}
+
+.role-name {
+    background-color: aquamarine;
+}
+
+.button-aqua { 
+    border-radius: 0.4rem;
+    border: 0.05rem solid black;
+    text-align: left;
+    background-color: darkturquoise;
+    color: #fff7f8;
+    padding-top: 0rem;
+}
+
+.button-halt { 
+    border-radius: 0.4rem;
+    border: 0.05rem solid black;
+    text-align: left;
+    background-color: #dc3545;
+    color: #fff7f8;
+    padding-top: 0rem;
+}
