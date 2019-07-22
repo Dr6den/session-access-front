@@ -102,8 +102,7 @@ export class SendRoleFormComponent implements OnInit {
             singleSelection: true,
             idField: 'item_id',
             textField: 'item_text',
-            selectAllText: 'Select All',
-            unSelectAllText: 'UnSelect All',
+            enableCheckAll: false,
             itemsShowLimit: 6,
             allowSearchFilter: false
         };
@@ -112,8 +111,7 @@ export class SendRoleFormComponent implements OnInit {
             singleSelection: false,
             idField: 'item_id',
             textField: 'item_text',
-            selectAllText: 'Select All',
-            unSelectAllText: 'UnSelect All',
+            enableCheckAll: false,
             itemsShowLimit: 6,
             allowSearchFilter: false
         };

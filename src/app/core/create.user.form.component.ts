@@ -74,8 +74,7 @@ export class CreateUserComponent {
             singleSelection: false,
             idField: 'item_id',
             textField: 'item_text',
-            selectAllText: 'Select All',
-            unSelectAllText: 'UnSelect All',
+            enableCheckAll: false,
             itemsShowLimit: 6,
             allowSearchFilter: false
         };
