@@ -37,11 +37,11 @@ export class SendRoleFormComponent implements OnInit {
             this.reservedRole.ROLENAME = activeRoute.snapshot.params["rolename"];
             this.reservedRole.ACCESS = (new String(activeRoute.snapshot.params["access"])).replace(/"/g,'').split(",");
             let GBUparam = (new String(activeRoute.snapshot.params["gbu"]));
-            this.reservedRole.GBU = GBUparam.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).split(",");
+            this.reservedRole.GBU = GBUparam.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
             let regionParam = (new String(activeRoute.snapshot.params["region"]));
-            this.reservedRole.REGION = regionParam.substring(regionParam.lastIndexOf("[") + 2, regionParam.lastIndexOf("]") - 1).split(",");
+            this.reservedRole.REGION = regionParam.substring(regionParam.lastIndexOf("[") + 2, regionParam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
             this.reservedRole.COGS = (new String(activeRoute.snapshot.params["cogs"])).replace(/"/g,'').split(",");
-            this.title = "Edit Role";       
+            this.title = "Edit Role";    
         }
         this.getRoleData();
     }
@@ -64,22 +64,35 @@ export class SendRoleFormComponent implements OnInit {
     }
     
     setUpDropdowns() {
-        let elnum = 0;
+                            let elnum = 0;
                             //filling in access dropdown from role access
                             this.accessDropdownList = this.role.ACCESS.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.accessSelectedItems = [{item_id: 0, item_text: this.role.ACCESS[0]}];
                             //filling in gbu dropdown from role access
                             elnum = 0;
                             this.gbuDropdownList = this.role.GBU.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.gbuSelectedItems = [{item_id: 0, item_text: this.role.GBU[0]}];
                             //filling in region dropdown from role access
                             elnum = 0;
                             this.regionDropdownList = this.role.REGION.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.regionSelectedItems = [{item_id: 0, item_text: this.role.REGION[0]}];
                             //filling in cogs dropdown from role access
                             elnum = 0;
                             this.cogsDropdownList = this.role.COGS.map(value => {return {item_id: elnum++, item_text: value}});
-                            this.cogsSelectedItems = [{item_id: 0, item_text: this.role.COGS[0]}];
+
+                            //filling selected dropdown items for all 4 dropdowns, default selected items for create mode, and selected from database with edit mode
+                            if (this.title === "Create Role") {
+                                this.accessSelectedItems = [{item_id: 0, item_text: this.role.ACCESS[0]}];                            
+                                this.gbuSelectedItems = [{item_id: 0, item_text: this.role.GBU[0]}];
+                                this.regionSelectedItems = [{item_id: 0, item_text: this.role.REGION[0]}];                            
+                                this.cogsSelectedItems = [{item_id: 0, item_text: this.role.COGS[0]}];
+                            } else {
+                                elnum = 0;
+                                this.accessSelectedItems = this.reservedRole.ACCESS.map(value => {return {item_id: elnum++, item_text: value}});
+                                elnum = 0;
+                                this.gbuSelectedItems = this.reservedRole.GBU.map(value => {return {item_id: elnum++, item_text: value}});
+                                elnum = 0;
+                                this.regionSelectedItems = this.reservedRole.REGION.map(value => {return {item_id: elnum++, item_text: value}});
+                                elnum = 0;
+                                this.cogsSelectedItems = this.reservedRole.COGS.map(value => {return {item_id: elnum++, item_text: value}});
+                            }
                             //role is erasing, avoid erasure
                             this.role.ROLENAME = this.reservedRole.ROLENAME;
     }
