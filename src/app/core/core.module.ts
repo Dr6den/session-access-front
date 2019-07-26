@@ -12,7 +12,7 @@ import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { HeaderComponent } from "./common/app.header.component"
+import { HeaderComponent } from "./common/app.header.component";
 
 
 @NgModule({
