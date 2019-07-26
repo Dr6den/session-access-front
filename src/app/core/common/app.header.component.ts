@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../../auth/services/authentication.service";
 import { LoginPopupComponent } from "../../modalwindows/login.popup.component";
+import { ProfilePopupComponent } from "../../modalwindows/profile.popup.component";
 
 @Component({
     selector: "app-header",
@@ -10,6 +11,7 @@ import { LoginPopupComponent } from "../../modalwindows/login.popup.component";
 })
 export class HeaderComponent {
     @ViewChild(LoginPopupComponent) loginPopup:LoginPopupComponent;
+    @ViewChild(ProfilePopupComponent) profilePopup:ProfilePopupComponent;
     disableLogin = false;
     disableLogout = true;
     disableUsername = true;
@@ -37,6 +39,9 @@ export class HeaderComponent {
 
     login() {
         this.loginPopup.openModalDialog();
-        //this.router.navigateByUrl("/login");
+    }
+    
+    profile() {
+        this.profilePopup.openModalDialog();
     }
 }

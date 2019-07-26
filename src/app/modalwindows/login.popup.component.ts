@@ -39,25 +39,21 @@ export class LoginPopupComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });   
-    // reset login status
-    //this.authenticationService.logout();
-
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+// convenience getter for easy access to form fields
+get f() { return this.loginForm.controls; }
 
-  openModalDialog(){
+openModalDialog(){
     this.display='block'; //Set block css
- }
+}
 
- closeModalDialog(){
-  this.display='none'; //set none css after close dialog
- }
+closeModalDialog(){
+    this.display='none'; //set none css after close dialog
+}
  
- onSubmit() {
+onSubmit() {console.log("&&&&&"+this.returnUrl);
         this.submitted = true;
 
         // stop here if form is invalid
@@ -70,13 +66,15 @@ export class LoginPopupComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    this.router.navigate([this.returnUrl]); 
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
                 });
-        
+        if (this.returnUrl === "/") {
+            window.location.reload();
+        }      
     }
     
 }

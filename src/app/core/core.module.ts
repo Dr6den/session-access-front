@@ -14,14 +14,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { HeaderComponent } from "./common/app.header.component";
 import { LoginPopupComponent } from '../modalwindows/login.popup.component';
+import { ProfilePopupComponent } from '../modalwindows/profile.popup.component';
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
          ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
-    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent, LoginPopupComponent],
-    providers: [LoginPopupComponent],
+    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent,
+         LoginPopupComponent, ProfilePopupComponent],
+    providers: [LoginPopupComponent, ProfilePopupComponent],
     exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
     bootstrap: [RolesTableComponent]
 })
