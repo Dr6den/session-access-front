@@ -9,11 +9,10 @@ import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './auth/interceptors';
-import { LoginComponent } from './auth/login';
 
 @NgModule({
     imports: [BrowserModule, ModelModule, CoreModule, routing, ReactiveFormsModule, HttpClientModule],
-    declarations: [InsertionRolesComponent, LoginComponent],
+    declarations: [InsertionRolesComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

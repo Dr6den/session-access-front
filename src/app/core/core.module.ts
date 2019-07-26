@@ -1,6 +1,6 @@
 import { NgModule, Component } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModelModule } from "../model/model.module";
 import { IndexComponent } from "./index.component";
 import { CreateUserComponent } from "./create.user.form.component";
@@ -13,13 +13,15 @@ import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { HeaderComponent } from "./common/app.header.component";
-
+import { LoginPopupComponent } from '../modalwindows/login.popup.component';
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ConfirmationPopoverModule.forRoot({
-      confirmButtonType: 'danger'
+    imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
+         ConfirmationPopoverModule.forRoot({
+             confirmButtonType: 'danger'
     })],
-    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent],
+    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent, LoginPopupComponent],
+    providers: [LoginPopupComponent],
     exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
     bootstrap: [RolesTableComponent]
 })

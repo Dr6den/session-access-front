@@ -1,6 +1,7 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../../auth/services/authentication.service";
+import { LoginPopupComponent } from "../../modalwindows/login.popup.component";
 
 @Component({
     selector: "app-header",
@@ -8,14 +9,14 @@ import { AuthenticationService } from "../../auth/services/authentication.servic
     styleUrls: ["app.header.component.css"]
 })
 export class HeaderComponent {
+    @ViewChild(LoginPopupComponent) loginPopup:LoginPopupComponent;
     disableLogin = false;
     disableLogout = true;
     disableUsername = true;
     username = "Nadia";
-    authService;
 
-    constructor(private activeRoute: ActivatedRoute, private router: Router, private authServiceInj: AuthenticationService) { 
-        this.authService = authServiceInj;
+    constructor(private activeRoute: ActivatedRoute, private router: Router, private authService: AuthenticationService) {
+         
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {
             this.disableLogin = true;
@@ -35,6 +36,7 @@ export class HeaderComponent {
     }
 
     login() {
-        this.router.navigateByUrl("/login");
+        this.loginPopup.openModalDialog();
+        //this.router.navigateByUrl("/login");
     }
 }

@@ -4,8 +4,7 @@ import { SendRoleFormComponent } from "./core/send.role.form.component";
 import { CreateUserComponent } from "./core/create.user.form.component";
 import { RolesTableComponent } from "./core/roles.table.component";
 import { UsersTableComponent } from "./core/users.table.component";
-import { LoginComponent } from "./auth/login/login.component"
-import { AuthGuard } from "./auth/guards/auth.guard"
+import { AuthGuard } from "./auth/guards/auth.guard";
 
 const routes: Routes = [
     { path: "createRole/:mode/:id", component: SendRoleFormComponent, canActivate: [AuthGuard] },
@@ -15,7 +14,6 @@ const routes: Routes = [
     { path: "showUsers", component: UsersTableComponent, canActivate: [AuthGuard] },
     { path: "showRoles", component: RolesTableComponent, canActivate: [AuthGuard] },
     { path: "", component: IndexComponent },
-    { path: "login", component: LoginComponent},
     { path: '**', redirectTo: '' }]
     
 export const routing = RouterModule.forRoot(routes);
