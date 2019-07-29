@@ -23,7 +23,7 @@
                 <div class="col-sm-10">
                     <ng-multiselect-dropdown id="multiselectAccess" class="mt-3 dropdownmulti" [placeholder]="ALL" [data]="accessDropdownList" 
                                              [(ngModel)]="accessSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                             [settings]="dropdownSettings">
                     </ng-multiselect-dropdown>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="col-sm-10">
                     <ng-multiselect-dropdown id="multiselectGbu" class="mt-3" [placeholder]="ALL" [data]="gbuDropdownList" 
                                              [(ngModel)]="gbuSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                             [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)">
                     </ng-multiselect-dropdown>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="col-sm-10">
                     <ng-multiselect-dropdown id="multiselectRegion" class="mt-3" [placeholder]="ALL" [data]="regionDropdownList" 
                                              [(ngModel)]="regionSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                             [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)">
                     </ng-multiselect-dropdown>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="col-sm-10">
                     <ng-multiselect-dropdown id="multiselectCogs" class="mt-3" [placeholder]="ALL" [data]="cogsDropdownList" 
                                              [(ngModel)]="cogsSelectedItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                             [settings]="dropdownSettings">
                     </ng-multiselect-dropdown>
                 </div>
             </div>

@@ -80,7 +80,7 @@ export class LoginPopupComponent implements OnInit {
     }
     
     disableValueChanged() {
-        this.disableValueChange.emit(this.counter);
+        this.disableValueChange.emit(true);
     }
     
 }

@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { RoleUpdate } from "../model/roleUpdate.model";
 
 @Component({
-    selector: "paForm",
+    selector: "roleEditor",
     templateUrl: "send.role.form.component.html",
     styleUrls: ["send.role.form.component.css"]
 })
@@ -103,7 +103,7 @@ export class SendRoleFormComponent implements OnInit {
             idField: 'item_id',
             textField: 'item_text',
             enableCheckAll: false,
-            itemsShowLimit: 6,
+            itemsShowLimit: 9,
             allowSearchFilter: false
         };
         
@@ -112,11 +112,14 @@ export class SendRoleFormComponent implements OnInit {
             idField: 'item_id',
             textField: 'item_text',
             enableCheckAll: false,
-            itemsShowLimit: 6,
+            itemsShowLimit: 9,
+            enableSearchFilter: true,
+            enableFilterSelectAll: true,
             allowSearchFilter: false
         };
     }
     onItemSelect(item: any) {
+        console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"+JSON.stringify(item));
         //console.log(item);
     }
     onSelectAll(items: any) {

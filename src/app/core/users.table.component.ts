@@ -4,7 +4,7 @@ import { Model } from "../model/repository.model";
 import { User } from "../model/user.model";
 
 @Component({
-    selector: "paTable",
+    selector: "usersTable",
     templateUrl: "users.table.component.html",
     styleUrls: ["users.table.component.css"]
 })

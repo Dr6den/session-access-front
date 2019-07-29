@@ -7,7 +7,7 @@ import { Role } from "../model/role.model";
 import { UserUpdate } from "../model/userUpdate.model";
 
 @Component({
-    selector: "paTable",
+    selector: "userEditor",
     templateUrl: "create.user.form.component.html",
     styleUrls: ["create.user.form.component.css"]
 })
