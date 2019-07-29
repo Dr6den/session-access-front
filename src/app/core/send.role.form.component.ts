@@ -63,6 +63,10 @@ export class SendRoleFormComponent implements OnInit {
                     });
     }
     
+    findIdOfDropdownElement(arr: Array<any>, val:String) {
+        return arr.find((item)=>item.item_text===val).item_id;
+    }
+    
     setUpDropdowns() {
                             let elnum = 0;
                             //filling in access dropdown from role access
@@ -84,14 +88,14 @@ export class SendRoleFormComponent implements OnInit {
                                 this.regionSelectedItems = [{item_id: 0, item_text: this.role.REGION[0]}];                            
                                 this.cogsSelectedItems = [{item_id: 0, item_text: this.role.COGS[0]}];
                             } else {
-                                elnum = 0;
-                                this.accessSelectedItems = this.reservedRole.ACCESS.map(value => {return {item_id: elnum++, item_text: value}});
-                                elnum = 0;
-                                this.gbuSelectedItems = this.reservedRole.GBU.map(value => {return {item_id: elnum++, item_text: value}});
-                                elnum = 0;
-                                this.regionSelectedItems = this.reservedRole.REGION.map(value => {return {item_id: elnum++, item_text: value}});
-                                elnum = 0;
-                                this.cogsSelectedItems = this.reservedRole.COGS.map(value => {return {item_id: elnum++, item_text: value}});
+                                this.accessSelectedItems = this.reservedRole.ACCESS.map(value => 
+                                    {return {item_id: this.findIdOfDropdownElement(this.accessDropdownList, value), item_text: value}});
+                                this.gbuSelectedItems = this.reservedRole.GBU.map(value => 
+                                    {return {item_id: this.findIdOfDropdownElement(this.gbuDropdownList, value), item_text: value}});
+                                this.regionSelectedItems = this.reservedRole.REGION.map(value => 
+                                    {return {item_id: this.findIdOfDropdownElement(this.regionDropdownList, value), item_text: value}});
+                                this.cogsSelectedItems = this.reservedRole.COGS.map(value => 
+                                    {return {item_id: this.findIdOfDropdownElement(this.cogsDropdownList, value), item_text: value}});
                             }
                             //role is erasing, avoid erasure
                             this.role.ROLENAME = this.reservedRole.ROLENAME;
