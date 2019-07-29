@@ -113,17 +113,18 @@ export class SendRoleFormComponent implements OnInit {
             textField: 'item_text',
             enableCheckAll: false,
             itemsShowLimit: 9,
-            enableSearchFilter: true,
-            enableFilterSelectAll: true,
             allowSearchFilter: false
         };
     }
-    onItemSelect(item: any) {
-        console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"+JSON.stringify(item));
-        //console.log(item);
+    onGBUItemSelect(item: any) {
+        if (item.item_text === "ALL" || this.gbuSelectedItems.some((item) => {return item.item_text === "ALL";})) {
+            this.gbuSelectedItems =  JSON.parse('[{"item_id":0,"item_text":"ALL"}]');
+        }
     }
-    onSelectAll(items: any) {
-       // console.log(items);
+    onRegionItemSelect(item: any) {
+        if (item.item_text === "ALL" || this.regionSelectedItems.some((item) => {return item.item_text === "ALL";})) {
+            this.regionSelectedItems = JSON.parse('[{"item_id":0,"item_text":"ALL"}]');
+        }
     }
 
     submitForm(form: NgForm) {
