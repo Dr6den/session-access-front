@@ -44,4 +44,12 @@ export class HeaderComponent {
     profile() {
         this.profilePopup.openModalDialog();
     }
+    
+    disableLoginChange(condition) {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.disableLogin = true;
+        this.disableLogout = false;
+        this.disableUsername = false;
+        this.username = currentUser.username;
+    }
 }

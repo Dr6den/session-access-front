@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { stringify } from '@angular/core/src/render3/util';
 import { variable } from '@angular/compiler/src/output/output_ast';
@@ -14,10 +14,11 @@ import { AuthenticationService } from '../auth/services';
 export class LoginPopupComponent implements OnInit {
   display='none'; //default Variable
   loginForm: FormGroup;
-    loading = false;
-    submitted = false;
-    returnUrl: string;
-    error = '';
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = '';
+  @Output() disableValueChange = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
 
@@ -42,18 +43,18 @@ export class LoginPopupComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   
-// convenience getter for easy access to form fields
-get f() { return this.loginForm.controls; }
+    // convenience getter for easy access to form fields
+    get f() { return this.loginForm.controls; }
 
-openModalDialog(){
-    this.display='block'; //Set block css
-}
+    openModalDialog(){
+        this.display='block'; //Set block css
+    }
 
-closeModalDialog(){
-    this.display='none'; //set none css after close dialog
-}
+    closeModalDialog(){
+        this.display='none'; //set none css after close dialog
+    }
  
-onSubmit() {console.log("&&&&&"+this.returnUrl);
+    onSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
@@ -66,15 +67,20 @@ onSubmit() {console.log("&&&&&"+this.returnUrl);
             .pipe(first())
             .subscribe(
                 data => {
+                    if (this.returnUrl === "/") {
+                        this.disableValueChanged();
+                    }    
                     this.router.navigate([this.returnUrl]); 
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
                 });
-        if (this.returnUrl === "/") {
-            window.location.reload();
-        }      
+          
+    }
+    
+    disableValueChanged() {
+        this.disableValueChange.emit(this.counter);
     }
     
 }

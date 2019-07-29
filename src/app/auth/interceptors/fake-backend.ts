@@ -8,7 +8,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     constructor() { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {console.log("############# fake");
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let testUser = { id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' };
 
         // wrap in delayed observable to simulate server api call
