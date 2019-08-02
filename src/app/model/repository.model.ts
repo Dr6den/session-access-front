@@ -14,7 +14,7 @@ export class Model {
     subscriptions = new Subscription();
 
     constructor(private dataSource: RestDataSource) {
-        this.getRoles();
+        //this.getRoles();
     }
     
     getRole(): Observable<Role> {

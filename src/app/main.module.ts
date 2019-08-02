@@ -9,16 +9,15 @@ import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './auth/interceptors';
+import { GlobalService } from './global.service';
 
 @NgModule({
     imports: [BrowserModule, ModelModule, CoreModule, routing, ReactiveFormsModule, HttpClientModule],
     declarations: [InsertionRolesComponent],
     providers: [
+        GlobalService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-        // provider used to create fake backend
-        fakeBackendProvider
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
     ],
     bootstrap: [InsertionRolesComponent]
 })

@@ -24,7 +24,7 @@ export class HeaderComponent {
             this.disableLogin = true;
             this.disableLogout = false;
             this.disableUsername = false;
-            this.username = currentUser.username;
+            this.username = currentUser.name;
         } else {
             this.disableLogin = false;
             this.disableLogout = true;
@@ -50,6 +50,6 @@ export class HeaderComponent {
         this.disableLogin = true;
         this.disableLogout = false;
         this.disableUsername = false;
-        this.username = currentUser.username;
+        this.username = currentUser.name;
     }
 }
