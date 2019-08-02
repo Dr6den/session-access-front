@@ -11,8 +11,13 @@ export class GlobalService {
     
     public sendRequest<T>(verb: string, url: string, body?: Object) : Observable<T> {
         let myHeaders = new HttpHeaders();
-	
-        /*if(verb == "PUT") {
+        
+        let authToken = JSON.parse(localStorage.getItem('currentUser'));
+        if (authToken) {
+            myHeaders = myHeaders.set("Content-Type", "application/json");
+            myHeaders = myHeaders.set("Authorization", authToken.access_token);
+        }
+         /*if(verb == "PUT") {
 		myHeaders = myHeaders.set("Access-Control-Allow-Origin","*");        
 		myHeaders = myHeaders.set("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
 		myHeaders = myHeaders.set("Access-Key", "<secret>");
@@ -21,7 +26,7 @@ export class GlobalService {
         return this.http.request<T>(verb, url, {
             body: body,
             headers: myHeaders
-        }).pipe(catchError(err => {console.log("sendReq777"+err);
+        }).pipe(catchError(err => {
             return throwError(err.status)}));
         }
 }

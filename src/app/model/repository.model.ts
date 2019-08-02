@@ -14,7 +14,10 @@ export class Model {
     subscriptions = new Subscription();
 
     constructor(private dataSource: RestDataSource) {
-        //this.getRoles();
+        let authToken = JSON.parse(localStorage.getItem('currentUser'));
+        if (authToken) {
+            this.getRoles();
+        }
     }
     
     getRole(): Observable<Role> {
