@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { AuthenticationService } from '../auth/services';
 
@@ -8,6 +8,7 @@ import { AuthenticationService } from '../auth/services';
   styleUrls: ['./profile.popup.component.css']
 })
 export class ProfilePopupComponent {
+    @Input('username') username: string;
     display='none'; //default Variable
 
     constructor(private authenticationService: AuthenticationService) { }
