@@ -1,0 +1,12 @@
+.footer-bounds {
+    width: 100%;
+    height: 4rem;
+}
+
+.user-img {
+    width: 2.5rem;
+}
+
+.table-footer-text {
+    font: normal  0.8rem sans-serif, serif;
+}

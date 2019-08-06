@@ -13,6 +13,7 @@ import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { HeaderComponent } from "./common/app.header.component";
+import { TableFooterComponent } from "./common/footers/table.footer.component";
 import { LoginPopupComponent } from '../modalwindows/login.popup.component';
 import { ProfilePopupComponent } from '../modalwindows/profile.popup.component';
 
@@ -22,7 +23,7 @@ import { ProfilePopupComponent } from '../modalwindows/profile.popup.component';
              confirmButtonType: 'danger'
     })],
     declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent,
-         LoginPopupComponent, ProfilePopupComponent],
+         LoginPopupComponent, ProfilePopupComponent, TableFooterComponent],
     providers: [LoginPopupComponent, ProfilePopupComponent],
     exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
     bootstrap: [RolesTableComponent]

@@ -12,13 +12,18 @@ export class UsersTableComponent {
     public popoverTitle: string = 'Delete the user';
     public popoverMessage: string = 'Are you sure you want delete the user?';
     public cancelClicked: boolean = false;
+    public numrecords: number;
+    public shown: number;
 
     constructor(private model: Model, private router: Router) {
         this.model.getUsers();
     }
 
     getItems(): Array<User> {
-        return this.model.getUsersArray();
+        let roles :User[] = this.model.getUsersArray();
+        this.numrecords = roles.length;
+        this.shown = roles.length;
+        return roles;
     }
     
     resetForm() {
