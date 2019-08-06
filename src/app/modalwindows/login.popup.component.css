@@ -9,7 +9,7 @@
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    border-left: 10px solid #e94646; /* red */
+    border-bottom: 0.2rem solid #e94646; /* red */
 }
 
 .backdrop {
@@ -19,4 +19,14 @@
     left:0;
     width:100%;
     height:100vh;
+}
+
+h6 {
+    color: white;
+}
+
+.textbox {
+    width: 20rem;
+    border-radius: 0.3rem;
+    box-shadow:0 0 0.2rem #0000cc inset;
 }
