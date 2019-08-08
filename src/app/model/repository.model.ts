@@ -32,6 +32,10 @@ export class Model {
 	});
     }
     
+    getObservableRoles(): Observable<Role[]> {
+        return this.dataSource.getRoles();
+    }
+    
     getRolesArray(): Role[] {
         return this.roles;
     }
@@ -58,6 +62,10 @@ export class Model {
 			this.users = data;
 		}
 	});
+    }
+    
+    getObservableUsers(): Observable<User[]> {
+        return this.dataSource.getUsers();
     }
     
     insertUser(user: User): Observable<User> {

@@ -16,6 +16,9 @@ import { HeaderComponent } from "./common/app.header.component";
 import { TableFooterComponent } from "./common/footers/table.footer.component";
 import { LoginPopupComponent } from '../modalwindows/login.popup.component';
 import { ProfilePopupComponent } from '../modalwindows/profile.popup.component';
+import { FormatTablePipe } from "./common/sortable/table.format.pipe";
+import { TableOrderByPipe } from "./common/sortable/table.sort.orderby.pipe";
+import { TableSortable } from "./common/sortable/table.sortable.component";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
@@ -23,8 +26,8 @@ import { ProfilePopupComponent } from '../modalwindows/profile.popup.component';
              confirmButtonType: 'danger'
     })],
     declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent,
-         LoginPopupComponent, ProfilePopupComponent, TableFooterComponent],
-    providers: [LoginPopupComponent, ProfilePopupComponent],
+         LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, TableSortable],
+    providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe],
     exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
     bootstrap: [RolesTableComponent]
 })
