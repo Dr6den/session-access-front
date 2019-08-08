@@ -40,7 +40,7 @@ export class RestDataSource {
         params = params.append('userName', username);
 
         let url = this.url + "/GetUserInfo";
-        return this.http.get(url, {params: params});
+        return this.globalService.sendRequest<User>("GET", url, null, params);
     }
     
     getUsers(): Observable<User[]> {

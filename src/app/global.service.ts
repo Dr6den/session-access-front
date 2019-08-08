@@ -9,7 +9,7 @@ export class GlobalService {
     
     public REST_URL: string = `http://localhost:4502/api`;
     
-    public sendRequest<T>(verb: string, url: string, body?: Object) : Observable<T> {
+    public sendRequest<T>(verb: string, url: string, body?: Object, params?: HttpParams) : Observable<T> {
         let myHeaders = new HttpHeaders();
         
         let authToken = JSON.parse(localStorage.getItem('currentUser'));
@@ -25,10 +25,12 @@ export class GlobalService {
         }*/
         return this.http.request<T>(verb, url, {
             body: body,
-            headers: myHeaders
+            headers: myHeaders,
+            params: params
         }).pipe(catchError(err => {
             return throwError(err.status)}));
-        }
+    }
+        
 }
 
 

@@ -9,7 +9,28 @@
   <tbody>
     <tr *ngFor="let object of data | orderBy : convertSorting()">
       <td *ngFor="let column of columns">
-        {{object[column.variable] | format : column.filter}}
+
+        <ng-container *ngIf="(column.variable === 'Edit'); then editColumn; else averageColumn">
+        </ng-container>
+
+        <ng-template #averageColumn>
+            <div>
+                {{object[column.variable] | format : column.filter}}
+            </div>
+        </ng-template>
+        <ng-template #editColumn>
+            <div>
+                <button class="button-aqua my-2" 
+                            [routerLink]="['/createUser', 'edit', object.USERID,
+                            {name: object.USERNAME}]">
+                            Edit
+                    </button>
+                    <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true">
+                        Delete
+                    </button>
+            </div>
+        </ng-template>
       </td>
     </tr>
   </tbody>
