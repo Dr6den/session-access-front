@@ -31,8 +31,4 @@ export class TableSortable {
   convertSorting(): string{
     return this.sort.descending ? '-' + this.sort.column : this.sort.column;
   }
-  
-  funfor(st: string): string{
-      return "<div>"+st+"</div>" + "<div>e</div>";
-  }
 }

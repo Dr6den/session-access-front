@@ -34,16 +34,37 @@ export class SendRoleFormComponent implements OnInit {
         if(activeRoute.snapshot.params["rolename"] === undefined) {            
             this.title = "Create Role";
         } else {
+        
             this.reservedRole.ROLENAME = activeRoute.snapshot.params["rolename"];
+        //-------please delete it 
             this.reservedRole.ACCESS = (new String(activeRoute.snapshot.params["access"])).replace(/"/g,'').split(",");
             let GBUparam = (new String(activeRoute.snapshot.params["gbu"]));
             this.reservedRole.GBU = GBUparam.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
             let regionParam = (new String(activeRoute.snapshot.params["region"]));
             this.reservedRole.REGION = regionParam.substring(regionParam.lastIndexOf("[") + 2, regionParam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
             this.reservedRole.COGS = (new String(activeRoute.snapshot.params["cogs"])).replace(/"/g,'').split(",");
+        //-------please delete it
+            let options = activeRoute.snapshot.params["options"];
+            if(options) {
+                let splitedOptions: string[] = options.split("-");
+                this.reservedRole.ACCESS = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "ACCESS").replace(/"/g,'').split(",");
+                let GBUparam = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "GBU");
+                this.reservedRole.GBU = GBUparam.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
+                let RegionParam = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "REGION");
+                this.reservedRole.REGION = RegionParam.substring(RegionParam.lastIndexOf("[") + 2, RegionParam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
+                this.reservedRole.COGS = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "COGS").replace(/"/g,'').split(",");
+            }
             this.title = "Edit Role";    
         }
         this.getRoleData();
+    }
+    
+    getStringFromArrayOfStringsThatIncludesName(arr: string[], part: string): string {
+        let result: string = '';
+        result = arr.find(function(element) {
+          return element.includes(part);
+        });
+        return result.substring(result.indexOf(":") + 2);
     }
     
     parseSelectedItem(item: Array<string>):Array<string> {
@@ -66,7 +87,7 @@ export class SendRoleFormComponent implements OnInit {
     findIdOfDropdownElement(arr: Array<any>, val:String) {
         return arr.find((item)=>item.item_text===val).item_id;
     }
-    
+
     setUpDropdowns() {
                             let elnum = 0;
                             //filling in access dropdown from role access

@@ -45,8 +45,8 @@
             <!--condition for roles table-->
             <div *ngIf="object.Options">
                     <button class="my-2 button-aqua" 
-                            [routerLink]="['/createRole', 'edit', object.ROLENAME,
-                            {access: object.ACCESS, gbu: object.GBU, region: object.REGION, cogs: object.COGS, rolename: object.ROLENAME}]">
+                            [routerLink]="['/createRole', 'edit', object.Rolename,
+                            {options: object.Options, rolename: object.Rolename}]">
                             Edit
                     </button>
                     <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
