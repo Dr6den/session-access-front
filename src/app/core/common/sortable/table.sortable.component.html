@@ -13,16 +13,40 @@
         <ng-container *ngIf="(column.variable === 'Edit'); then editColumn; else averageColumn">
         </ng-container>
 
-        <ng-template #averageColumn>
-            <div>
-                {{object[column.variable] | format : column.filter}}
+        <ng-template #averageColumn><!--fill roles options row-->
+            <div *ngIf="(column.variable === 'Options');else average_content">
+                <div>{{object.Options | split_and_get_one_of_them:'-':'ACCESS' }}</div>
+                <div>{{object.Options | split_and_get_one_of_them:'-':'GBU' }}</div>
+                <div>{{object.Options | split_and_get_one_of_them:'-':'REGION' }}</div>
+                <div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>
             </div>
+
+            <ng-template #average_content><!--fill simple for all tables row-->
+                <div>
+                    {{object[column.variable] | format : column.filter}}
+                </div>
+            </ng-template>            
         </ng-template>
-        <ng-template #editColumn>
-            <div>
-                <button class="button-aqua my-2" 
+        
+        <ng-template #editColumn> <!--edit columns we have to fill by buttons-->
+            <div *ngIf="object.USERNAME"> <!--condition for users table-->
+		<div>
+                    <button class="button-aqua my-2" 
                             [routerLink]="['/createUser', 'edit', object.USERID,
                             {name: object.USERNAME}]">
+                            Edit
+                    </button>
+                    <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true">
+                        Delete
+                    </button>
+                </div>
+            </div>
+            <!--condition for roles table-->
+            <div *ngIf="object.Options">
+                    <button class="my-2 button-aqua" 
+                            [routerLink]="['/createRole', 'edit', object.ROLENAME,
+                            {access: object.ACCESS, gbu: object.GBU, region: object.REGION, cogs: object.COGS, rolename: object.ROLENAME}]">
                             Edit
                     </button>
                     <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
@@ -35,3 +59,5 @@
     </tr>
   </tbody>
 </table>
+
+<!--{{funfor("hey")}}-->
