@@ -4,7 +4,8 @@ import { FormatTablePipe } from "./table.format.pipe"
 
 @Component({
   selector: 'table-sortable',
-  templateUrl: 'table.sortable.component.html'
+  templateUrl: 'table.sortable.component.html',
+  styleUrls: ["table.sortable.component.css"]
 })
 export class TableSortable {
   
