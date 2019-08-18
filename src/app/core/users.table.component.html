@@ -9,39 +9,6 @@
     </button>
 </div>
 
-<div class="mr-1 mt-4 ml-1">
-    <table class="table table-hover text-center">
-        <thead>
-            <tr>
-                <th class="color-class">USERID</th>
-                <th class="color-class">USERNAME</th>
-                <th class="color-class">NTSID</th>
-                <th class="color-class">Role</th>
-                <th class="color-class"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of getItems()">
-                <td><div class="my-3">{{item.USERID}}</div></td>
-                <td><div class="my-3">{{item.USERNAME}}</div></td>
-                <td><div class="my-3">{{item.NTSID}}</div></td>
-                <td><div class="my-3">{{item.ROLES}}</div></td>
-                <td>
-                    <button class="button-aqua my-2" 
-                            [routerLink]="['/createUser', 'edit', item.USERID,
-                            {name: item.USERNAME}]">
-                            Edit
-                    </button>
-                    <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
-                        (confirm)="deleteItem(item)" (cancel)="cancelClicked = true">
-                        Delete
-                    </button>
-                </td>
-            </tr>         
-        </tbody>
-    </table>
-</div>
-
 <table-sortable
   [columns]="columns"
 	[data]="rows"

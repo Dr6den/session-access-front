@@ -11,9 +11,6 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
     styleUrls: ["users.table.component.css"]
 })
 export class UsersTableComponent {
-    public popoverTitle: string = 'Delete the user';
-    public popoverMessage: string = 'Are you sure you want delete the user?';
-    public cancelClicked: boolean = false;
     public numrecords: number;
     public shown: number;
 
@@ -27,19 +24,9 @@ export class UsersTableComponent {
             this.shown = this.rows.length;
         });
     }
-
-    getItems(): Array<User> {
-        let roles :User[] = this.model.getUsersArray();
-        return roles;
-    }
     
     resetForm() {
         this.router.navigateByUrl("/");
-    }
-    
-    deleteItem(item: User) {
- 	this.model.deleteUser(item.NTSID);
-	window.location.reload();
     }
     
     //sorting table properties

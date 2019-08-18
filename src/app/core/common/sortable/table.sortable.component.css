@@ -1,3 +1,13 @@
 td {
     border: 0.001rem solid  silver;
 }
+
+table {
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    width: 99%
+}
+th {
+    color: white;
+}
+

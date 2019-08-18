@@ -11,9 +11,6 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
     styleUrls: ["roles.table.component.css"]
 })
 export class RolesTableComponent {
-    public popoverTitle: string = 'Delete the role';
-    public popoverMessage: string = 'Are you sure you want delete the role?';
-    public cancelClicked: boolean = false;
     public numrecords: number;
     public shown: number;
 
@@ -28,20 +25,10 @@ export class RolesTableComponent {
         });
     }
 
-    getItems(): Array<Role> {
-        let roles :Role[] = this.model.getRolesArray();
-        return roles;
-    }
-    
     resetForm() {
         this.router.navigateByUrl("/");
     }
 
-    deleteItem(item: Role) {
- 	this.model.deleteRole(item.ROLENAME);
-	window.location.reload();
-    }
-    
     //sorting table properties
     columns: any[];
     sorting: any;    

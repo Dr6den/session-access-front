@@ -1,6 +1,6 @@
-<table class="table table-hover table-striped table-sortable text-center mr-1 mt-4 ml-1">
+<table class="table table-hover table-striped table-sortable text-center mt-4">
   <thead>
-    <tr>
+    <tr class="text-left header-color-without-shadow">
       <th *ngFor="let column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">
         {{column.display}}
       </th>

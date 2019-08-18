@@ -38,6 +38,14 @@
     );
 }
 
+.header-color-without-shadow {
+  background-image:
+    linear-gradient(
+      to top right, 
+      darkturquoise, #00ffff
+    );
+}
+
 .table-footer-color {
   box-shadow: 0.1em 0.1em 1px rgba(122,122,122,0.5);
   background-image:
