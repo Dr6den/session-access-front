@@ -38,7 +38,7 @@ export class RolesTableComponent {
     }
 
     deleteItem(item: Role) {
- 	this.model.deleteRole(item);
+ 	this.model.deleteRole(item.ROLENAME);
 	window.location.reload();
     }
     

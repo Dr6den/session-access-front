@@ -76,11 +76,11 @@ export class Model {
         return this.dataSource.updateUser(user);
     }
     
-    deleteUser(user: User) {
-        this.dataSource.deleteUser(user.NTSID).subscribe();
+    deleteUser(ntsid: string) {
+        this.dataSource.deleteUser(ntsid).subscribe();
     }
     
-    deleteRole(role: Role) {
-        this.dataSource.deleteRole(role.ROLENAME).subscribe();
+    deleteRole(rolename: string) {
+        this.dataSource.deleteRole(rolename).subscribe();
     }
 }

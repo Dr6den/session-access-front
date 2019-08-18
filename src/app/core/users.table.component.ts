@@ -38,7 +38,7 @@ export class UsersTableComponent {
     }
     
     deleteItem(item: User) {
- 	this.model.deleteUser(item);
+ 	this.model.deleteUser(item.NTSID);
 	window.location.reload();
     }
     

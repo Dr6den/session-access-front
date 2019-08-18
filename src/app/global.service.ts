@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
 export class GlobalService {
     constructor(private http: HttpClient){}
     
-    public REST_URL: string = `http://localhost:4502/api`;
+    public REST_URL: string = `http://localhost:4501/api`;
     
     public sendRequest<T>(verb: string, url: string, body?: Object, params?: HttpParams) : Observable<T> {
         let myHeaders = new HttpHeaders();
