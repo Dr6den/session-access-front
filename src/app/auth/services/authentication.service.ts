@@ -1,5 +1,5 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { GlobalService } from "../../global.service";
 import { Observable } from "rxjs";
@@ -13,8 +13,11 @@ export class AuthenticationService {
     }
     
     authUser(username: string, password: string): Observable<any> {
-        let authUrl = this.url + "/AuthUser?username=" + username + "&password=" + password;
-        return this.globalService.sendRequest<any>("GET", authUrl);
+        let authUrl = this.url + "/AuthUser";
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.set("Content-Type", "application/json");
+        headers = headers.set("Authorization", username + ":" + password);
+        return this.globalService.sendRequest<any>("POST", authUrl, null, null, headers);
     }   
     
     login(username: string, password: string) {  
