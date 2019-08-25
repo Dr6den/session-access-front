@@ -1,0 +1,14 @@
+td {
+    border: 0.01rem solid;
+}
+
+th {
+    color: white;
+}
+
+.line{
+    width: 3rem;
+    height: 2rem;
+    border-bottom: 0.3rem solid aqua;
+    position: absolute;
+}

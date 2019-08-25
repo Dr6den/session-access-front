@@ -5,8 +5,7 @@ import { ModelModule } from "../model/model.module";
 import { IndexComponent } from "./index.component";
 import { CreateUserComponent } from "./create.user.form.component";
 import { SendRoleFormComponent } from "./send.role.form.component";
-import { UsersTableComponent } from "./users.table.component";
-import { RolesTableComponent } from "./roles.table.component";
+import { UsersAndRolesTableComponent } from "./users.roles.table.component";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
@@ -20,16 +19,19 @@ import { FormatTablePipe } from "./common/sortable/table.format.pipe";
 import { SplitStringAndReturnOneOfPipe } from "./common/sortable/split.string.return.one.contained.pipe";
 import { TableOrderByPipe } from "./common/sortable/table.sort.orderby.pipe";
 import { TableSortable } from "./common/sortable/table.sortable.component";
+import { TabsComponent } from "./common/tabs/tabs.component";
+import { TabComponent } from "./common/tabs/tab.component";
+//import { Tab } from "./common/tabs/tab.interface";
 
 @NgModule({
     imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
          ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
-    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent, HeaderComponent,
-         LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe, TableSortable],
+    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersAndRolesTableComponent, HeaderComponent,
+         LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
+         TabsComponent, TabComponent, TableSortable],
     providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe],
-    exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersTableComponent, RolesTableComponent],
-    bootstrap: [RolesTableComponent]
+    exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersAndRolesTableComponent]
 })
 export class CoreModule { }

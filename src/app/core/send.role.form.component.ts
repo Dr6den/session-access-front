@@ -49,9 +49,9 @@ export class SendRoleFormComponent implements OnInit {
                 let splitedOptions: string[] = options.split("-");
                 this.reservedRole.ACCESS = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "ACCESS").replace(/"/g,'').split(",");
                 let GBUparam = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "GBU");
-                this.reservedRole.GBU = GBUparam.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
+                this.reservedRole.GBU = GBUparam/*.substring(GBUparam.lastIndexOf("[") + 2, GBUparam.lastIndexOf("]") - 1).replace(/"/g,'')*/.split(",");
                 let RegionParam = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "REGION");
-                this.reservedRole.REGION = RegionParam.substring(RegionParam.lastIndexOf("[") + 2, RegionParam.lastIndexOf("]") - 1).replace(/"/g,'').split(",");
+                this.reservedRole.REGION = RegionParam/*.substring(RegionParam.lastIndexOf("[") + 2, RegionParam.lastIndexOf("]") - 1).replace(/"/g,'')*/.split(",");
                 this.reservedRole.COGS = this.getStringFromArrayOfStringsThatIncludesName(splitedOptions, "COGS").replace(/"/g,'').split(",");
             }
             this.title = "Edit Role";    

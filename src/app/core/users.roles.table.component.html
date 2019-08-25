@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="button-home ml-2 mr-1 mt-4">
+    <button type="reset" (click)="resetForm()" class="h-100 py-3 col-4 button-aqua">
+        To homepage
+    </button>
+    <button routerLink="/createUser" class="ml-3 h-100 py-3 col-4 button-aqua">
+        Create User
+    </button>
+</div>
+
+<tabs>
+  <tab [tabTitle]="'Title 1'">
+      <div class="line ml-2"></div>
+      <table-sortable
+        [columns]="userColumns"
+	[data]="userRows"
+	[sort]="userSorting">
+        Loading table...
+      </table-sortable>    
+  </tab>
+  <tab tabTitle="Title 2">
+      <div class="line" style="margin-left: 4rem"></div>
+      <table-sortable
+        [columns]="roleColumns"
+	[data]="roleRows"
+	[sort]="roleSorting">
+        Loading table...
+      </table-sortable>
+  </tab>
+</tabs>
+
+<table-footer [numrecords]="numrecords" [shown]="shown"></table-footer>
