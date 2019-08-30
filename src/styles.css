@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .color-class {
-    background-color: darkturquoise;
+    background-color: #006eb5;
 }
 
 .color-text {
@@ -34,7 +34,7 @@
   background-image:
     linear-gradient(
       to top right, 
-      darkturquoise, #00ffff
+      #006eb5, #004069
     );
 }
 
@@ -42,7 +42,7 @@
   background-image:
     linear-gradient(
       to top right, 
-      darkturquoise, #00ffff
+      #006eb5, #004069
     );
 }
 
@@ -53,4 +53,12 @@
       to top right, 
       #DCDCDC, #E6E6FA
     );
+}
+
+.text-headers-color {
+    color: #ffffff;
+}
+
+.text-links-color {
+    color: #323232;
 }

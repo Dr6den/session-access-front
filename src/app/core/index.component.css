@@ -1,6 +1,19 @@
-.button-aqua {
-    font-size: 1rem;
-    font-weight: bolder;
-    text-align: center;
+.button-link {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
 }
 
+.users-link {
+    margin-top: 4.3rem;
+    margin-left: 2.6rem;
+}
+
+.roles-link {
+    margin-top: 3rem;
+    margin-left: 2.6rem;
+}
