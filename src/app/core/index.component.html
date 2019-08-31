@@ -3,12 +3,32 @@
     <div class="row">
         <div class="col-12 mt-3">
             <div class="users-link">
-                <a href="javascript:void(0);" class="button-link text-links-color" routerLink="/showUsers">Users</a>
+                <a href="javascript:void(0);" class="button-link text-links-color" routerLink="/showUsers" [ngbTooltip]="UsersTooltip" placement="right"
+                   >Users</a>
+                <ng-template #UsersTooltip>
+                    <div class="info-popuver"> 
+                        <div class="tcontent">In this directory you can find list of
+                        all users with their info. You can
+                        search, edit users and create new
+                        ones.</div>                            
+                    </div>
+                </ng-template>
             </div>
             <div class="roles-link">
-                <a href="javascript:void(0);" class="button-link text-links-color" routerLink="/showUsers">Roles</a>
+                <a href="javascript:void(0);" class="button-link text-links-color" routerLink="/showUsers" [ngbTooltip]="RolesTooltip" placement="right"
+                   >Roles</a>
+                <ng-template #RolesTooltip>
+                    <div class="info-popuver"> 
+                        <div class="tcontent">In this directory you can find list of
+                        all roles with their info. You can
+                        search, edit users and create new
+                        ones.</div>                            
+                    </div>
+                </ng-template>
             </div>
+        </div>
+        <div id="folders-image">
+            <img src="assets/img/Folders-bloor.png"  alt="assets/img/Folders.png" class="user-img float-right mr-1 mt-1"/>
         </div>
     </div>
 </div>
-

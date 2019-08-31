@@ -21,17 +21,18 @@ import { TableOrderByPipe } from "./common/sortable/table.sort.orderby.pipe";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { TabsComponent } from "./common/tabs/tabs.component";
 import { TabComponent } from "./common/tabs/tab.component";
-//import { Tab } from "./common/tabs/tab.interface";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
+    imports: [BrowserModule, NgbModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
          ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
     declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersAndRolesTableComponent, HeaderComponent,
          LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          TabsComponent, TabComponent, TableSortable],
-    providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe],
-    exports: [ModelModule, SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersAndRolesTableComponent]
+    providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
+         IndexComponent],
+    exports: [ModelModule, SendRoleFormComponent, CreateUserComponent, UsersAndRolesTableComponent]
 })
 export class CoreModule { }

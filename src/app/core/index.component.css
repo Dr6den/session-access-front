@@ -17,3 +17,29 @@
     margin-top: 3rem;
     margin-left: 2.6rem;
 }
+
+.info-popuver {
+    background-color: #eeeeee;
+    color: #323232;
+    font-family: Asap;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.tcontent {
+    margin-left: 0.3rem;
+}
+
+#folders-image {
+    position: relative;
+}
+#folders-image {
+    position: absolute;
+    bottom: 0rem;
+    right: 0rem;
+}

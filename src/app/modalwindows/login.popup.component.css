@@ -30,3 +30,7 @@ h6 {
     border-radius: 0.3rem;
     box-shadow:0 0 0.2rem #0000cc inset;
 }
+
+.close {
+    color: #ffffff;
+}

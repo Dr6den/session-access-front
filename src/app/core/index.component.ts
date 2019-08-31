@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { Model } from "../model/repository.model";
+import {NgbPopover} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: "paTable",
@@ -8,6 +9,5 @@ import { Model } from "../model/repository.model";
 })
 export class IndexComponent {
 
-    constructor(private model: Model) { }
 
 }
