@@ -11,8 +11,6 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
     styleUrls: ["users.roles.table.component.css"]
 })
 export class UsersAndRolesTableComponent {
-    public numrecords: number;
-    public shown: number;
     public title: string = "Users";
 
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
@@ -21,16 +19,12 @@ export class UsersAndRolesTableComponent {
         this.roleColumns = fillInTableService.fillColumnsToRolesTable();
         fillInTableService.fillRowsToRolesTable().then((promiserows) => { 
             this.roleRows = promiserows;
-            this.numrecords = this.roleRows.length;
-            this.shown = this.roleRows.length;
         });
         this.model.getUsers();
         this.userSorting = this.fillInTableService.fillSortingToUsersTable();
         this.userColumns = fillInTableService.fillColumnsToUserTable();
         fillInTableService.fillRowsToUsersTable().then((promiserows) => { 
             this.userRows = promiserows;
-            this.numrecords = this.userRows.length;
-            this.shown = this.userRows.length;
         });
     }
     

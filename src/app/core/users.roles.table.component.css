@@ -6,9 +6,40 @@ th {
     color: white;
 }
 
-.line{
+.line {
     width: 3rem;
     height: 2rem;
     border-bottom: 0.3rem solid aqua;
     position: absolute;
 }
+
+.to-homepage {
+    margin-top: 0.75rem;
+}
+
+.to-homepage a {
+    margin-left: 2.5rem;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6e8298;
+}
+
+.mainLoginInput{
+  height: 40px;
+  padding: 0px;
+  font-size: 30px;
+  margin: 5px 0;
+}
+
+input#search {
+    background-image: url(../../assets/img/icons8-ios-filled-50.png);
+    background-repeat: no-repeat;
+    text-indent: 20px;
+}
+
+#search:active { background-image: none; }

@@ -1,9 +1,11 @@
 <app-header [title]="title"></app-header>
 
+<div class="to-homepage">
+    <a href="javascript:void(0);" (click)="resetForm()">&lt; - Back to Home</a>
+</div>
+
 <div class="button-home ml-2 mr-1 mt-4">
-    <button type="reset" (click)="resetForm()" class="h-100 py-3 col-4 button-aqua">
-        To homepage
-    </button>
+    <input type="text" id="search" name="search" onchange="hideIcon(this);" />
     <button routerLink="/createUser" class="ml-3 h-100 py-3 col-4 button-aqua">
         Create User
     </button>
@@ -30,4 +32,3 @@
   </tab>
 </tabs>
 
-<table-footer [numrecords]="numrecords" [shown]="shown"></table-footer>
