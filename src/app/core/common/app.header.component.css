@@ -22,3 +22,11 @@ a {
   line-height: normal;
   letter-spacing: normal;
 }
+
+a {
+    margin-top: 1rem;
+}
+
+img {
+    margin-top: 0.7rem;
+}

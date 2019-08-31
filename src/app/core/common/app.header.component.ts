@@ -10,6 +10,7 @@ import { ProfilePopupComponent } from "../../modalwindows/profile.popup.componen
     styleUrls: ["app.header.component.css"]
 })
 export class HeaderComponent {
+    @Input('title') title: string;
     @ViewChild(LoginPopupComponent) loginPopup:LoginPopupComponent;
     @ViewChild(ProfilePopupComponent) profilePopup:ProfilePopupComponent;
     disableLogin = false;

@@ -1,10 +1,10 @@
 <div class='header-bounds header-color'>  
-    <div class="header-name text-headers-color float-left">Directories</div>
-    <a [hidden]="disableLogin" href="javascript:void(0);" class="float-right mr-5 mt-2" (click)="login()">login</a>
-    <a [hidden]="disableLogout" href="javascript:void(0);" class="float-right mr-5 mt-2" (click)="logout()">logout</a>
+    <div class="header-name text-headers-color float-left">{{title}}</div>
+    <a [hidden]="disableLogin" href="javascript:void(0);" class="float-right mr-5" (click)="login()">login</a>
+    <a [hidden]="disableLogout" href="javascript:void(0);" class="float-right mr-5" (click)="logout()">logout</a>
     <div [hidden]="disableUsername">
-        <a href="javascript:void(0);" class="float-right mr-5 mt-2" (click)="profile()">{{username}}</a>
-        <img src="assets/img/default-user-profile-picture-7.png"  alt="" class="user-img float-right mr-1 mt-1"/>
+        <a href="javascript:void(0);" class="float-right mr-5" (click)="profile()">{{username}}</a>
+        <img src="assets/img/default-user-profile-picture-7.png"  alt="" class="user-img float-right mr-1"/>
     </div>
 </div>
 

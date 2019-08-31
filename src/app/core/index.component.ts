@@ -8,6 +8,6 @@ import {NgbPopover} from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ["index.component.css"]
 })
 export class IndexComponent {
-
+     public title: string = "Directories";
 
 }
