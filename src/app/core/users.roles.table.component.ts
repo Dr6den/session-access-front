@@ -12,6 +12,12 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
 })
 export class UsersAndRolesTableComponent {
     public title: string = "Users";
+    levelNum:number;
+    levels:Array<Object> = [
+        {num: 10, name: "10"},
+        {num: 50, name: "50"},
+        {num: 100, name: "100"}
+    ];
 
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
         this.model.getRoles();

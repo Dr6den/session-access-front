@@ -4,11 +4,16 @@
     <a href="javascript:void(0);" (click)="resetForm()">&lt; - Back to Home</a>
 </div>
 
-<div class="button-home ml-2 mr-1 mt-4">
-    <input type="text" id="search" name="search" onchange="hideIcon(this);" />
-    <button routerLink="/createUser" class="ml-3 h-100 py-3 col-4 button-aqua">
+<div class="button-home">
+    <input type="text" id="searchInput" placeholder="Search User">
+        
+    <button routerLink="/createUser" class="create-button">
         Create User
     </button>
+    
+    <select type="number" class="select-items" [(ngModel)]="selectedLevelCustomCompare" [compareWith]="compareFn">
+      <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
+    </select>
 </div>
 
 <tabs>
