@@ -3,6 +3,11 @@
     background-color: #006eb5;
 }
 
+.button-color {
+    background-color: rgba(0, 162, 143, 0.8);
+    color: #ffffff;
+}
+
 .color-text {
     color: darkturquoise;
 }

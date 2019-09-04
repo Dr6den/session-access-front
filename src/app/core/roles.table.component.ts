@@ -11,7 +11,7 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
     styleUrls: ["roles.table.component.css"]
 })
 export class RolesTableComponent {
-    public title: string = "Users";
+    public title: string = "Roles";
     levelNum:number;
     levels:Array<Object> = [
         {num: 10, name: "10"},
