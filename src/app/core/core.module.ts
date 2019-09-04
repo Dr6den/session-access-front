@@ -4,8 +4,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModelModule } from "../model/model.module";
 import { IndexComponent } from "./index.component";
 import { CreateUserComponent } from "./create.user.form.component";
-import { SendRoleFormComponent } from "./send.role.form.component";
-import { UsersAndRolesTableComponent } from "./users.roles.table.component";
+import { CreateRoleFormComponent } from "./create.role.form.component";
+import { UsersTableComponent } from "./users.table.component";
+import { RolesTableComponent } from "./roles.table.component";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
@@ -28,11 +29,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
          ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
-    declarations: [SendRoleFormComponent, IndexComponent, CreateUserComponent, UsersAndRolesTableComponent, HeaderComponent,
+    declarations: [CreateRoleFormComponent, IndexComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent, HeaderComponent,
          LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          TabsComponent, TabComponent, TableSortable],
     providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          IndexComponent],
-    exports: [ModelModule, SendRoleFormComponent, CreateUserComponent, UsersAndRolesTableComponent]
+    exports: [ModelModule, CreateRoleFormComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent]
 })
 export class CoreModule { }

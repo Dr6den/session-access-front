@@ -7,10 +7,10 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
 
 @Component({
     selector: "usersTable",
-    templateUrl: "users.roles.table.component.html",
-    styleUrls: ["users.roles.table.component.css"]
+    templateUrl: "users.table.component.html",
+    styleUrls: ["users.table.component.css"]
 })
-export class UsersAndRolesTableComponent {
+export class UsersTableComponent {
     public title: string = "Users";
     levelNum:number;
     levels:Array<Object> = [
@@ -18,14 +18,9 @@ export class UsersAndRolesTableComponent {
         {num: 50, name: "50"},
         {num: 100, name: "100"}
     ];
+    selectedLevel = this.levels[0];
 
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
-        this.model.getRoles();
-        this.roleSorting = this.fillInTableService.fillSortingToRolesTable();
-        this.roleColumns = fillInTableService.fillColumnsToRolesTable();
-        fillInTableService.fillRowsToRolesTable().then((promiserows) => { 
-            this.roleRows = promiserows;
-        });
         this.model.getUsers();
         this.userSorting = this.fillInTableService.fillSortingToUsersTable();
         this.userColumns = fillInTableService.fillColumnsToUserTable();

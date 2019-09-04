@@ -38,6 +38,9 @@ th {
 
 .select-items {
     height: 2.3rem;
+    float: right;
+    margin-right: 3.6rem;
+    margin-top: 3.6rem;
 }
 
 #searchInput {

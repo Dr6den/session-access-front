@@ -1,0 +1,24 @@
+<app-header [title]="title"></app-header>
+
+<div class="to-homepage">
+    <a href="javascript:void(0);" (click)="resetForm()">&lt; - Back to Home</a>
+</div>
+
+<div class="button-home">
+    <input type="text" id="searchInput" placeholder="Search User">
+        
+    <button routerLink="/createUser" class="create-button">
+        Create User
+    </button>
+    
+    <select type="number" class="select-items"  [(ngModel)]="selectedLevel">
+      <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
+    </select>
+</div>
+
+<table-sortable
+    [columns]="roleColumns"
+    [data]="roleRows"
+    [sort]="roleSorting">
+    Loading table...
+</table-sortable>

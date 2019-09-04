@@ -1,0 +1,103 @@
+td {
+    border: 0.01rem solid;
+}
+
+th {
+    color: white;
+}
+
+.line {
+    width: 3rem;
+    height: 2rem;
+    border-bottom: 0.3rem solid aqua;
+    position: absolute;
+}
+
+.to-homepage {
+    margin-top: 0.75rem;
+}
+
+.to-homepage a {
+    margin-left: 2.5rem;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6e8298;
+}
+
+.mainLoginInput{
+  height: 40px;
+  padding: 0px;
+  font-size: 30px;
+  margin: 5px 0;
+}
+
+.select-items {
+    height: 2.3rem;
+    float: right;
+    margin-right: 3.6rem;
+    margin-top: 3.6rem;
+}
+
+#searchInput {
+    margin-left: 3.6rem;
+    margin-top: 3.6rem;
+    width: 40rem;
+    height: 2.3rem;
+}
+
+.create-button {
+    width: 9.1rem;
+    height: 2.3rem;
+    margin-left: 0.9rem;
+    background-color: #00a28f;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+#searchInput::-webkit-input-placeholder {
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  background-size: 3%;
+  text-indent: 5%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+#searchInput::-moz-placeholder {
+  /* Firefox 19+ */
+  text-indent: 5%;
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  text-indent: 5%;
+  background-size: 3%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+#searchInput:-moz-placeholder {
+  /* Firefox 18- */
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  background-size: 3%;
+  text-indent: 5%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+#searchInput:-ms-input-placeholder {
+  /* IE 10- */
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  background-size: 3%;
+  text-indent: 5%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}

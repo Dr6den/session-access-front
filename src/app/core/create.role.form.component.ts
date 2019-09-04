@@ -8,10 +8,10 @@ import { RoleUpdate } from "../model/roleUpdate.model";
 
 @Component({
     selector: "roleEditor",
-    templateUrl: "send.role.form.component.html",
-    styleUrls: ["send.role.form.component.css"]
+    templateUrl: "create.role.form.component.html",
+    styleUrls: ["create.role.form.component.css"]
 })
-export class SendRoleFormComponent implements OnInit {
+export class CreateRoleFormComponent implements OnInit {
     role = new Role();
     reservedRole = new Role();
     accessDropdownList = [];
