@@ -1,13 +1,13 @@
 .ng-valid[required], .ng-valid.required  {
     font-size: 16px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     border-left: 10px solid rgb(218, 200, 43); /* yellow */
 }
 
 .ng-invalid:not(form)  {
     font-size: 16px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     border-bottom: 0.2rem solid #e94646; /* red */
 }

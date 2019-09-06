@@ -1,6 +1,6 @@
 <table class="table table-hover table-striped table-sortable text-center mt-4">
   <thead>
-    <tr class="text-left header-color-without-shadow">
+    <tr class="text-left table-header">
       <th *ngFor="let column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">
         {{column.display}}
       </th>
@@ -10,7 +10,7 @@
     <tr *ngFor="let object of data | orderBy : convertSorting()">
       <td *ngFor="let column of columns">
 
-        <ng-container *ngIf="(column.variable === 'Edit'); then editColumn; else averageColumn">
+        <ng-container *ngIf="(column.variable === 'Actions'); then editColumn; else averageColumn">
         </ng-container>
 
         <ng-template #averageColumn><!--fill roles options row-->
@@ -29,30 +29,22 @@
         </ng-template>
         
         <ng-template #editColumn> <!--edit columns we have to fill by buttons-->
-            <div *ngIf="object.USERNAME"> <!--condition for users table-->
+            <div *ngIf="object.USERNAME" class="table-buttons"> <!--condition for users table-->
 		<div>
-                    <button class="button-aqua my-2" 
-                            [routerLink]="['/createUser', 'edit', object.USERID,
-                            {name: object.USERNAME}]">
-                            Edit
-                    </button>
-                    <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
-                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true">
-                        Delete
-                    </button>
+                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2"
+                         [routerLink]="['/createUser', 'edit', object.USERID, {name: object.USERNAME}]"/>
+                    <img src="assets/img/Close.png" alt="" class="my-2 ml-2 float-right"
+                         mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right"
+                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true"/>
                 </div>
             </div>
             <!--condition for roles table-->
-            <div *ngIf="object.Options">
-                    <button class="my-2 button-aqua" 
-                            [routerLink]="['/createRole', 'edit', object.Rolename,
-                            {options: object.Options, rolename: object.Rolename}]">
-                            Edit
-                    </button>
-                    <button class="button-halt my-2 ml-2"  mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
-                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true">
-                        Delete
-                    </button>
+            <div *ngIf="object.Options" class="table-buttons">
+                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2"
+                         [routerLink]="['/createRole', 'edit', object.Rolename, {options: object.Options, rolename: object.Rolename}]"/>
+                    <img src="assets/img/Close.png" alt="" class="my-2 ml-2 float-right"
+                        mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right"
+                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true"/>
             </div>
         </ng-template>
       </td>

@@ -120,6 +120,6 @@ export class CreateUserComponent {
     }
     
     goHome() {
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/showUsers");
     }
 }

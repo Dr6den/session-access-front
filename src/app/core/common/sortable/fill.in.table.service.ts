@@ -10,7 +10,7 @@ export class FillInTableService {
         let columns = [];
         return this.model.getObservableUsers().toPromise()
             .then((ousers) => {ousers.forEach((user) => {
-            columns.push({"USERID": user.USERID, "USERNAME": user.USERNAME, "NTSID": user.NTSID, "Role": user.ROLES, "Edit":""});});
+            columns.push({"Actions":"", "USERID": user.USERID, "USERNAME": user.USERNAME, "NTSID": user.NTSID, "Role": user.ROLES});});
             return columns;
             });         
     }
@@ -21,6 +21,11 @@ export class FillInTableService {
     
     fillColumnsToUserTable(): any[] {
         return [
+            {
+                display: 'Actions', //The text to display
+                variable: 'Actions', //The name of the key that's apart of the data array
+                filter: 'text' //The type data type of the column (number, text, date, etc.)
+            },
             {
                 display: 'USERID', //The text to display
                 variable: 'USERID', //The name of the key that's apart of the data array
@@ -40,11 +45,6 @@ export class FillInTableService {
                 display: 'Role', //The text to display
                 variable: 'Role', //The name of the key that's apart of the data array
                 filter: 'text' //The type data type of the column (number, text, date, etc.)
-            },
-            {
-                display: 'Edit', //The text to display
-                variable: 'Edit', //The name of the key that's apart of the data array
-                filter: 'text' //The type data type of the column (number, text, date, etc.)
             }
         ];
     }
@@ -54,7 +54,7 @@ export class FillInTableService {
         return this.model.getObservableRoles().toPromise()
             .then((ousers) => {ousers.forEach((role) => {
                 let opt = "ACCESS: " + role.ACCESS + "-GBU: " + role.GBU + "-REGION: " + role.REGION + "-COGS: " + role.COGS;
-                columns.push({"Options": opt, "Rolename": role.ROLENAME, "Edit": ""});});
+                columns.push({"Actions": "","Options": opt, "Rolename": role.ROLENAME});});
                 return columns;
             });       
     }
@@ -66,6 +66,11 @@ export class FillInTableService {
     fillColumnsToRolesTable(): any[] {
         return [
             {
+                display: 'Actions', //The text to display
+                variable: 'Actions', //The name of the key that's apart of the data array
+                filter: 'text' //The type data type of the column (number, text, date, etc.)
+            },
+            {
                 display: 'Options', //The text to display
                 variable: 'Options', //The name of the key that's apart of the data array
                 filter: 'text' //The type data type of the column (number, text, date, etc.)
@@ -73,11 +78,6 @@ export class FillInTableService {
             {
                 display: 'Rolename', //The text to display
                 variable: 'Rolename', //The name of the key that's apart of the data array
-                filter: 'text' //The type data type of the column (number, text, date, etc.)
-            },
-            {
-                display: 'Edit', //The text to display
-                variable: 'Edit', //The name of the key that's apart of the data array
                 filter: 'text' //The type data type of the column (number, text, date, etc.)
             }
         ];

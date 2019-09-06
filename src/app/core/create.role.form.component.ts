@@ -188,6 +188,6 @@ export class CreateRoleFormComponent implements OnInit {
     }
     
     goHome() {
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl("/showRoles");
     }
 }
