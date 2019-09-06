@@ -4,16 +4,19 @@ export class Role {
     public GBU?: Array<string>;
     public REGION?: Array<string>;
     public COGS?: Array<string>;
+    public Application?: string;
 
     constructor(public rolenamePar?: string,
                 public accessPar?: Array<string>,
                 public gbuPar?: Array<string>,
                 public regionPar?: Array<string>,
-                public cogsPar?: Array<string>) {
+                public cogsPar?: Array<string>,
+                public applicationPar?: string) {
         this.ROLENAME = rolenamePar;
 	this.ACCESS = accessPar;
 	this.GBU = gbuPar;
 	this.REGION = regionPar;
 	this.COGS = cogsPar;
+        this.Application = applicationPar;
     }
 }

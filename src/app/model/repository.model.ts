@@ -28,6 +28,7 @@ export class Model {
 	this.dataSource.getRoles().subscribe((data) => {
 		if (data[0] != undefined) {
 			this.roles = data;
+                        console.log(this.roles);
 		}
 	});
     }

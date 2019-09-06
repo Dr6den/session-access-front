@@ -54,7 +54,7 @@ export class FillInTableService {
         return this.model.getObservableRoles().toPromise()
             .then((ousers) => {ousers.forEach((role) => {
                 let opt = "ACCESS: " + role.ACCESS + "-GBU: " + role.GBU + "-REGION: " + role.REGION + "-COGS: " + role.COGS;
-                columns.push({"Actions": "","Options": opt, "Rolename": role.ROLENAME});});
+                columns.push({"Actions": "", "Applications": role.Application, "Options": opt, "Rolename": role.ROLENAME});});
                 return columns;
             });       
     }
@@ -69,6 +69,11 @@ export class FillInTableService {
                 display: 'Actions', //The text to display
                 variable: 'Actions', //The name of the key that's apart of the data array
                 filter: 'text' //The type data type of the column (number, text, date, etc.)
+            },
+            {
+                display: 'Applications',
+                variable: 'Applications',
+                filter: 'text'
             },
             {
                 display: 'Options', //The text to display
