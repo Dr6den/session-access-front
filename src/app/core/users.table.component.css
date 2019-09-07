@@ -21,18 +21,25 @@
   margin: 5px 0;
 }
 
+.label-show {
+    float: right;
+    margin-right: 1rem;
+    margin-top: 4.3rem;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6e8298;
+}
+
 .select-items {
     height: 2.3rem;
     float: right;
-    margin-right: 3.6rem;
+    margin-right: 2rem;
     margin-top: 3.6rem;
-}
-
-#searchInput {
-    margin-left: 3.6rem;
-    margin-top: 3.6rem;
-    width: 40rem;
-    height: 2.3rem;
 }
 
 .create-button {
@@ -48,6 +55,13 @@
     line-height: normal;
     letter-spacing: normal;
     color: #ffffff;
+}
+
+#searchInput {
+    margin-left: 3.6rem;
+    margin-top: 3.6rem;
+    width: 40rem;
+    height: 2.3rem;
 }
 
 #searchInput::-webkit-input-placeholder {

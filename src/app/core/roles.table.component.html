@@ -11,9 +11,10 @@
         Create Role
     </button>
     
-    <select type="number" class="select-items"  [(ngModel)]="selectedLevel">
+    <select type="number" name="show" class="select-items"  [(ngModel)]="selectedLevel">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
     </select>
+    <label class="label-show" for="show">Show</label>
 </div>
 
 <table-sortable
