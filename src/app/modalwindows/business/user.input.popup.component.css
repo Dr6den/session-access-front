@@ -1,0 +1,87 @@
+.user-input-labels {
+    margin-left: 2rem;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #323232;
+}
+
+.textbox, .dropdown {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+    margin-right: 2rem;
+    height: 2.3rem;
+    width: 28rem;
+}
+
+.field-of-form {
+    margin-top: 1.5rem;
+}
+
+.submit-button {
+   margin-right: 2rem;
+   margin-left: 1.4rem;
+}
+
+.log-sub-div input {
+    margin-bottom: 2.8rem;
+    margin-top: 2.8rem;
+}
+
+.log-sub-div {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.modal {
+    left: -10%;
+}
+
+.modal-title {
+    margin-left: 1rem;
+    font-family: Roboto;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.modal-content {
+    width: 41rem;
+    margin: 0rem;
+    padding: 0rem;
+    border: solid 1px #6e8298;
+}
+
+.close {
+    position: absolute;
+    right: 1.8rem;
+    top: 1.8rem;
+    width: 20px;
+    height: 20px;
+}
+.close:hover {
+    opacity: 0;
+}
+.close:before, .close:after {
+    position: absolute;
+    top: 0rem;
+    left: 15px;
+    content: ' ';
+    height: 30px;
+    width: 2px;
+    background-color: #ffffff;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}

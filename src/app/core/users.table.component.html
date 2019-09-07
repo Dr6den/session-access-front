@@ -7,7 +7,7 @@
 <div class="button-home">
     <input type="text" id="searchInput" placeholder="Search User">
         
-    <button routerLink="/createUser" class="create-button">
+    <button (click)="userInput()" class="create-button">
         Create User
     </button>
     
@@ -23,3 +23,5 @@
     [sort]="userSorting">
     Loading table...
 </table-sortable>    
+
+<user-input-popup></user-input-popup>

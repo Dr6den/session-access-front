@@ -6,6 +6,13 @@
 .button-color {
     background-color: rgba(0, 162, 143, 0.8);
     color: #ffffff;
+    border: solid 1px #eeeeee;
+}
+
+.button-cancel {
+    background-color: #ffffff;
+    color: rgba(0, 162, 143, 0.8);
+    border: solid 1px #00a28f;
 }
 
 .color-text {

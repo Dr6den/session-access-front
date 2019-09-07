@@ -1,0 +1,48 @@
+<div class="modal"  [ngStyle]="{'display':display}">
+    <!-- modal-dialog -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- modal-header -->
+        <div class="modal-header color-class">
+            <h6 class="modal-title">Create User</h6>
+            <span class="close" (click)="closeModalDialog()"></span>
+        </div>  
+        <!-- modal-body -->
+        <div class="modal-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="field-of-form">
+                        <label for="username" class="user-input-labels">UserName</label>
+                        <input type="text" formControlName="username" class="textbox float-right"/>
+                    </div>      
+                    <div class="field-of-form">
+                        <label for="userid" class="user-input-labels">UserID</label>
+                        <input type="text" formControlName="userid" class="textbox float-right"/>                               
+                    </div>
+                    <div class="field-of-form">
+                        <label for="ntsid" class="user-input-labels">NTSID</label>
+                        <input type="text" formControlName="ntsid" class="textbox float-right"/>
+                    </div>      
+                    <div class="field-of-form">
+                        <label for="ntdomainsid" class="user-input-labels">NTDomainsID</label>
+                        <input type="text" formControlName="ntdomainsid" class="textbox float-right"/>                               
+                    </div>
+                   
+                    <div class="field-of-form">
+                        <label for="multiselectCogs" class="user-input-labels">Role</label>
+                        <div class="dropdown float-right">
+                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="ALL" [data]="rolesDropdownList" 
+                                             [disabled]='disableForm' [(ngModel)]="selectedRolesItems" [ngModelOptions]="{standalone: true}"
+                                             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                
+                    <div class="log-sub-div">
+                        <input type="submit" class="button-color submit-button float-right" value="Create User">
+                        <input type="button" class="button-cancel float-right" value="Cancel">
+                    </div>
+                </form>
+        </div> 
+        </div>
+    </div>
+</div>
