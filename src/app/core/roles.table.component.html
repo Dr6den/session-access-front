@@ -7,7 +7,7 @@
 <div class="button-home">
     <input type="text" id="searchInput" placeholder="Search User">
         
-    <button routerLink="/createRole" class="create-button">
+    <button (click)="roleInput()" class="create-button">
         Create Role
     </button>
     
@@ -23,3 +23,5 @@
     [sort]="roleSorting">
     Loading table...
 </table-sortable>
+
+<role-input-popup></role-input-popup>

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 
 @Component({
   selector: 'user-input-popup',

@@ -1,9 +1,10 @@
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { Model } from "../model/repository.model";
 import { User } from "../model/user.model";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { FillInTableService } from "./common/sortable/fill.in.table.service";
+import { RoleInputPopupComponent } from "../modalwindows/business/role.input.popup.component";
 
 @Component({
     selector: "rolesTable",
@@ -12,7 +13,17 @@ import { FillInTableService } from "./common/sortable/fill.in.table.service";
 })
 export class RolesTableComponent {
     public title: string = "Roles";
-    levelNum:number;
+    @ViewChild(RoleInputPopupComponent) roleInputPopup:RoleInputPopupComponent;
+    levelNum:number;    
+     
+    //sorting table properties
+    userColumns: any[];
+    userSorting: any;    
+    userRows: any[];
+    roleColumns: any[];
+    roleSorting: any;    
+    roleRows: any[];
+    
     levels:Array<Object> = [
         {num: 10, name: "10"},
         {num: 50, name: "50"},
@@ -33,11 +44,7 @@ export class RolesTableComponent {
         this.router.navigateByUrl("/");
     }
     
-    //sorting table properties
-    userColumns: any[];
-    userSorting: any;    
-    userRows: any[];
-    roleColumns: any[];
-    roleSorting: any;    
-    roleRows: any[];
+    roleInput() {
+        this.roleInputPopup.openModalDialog();
+    }
 }

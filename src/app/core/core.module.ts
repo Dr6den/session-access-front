@@ -18,6 +18,7 @@ import { LoginPopupComponent } from '../modalwindows/login.popup.component';
 import { ProfilePopupComponent } from '../modalwindows/profile.popup.component';
 import { UserInputPopupComponent } from '../modalwindows/business/user.input.popup.component';
 import { RoleInputPopupComponent } from '../modalwindows/business/role.input.popup.component';
+import { DynamicDropboxComponent } from '../modalwindows/business/dynamic/dynamic.dropbox.component';
 import { FormatTablePipe } from "./common/sortable/table.format.pipe";
 import { SplitStringAndReturnOneOfPipe } from "./common/sortable/split.string.return.one.contained.pipe";
 import { TableOrderByPipe } from "./common/sortable/table.sort.orderby.pipe";
@@ -33,9 +34,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     })],
     declarations: [CreateRoleFormComponent, IndexComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent, HeaderComponent,
          LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
-         TabsComponent, TabComponent, TableSortable, UserInputPopupComponent, RoleInputPopupComponent],
+         TabsComponent, TabComponent, TableSortable, UserInputPopupComponent, RoleInputPopupComponent, DynamicDropboxComponent],
     providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          IndexComponent, UserInputPopupComponent, RoleInputPopupComponent],
-    exports: [ModelModule, CreateRoleFormComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent]
+    exports: [ModelModule, CreateRoleFormComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent],
+    bootstrap: [RoleInputPopupComponent],
+    entryComponents: [DynamicDropboxComponent]
 })
 export class CoreModule { }

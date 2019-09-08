@@ -1,4 +1,4 @@
-<div class="modal"  [ngStyle]="{'display':display}">
+<div class="modal" [ngStyle]="{'display':display}">
     <!-- modal-dialog -->
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,22 +9,22 @@
         </div>  
         <!-- modal-body -->
         <div class="modal-body">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form (ngSubmit)="onSubmit()">
                     <div class="field-of-form">
                         <label for="username" class="user-input-labels">UserName</label>
-                        <input type="text" formControlName="username" class="textbox float-right"/>
+                        <input type="text" class="textbox float-right"/>
                     </div>      
                     <div class="field-of-form">
                         <label for="userid" class="user-input-labels">UserID</label>
-                        <input type="text" formControlName="userid" class="textbox float-right"/>                               
+                        <input type="text" class="textbox float-right"/>                               
                     </div>
                     <div class="field-of-form">
                         <label for="ntsid" class="user-input-labels">NTSID</label>
-                        <input type="text" formControlName="ntsid" class="textbox float-right"/>
+                        <input type="text" class="textbox float-right"/>
                     </div>      
                     <div class="field-of-form">
                         <label for="ntdomainsid" class="user-input-labels">NTDomainsID</label>
-                        <input type="text" formControlName="ntdomainsid" class="textbox float-right"/>                               
+                        <input type="text" class="textbox float-right"/>                               
                     </div>
                    
                     <div class="field-of-form">

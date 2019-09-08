@@ -1,26 +1,48 @@
-<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+<div class="modal" [ngStyle]="{'display':display}">
     <!-- modal-dialog -->
-    <div class="modal-dialog" role="document">
-        <!-- modal-content -->
-        <div class="modal-content m-3 shadow rounded">
-            <!-- modal-header -->
-            <div class="modal-header color-class">
-                <h6 class="modal-title">User Profile</h6>
-                <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
-            </div>
-
-            <div class="row m-4">
-                <div class="col-2 m3-4">
-                    <img src="assets/img/kisspng-user-profile.jpg"  alt="" class="img-fluid img-responsive"/>
-                </div>
-                <div class="col-8 float-right">
-                    <h4>{{username}}</h4>                    
-                </div>
-                <div class="col-1 float-right ml-3">
-                    <button type="button" class="btn btn-primary float-right">Ok</button>
-                </div>
-            </div>
-
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- modal-header -->
+        <div class="modal-header color-class">
+            <h6 class="modal-title">Create User</h6>
+            <span class="close" (click)="closeModalDialog()"></span>
+        </div>  
+        <!-- modal-body -->
+        <div class="modal-body">
+            <form (ngSubmit)="onSubmit()">
+                    <div class="field-of-form">
+                        <label for="username" class="user-input-labels">UserName</label>
+                        <input type="text" class="textbox float-right"/>
+                    </div>      
+                    <div class="field-of-form">
+                        <label for="userid" class="user-input-labels">UserID</label>
+                        <input type="text" class="textbox float-right"/>                               
+                    </div>
+                    <div class="field-of-form">
+                        <label for="ntsid" class="user-input-labels">NTSID</label>
+                        <input type="text" class="textbox float-right"/>
+                    </div>      
+                    <div class="field-of-form">
+                        <label for="ntdomainsid" class="user-input-labels">NTDomainsID</label>
+                        <input type="text" class="textbox float-right"/>                               
+                    </div>
+                   
+                    <div class="field-of-form">
+                        <label for="multiselectCogs" class="user-input-labels">Role</label>
+                        <div class="dropdown float-right">
+                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="ALL" [data]="rolesDropdownList" 
+                                             [disabled]='disableForm' [(ngModel)]="selectedRolesItems" [ngModelOptions]="{standalone: true}"
+                                             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                <template #dropboxcontainer></template>
+                    <div class="log-sub-div">
+                        <input type="submit" class="button-color submit-button float-right" value="Create User">
+                        <input type="button" class="button-cancel float-right" value="Cancel">
+                    </div>
+                </form>
+        </div> 
         </div>
     </div>
 </div>
