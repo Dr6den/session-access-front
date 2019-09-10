@@ -4,35 +4,23 @@
         <div class="modal-content">
         <!-- modal-header -->
         <div class="modal-header color-class">
-            <h6 class="modal-title">Create User</h6>
+            <h6 class="modal-title">Create Role</h6>
             <span class="close" (click)="closeModalDialog()"></span>
         </div>  
         <!-- modal-body -->
         <div class="modal-body">
             <form (ngSubmit)="onSubmit()">
                     <div class="field-of-form">
-                        <label for="username" class="user-input-labels">UserName</label>
+                        <label for="username" class="user-input-labels">Name of role</label>
                         <input type="text" class="textbox float-right"/>
                     </div>      
-                    <div class="field-of-form">
-                        <label for="userid" class="user-input-labels">UserID</label>
-                        <input type="text" class="textbox float-right"/>                               
-                    </div>
-                    <div class="field-of-form">
-                        <label for="ntsid" class="user-input-labels">NTSID</label>
-                        <input type="text" class="textbox float-right"/>
-                    </div>      
-                    <div class="field-of-form">
-                        <label for="ntdomainsid" class="user-input-labels">NTDomainsID</label>
-                        <input type="text" class="textbox float-right"/>                               
-                    </div>
                    
                     <div class="field-of-form">
                         <label for="multiselectCogs" class="user-input-labels">Role</label>
                         <div class="dropdown float-right">
-                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="ALL" [data]="rolesDropdownList" 
-                                             [disabled]='disableForm' [(ngModel)]="selectedRolesItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'At first select an application'" [data]="applicationDropdownList" 
+                                             [(ngModel)]="appSelectedDropdownItems" [ngModelOptions]="{standalone: true}"
+                                             [settings]="dropdownSettings" (onSelect)="onApplicationSelect($event)">
                             </ng-multiselect-dropdown>
                         </div>
                     </div>
