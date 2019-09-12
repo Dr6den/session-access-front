@@ -61,7 +61,7 @@ export class UserInputPopupComponent {
                 rolesDropdown.push({item_id: elnum++, item_text: role.ROLENAME});
             });
             this.rolesDropdownList = rolesDropdown;
-            this.selectedRolesItems = [{item_id: 0, item_text: this.rolesDropdownList[0].item_text}];
+            //this.selectedRolesItems = [{item_id: 0, item_text: this.rolesDropdownList[0].item_text}];
         });
     }
     
@@ -74,11 +74,11 @@ export class UserInputPopupComponent {
         } else {
             this.title = "Create User";
         }
-        this.display='block'; //Set block css
+        this.display='block';
     }
 
     closeModalDialog(){
-        this.display='none'; //set none css after close dialog
+        this.display='none';
     }
     
     checkError(errorCode: number) {
@@ -110,11 +110,12 @@ export class UserInputPopupComponent {
        
             if (this.title === "Edit User") {
                 let userUpdate = new UserUpdate(this.reservedUser, this.user);
-                this.model.updateUser(userUpdate).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
+                this.model.updateUser(userUpdate).toPromise().then().catch((response) => this.checkError(response));
             } else {
-                this.model.insertUser(editedUser).toPromise().then(() => this.router.navigateByUrl("/")).catch((response) => this.checkError(response));
+                this.model.insertUser(editedUser).toPromise().then().catch((response) => this.checkError(response));
             }
             this.closeModalDialog();
+            window.location.reload();
         }
     }
     

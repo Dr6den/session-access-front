@@ -31,7 +31,7 @@
                     <div class="field-of-form">
                         <label for="multiselectCogs" class="user-input-labels">Role</label>
                         <div class="dropdown float-right">
-                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="ALL" [data]="rolesDropdownList" 
+                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'choose your role'" [data]="rolesDropdownList" 
                                              [disabled]='disableForm' [(ngModel)]="selectedRolesItems" [ngModelOptions]="{standalone: true}"
                                              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                             </ng-multiselect-dropdown>
