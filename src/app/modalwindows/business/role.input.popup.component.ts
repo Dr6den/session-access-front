@@ -71,7 +71,7 @@ export class RoleInputPopupComponent implements OnInit {
         this.model.getRole().subscribe(data => {
             let applications: Array<string> = [];
             if ((data != undefined)) {
-                this.role = data;
+                this.role = data;//console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+JSON.stringify(this.role));
                             //Object.values(this.role).forEach(e => console.log(Object.values(e)[0]));
                             //Object.keys(this.role).forEach(e => console.log(Object.keys(e)[0]));
                             

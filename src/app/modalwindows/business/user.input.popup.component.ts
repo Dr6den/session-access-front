@@ -33,10 +33,19 @@ export class UserInputPopupComponent {
         }
         
         this.getRoleData();
+      
+        this.dropdownSettings = {
+            singleSelection: false,
+            idField: 'item_id',
+            textField: 'item_text',
+            enableCheckAll: false,
+            itemsShowLimit: 6,
+            allowSearchFilter: false
+        };
     }
     
     toggleDisable() {        
-        this.getUserData(this.user.USERNAME);console.log(this.user);
+        this.getUserData(this.user.USERNAME);
         if (this.user) {
             this.disableForm = false;
         }
@@ -49,15 +58,19 @@ export class UserInputPopupComponent {
                             this.user.NTSID = data.NTSID;
                             this.user.NTDOMAINSID = data.NTDOMAINSID;                            
 			}
-                    });console.log(this.user);
+                    });
     }
     
     getRoleData() {
-        let rolesDescription: Array<Role> = this.model.getRolesArray();
         let elnum = 0;
-        //filling in roles dropdown from user roles
-        /*this.rolesDropdownList = rolesDescription.map(value => {return {item_id: elnum++, item_text: value.ROLENAME}});
-        this.selectedRolesItems = [{item_id: 0, item_text: rolesDescription[0].ROLENAME}];*/
+        let rolesDropdown = [];
+        this.model.getObservableRoles().toPromise()
+            .then((roles) => {roles.forEach((role) => {                                
+                rolesDropdown.push({item_id: elnum++, item_text: role.ROLENAME});
+            });
+            this.rolesDropdownList = rolesDropdown;
+            this.selectedRolesItems = [{item_id: 0, item_text: this.rolesDropdownList[0].item_text}];
+        });
     }
     
     openModalDialog(){
