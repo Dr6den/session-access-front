@@ -4,7 +4,7 @@
         <div class="modal-content">
         <!-- modal-header -->
         <div class="modal-header color-class">
-            <h6 class="modal-title">Create User</h6>
+            <h6 class="modal-title">{{title}}</h6>
             <span class="close" (click)="closeModalDialog()"></span>
         </div>  
         <!-- modal-body -->
@@ -12,19 +12,20 @@
             <form (ngSubmit)="onSubmit()">
                     <div class="field-of-form">
                         <label for="username" class="user-input-labels">UserName</label>
-                        <input type="text" class="textbox float-right"/>
+                        <input type="button" (click)="toggleDisable()" class="button-color submit-button float-right mt-1" value="Find User">
+                        <input type="text" name="username" class="user-textbox float-right" [(ngModel)]="user.USERNAME" required/>                       
                     </div>      
                     <div class="field-of-form">
                         <label for="userid" class="user-input-labels">UserID</label>
-                        <input type="text" class="textbox float-right"/>                               
+                        <input disabled name="userid" type="text" class="textbox float-right"/>                               
                     </div>
                     <div class="field-of-form">
                         <label for="ntsid" class="user-input-labels">NTSID</label>
-                        <input type="text" class="textbox float-right"/>
+                        <input disabled name="ntsid" type="text" class="textbox float-right"/>
                     </div>      
                     <div class="field-of-form">
                         <label for="ntdomainsid" class="user-input-labels">NTDomainsID</label>
-                        <input type="text" class="textbox float-right"/>                               
+                        <input disabled name="ntdomainsid" type="text" class="textbox float-right"/>                               
                     </div>
                    
                     <div class="field-of-form">
@@ -38,7 +39,7 @@
                     </div>
                 
                     <div class="log-sub-div">
-                        <input type="submit" class="button-color submit-button float-right" value="Create User">
+                        <input [disabled]='disableForm' type="submit" class="button-color submit-button float-right" value="Create User">
                         <input type="button" class="button-cancel float-right" value="Cancel">
                     </div>
                 </form>

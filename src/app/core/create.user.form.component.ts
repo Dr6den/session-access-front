@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { Model } from "../model/repository.model";
 import { ActivatedRoute, Router } from "@angular/router";
-import { User } from "../model/user.model"
+import { User } from "../model/user.model";
 import { NgForm } from "@angular/forms";
 import { Role } from "../model/role.model";
 import { UserUpdate } from "../model/userUpdate.model";

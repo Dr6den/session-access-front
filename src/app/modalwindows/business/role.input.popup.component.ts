@@ -16,6 +16,8 @@ export class RoleInputPopupComponent implements OnInit {
     role: object;
     appSelectedDropdownItems = [];
     applicationDropdownList: Array<string> = [];
+    dropdownSettings = {};
+    dropdownMultiSettings = {};
 
     @ViewChild('dropboxcontainer', { read: ViewContainerRef }) container;
     constructor(private resolver: ComponentFactoryResolver, private model: Model) {
