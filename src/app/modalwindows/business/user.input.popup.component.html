@@ -9,7 +9,7 @@
         </div>  
         <!-- modal-body -->
         <div class="modal-body">
-            <form (ngSubmit)="onSubmit()">
+            <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
                     <div class="field-of-form">
                         <label for="username" class="user-input-labels">UserName</label>
                         <input type="button" (click)="toggleDisable()" class="button-color submit-button float-right mt-1" value="Find User">
@@ -39,8 +39,8 @@
                     </div>
                 
                     <div class="log-sub-div">
-                        <input [disabled]='disableForm' type="submit" class="button-color submit-button float-right" value="Create User">
-                        <input type="button" class="button-cancel float-right" value="Cancel">
+                        <input [disabled]='disableForm' type="submit" (click)="submitForm(form)" class="button-color submit-button float-right" value="Create User">
+                        <input type="button" (click)="closeModalDialog()" class="button-cancel float-right" value="Cancel">
                     </div>
                 </form>
         </div> 

@@ -1,9 +1,10 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { TableOrderByPipe } from "./table.sort.orderby.pipe"
 import { FormatTablePipe } from "./table.format.pipe"
 import { Role } from "../../../model/role.model";
 import { User } from "../../../model/user.model";
 import { Model } from "../../../model/repository.model";
+import { UserInputPopupComponent } from "../../../modalwindows/business/user.input.popup.component";
 
 @Component({
   selector: 'table-sortable',
@@ -18,6 +19,7 @@ export class TableSortable {
   @Input() columns: any[];
   @Input() data: any[];
   @Input() sort: any;
+  @Output() callUserInputPopup = new EventEmitter();
   
   constructor(private model: Model){}
   
@@ -52,5 +54,9 @@ export class TableSortable {
         this.model.deleteRole(item.Rolename);
 	window.location.reload();
       }
+  }
+  
+  userInput(user: User) {
+      this.callUserInputPopup.emit(user);
   }
 }

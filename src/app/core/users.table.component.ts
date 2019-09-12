@@ -44,7 +44,7 @@ export class UsersTableComponent {
         this.router.navigateByUrl("/");
     }
     
-    userInput() {
-        this.userInputPopup.openModalDialog();
+    userInput(user?: User) {
+        this.userInputPopup.openModalDialog(user);
     }
 }

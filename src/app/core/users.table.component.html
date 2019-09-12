@@ -20,7 +20,8 @@
 <table-sortable
     [columns]="userColumns"
     [data]="userRows"
-    [sort]="userSorting">
+    [sort]="userSorting"
+    (callUserInputPopup)='userInput($event)'>
     Loading table...
 </table-sortable>    
 

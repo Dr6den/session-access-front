@@ -31,8 +31,8 @@
         <ng-template #editColumn> <!--edit columns we have to fill by buttons-->
             <div *ngIf="object.USERNAME" class="table-buttons"> <!--condition for users table-->
 		<div>
-                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2"
-                         [routerLink]="['/createUser', 'edit', object.USERID, {name: object.USERNAME}]"/>
+                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2" (click)="userInput(object)"/>
+                         <!--[routerLink]="['/createUser', 'edit', object.USERID, {name: object.USERNAME}]"/>-->
                     <img src="assets/img/Close.png" alt="" class="my-2 ml-2 float-right"
                          mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right"
                         (confirm)="deleteItem(object)" (cancel)="cancelClicked = true"/>
