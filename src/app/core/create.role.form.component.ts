@@ -78,7 +78,7 @@ export class CreateRoleFormComponent implements OnInit {
     getRoleData() {
         this.model.getRole().subscribe(data => {
 			if ((data != undefined)) {
-                            this.role = data;console.log(this.role);
+                            this.role = data;
                             this.setUpDropdowns();
 			}
                     });

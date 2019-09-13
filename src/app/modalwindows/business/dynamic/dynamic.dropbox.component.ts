@@ -6,16 +6,13 @@ import { Component, Input } from '@angular/core';
 })
 export class DynamicDropboxComponent {
     @Input() title: string;
-    dropdownSettings = {};
+    @Input() dropdownList: Array<string>;
+    @Input() dropdownSettings;
+    @Input() selectedItems;
     
-    constructor() {
-        this.dropdownSettings = {
-            singleSelection: true,
-            idField: 'item_id',
-            textField: 'item_text',
-            enableCheckAll: false,
-            itemsShowLimit: 9,
-            allowSearchFilter: false
-        };
+    onItemSelect(item: any) {
+        if (item === "All" || this.selectedItems.some((item) => {return item === "All";})) {
+            this.selectedItems =  JSON.parse('["All"]');
+        }
     }
 }
