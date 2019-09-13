@@ -40,8 +40,8 @@
             </div>
             <!--condition for roles table-->
             <div *ngIf="object.Options" class="table-buttons">
-                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2"
-                         [routerLink]="['/createRole', 'edit', object.Rolename, {options: object.Options, rolename: object.Rolename}]"/>
+                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2" (click)="roleInput(object)"/>
+                         <!-- [routerLink]="['/createRole', 'edit', object.Rolename, {options: object.Options, rolename: object.Rolename}]"/>-->
                     <img src="assets/img/Close.png" alt="" class="my-2 ml-2 float-right"
                         mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right"
                         (confirm)="deleteItem(object)" (cancel)="cancelClicked = true"/>

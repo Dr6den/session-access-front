@@ -20,6 +20,7 @@ export class TableSortable {
   @Input() data: any[];
   @Input() sort: any;
   @Output() callUserInputPopup = new EventEmitter();
+  @Output() callRoleInputPopup = new EventEmitter();
   
   constructor(private model: Model){}
   
@@ -58,5 +59,9 @@ export class TableSortable {
   
   userInput(user: User) {
       this.callUserInputPopup.emit(user);
+  }
+  
+  roleInput(role: object) {
+      this.callRoleInputPopup.emit(role);
   }
 }

@@ -4,12 +4,12 @@
         <div class="modal-content">
         <!-- modal-header -->
         <div class="modal-header color-class">
-            <h6 class="modal-title">Create Role</h6>
+            <h6 class="modal-title">{{pagetitle}}</h6>
             <span class="close" (click)="closeModalDialog()"></span>
         </div>  
         <!-- modal-body -->
         <div class="modal-body">
-            <form (ngSubmit)="onSubmit()">
+            <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
                     <div class="field-of-form">
                         <label for="username" class="user-input-labels">Name of role</label>
                         <input type="text" class="textbox float-right"/>
@@ -26,7 +26,7 @@
                     </div>
                 <template #dropboxcontainer></template>
                     <div class="log-sub-div">
-                        <input type="submit" class="button-color submit-button float-right" value="Create User">
+                        <input type="submit" (click)="submitForm(form)" class="button-color submit-button float-right" value="Create User">
                         <input type="button" (click)="closeModalDialog()" class="button-cancel float-right" value="Cancel">
                     </div>
                 </form>

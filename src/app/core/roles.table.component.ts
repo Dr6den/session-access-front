@@ -44,7 +44,7 @@ export class RolesTableComponent {
         this.router.navigateByUrl("/");
     }
     
-    roleInput() {
+    roleInput(role?: object) {
         this.roleInputPopup.openModalDialog();
     }
 }

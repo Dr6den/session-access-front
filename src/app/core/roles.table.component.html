@@ -20,7 +20,8 @@
 <table-sortable
     [columns]="roleColumns"
     [data]="roleRows"
-    [sort]="roleSorting">
+    [sort]="roleSorting"
+    (callRoleInputPopup)='roleInput($event)'>
     Loading table...
 </table-sortable>
 

@@ -1,5 +1,6 @@
 import {Component, Input, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef, ViewChild, Output, EventEmitter, OnInit} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser';
+import { NgForm } from "@angular/forms";
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { DynamicDropboxComponent } from './dynamic/dynamic.dropbox.component';
 import { Model } from "../../model/repository.model";
@@ -12,12 +13,17 @@ import { Model } from "../../model/repository.model";
 export class RoleInputPopupComponent implements OnInit {
     display='none'; //default Variable
     title = 'app';
+    pagetitle = '';
     componentRef: ComponentRef<any>;
     role: object;
+    processedRole: object;
+    chosenApplication: object;
     appSelectedDropdownItems = [];
     applicationDropdownList: Array<string> = [];
     dropdownSettings = {};
     dropdownMultiSettings = {};
+    errorMessage = "error message";
+    errorTextColor: string = "#FFFFFF";
 
     @ViewChild('dropboxcontainer', { read: ViewContainerRef }) container;
     constructor(private resolver: ComponentFactoryResolver, private model: Model) {      
@@ -44,7 +50,12 @@ export class RoleInputPopupComponent implements OnInit {
         };
     }
     
-    openModalDialog(){
+    openModalDialog(role?: object){
+        if (role) {
+            this.pagetitle = "Edit Role";
+        } else {
+            this.pagetitle = "Create Role";
+        }
         this.display='block';
     }
 
@@ -63,6 +74,11 @@ export class RoleInputPopupComponent implements OnInit {
             this.componentRef.instance.title = title;
             this.componentRef.instance.dropdownList = entryValues[0];
             this.componentRef.instance.selectedItems = [];
+            this.componentRef.instance.chosenSelectedItems.subscribe(data => {
+                let appName:string = this.chosenApplication["Application"].values[0];
+                this.processedRole[appName][title].values = data;
+                console.log(JSON.stringify(this.processedRole));
+            });
             if (entryValues[1]) {
                 this.componentRef.instance.dropdownSettings = {
                     singleSelection: false,
@@ -94,25 +110,46 @@ export class RoleInputPopupComponent implements OnInit {
             let applications: Array<string> = [];
             if ((data != undefined)) {
                 this.role = data;
-                            //Object.values(this.role).forEach(e => console.log(Object.values(e)[0]));
-                            //Object.keys(this.role).forEach(e => console.log(Object.keys(e)[0]));
-                            
+                this.processedRole = this.role;
                 Object.entries(this.role).forEach(entry => applications.push(Object.values(entry)[0]));
                 this.applicationDropdownList = applications;
-                           
-//Object.values(this.role).forEach(e => Object.values(e).forEach(el => console.log(el)));
-			}
-                    });
+            }
+        });
     }
     
     onApplicationSelect(item: any) {            
-        let selectedRole = this.role[item];
+        this.chosenApplication = this.role[item];
         this.clearComponents();
-        Object.entries(selectedRole).forEach(entry => {
+        Object.entries(this.chosenApplication).forEach(entry => {
             if (entry[0] !== "Application") {
-                let entryValues = Object.values(selectedRole[entry[0]]);
+                let entryValues = Object.values(this.chosenApplication[entry[0]]);
                 this.createComponent(entry[0], entryValues);
             }
         });
+    }
+    
+    submitForm(form: NgForm) {
+        if (form.valid) {      
+            if (this.title === "Edit User") {
+                this.model.updateRole(this.processedRole).toPromise().then().catch((response) => this.checkError(response));
+            } else {
+                this.model.insertRole(this.processedRole).toPromise().then().catch((response) => this.checkError(response));
+            }
+            this.closeModalDialog();
+            window.location.reload();
+        }
+    }
+    
+    checkError(errorCode: number) {
+        this.errorTextColor = "red";
+        if (errorCode === 404) {
+            this.errorMessage = "Schema doesn't exist";            
+        } else if (errorCode === 400) {
+            this.errorMessage = "Schema is not specified";
+        } else if (errorCode === 500) {
+            this.errorMessage = "Unknown error";
+        } else if (errorCode === 409) {
+            this.errorMessage = "Record already exist";
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
     selector: 'dropbox-dynamic',
     templateUrl: './dynamic.dropbox.component.html',
@@ -9,10 +9,12 @@ export class DynamicDropboxComponent {
     @Input() dropdownList: Array<string>;
     @Input() dropdownSettings;
     @Input() selectedItems;
+    @Output() chosenSelectedItems = new EventEmitter();
     
     onItemSelect(item: any) {
         if (item === "All" || this.selectedItems.some((item) => {return item === "All";})) {
             this.selectedItems =  JSON.parse('["All"]');
         }
+        this.chosenSelectedItems.emit(this.selectedItems);
     }
 }
