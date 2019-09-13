@@ -1,4 +1,4 @@
-import {Component, Input, ComponentFactory,ComponentRef, ComponentFactoryResolver, ViewContainerRef, ViewChild, Output, EventEmitter, OnInit} from '@angular/core'
+import {Component, Input, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef, ViewChild, Output, EventEmitter, OnInit} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { DynamicDropboxComponent } from './dynamic/dynamic.dropbox.component';
@@ -20,9 +20,10 @@ export class RoleInputPopupComponent implements OnInit {
     dropdownMultiSettings = {};
 
     @ViewChild('dropboxcontainer', { read: ViewContainerRef }) container;
-    constructor(private resolver: ComponentFactoryResolver, private model: Model) {
+    constructor(private resolver: ComponentFactoryResolver, private model: Model) {      
         this.getRoleData();
-        console.log("111"+this.applicationDropdownList);
+        
+        
     }
     
     ngOnInit() {        
@@ -56,10 +57,13 @@ export class RoleInputPopupComponent implements OnInit {
         this.display='none'; //set none css after close dialog
     }
     
-    createComponent(title) {
-        //this.container.clear();
+    clearComponents() {
+        this.container.clear(); 
+    }
+    
+    createComponent(title) {        
         const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(DynamicDropboxComponent);
-        this.componentRef = this.container.createComponent(factory);    
+        this.componentRef = this.container.createComponent(factory);           
         this.componentRef.instance.title = title;
     }
     
@@ -77,7 +81,6 @@ export class RoleInputPopupComponent implements OnInit {
                             
                 Object.entries(this.role).forEach(entry => applications.push(Object.values(entry)[0]));
                             
-                Object.entries(this.role['EMEA EUA & SPO']).forEach(entry => console.log(entry[0]));
                 console.log(Object.entries(this.role['EMEA EUA & SPO']['ACCESS']));
                 this.applicationDropdownList = applications;
                            
@@ -88,7 +91,16 @@ export class RoleInputPopupComponent implements OnInit {
                     });
     }
     
-    onApplicationSelect(item: any) {console.log(item.item_text);
-        
+    onApplicationSelect(item: any) {        
+        //this.container.clear(); 
+        //this.componentRef.destroy(); 
+    console.log("hey");    
+        let selectedRole = this.role[item];
+        this.clearComponents();
+        Object.entries(selectedRole).forEach(entry => {
+            if (entry[0] !== "Application") {console.log(entry[0]);
+                this.createComponent(entry[0]);
+            }
+        });
     }
 }

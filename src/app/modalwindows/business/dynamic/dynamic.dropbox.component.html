@@ -1,7 +1,7 @@
-<div class="form-group row">
-    <label for="multiselectAccess" class="col-sm-2 col-form-label">{{title}}</label>
-    <div class="col-sm-10">
-        <ng-multiselect-dropdown id="dropbox" class="mt-3" [placeholder]="ALL" [data]="accessDropdownList" 
+<div class="field-of-form">
+    <label for="multiselectAccess" class="user-input-labels">{{title}}</label>
+    <div class="dropdown float-right">
+        <ng-multiselect-dropdown id="dropbox" [placeholder]="ALL" [data]="accessDropdownList" 
                                  [(ngModel)]="accessSelectedItems" [ngModelOptions]="{standalone: true}"
                                  [settings]="dropdownSettings">
         </ng-multiselect-dropdown>

@@ -5,3 +5,27 @@
 :host /deep/ .dropdown-list[_ngcontent-c2] {
     background-color: Aquamarine;
 }
+
+.dropdown {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+    margin-right: 2rem;
+    height: 2.3rem;
+    width: 28rem;
+}
+
+.roles-input-labels {
+    margin-left: 2rem;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #323232;
+}
+
+.field-of-form {
+    margin-top: 1.5rem;
+}

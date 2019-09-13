@@ -16,7 +16,7 @@
                     </div>      
                    
                     <div class="field-of-form">
-                        <label for="multiselectCogs" class="user-input-labels">Role</label>
+                        <label for="multiselectCogs" class="user-input-labels">Application</label>
                         <div class="dropdown float-right">
                             <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'At first select an application'" [data]="applicationDropdownList" 
                                              [(ngModel)]="appSelectedDropdownItems" [ngModelOptions]="{standalone: true}"
@@ -27,7 +27,7 @@
                 <template #dropboxcontainer></template>
                     <div class="log-sub-div">
                         <input type="submit" class="button-color submit-button float-right" value="Create User">
-                        <input type="button" class="button-cancel float-right" value="Cancel">
+                        <input type="button" (click)="closeModalDialog()" class="button-cancel float-right" value="Cancel">
                     </div>
                 </form>
         </div> 
