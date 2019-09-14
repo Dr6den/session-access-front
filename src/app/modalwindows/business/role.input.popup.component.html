@@ -11,8 +11,8 @@
         <div class="modal-body">
             <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
                     <div class="field-of-form">
-                        <label for="username" class="user-input-labels">Name of role</label>
-                        <input type="text" class="textbox float-right"/>
+                        <label for="rolename" class="user-input-labels">Name of role</label>
+                        <input type="text" name="rolename" class="textbox float-right" [(ngModel)]="rolename" required/>
                     </div>      
                    
                     <div class="field-of-form">

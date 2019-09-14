@@ -14,6 +14,7 @@ export class RoleInputPopupComponent implements OnInit {
     display='none'; //default Variable
     title = 'app';
     pagetitle = '';
+    rolename = '';
     componentRef: ComponentRef<any>;
     role: object;
     processedRole: object;
@@ -50,10 +51,17 @@ export class RoleInputPopupComponent implements OnInit {
         };
     }
     
-    openModalDialog(role?: object){
-        if (role) {
+    openModalDialog(role?: object) {
+        if (role) {console.log(JSON.stringify(role["Applications"]));
             this.pagetitle = "Edit Role";
+            this.rolename = role["Rolename"];
+            this.selectApplication(role["Applications"]);
+            this.appSelectedDropdownItems = [];
+            this.appSelectedDropdownItems.push(role["Applications"]);
         } else {
+            this.appSelectedDropdownItems = [];
+            this.rolename = "";
+            this.clearComponents();
             this.pagetitle = "Create Role";
         }
         this.display='block';
@@ -77,7 +85,6 @@ export class RoleInputPopupComponent implements OnInit {
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
                 let appName:string = this.chosenApplication["Application"].values[0];
                 this.processedRole[appName][title].values = data;
-                console.log(JSON.stringify(this.processedRole));
             });
             if (entryValues[1]) {
                 this.componentRef.instance.dropdownSettings = {
@@ -118,6 +125,10 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     onApplicationSelect(item: any) {            
+        this.selectApplication(item);
+    }
+    
+    selectApplication(item: any) {
         this.chosenApplication = this.role[item];
         this.clearComponents();
         Object.entries(this.chosenApplication).forEach(entry => {

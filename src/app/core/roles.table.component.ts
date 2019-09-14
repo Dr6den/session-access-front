@@ -45,6 +45,6 @@ export class RolesTableComponent {
     }
     
     roleInput(role?: object) {
-        this.roleInputPopup.openModalDialog();
+        this.roleInputPopup.openModalDialog(role);
     }
 }
