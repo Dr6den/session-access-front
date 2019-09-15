@@ -1,7 +1,6 @@
 import { Injectable, Inject, InjectionToken } from "@angular/core";
 import { HttpClient, HttpParams} from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Role } from "../model/role.model";
 import { User } from "../model/user.model";
 import { UserUpdate } from "../model/userUpdate.model";
 import { RoleUpdate } from "../model/roleUpdate.model";
@@ -15,19 +14,19 @@ export class RestDataSource {
             this.url = globalService.REST_URL;
         }
                 
-    getRole(): Observable<Role> {
+    getRole(): Observable<object> {
         let url = this.url + "/angular/getRoles";
-        return this.globalService.sendRequest<Role>("GET", url);
+        return this.globalService.sendRequest<object>("GET", url);
     }
     
-    getRoles(): Observable<Role[]> {
+    getRoles(): Observable<object[]> {
         let url = this.url + "/GetRecords/Roles?parseRoleOpts=true";
-        return this.globalService.sendRequest<Role[]>("GET", url);
+        return this.globalService.sendRequest<object[]>("GET", url);
     }
     
-    insertRole(role: Role): Observable<Role> {
+    insertRole(role: object): Observable<object> {
 	let url = this.url + "/InsertRecord/Roles";
-        return this.globalService.sendRequest<Role>("POST", url, role);
+        return this.globalService.sendRequest<object>("POST", url, role);
     }
     
     updateRole(role: RoleUpdate): Observable<RoleUpdate> {

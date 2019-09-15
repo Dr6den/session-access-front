@@ -1,6 +1,7 @@
 import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { Model } from "../../../model/repository.model";
 import { User } from "../../../model/user.model";
+import { Role } from "../../../model/role.model";
 
 @Injectable({ providedIn: 'root' })
 export class FillInTableService {
@@ -49,12 +50,14 @@ export class FillInTableService {
         ];
     }
     
-     fillRowsToRolesTable(): Promise<any> {
+    fillRowsToRolesTable(): Promise<any> {
         let columns = [];
         return this.model.getObservableRoles().toPromise()
             .then((ousers) => {ousers.forEach((role) => {
-                let opt = "ACCESS: " + role.ACCESS + "-GBU: " + role.GBU + "-REGION: " + role.REGION + "-COGS: " + role.COGS;
-                columns.push({"Actions": "", "Applications": role.Application, "Options": opt, "Rolename": role.ROLENAME});});
+                let roleStr = new Role(role);
+                let opt = roleStr.getArrayOfOptionsObject();
+                columns.push({"Actions": "", "Applications": roleStr.application, "Options": opt, "Rolename": roleStr.rolename});
+            });
                 return columns;
             });       
     }

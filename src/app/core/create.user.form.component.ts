@@ -65,8 +65,8 @@ export class CreateUserComponent {
         let rolesDescription: Array<Role> = this.model.getRolesArray();
         let elnum = 0;
         //filling in roles dropdown from user roles
-        this.rolesDropdownList = rolesDescription.map(value => {return {item_id: elnum++, item_text: value.ROLENAME}});
-        this.selectedRolesItems = [{item_id: 0, item_text: rolesDescription[0].ROLENAME}];
+        this.rolesDropdownList = rolesDescription.map(value => {return {item_id: elnum++, item_text: value.rolename}});
+        this.selectedRolesItems = [{item_id: 0, item_text: rolesDescription[0].rolename}];
     }
     
     ngOnInit() {        

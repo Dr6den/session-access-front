@@ -8,7 +8,7 @@ import { RoleUpdate } from "../model/roleUpdate.model";
 
 @Injectable()
 export class Model {
-    roles;
+    roles = [];
     users;
     model;
     subscriptions = new Subscription();
@@ -20,19 +20,22 @@ export class Model {
         }
     }
     
-    getRole(): Observable<Role> {
+    getRole(): Observable<object> {
         return this.dataSource.getRole();
     }
     
     getRoles(): void {
 	this.dataSource.getRoles().subscribe((data) => {
-		if (data[0] != undefined) {
-			this.roles = data;
+		if (data[0] != undefined) {                    
+                    data.forEach((r) => {
+                        let role = new Role(r);
+                        this.roles.push(role);
+                    });
 		}
 	});
     }
     
-    getObservableRoles(): Observable<Role[]> {
+    getObservableRoles(): Observable<object[]> {
         return this.dataSource.getRoles();
     }
     
@@ -40,7 +43,7 @@ export class Model {
         return this.roles;
     }
     
-    insertRole(role: Role): Observable<Role> {
+    insertRole(role: object): Observable<object> {
         return this.dataSource.insertRole(role);
     }
     

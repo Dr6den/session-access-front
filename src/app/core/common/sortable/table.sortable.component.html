@@ -15,10 +15,10 @@
 
         <ng-template #averageColumn><!--fill roles options row-->
             <div *ngIf="(column.variable === 'Options');else average_content">
-                <div>{{object.Options | split_and_get_one_of_them:'-':'ACCESS' }}</div>
-                <div>{{object.Options | split_and_get_one_of_them:'-':'GBU' }}</div>
+                <div *ngFor="let item of object.Options">{{item}}</div>
+               <!-- <div>{{object.Options | split_and_get_one_of_them:'-':'GBU' }}</div>
                 <div>{{object.Options | split_and_get_one_of_them:'-':'REGION' }}</div>
-                <div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>
+                <div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>-->
             </div>
 
             <ng-template #average_content><!--fill simple for all tables row-->
