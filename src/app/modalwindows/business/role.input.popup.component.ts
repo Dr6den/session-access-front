@@ -4,6 +4,7 @@ import { NgForm } from "@angular/forms";
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { DynamicDropboxComponent } from './dynamic/dynamic.dropbox.component';
 import { Model } from "../../model/repository.model";
+import { Role } from "../../model/role.model"
 
 @Component({
   selector: 'role-input-popup',
@@ -23,6 +24,7 @@ export class RoleInputPopupComponent implements OnInit {
     applicationDropdownList: Array<string> = [];
     dropdownSettings = {};
     dropdownMultiSettings = {};
+    rolesOwnedOptions;
     errorMessage = "error message";
     errorTextColor: string = "#FFFFFF";
 
@@ -52,17 +54,19 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     openModalDialog(role?: object) {
-        if (role) {console.log(JSON.stringify(role["Applications"]));
+        if (role) {
             this.pagetitle = "Edit Role";
             this.rolename = role["Rolename"];
+            this.rolesOwnedOptions = role["Options"];
             this.selectApplication(role["Applications"]);
             this.appSelectedDropdownItems = [];
-            this.appSelectedDropdownItems.push(role["Applications"]);
+            this.appSelectedDropdownItems.push(role["Applications"]);            
         } else {
             this.appSelectedDropdownItems = [];
             this.rolename = "";
             this.clearComponents();
             this.pagetitle = "Create Role";
+            this.rolesOwnedOptions = undefined;
         }
         this.display='block';
     }
@@ -104,6 +108,10 @@ export class RoleInputPopupComponent implements OnInit {
                     itemsShowLimit: 9,
                     allowSearchFilter: false
                 };
+            }
+            //if role edit we have to set selected roles from received from roles table data
+            if (this.rolesOwnedOptions) {
+                console.log(this.rolesOwnedOptions);
             }
         }
     }
