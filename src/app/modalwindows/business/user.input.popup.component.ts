@@ -57,11 +57,11 @@ export class UserInputPopupComponent {
         let elnum = 0;
         let rolesDropdown = [];
         this.model.getObservableRoles().toPromise()
-            .then((roles) => {roles.forEach((role) => {                                
-          //      rolesDropdown.push({item_id: elnum++, item_text: role["ROLENAME"]"});
+            .then((roles) => {roles.forEach((role) => {   console.log(JSON.stringify(role));                             
+                rolesDropdown.push({item_id: elnum++, item_text: role["ROLENAME"]});
             });
             this.rolesDropdownList = rolesDropdown;
-            //this.selectedRolesItems = [{item_id: 0, item_text: this.rolesDropdownList[0].item_text}];
+            this.selectedRolesItems = [{item_id: 0, item_text: this.rolesDropdownList[0].item_text}];
         });
     }
     
