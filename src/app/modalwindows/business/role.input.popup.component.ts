@@ -17,6 +17,7 @@ export class RoleInputPopupComponent implements OnInit {
     pagetitle = '';
     rolename = '';
     componentRef: ComponentRef<any>;
+    dataRecievedFromRolesTableScreen: Role;
     role: object;
     processedRole: object;
     chosenApplication: object;
@@ -55,18 +56,18 @@ export class RoleInputPopupComponent implements OnInit {
     
     openModalDialog(role?: object) {
         if (role) {
+            this.dataRecievedFromRolesTableScreen = new Role(role);
             this.pagetitle = "Edit Role";
             this.rolename = role["Rolename"];
-            this.rolesOwnedOptions = role["Options"];
             this.selectApplication(role["Applications"]);
             this.appSelectedDropdownItems = [];
             this.appSelectedDropdownItems.push(role["Applications"]);            
         } else {
+            this.dataRecievedFromRolesTableScreen = new Role();
             this.appSelectedDropdownItems = [];
             this.rolename = "";
             this.clearComponents();
             this.pagetitle = "Create Role";
-            this.rolesOwnedOptions = undefined;
         }
         this.display='block';
     }
@@ -109,9 +110,16 @@ export class RoleInputPopupComponent implements OnInit {
                     allowSearchFilter: false
                 };
             }
-            //if role edit we have to set selected roles from received from roles table data
-            if (this.rolesOwnedOptions) {
-                console.log(this.rolesOwnedOptions);
+            //if role received from edit talbe (Edit mode) we have to set seted properties that are choosen
+            if (this.dataRecievedFromRolesTableScreen.rolename) {
+                let opts = this.dataRecievedFromRolesTableScreen.roleObj["Options"];
+                for (let el of opts) {                    
+                    if (el.startsWith(title)) {
+                        let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
+                        selectedRolesArray.forEach((r) => this.componentRef.instance.selectedItems.push(r));
+                        break;
+                    }
+                }
             }
         }
     }

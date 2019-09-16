@@ -61,7 +61,14 @@ export class TableSortable {
       this.callUserInputPopup.emit(user);
   }
   
+  /*role that arrives from from html table doesn't have enough fields, thats why I have to find real objects in table and send them*/
   roleInput(role: object) {
-      this.callRoleInputPopup.emit(role);
+      let roleWithAllNeededFields;
+      this.data.forEach((rol) => {
+          if ((rol["Applications"] === rol["Applications"]) && (rol["Rolename"] === role["Rolename"])) {
+            roleWithAllNeededFields = rol;
+          }
+      });
+      this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }
 }

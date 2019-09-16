@@ -1,12 +1,12 @@
 export class Role {
     public rolename?: string;
     public application?: string;
-    public roleObj: object;
 
-    constructor(public roleObjPar?: object) {
-        this.rolename = roleObjPar["ROLENAME"];
-        this.application = roleObjPar["Application"];
-        this.roleObj = roleObjPar;
+    constructor(public roleObj?: object) {
+        if (roleObj) {
+            this.rolename = (roleObj["ROLENAME"]) ? roleObj["ROLENAME"] : roleObj["Rolename"];
+            this.application = (roleObj["Application"]) ? roleObj["Application"] : roleObj["Applications"];
+        }
     }
     
     public getStringOfOptionsObject(): string {
@@ -31,4 +31,5 @@ export class Role {
         });
         return opts;
     }
+    
 }
