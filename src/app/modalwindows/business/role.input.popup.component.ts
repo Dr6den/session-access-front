@@ -4,7 +4,8 @@ import { NgForm } from "@angular/forms";
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { DynamicDropboxComponent } from './dynamic/dynamic.dropbox.component';
 import { Model } from "../../model/repository.model";
-import { Role } from "../../model/role.model"
+import { Role } from "../../model/role.model";
+import { RoleUpdate } from "../../model/roleUpdate.model";
 
 @Component({
   selector: 'role-input-popup',
@@ -19,6 +20,7 @@ export class RoleInputPopupComponent implements OnInit {
     componentRef: ComponentRef<any>;
     dataRecievedFromRolesTableScreen: Role;
     role: object;
+    previousRequest: object;
     processedRole: object;
     chosenApplication: object;
     appSelectedDropdownItems = [];
@@ -57,6 +59,7 @@ export class RoleInputPopupComponent implements OnInit {
     openModalDialog(role?: object) {
         if (role) {
             this.dataRecievedFromRolesTableScreen = new Role(role);
+            this.previousRequest = role;
             this.pagetitle = "Edit Role";
             this.rolename = role["Rolename"];
             this.selectApplication(role["Applications"]);
@@ -156,14 +159,27 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     submitForm(form: NgForm) {
-        if (form.valid) {      
-            if (this.title === "Edit User") {
-                this.model.updateRole(this.processedRole).toPromise().then().catch((response) => this.checkError(response));
+        if (form.valid) {
+            let appName = this.chosenApplication["Application"]["values"];
+            let changedRoleData = this.processedRole[appName]; 
+            changedRoleData["ROLENAME"]["values"] = this.rolename; 
+            changedRoleData["Rolename"] = this.rolename;
+            changedRoleData["Applications"] = appName; 
+            let request = {};
+            request[appName] = changedRoleData;
+            if (this.pagetitle === "Edit Role") {   console.log("prev"+JSON.stringify(this.previousRequest));         
+                let previousRoleData = this.previousRequest; 
+                previousRoleData["Rolename"] = this.rolename;  
+                let previousRequest = {};
+                previousRequest[appName] = previousRoleData;
+                 console.log("==="+JSON.stringify(previousRequest));
+                let roleUpdate = new RoleUpdate(previousRequest, request);
+                this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
             } else {
-                this.model.insertRole(this.processedRole).toPromise().then().catch((response) => this.checkError(response));
+                this.model.insertRole(request).toPromise().then().catch((response) => this.checkError(response));
             }
             this.closeModalDialog();
-            window.location.reload();
+           // window.location.reload();
         }
     }
     
