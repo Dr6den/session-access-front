@@ -20,7 +20,7 @@
                         <div class="dropdown float-right">
                             <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'At first select an application'" [data]="applicationDropdownList" 
                                              [(ngModel)]="appSelectedDropdownItems" [ngModelOptions]="{standalone: true}"
-                                             [settings]="dropdownSettings" (onSelect)="onApplicationSelect($event)">
+                                             [settings]="dropdownSettings" (onSelect)="onApplicationSelect($event)" [disabled]='updateMode'>
                             </ng-multiselect-dropdown>
                         </div>
                     </div>

@@ -13,6 +13,7 @@ import { RoleUpdate } from "../../model/roleUpdate.model";
   styleUrls: ['./role.input.popup.component.css']
 })
 export class RoleInputPopupComponent implements OnInit {
+    updateMode = false;
     display='none'; //default Variable
     title = 'app';
     pagetitle = '';
@@ -60,13 +61,14 @@ export class RoleInputPopupComponent implements OnInit {
         if (role) {
             this.dataRecievedFromRolesTableScreen = new Role(role);
             this.pagetitle = "Edit Role";
+            this.updateMode = true;
             this.rolename = role["Rolename"];
             this.selectApplication(role["Applications"]);
             this.appSelectedDropdownItems = [];
             this.appSelectedDropdownItems.push(role["Applications"]);            
         } else {
             this.dataRecievedFromRolesTableScreen = new Role();
-            //this.request = {};
+            this.updateMode = false;
             this.appSelectedDropdownItems = [];
             this.rolename = "";
             this.clearComponents();
