@@ -19,16 +19,14 @@ export class RoleInputPopupComponent implements OnInit {
     pagetitle = '';
     rolename = '';
     componentRef: ComponentRef<any>;
-    dataRecievedFromRolesTableScreen: Role;
+    dataRecievedFromRolesTableScreen: object;
     role: object;
     request: object;
-    processedRole: object;
     chosenApplication: object;
     appSelectedDropdownItems = [];
     applicationDropdownList: Array<string> = [];
     dropdownSettings = {};
     dropdownMultiSettings = {};
-    rolesOwnedOptions;
     errorMessage = "error message";
     errorTextColor: string = "#FFFFFF";
 
@@ -59,7 +57,7 @@ export class RoleInputPopupComponent implements OnInit {
     
     openModalDialog(role?: object) {
         if (role) {
-            this.dataRecievedFromRolesTableScreen = new Role(role);
+            this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
             this.updateMode = true;
             this.rolename = role["Rolename"];
@@ -67,7 +65,7 @@ export class RoleInputPopupComponent implements OnInit {
             this.appSelectedDropdownItems = [];
             this.appSelectedDropdownItems.push(role["Applications"]);            
         } else {
-            this.dataRecievedFromRolesTableScreen = new Role();
+            this.dataRecievedFromRolesTableScreen = undefined;
             this.updateMode = false;
             this.appSelectedDropdownItems = [];
             this.rolename = "";
@@ -95,7 +93,7 @@ export class RoleInputPopupComponent implements OnInit {
             this.componentRef.instance.selectedItems = [];
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
                 let appName:string = this.chosenApplication["Application"].values[0];
-                this.processedRole[appName][title].values = data;
+                this.role[appName][title].values = data;
             });
             if (entryValues[1]) {
                 this.componentRef.instance.dropdownSettings = {
@@ -117,8 +115,8 @@ export class RoleInputPopupComponent implements OnInit {
                 };
             }
             //if role received from edit talbe (Edit mode) we have to set seted properties that are choosen
-            if (this.dataRecievedFromRolesTableScreen.rolename) {
-                let opts = this.dataRecievedFromRolesTableScreen.roleObj["Options"];
+            if (this.dataRecievedFromRolesTableScreen) {
+                let opts = this.dataRecievedFromRolesTableScreen["Options"];
                 for (let el of opts) {                 
                     if (el.startsWith(title)) {
                         let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
@@ -139,7 +137,6 @@ export class RoleInputPopupComponent implements OnInit {
             let applications: Array<string> = [];
             if ((data != undefined)) {
                 this.role = data;
-                this.processedRole = this.role;
                 Object.entries(this.role).forEach(entry => applications.push(Object.values(entry)[0]));
                 this.applicationDropdownList = applications;
             }
@@ -167,22 +164,24 @@ export class RoleInputPopupComponent implements OnInit {
             this.request["ROLENAME"] = this.rolename;
             this.request["Application"] = appName;
             this.request["Actions"] = "";
-            this.request["Options"] = this.getArrayOfOptionsObject(this.role[appName]);console.log("---"+JSON.stringify(this.request)); 
-            if (this.pagetitle === "Edit Role") {          
-               /* let previousRoleData = this.dataRecievedFromRolesTableScreen; 
-                previousRoleData["Rolename"] = this.rolename; 
+            this.request["Options"] = this.getArrayOfOptionsObject(this.role[appName]); 
+    
+            if (this.pagetitle === "Edit Role") {   console.log("???"+JSON.stringify(this.applicationDropdownList));       
+                /*let previousRoleData = this.dataRecievedFromRolesTableScreen; 
+               /* previousRoleData["Rolename"] = this.rolename; 
                 let previousRequest = {};
                 previousRequest["Application"] = appName;
                 previousRequest["ROLENAME"] = previousRoleData["Rolename"];
                 previousRequest["Actions"] = ""; console.log("###"+JSON.stringify(this.getArrayOfOptionsObject(this.previousRoleData[appName])));
-                 console.log("==="+JSON.stringify(previousRequest));
-                let roleUpdate = new RoleUpdate(previousRequest, request);
-                this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));*/
+                 console.log("==="+JSON.stringify(previousRequest));*/
+                let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
+       console.log("---"+JSON.stringify(roleUpdate));
+                this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
             } else {
                 this.model.insertRole(this.request).toPromise().then().catch((response) => this.checkError(response));
             }
             this.closeModalDialog();
-            window.location.reload();
+            //window.location.reload();
         }
     }
     
