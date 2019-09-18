@@ -20,7 +20,7 @@ export class RoleInputPopupComponent implements OnInit {
     componentRef: ComponentRef<any>;
     dataRecievedFromRolesTableScreen: Role;
     role: object;
-    previousRequest: object;
+    request: object;
     processedRole: object;
     chosenApplication: object;
     appSelectedDropdownItems = [];
@@ -59,7 +59,6 @@ export class RoleInputPopupComponent implements OnInit {
     openModalDialog(role?: object) {
         if (role) {
             this.dataRecievedFromRolesTableScreen = new Role(role);
-            this.previousRequest = role;
             this.pagetitle = "Edit Role";
             this.rolename = role["Rolename"];
             this.selectApplication(role["Applications"]);
@@ -67,11 +66,13 @@ export class RoleInputPopupComponent implements OnInit {
             this.appSelectedDropdownItems.push(role["Applications"]);            
         } else {
             this.dataRecievedFromRolesTableScreen = new Role();
+            //this.request = {};
             this.appSelectedDropdownItems = [];
             this.rolename = "";
             this.clearComponents();
             this.pagetitle = "Create Role";
         }
+        this.request = {};
         this.display='block';
     }
 
@@ -116,7 +117,7 @@ export class RoleInputPopupComponent implements OnInit {
             //if role received from edit talbe (Edit mode) we have to set seted properties that are choosen
             if (this.dataRecievedFromRolesTableScreen.rolename) {
                 let opts = this.dataRecievedFromRolesTableScreen.roleObj["Options"];
-                for (let el of opts) {                    
+                for (let el of opts) {                 
                     if (el.startsWith(title)) {
                         let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
                         selectedRolesArray.forEach((r) => this.componentRef.instance.selectedItems.push(r));
@@ -160,27 +161,39 @@ export class RoleInputPopupComponent implements OnInit {
     
     submitForm(form: NgForm) {
         if (form.valid) {
-            let appName = this.chosenApplication["Application"]["values"];
-            let changedRoleData = this.processedRole[appName]; 
-            changedRoleData["ROLENAME"]["values"] = this.rolename; 
-            changedRoleData["Rolename"] = this.rolename;
-            changedRoleData["Applications"] = appName; 
-            let request = {};
-            request[appName] = changedRoleData;
-            if (this.pagetitle === "Edit Role") {   console.log("prev"+JSON.stringify(this.previousRequest));         
-                let previousRoleData = this.previousRequest; 
-                previousRoleData["Rolename"] = this.rolename;  
+            let appName = this.chosenApplication["Application"]["values"][0];
+            this.request["ROLENAME"] = this.rolename;
+            this.request["Application"] = appName;
+            this.request["Actions"] = "";
+            this.request["Options"] = this.getArrayOfOptionsObject(this.role[appName]);console.log("---"+JSON.stringify(this.request)); 
+            if (this.pagetitle === "Edit Role") {          
+               /* let previousRoleData = this.dataRecievedFromRolesTableScreen; 
+                previousRoleData["Rolename"] = this.rolename; 
                 let previousRequest = {};
-                previousRequest[appName] = previousRoleData;
+                previousRequest["Application"] = appName;
+                previousRequest["ROLENAME"] = previousRoleData["Rolename"];
+                previousRequest["Actions"] = ""; console.log("###"+JSON.stringify(this.getArrayOfOptionsObject(this.previousRoleData[appName])));
                  console.log("==="+JSON.stringify(previousRequest));
                 let roleUpdate = new RoleUpdate(previousRequest, request);
-                this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
+                this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));*/
             } else {
-                this.model.insertRole(request).toPromise().then().catch((response) => this.checkError(response));
+                this.model.insertRole(this.request).toPromise().then().catch((response) => this.checkError(response));
             }
             this.closeModalDialog();
-           // window.location.reload();
+            window.location.reload();
         }
+    }
+    
+    private getArrayOfOptionsObject(roleObj: string): Array<string> {
+        let opts = [];
+        Object.entries(roleObj).forEach((entry)=>{
+            if ((entry[0] !== "Options") && (entry[0] !== "ROLENAME") && (entry[0] !== "Application") && (entry[0] !== "Actions") &&
+                 (entry[0] !== "Applications" ) && (entry[0] !== "Rolename" )) {
+                
+                opts.push(entry[0] + ": " + entry[1]["values"]);
+            }
+        });
+        return opts;
     }
     
     checkError(errorCode: number) {
