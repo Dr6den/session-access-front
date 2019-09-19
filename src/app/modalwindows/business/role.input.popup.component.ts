@@ -27,7 +27,6 @@ export class RoleInputPopupComponent implements OnInit {
     applicationDropdownList: Array<string> = [];
     dropdownSettings = {};
     dropdownMultiSettings = {};
-    multiselectIndicator: object;
     errorMessage = "error message";
     errorTextColor: string = "#FFFFFF";
 
@@ -65,9 +64,7 @@ export class RoleInputPopupComponent implements OnInit {
             this.pagetitle = "Edit Role";
             this.updateMode = true;
             this.rolename = role["Rolename"];      
-            promiseRoleData.then(() => {
-                let appName:string = role["Applications"];
-                this.multiselectIndicator = this.bindMultiselectToRoleName(this.role[appName]);
+            promiseRoleData.then(() => {                
                 this.selectApplication(role["Applications"]); 
             });
 
@@ -99,12 +96,8 @@ export class RoleInputPopupComponent implements OnInit {
             this.componentRef = this.container.createComponent(factory);           
             this.componentRef.instance.title = title;
             this.componentRef.instance.dropdownList = entryValues[0];
+            this.componentRef.instance.selectedItems = [];
             
-            if (this.multiselectIndicator[title]) {
-                this.componentRef.instance.selectedItems = [];
-            } else {
-                this.componentRef.instance.selectedItems = "";
-            }
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
                 let appName:string = this.chosenApplication["Application"].values[0];
                 this.role[appName][title].values = data;
@@ -133,18 +126,13 @@ export class RoleInputPopupComponent implements OnInit {
                 let opts = this.dataRecievedFromRolesTableScreen["Options"];
                 for (let el of opts) {                 
                     if (el.startsWith(title)) {
-                        if (this.multiselectIndicator[title]) {
-                            let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
-                            selectedRolesArray.forEach((r) => {
-                                this.componentRef.instance.selectedItems.push(r);
-                                let appName:string = this.chosenApplication["Application"].values[0];
-                                this.role[appName][title].values = r;
-                            });
-                        } else {
-                            let selectedRole:string = el.substring(el.indexOf(":") + 2);
-                            this.componentRef.instance.selectedItems = selectedRole;
-                        }
-                        
+                        let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
+                        selectedRolesArray.forEach((r) => {
+                            this.componentRef.instance.selectedItems.push(r);
+                            let appName:string = this.chosenApplication["Application"].values[0];
+                            this.role[appName][title].values = r;
+                        });
+
                         break;
                     }
                 }
@@ -188,14 +176,15 @@ export class RoleInputPopupComponent implements OnInit {
     
     submitForm(form: NgForm) {
         if (form.valid) {
-            let appName = this.chosenApplication["Application"]["values"][0];console.log("+++"+JSON.stringify(this.role[appName]));
+            let appName = this.chosenApplication["Application"]["values"][0];
+            let multiselectIndicator = this.bindMultiselectToRoleName(this.role[appName]);
             this.request["ROLENAME"] = this.rolename;
             this.request["Application"] = appName;
             delete this.request["Options"];             
-            this.addPropsToJsonObjectFromAdditionalProps(this.role[appName], this.request, this.multiselectIndicator);
+            this.addPropsToJsonObjectFromAdditionalProps(this.role[appName], this.request, multiselectIndicator);
             
             if (this.pagetitle === "Edit Role") {     
-                this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen, this.multiselectIndicator);
+                this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen, multiselectIndicator);
                 let oldRoleName = this.dataRecievedFromRolesTableScreen["Rolename"];
                 this.dataRecievedFromRolesTableScreen["ROLENAME"] = oldRoleName;
                 this.dataRecievedFromRolesTableScreen["Application"] = appName;
@@ -204,15 +193,15 @@ export class RoleInputPopupComponent implements OnInit {
                 delete this.dataRecievedFromRolesTableScreen["Actions"];
                 delete this.dataRecievedFromRolesTableScreen["Applications"];
                 delete this.dataRecievedFromRolesTableScreen["Rolename"];
+                
                 let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
-       console.log("---"+JSON.stringify(roleUpdate));
                 this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
                 this.dataRecievedFromRolesTableScreen["Rolename"] = oldRoleName;
             } else {
                 this.model.insertRole(this.request).toPromise().then().catch((response) => this.checkError(response));
             }
             this.closeModalDialog();
-            //window.location.reload();
+            window.location.reload();
         }
     }
     
@@ -240,7 +229,11 @@ export class RoleInputPopupComponent implements OnInit {
                         splittedValues.forEach((val) => valuesArray.push(val));
                         roleObj[entry[0]] = valuesArray;
                     } else {
-                        roleObj[entry[0]] = entry[1]["values"];
+                        if (Array.isArray(entry[1]["values"])) {
+                            roleObj[entry[0]] = entry[1]["values"][0];
+                        } else {
+                            roleObj[entry[0]] = entry[1]["values"];
+                        }
                     }
             }
         });
