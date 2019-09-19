@@ -27,6 +27,7 @@ export class RoleInputPopupComponent implements OnInit {
     applicationDropdownList: Array<string> = [];
     dropdownSettings = {};
     dropdownMultiSettings = {};
+    multiselectIndicator: object;
     errorMessage = "error message";
     errorTextColor: string = "#FFFFFF";
 
@@ -65,7 +66,9 @@ export class RoleInputPopupComponent implements OnInit {
             this.updateMode = true;
             this.rolename = role["Rolename"];      
             promiseRoleData.then(() => {
-                this.selectApplication(role["Applications"]);
+                let appName:string = role["Applications"];
+                this.multiselectIndicator = this.bindMultiselectToRoleName(this.role[appName]);
+                this.selectApplication(role["Applications"]); 
             });
 
             this.appSelectedDropdownItems = [];
@@ -96,7 +99,12 @@ export class RoleInputPopupComponent implements OnInit {
             this.componentRef = this.container.createComponent(factory);           
             this.componentRef.instance.title = title;
             this.componentRef.instance.dropdownList = entryValues[0];
-            this.componentRef.instance.selectedItems = [];
+            
+            if (this.multiselectIndicator[title]) {
+                this.componentRef.instance.selectedItems = [];
+            } else {
+                this.componentRef.instance.selectedItems = "";
+            }
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
                 let appName:string = this.chosenApplication["Application"].values[0];
                 this.role[appName][title].values = data;
@@ -125,12 +133,17 @@ export class RoleInputPopupComponent implements OnInit {
                 let opts = this.dataRecievedFromRolesTableScreen["Options"];
                 for (let el of opts) {                 
                     if (el.startsWith(title)) {
-                        let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
-                        selectedRolesArray.forEach((r) => {
-                            this.componentRef.instance.selectedItems.push(r);
-                            let appName:string = this.chosenApplication["Application"].values[0];
-                            this.role[appName][title].values = r;
-                        });
+                        if (this.multiselectIndicator[title]) {
+                            let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
+                            selectedRolesArray.forEach((r) => {
+                                this.componentRef.instance.selectedItems.push(r);
+                                let appName:string = this.chosenApplication["Application"].values[0];
+                                this.role[appName][title].values = r;
+                            });
+                        } else {
+                            let selectedRole:string = el.substring(el.indexOf(":") + 2);
+                            this.componentRef.instance.selectedItems = selectedRole;
+                        }
                         
                         break;
                     }
@@ -178,14 +191,11 @@ export class RoleInputPopupComponent implements OnInit {
             let appName = this.chosenApplication["Application"]["values"][0];console.log("+++"+JSON.stringify(this.role[appName]));
             this.request["ROLENAME"] = this.rolename;
             this.request["Application"] = appName;
-            delete this.request["Options"]; 
-            
-            let multiselectMap = this.bindMultiselectToRoleName(this.role[appName]);
-            console.log(JSON.stringify(multiselectMap))
-            this.addPropsToJsonObjectFromAdditionalProps(this.role[appName], this.request);
+            delete this.request["Options"];             
+            this.addPropsToJsonObjectFromAdditionalProps(this.role[appName], this.request, this.multiselectIndicator);
             
             if (this.pagetitle === "Edit Role") {     
-                this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen);
+                this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen, this.multiselectIndicator);
                 let oldRoleName = this.dataRecievedFromRolesTableScreen["Rolename"];
                 this.dataRecievedFromRolesTableScreen["ROLENAME"] = oldRoleName;
                 this.dataRecievedFromRolesTableScreen["Application"] = appName;
@@ -206,36 +216,50 @@ export class RoleInputPopupComponent implements OnInit {
         }
     }
     
-    private bindMultiselectToRoleName(role: object): Map {
-        var map = new Map();
-        map.set("Jesus", "Crist");
-        return map;
-    }
-    
-    private addPropsToJsonObjectFromAdditionalProps(role: object, roleObj: object) {
+    //returns object of all roles of the applications role if it contains single select ability or multi select ability
+    private bindMultiselectToRoleName(role: object): object {
+        var multiselectIndicator = {};
         Object.entries(role).forEach((entry)=>{
             if ((entry[0] !== "Options") && (entry[0] !== "ROLENAME") && (entry[0] !== "Application") && (entry[0] !== "Actions") &&
                  (entry[0] !== "Applications" ) && (entry[0] !== "Rolename" )) {
-                    
-                    let entryString = entry[1]["values"].toString();
-                    let splittedValues =  entryString.substring(entryString.indexOf(":") + 1).split(",");
-                    let valuesArray = [];
-                    splittedValues.forEach((val) => valuesArray.push(val));
-                    roleObj[entry[0]] = valuesArray;
+                    multiselectIndicator[entry[0]] = entry[1].multiselect;
+            }
+        });
+        return multiselectIndicator;
+    }
+    
+    private addPropsToJsonObjectFromAdditionalProps(role: object, roleObj: object, multiselectIndicator: object) {
+        Object.entries(role).forEach((entry)=>{
+            if ((entry[0] !== "Options") && (entry[0] !== "ROLENAME") && (entry[0] !== "Application") && (entry[0] !== "Actions") &&
+                 (entry[0] !== "Applications" ) && (entry[0] !== "Rolename" )) {
+                    let isMultiselect = multiselectIndicator[entry[0]];
+                    if (isMultiselect === true) {
+                        let entryString = entry[1]["values"].toString();
+                        let splittedValues =  entryString.substring(entryString.indexOf(":") + 1).split(",");
+                        let valuesArray = [];
+                        splittedValues.forEach((val) => valuesArray.push(val));
+                        roleObj[entry[0]] = valuesArray;
+                    } else {
+                        roleObj[entry[0]] = entry[1]["values"];
+                    }
             }
         });
     }
     
     //function fills properties to json object from Options single property
-    private addPropsToJsonObjectFromOptions(roleObj: object) {
+    private addPropsToJsonObjectFromOptions(roleObj: object, multiselectIndicator: object) {
         if (roleObj["Options"]) {
-            Object.entries(roleObj["Options"]).forEach((entry)=>{            
-                    let entryString = entry[1].toString();
+            Object.entries(roleObj["Options"]).forEach((entry)=>{
+                let entryString = entry[1].toString();
+                let isMultiselect = multiselectIndicator[entryString.substring(0, entryString.indexOf(":"))]; 
+                if (isMultiselect === true) {
                     let splittedValues =  entryString.substring(entryString.indexOf(":") + 2).split(",");
                     let valuesArray = [];
                     splittedValues.forEach((val) => valuesArray.push(val));
                     roleObj[entryString.substring(0, entryString.indexOf(":"))] = valuesArray;
-
+                } else {
+                    roleObj[entryString.substring(0, entryString.indexOf(":"))] = entry[1].toString().substring(entryString.indexOf(":") + 2);
+                }
             });
         }
     }
