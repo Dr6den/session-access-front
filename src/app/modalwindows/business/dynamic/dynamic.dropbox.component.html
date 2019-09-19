@@ -3,7 +3,7 @@
     <div class="dropdown float-right">
         <ng-multiselect-dropdown id="dropbox" [placeholder]="'Please, Select Item'" [data]="dropdownList" 
                                  [(ngModel)]="selectedItems" [ngModelOptions]="{standalone: true}"
-                                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeselect($event)">
         </ng-multiselect-dropdown>
     </div>
 </div>

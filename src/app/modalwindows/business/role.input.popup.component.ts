@@ -57,6 +57,7 @@ export class RoleInputPopupComponent implements OnInit {
     
     openModalDialog(role?: object) {
         if (role) {
+            this.getRoleData();   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
             this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
             this.updateMode = true;
@@ -120,7 +121,12 @@ export class RoleInputPopupComponent implements OnInit {
                 for (let el of opts) {                 
                     if (el.startsWith(title)) {
                         let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
-                        selectedRolesArray.forEach((r) => this.componentRef.instance.selectedItems.push(r));
+                        selectedRolesArray.forEach((r) => {
+                            this.componentRef.instance.selectedItems.push(r);
+                            let appName:string = this.chosenApplication["Application"].values[0];
+                            this.role[appName][title].values = r;
+                        });
+                        
                         break;
                     }
                 }
@@ -160,20 +166,17 @@ export class RoleInputPopupComponent implements OnInit {
     
     submitForm(form: NgForm) {
         if (form.valid) {
-            let appName = this.chosenApplication["Application"]["values"][0];
+            let appName = this.chosenApplication["Application"]["values"][0];console.log("+++"+JSON.stringify(this.role[appName]));
             this.request["ROLENAME"] = this.rolename;
             this.request["Application"] = appName;
             this.request["Actions"] = "";
-            this.request["Options"] = this.getArrayOfOptionsObject(this.role[appName]); 
-    
-            if (this.pagetitle === "Edit Role") {   console.log("???"+JSON.stringify(this.applicationDropdownList));       
-                /*let previousRoleData = this.dataRecievedFromRolesTableScreen; 
-               /* previousRoleData["Rolename"] = this.rolename; 
-                let previousRequest = {};
-                previousRequest["Application"] = appName;
-                previousRequest["ROLENAME"] = previousRoleData["Rolename"];
-                previousRequest["Actions"] = ""; console.log("###"+JSON.stringify(this.getArrayOfOptionsObject(this.previousRoleData[appName])));
-                 console.log("==="+JSON.stringify(previousRequest));*/
+            delete this.request["Options"]; 
+            this.addPropsToJsonObjectFromAdditionalProps(this.role[appName], this.request);
+    console.log("%%%"+JSON.stringify(this.dataRecievedFromRolesTableScreen));
+            if (this.pagetitle === "Edit Role") {     
+                this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen);
+                this.dataRecievedFromRolesTableScreen["ROLENAME"] = this.dataRecievedFromRolesTableScreen["Rolename"];
+                delete this.dataRecievedFromRolesTableScreen["Options"];
                 let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
        console.log("---"+JSON.stringify(roleUpdate));
                 this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
@@ -185,16 +188,27 @@ export class RoleInputPopupComponent implements OnInit {
         }
     }
     
-    private getArrayOfOptionsObject(roleObj: string): Array<string> {
-        let opts = [];
-        Object.entries(roleObj).forEach((entry)=>{
+    private addPropsToJsonObjectFromAdditionalProps(role: object, roleObj: object) {
+        Object.entries(role).forEach((entry)=>{
             if ((entry[0] !== "Options") && (entry[0] !== "ROLENAME") && (entry[0] !== "Application") && (entry[0] !== "Actions") &&
                  (entry[0] !== "Applications" ) && (entry[0] !== "Rolename" )) {
-                
-                opts.push(entry[0] + ": " + entry[1]["values"]);
+                    
+                    roleObj[entry[0]] = entry[1]["values"];
             }
         });
-        return opts;
+    }
+    
+     private addPropsToJsonObjectFromOptions(roleObj: object) {
+        if (roleObj["Options"]) {
+            Object.entries(roleObj["Options"]).forEach((entry)=>{            
+                    let entryString = entry[1].toString();
+                    let splittedValues =  entryString.substring(entryString.indexOf(":")+2).split(",");
+                    let valuesArray = [];
+                    splittedValues.forEach((val) => valuesArray.push(val));
+                    roleObj[entryString.substring(0, entryString.indexOf(":"))] = valuesArray;
+
+            });
+        }
     }
     
     checkError(errorCode: number) {

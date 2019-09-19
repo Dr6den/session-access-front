@@ -12,9 +12,16 @@ export class DynamicDropboxComponent {
     @Output() chosenSelectedItems = new EventEmitter();
     
     onItemSelect(item: any) {
+        if (item === "ALL" || this.selectedItems.some((item) => {return item === "ALL";})) {
+            this.selectedItems =  JSON.parse('["ALL"]');
+        }
         if (item === "All" || this.selectedItems.some((item) => {return item === "All";})) {
             this.selectedItems =  JSON.parse('["All"]');
         }
+        this.chosenSelectedItems.emit(this.selectedItems);
+    }
+    
+    onItemDeselect(item: any) {
         this.chosenSelectedItems.emit(this.selectedItems);
     }
 }
