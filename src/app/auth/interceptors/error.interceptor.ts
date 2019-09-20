@@ -8,11 +8,11 @@ import { AuthenticationService } from '../services';
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService) {}
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {        
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {       
         return next.handle(request).pipe(catchError(err => {
-            if (err.status === 401) {
-                // auto logout if 401 response returned from api
-                this.authenticationService.logout();
+            if (err.status === 403) {
+                // auto logout if 403 response returned from api
+                this.authenticationService.refreshToken();                
                 location.reload(true);
             }
             

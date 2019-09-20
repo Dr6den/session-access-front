@@ -18,8 +18,21 @@ export class AuthenticationService {
         headers = headers.set("Content-Type", "application/json");
         headers = headers.set("Authorization", username + ":" + password);
         return this.globalService.sendRequest<any>("POST", authUrl, null, null, headers);
-    }   
+    } 
     
+    refreshToken(): void {
+        let authToken = JSON.parse(localStorage.getItem('currentUser'));
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.set("Authorization", authToken.refresh_token);
+
+        let url = this.url + "/RefreshToken";
+        this.globalService.sendRequest<any>("GET", url, null, null, headers).subscribe((user) => { 
+            if (user && user.access_token) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+        });
+    }
+       
     login(username: string, password: string) {  
         return this.authUser(username, password)
             .pipe(map(user => {
