@@ -1,16 +1,10 @@
 import { Routes, RouterModule } from "@angular/router";
 import { IndexComponent } from "./core/index.component";
-import { CreateRoleFormComponent } from "./core/create.role.form.component";
-import { CreateUserComponent } from "./core/create.user.form.component";
 import { UsersTableComponent } from "./core/users.table.component";
 import { RolesTableComponent } from "./core/roles.table.component";
 import { AuthGuard } from "./auth/guards/auth.guard";
 
 const routes: Routes = [
-    { path: "createRole/:mode/:id", component: CreateRoleFormComponent, canActivate: [AuthGuard] },
-    { path: "createRole", component: CreateRoleFormComponent, canActivate: [AuthGuard] },
-    { path: "createUser", component: CreateUserComponent, canActivate: [AuthGuard] },
-    { path: "createUser/:mode/:id", component: CreateUserComponent, canActivate: [AuthGuard] },
     { path: "showUsers", component: UsersTableComponent, canActivate: [AuthGuard] },
     { path: "showRoles", component: RolesTableComponent, canActivate: [AuthGuard] },
     { path: "", component: IndexComponent },

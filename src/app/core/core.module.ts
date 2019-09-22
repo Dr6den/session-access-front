@@ -3,8 +3,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModelModule } from "../model/model.module";
 import { IndexComponent } from "./index.component";
-import { CreateUserComponent } from "./create.user.form.component";
-import { CreateRoleFormComponent } from "./create.role.form.component";
 import { UsersTableComponent } from "./users.table.component";
 import { RolesTableComponent } from "./roles.table.component";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -32,12 +30,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
          ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
-    declarations: [CreateRoleFormComponent, IndexComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent, HeaderComponent,
+    declarations: [IndexComponent, RolesTableComponent, UsersTableComponent, HeaderComponent,
          LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          TabsComponent, TabComponent, TableSortable, UserInputPopupComponent, RoleInputPopupComponent, DynamicDropboxComponent],
     providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          IndexComponent, UserInputPopupComponent, RoleInputPopupComponent],
-    exports: [ModelModule, CreateRoleFormComponent, CreateUserComponent, RolesTableComponent, UsersTableComponent],
+    exports: [ModelModule, RolesTableComponent, UsersTableComponent],
     bootstrap: [RoleInputPopupComponent],
     entryComponents: [DynamicDropboxComponent]
 })
