@@ -65,13 +65,16 @@ export class UserInputPopupComponent {
         });
     }
     
-    openModalDialog(user?: User){
+    openModalDialog(user?: User) {
         if (user) {
             this.title = "Edit User";
             this.user.USERNAME = user.USERNAME;
             this.toggleDisable();
             this.reservedUser = this.user;
+            this.selectedRolesItems = [];
+            user.Role.forEach((role) => this.selectedRolesItems.push({item_id: 0, item_text: role}));
         } else {
+            this.getRoleData();
             this.title = "Create User";
         }
         this.display='block';
