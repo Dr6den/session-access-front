@@ -1,3 +1,11 @@
+:host ::ng-deep thead th {
+    width: 10.9%;
+}
+
+:host ::ng-deep tbody td {
+    width: 10.9%;
+}
+
 .to-homepage {
     margin-top: 0.75rem;
 }

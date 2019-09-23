@@ -1,16 +1,15 @@
-td {
-    border: 0.001rem solid  silver;
+tbody td, thead th {
+    /*width: 30.9%;*/ /*please override this value in parent component for using different nuber of coluns. 30.9 is for 4 columns*/
+    float: left;
 }
 
 table {
     margin-right: 0.5%;
     margin-left: 0.5%;
-    width: 99%;
+    width: 60rem;
+    border-right: 0.001rem solid silver;
 }
 
-th:first-child {
-    width: 2.6rem;
-}
 
 th {
     color: white;
@@ -30,5 +29,40 @@ th {
 
 .table-buttons {
     width: 2.3rem;
+}
+
+.table-container {
+    margin-left: 2rem;
+    width: 93%; overflow: scroll;
+    overflow-y: hidden;
+}
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 50px;
+    text-align: left;
+}
+
+tbody {
+    height: 23rem;
+    overflow-y: auto;
+}
+
+tbody td {
+    border-right: 0.001rem solid silver;
+    height: 8rem;
+}
+
+tbody td:first-child, thead th:first-child {
+    width: 4.3rem;
+    border-left: 0.001rem solid silver;
 }
 
