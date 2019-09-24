@@ -1,3 +1,8 @@
+:host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+}
+
 .roles-input-labels {
     margin-left: 2rem;
     font-family: Roboto;
@@ -10,12 +15,15 @@
     color: #323232;
 }
 
-.textbox, .dropdown {
-    border-radius: 6px;
-    border: solid 1px #6e8298;
+.textbox, .dropdown {    
     margin-right: 2rem;
     height: 2.3rem;
     width: 28rem;
+}
+
+.textbox {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
 }
 
 .field-of-form {

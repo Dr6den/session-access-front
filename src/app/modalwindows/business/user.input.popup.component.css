@@ -1,3 +1,20 @@
+:host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] .selected-item[_ngcontent-c6] {
+    font-family: sans-serif;
+    font-size: 10px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    margin-bottom: 0.1rem;
+}
+
+:host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+}
+
 .user-input-labels {
     margin-left: 2rem;
     font-family: Roboto;
@@ -11,11 +28,14 @@
 }
 
 .textbox, .dropdown {
-    border-radius: 6px;
-    border: solid 1px #6e8298;
     margin-right: 2rem;
     height: 2.3rem;
     width: 28rem;
+}
+
+.textbox {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
 }
 
 .user-textbox {

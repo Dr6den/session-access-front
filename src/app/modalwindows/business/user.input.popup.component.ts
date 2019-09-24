@@ -31,7 +31,7 @@ export class UserInputPopupComponent {
             idField: 'item_id',
             textField: 'item_text',
             enableCheckAll: false,
-            itemsShowLimit: 6,
+            itemsShowLimit: 100,
             allowSearchFilter: false
         };
     }
@@ -57,11 +57,10 @@ export class UserInputPopupComponent {
         let elnum = 0;
         let rolesDropdown = [];
         this.model.getObservableRoles().toPromise()
-            .then((roles) => {roles.forEach((role) => {                            
-                rolesDropdown.push({item_id: elnum++, item_text: role["ROLENAME"]});
+            .then((roles) => {roles.forEach((role) => {                       
+                rolesDropdown.push(role["ROLENAME"] + " | " + role["Application"]);
             });
             this.rolesDropdownList = rolesDropdown;
-            this.selectedRolesItems = [{item_id: 0, item_text: this.rolesDropdownList[0].item_text}];
         });
     }
     
@@ -72,9 +71,18 @@ export class UserInputPopupComponent {
             this.toggleDisable();
             this.reservedUser = this.user;
             this.selectedRolesItems = [];
-            user.Role.forEach((role) => this.selectedRolesItems.push({item_id: 0, item_text: role}));
+            user["Role"].forEach((role) => {
+                for (let el of this.rolesDropdownList) {
+                    if(el.startsWith(role)) {
+                        this.selectedRolesItems.push(el);
+                        break;
+                    }
+                }
+            });
         } else {
             this.getRoleData();
+            this.selectedRolesItems = [];
+            this.selectedRolesItems.push(this.rolesDropdownList[0].item_text);
             this.title = "Create User";
         }
         this.display='block';
@@ -99,9 +107,8 @@ export class UserInputPopupComponent {
     
     parseSelectedItem(item: Array<string>):Array<string> {
         let parsedSi = item.map((element) => {
-            let elementStringified = JSON.stringify(element);
-            return elementStringified.substring(elementStringified.lastIndexOf(":") + 2, elementStringified.lastIndexOf("}") - 1);
-        })
+            return element.substring(0, element.indexOf("|") -1);
+        });
         return parsedSi;
     }
     
