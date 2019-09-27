@@ -88,7 +88,7 @@ export class UserInputPopupComponent {
         } else {
             this.getRoleData();
             this.selectedRolesItems = [];
-            this.selectedRolesItems.push(this.rolesDropdownList[0].item_text);
+            this.selectedRolesItems.push(this.rolesDropdownList[0]);
             this.title = "Create User";
         }
         this.display='block';
