@@ -39,6 +39,10 @@ export class Model {
         return this.dataSource.getRoles();
     }
     
+    getObservableRolesFromPage(page: string): Observable<object[]> {
+        return this.dataSource.getRolesFromPage(page);
+    }
+    
     getRolesArray(): Role[] {
         return this.roles;
     }

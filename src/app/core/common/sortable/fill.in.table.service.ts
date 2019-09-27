@@ -10,9 +10,10 @@ export class FillInTableService {
     fillRowsToUsersTable(): Promise<any> {
         let columns = [];
         return this.model.getObservableUsers().toPromise()
-            .then((ousers) => {ousers.forEach((user) => {
-            columns.push({"Actions":"", "USERID": user.USERID, "USERNAME": user.USERNAME, "NTSID": user.NTSID, "Role": user.ROLES});});
-            return columns;
+            .then((ousers) => {let vals = Object.values(ousers["values"]);
+                vals.forEach((user) => {
+                columns.push({"Actions":"", "USERID": user.USERID, "USERNAME": user.USERNAME, "NTSID": user.NTSID, "Role": user.ROLES});});
+                return columns;
             });         
     }
     
@@ -53,7 +54,8 @@ export class FillInTableService {
     fillRowsToRolesTable(): Promise<any> {
         let columns = [];
         return this.model.getObservableRoles().toPromise()
-            .then((ousers) => {ousers.forEach((role) => {
+            .then((ousers) => {let vals = Object.values(ousers["values"]);
+                vals.forEach((role) => {
                 let roleStr = new Role(role);
                 let opt = roleStr.getArrayOfOptionsObject();
                 columns.push({"Actions": "", "Applications": roleStr.application, "Options": opt, "Rolename": roleStr.rolename});

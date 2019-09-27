@@ -47,4 +47,9 @@ export class RolesTableComponent {
     roleInput(role?: object) {
         this.roleInputPopup.openModalDialog(role);
     }
+    
+    changeRolesOutputOnPage(event: object) {
+       /* this.model.getObservableRolesFromPage(event.toString()).toPromise()
+            .then((out)=>console.log("hey" + JSON.stringify(out)));*/
+    }
 }

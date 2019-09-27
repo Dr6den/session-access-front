@@ -24,6 +24,11 @@ export class RestDataSource {
         return this.globalService.sendRequest<object[]>("GET", url);
     }
     
+    getRolesFromPage(page: string): Observable<object[]> {
+        let url = this.url + "/GetRecords/Roles?parseRoleOpts=true&page=" + page;
+        return this.globalService.sendRequest<object[]>("GET", url);
+    }
+    
     insertRole(role: object): Observable<object> {
 	let url = this.url + "/InsertRecord/Roles";
         return this.globalService.sendRequest<object>("POST", url, role);

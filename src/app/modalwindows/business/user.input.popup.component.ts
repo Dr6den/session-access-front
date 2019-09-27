@@ -46,9 +46,10 @@ export class UserInputPopupComponent {
     getUserData(username: string) {
         this.model.getUser(username).subscribe(data => {
 			if ((data != undefined)) {
-                            this.user.USERID = data.USERID;
-                            this.user.NTSID = data.NTSID;
-                            this.user.NTDOMAINSID = data.NTDOMAINSID;                            
+                            this.user.USERID = data[0].USERID;
+                            this.user.NTSID = data[0].NTSID;
+                            this.user.USEREMAIL = data[0].USEREMAIL;
+                            this.user.NTDOMAINSID = data[0].NTDOMAINSID;                          
 			}
                     });
     }
@@ -57,9 +58,10 @@ export class UserInputPopupComponent {
         let elnum = 0;
         let rolesDropdown = [];
         this.model.getObservableRoles().toPromise()
-            .then((roles) => {roles.forEach((role) => {                       
-                rolesDropdown.push(role["ROLENAME"] + " | " + role["Application"]);
-            });
+            .then((roles) => {let vals = Object.values(roles["values"]);
+                vals.forEach((role) => {
+                    rolesDropdown.push(role["ROLENAME"] + " | " + role["Application"]);
+                });
             this.rolesDropdownList = rolesDropdown;
         });
     }
@@ -68,6 +70,10 @@ export class UserInputPopupComponent {
         if (user) {
             this.title = "Edit User";
             this.user.USERNAME = user.USERNAME;
+            this.user.USERID = user.USERID;
+            this.user.NTSID = user.NTSID;
+            this.user.NTDOMAINSID = user.NTDOMAINSID;
+            
             this.toggleDisable();
             this.reservedUser = this.user;
             this.selectedRolesItems = [];
