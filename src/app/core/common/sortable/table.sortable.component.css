@@ -6,7 +6,7 @@ tbody td, thead th {
 table {
     margin-right: 0.5%;
     margin-left: 0.5%;
-    width: 60rem;
+    width: 99%;
     border-right: 0.001rem solid silver;
 }
 
@@ -33,7 +33,7 @@ th {
 
 .table-container {
     margin-left: 2rem;
-    width: 93%; overflow: scroll;
+    width: 95%; overflow: scroll;
     overflow-y: hidden;
 }
 

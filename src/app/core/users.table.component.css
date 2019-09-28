@@ -1,9 +1,9 @@
 :host ::ng-deep thead th {
-    width: 23.1%;
+    width: 23.4%;
 }
 
 :host ::ng-deep tbody td {
-    width: 23%;
+    width: 23.3%;
 }
 
 .to-homepage {

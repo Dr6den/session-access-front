@@ -64,6 +64,17 @@ export class FillInTableService {
             });       
     }
     
+    fillRowsToRolesTableFromOutsideSource(source: object[]) {
+        let columns = [];
+        source.forEach((role) => {
+            //console.log(JSON.stringify(role))
+            let roleStr = new Role(role);
+            let opt = roleStr.getArrayOfOptionsObject();
+            columns.push({"Actions": "", "Applications": roleStr.application, "Options": opt, "Rolename": roleStr.rolename});
+        });
+        return columns;
+    }
+    
     fillSortingToRolesTable(): any {
         return {column: 'Rolename', descending: false};
     }

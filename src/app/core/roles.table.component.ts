@@ -5,6 +5,7 @@ import { User } from "../model/user.model";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { FillInTableService } from "./common/sortable/fill.in.table.service";
 import { RoleInputPopupComponent } from "../modalwindows/business/role.input.popup.component";
+import { TableContainer } from "../model/table.container";
 
 @Component({
     selector: "rolesTable",
@@ -24,6 +25,8 @@ export class RolesTableComponent {
     roleSorting: any;    
     roleRows: any[];
     
+    rolesReserve: object[] = [];
+    
     levels:Array<Object> = [
         {num: 10, name: "10"},
         {num: 50, name: "50"},
@@ -38,6 +41,11 @@ export class RolesTableComponent {
         fillInTableService.fillRowsToRolesTable().then((promiserows) => { 
             this.roleRows = promiserows;
         });
+        
+        this.model.getObservableRoles().toPromise()
+            .then((ousers) => {let vals = Object.values(ousers["values"]);
+                vals.forEach((role) => {this.rolesReserve.push(role)});
+            });       
     }
     
     resetForm() {
@@ -48,8 +56,11 @@ export class RolesTableComponent {
         this.roleInputPopup.openModalDialog(role);
     }
     
-    changeRolesOutputOnPage(event: object) {
+    changeRolesOutputOnPage(event: object) {//console.log("hey" + JSON.stringify(this.rolesReserve))
        /* this.model.getObservableRolesFromPage(event.toString()).toPromise()
             .then((out)=>console.log("hey" + JSON.stringify(out)));*/
+        let tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
+        //console.log("hey" + JSON.stringify(tableContainer.getRolesOnPage(0)));
+        this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(tableContainer.getRolesOnPage(0));
     }
 }
