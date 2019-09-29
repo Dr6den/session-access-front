@@ -24,15 +24,16 @@ export class RolesTableComponent {
     roleColumns: any[];
     roleSorting: any;    
     roleRows: any[];
+    pageNumber: number;
     
+    tableContainer: TableContainer;
     rolesReserve: object[] = [];
     
     levels:Array<Object> = [
-        {num: 10, name: "10"},
+        {num: 100, name: "100"},
         {num: 50, name: "50"},
-        {num: 100, name: "100"}
+        {num: 10, name: "10"}
     ];
-    selectedLevel = this.levels[0];
     
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
         this.model.getRoles();
@@ -45,7 +46,9 @@ export class RolesTableComponent {
         this.model.getObservableRoles().toPromise()
             .then((ousers) => {let vals = Object.values(ousers["values"]);
                 vals.forEach((role) => {this.rolesReserve.push(role)});
-            });       
+                this.tableContainer = new TableContainer(this.rolesReserve, 100);
+            });
+        this.pageNumber = 1;       
     }
     
     resetForm() {
@@ -56,11 +59,36 @@ export class RolesTableComponent {
         this.roleInputPopup.openModalDialog(role);
     }
     
-    changeRolesOutputOnPage(event: object) {//console.log("hey" + JSON.stringify(this.rolesReserve))
-       /* this.model.getObservableRolesFromPage(event.toString()).toPromise()
-            .then((out)=>console.log("hey" + JSON.stringify(out)));*/
-        let tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
-        //console.log("hey" + JSON.stringify(tableContainer.getRolesOnPage(0)));
-        this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(tableContainer.getRolesOnPage(0));
+    changeRolesOutputOnPage(event: object) {
+        this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
+        this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+    }
+    
+    nextPageTabulate() {
+        if(this.pageNumber < this.tableContainer.numberOfPages){
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.pageNumber));
+            this.pageNumber++;
+        }
+    }
+    
+    previousPageTabulate() {
+        if(this.pageNumber > 1){
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.pageNumber - 2));
+            this.pageNumber--;
+        }
+    }
+    
+    firstPageTabulate() {
+        if(this.pageNumber > 1){
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+            this.pageNumber = 1;
+        }
+    }
+    
+    lastPageTabulate() {
+        if(this.pageNumber < this.tableContainer.numberOfPages){
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1));
+            this.pageNumber = this.tableContainer.numberOfPages;
+        }
     }
 }

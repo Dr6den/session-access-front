@@ -6,6 +6,21 @@
     width: 31.2%;
 }
 
+.pagination {
+    color: #6e8298;
+    margin-top: 1rem;
+    margin-left: 45%;
+}
+
+.pagination-elem {
+    margin-left: 1rem;
+}
+
+.page-number {
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
 .to-homepage {
     margin-top: 0.75rem;
 }

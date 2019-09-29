@@ -17,6 +17,14 @@ export class FillInTableService {
             });         
     }
     
+    fillRowsToUsersTableFromOutsideSource(source: object[]) {
+        let columns = [];
+        source.forEach((user) => {
+            columns.push({"Actions":"", "USERID": user["USERID"], "USERNAME": user["USERNAME"], "NTSID": user["NTSID"], "Role": user["ROLES"]});
+        });
+        return columns;
+    }
+    
     fillSortingToUsersTable(): any {
         return {column: 'USERID', descending: false};
     }

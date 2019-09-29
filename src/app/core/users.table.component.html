@@ -11,7 +11,7 @@
         Create User
     </button>
     
-    <select type="number" class="select-items"  [(ngModel)]="selectedLevel">
+    <select type="number" class="select-items" (change)="changeUsersOutputOnPage($event.target.value)">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
     </select>
     <label class="label-show" for="show">Show</label>
@@ -23,6 +23,14 @@
     [sort]="userSorting"
     (callUserInputPopup)='userInput($event)'>
     Loading table...
-</table-sortable>    
+</table-sortable>   
+
+<div class="pagination">
+    <span (click)="firstPageTabulate()" class="pagination-elem">&#171;</span>
+    <span (click)="previousPageTabulate()" class="pagination-elem"><</span>
+    <span class="page-number">{{pageNumber}}</span>
+    <span (click)="nextPageTabulate()" class="pagination-elem">></span>
+    <span (click)="lastPageTabulate()" class="pagination-elem">&#187;</span>
+</div>
 
 <user-input-popup></user-input-popup>

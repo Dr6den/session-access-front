@@ -35,13 +35,5 @@ export class TableContainer {
         this.currentPage = numberOfPage;
         return this.items[numberOfPage]["array"];
     }
-
-    public next(): object[] {
-        return this.getRolesOnPage(this.currentPage + 1);
-    }
-    
-    public previous(): object[] {
-        return this.getRolesOnPage(this.currentPage + 1);
-    }
 }
 
