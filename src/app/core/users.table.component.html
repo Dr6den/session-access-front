@@ -5,7 +5,7 @@
 </div>
 
 <div class="button-home">
-    <input type="text" id="searchInput" placeholder="Search User">
+    <input (input)="filter($event.target.value)" type="text" id="searchInput" placeholder="Search User">
         
     <button (click)="userInput()" class="create-button">
         Create User

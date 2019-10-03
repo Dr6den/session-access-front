@@ -24,9 +24,12 @@ export class RestDataSource {
         return this.globalService.sendRequest<object[]>("GET", url);
     }
     
-    getRolesFromPage(page: string): Observable<object[]> {
-        let url = this.url + "/GetRecords/Roles?parseRoleOpts=true&page=" + page;
-        return this.globalService.sendRequest<object[]>("GET", url);
+    getRolesByFilter(page: string): Observable<object[]> {
+        page = '{"ROLENAME":"role", "Application":"EMEA EUA & SPO"}';
+        let url = this.url + "/GetRecords/Roles?parseRoleOpts=true";
+        let params = new HttpParams();
+        params = params.append('filter', page);console.log("iii"+JSON.stringify(params))
+        return this.globalService.sendRequest<object[]>("GET", url, null, params);
     }
     
     insertRole(role: object): Observable<object> {

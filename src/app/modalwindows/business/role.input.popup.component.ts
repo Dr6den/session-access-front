@@ -91,7 +91,7 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     createComponent(title, entryValues) {
-        if (entryValues[0] !== "text")  {      
+        if (entryValues[0] !== "text" && entryValues[0] !== "options")  {
             const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(DynamicDropboxComponent);
             this.componentRef = this.container.createComponent(factory);           
             this.componentRef.instance.title = title;

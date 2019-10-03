@@ -91,4 +91,8 @@ export class UsersTableComponent {
             this.pageNumber = this.tableContainer.numberOfPages;
         }
     }
+    
+    filter(event: string) {
+        //console.log(event);
+    }
 }

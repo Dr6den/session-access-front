@@ -91,4 +91,11 @@ export class RolesTableComponent {
             this.pageNumber = this.tableContainer.numberOfPages;
         }
     }
+    
+    filter(event: string) {
+        this.model.getObservableRolesByFilter("").toPromise()
+            .then((role) => {console.log("to You:"+JSON.stringify(role));
+                
+            });
+    }
 }

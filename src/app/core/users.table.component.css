@@ -6,6 +6,56 @@
     width: 23.3%;
 }
 
+@media screen and (max-width: 1160px) { 
+    :host ::ng-deep thead th {
+        width: 23.1%;
+    }
+
+    :host ::ng-deep tbody td {
+        width: 23%;
+    }
+}
+
+@media screen and (max-width: 1000px) { 
+    :host ::ng-deep thead th {
+        width: 22.5%;
+    }
+
+    :host ::ng-deep tbody td {
+        width: 22.4%;
+    }
+}
+
+@media screen and (max-width: 750px) { 
+    :host ::ng-deep thead th {
+        width: 22.1%;
+    }
+
+    :host ::ng-deep tbody td {
+        width: 22%;
+    }
+}
+
+@media screen and (max-width: 650px) { 
+    :host ::ng-deep thead th {
+        width: 21.5%;
+    }
+
+    :host ::ng-deep tbody td {
+        width: 21.4%;
+    }
+}
+
+@media screen and (max-width: 550px) { 
+    :host ::ng-deep thead th {
+        width: 21.1%;
+    }
+
+    :host ::ng-deep tbody td {
+        width: 21%;
+    }
+}
+
 .pagination {
     color: #6e8298;
     margin-top: 1rem;
@@ -85,6 +135,24 @@
     margin-top: 3.6rem;
     width: 40rem;
     height: 2.3rem;
+}
+
+@media screen and (max-width: 1050px) { 
+    #searchInput {
+        width: 30rem;
+    }
+}
+
+@media screen and (max-width: 900px) { 
+    #searchInput {
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width: 730px) { 
+    #searchInput {
+        width: 10rem;
+    }
 }
 
 #searchInput::-webkit-input-placeholder {
