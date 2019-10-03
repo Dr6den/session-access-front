@@ -96,6 +96,9 @@ export class RolesTableComponent {
         this.model.getObservableRolesByFilter("").toPromise()
             .then((role) => {console.log("to You:"+JSON.stringify(role));
                 
-            });
+            }).catch((response) => this.checkError(response));
+    }
+    
+    checkError(errorCode: object) {console.log(JSON.stringify(errorCode))
     }
 }

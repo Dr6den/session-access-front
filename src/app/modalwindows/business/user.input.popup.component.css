@@ -18,6 +18,15 @@
     overflow-x: hidden;
 }
 
+.error-message {
+    margin-left: 35%;
+}
+
+.modal-body {
+    margin-top: 0rem;
+    padding-top: 0rem;
+}
+
 .user-input-labels {
     margin-left: 2rem;
     font-family: Roboto;

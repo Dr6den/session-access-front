@@ -25,7 +25,7 @@ export class GlobalService {
             headers: myHeaders,
             params: params
         }).pipe(catchError(err => {
-            return throwError(err.status)}));
+            return throwError(err)}));
     }    
 }
 

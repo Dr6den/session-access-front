@@ -21,7 +21,6 @@ export class UserInputPopupComponent {
     disableForm =  true;
     title = "";
     errorMessage = "error message";
-    errorTextColor: string = "#FFFFFF";
 
     constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router) {
         this.getRoleData();
@@ -44,14 +43,15 @@ export class UserInputPopupComponent {
     }
     
     getUserData(username: string) {
-        this.model.getUser(username).subscribe(data => {
+        this.model.getUser(username).toPromise().then(data => {
 			if ((data != undefined)) {
                             this.user.USERID = data[0].USERID;
                             this.user.NTSID = data[0].NTSID;
                             this.user.USEREMAIL = data[0].USEREMAIL;
                             this.user.NTDOMAINSID = data[0].NTDOMAINSID;                          
 			}
-                    });
+                        this.errorMessage = "error message";
+                    }).catch((response) => this.checkError(response));;
     }
     
     getRoleData() {
@@ -92,23 +92,15 @@ export class UserInputPopupComponent {
             this.title = "Create User";
         }
         this.display='block';
+        this.errorMessage = "error message";
     }
 
     closeModalDialog(){
         this.display='none';
     }
     
-    checkError(errorCode: number) {
-        this.errorTextColor = "red";
-        if (errorCode === 404) {
-            this.errorMessage = "Schema doesn't exist";            
-        } else if (errorCode === 400) {
-            this.errorMessage = "Schema is not specified";
-        } else if (errorCode === 500) {
-            this.errorMessage = "Unknown error";
-        } else if (errorCode === 409) {
-            this.errorMessage = "Record already exist";
-        }
+    checkError(errorCode: object) {
+        this.errorMessage = errorCode.toString();
     }
     
     parseSelectedItem(item: Array<string>):Array<string> {
@@ -130,8 +122,10 @@ export class UserInputPopupComponent {
             } else {
                 this.model.insertUser(editedUser).toPromise().then().catch((response) => this.checkError(response));
             }
-            this.closeModalDialog();
-            window.location.reload();
+            if (this.errorMessage === "error message") {
+                this.closeModalDialog();
+                window.location.reload();
+            }
         }
     }
     
