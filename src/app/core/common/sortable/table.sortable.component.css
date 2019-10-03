@@ -58,7 +58,8 @@ tbody {
 
 tbody td {
     border-right: 0.001rem solid silver;
-    height: 8rem;
+    height: 6.1rem;
+    overflow-y: auto;
 }
 
 tbody td:first-child, thead th:first-child {
