@@ -1,6 +1,6 @@
 :host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] .selected-item[_ngcontent-c6] {
     font-family: sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
@@ -13,6 +13,9 @@
 :host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] {
     border-radius: 6px;
     border: solid 1px #6e8298;
+    max-height: 5rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .user-input-labels {

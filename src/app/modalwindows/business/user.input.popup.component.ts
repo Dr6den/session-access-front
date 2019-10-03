@@ -60,7 +60,7 @@ export class UserInputPopupComponent {
         this.model.getObservableRoles().toPromise()
             .then((roles) => {let vals = Object.values(roles["values"]);
                 vals.forEach((role) => {
-                    rolesDropdown.push(role["ROLENAME"] + " | " + role["Application"]);
+                    rolesDropdown.push(role["Application"] + " : " +  role["ROLENAME"]);
                 });
             this.rolesDropdownList = rolesDropdown;
         });
@@ -79,7 +79,7 @@ export class UserInputPopupComponent {
             this.selectedRolesItems = [];
             user["Role"].forEach((role) => {
                 for (let el of this.rolesDropdownList) {
-                    if(el.startsWith(role)) {
+                    if(el.endsWith(role)) {
                         this.selectedRolesItems.push(el);
                         break;
                     }
@@ -113,7 +113,7 @@ export class UserInputPopupComponent {
     
     parseSelectedItem(item: Array<string>):Array<string> {
         let parsedSi = item.map((element) => {
-            return element.substring(0, element.indexOf("|") -1);
+            return element.substring(0, element.indexOf(":") -1);
         });
         return parsedSi;
     }
