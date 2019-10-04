@@ -24,7 +24,8 @@ export class RolesTableComponent {
     roleColumns: any[];
     roleSorting: any;    
     roleRows: any[];
-    pageNumber: number;
+    currentPageNumber: number;
+    numberOfPages: number;
     
     tableContainer: TableContainer;
     rolesReserve: object[] = [];
@@ -48,7 +49,8 @@ export class RolesTableComponent {
                 vals.forEach((role) => {this.rolesReserve.push(role)});
                 this.tableContainer = new TableContainer(this.rolesReserve, 100);
             });
-        this.pageNumber = 1;       
+        this.currentPageNumber = 1; 
+        this.numberOfPages = 100;      
     }
     
     resetForm() {
@@ -62,43 +64,55 @@ export class RolesTableComponent {
     changeRolesOutputOnPage(event: object) {
         this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
         this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+        this.numberOfPages =  Number.parseInt(event.toString());
     }
     
     nextPageTabulate() {
-        if(this.pageNumber < this.tableContainer.numberOfPages){
-            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.pageNumber));
-            this.pageNumber++;
+        if(this.currentPageNumber < this.tableContainer.numberOfPages){
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber));
+            this.currentPageNumber++;
         }
     }
     
     previousPageTabulate() {
-        if(this.pageNumber > 1){
-            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.pageNumber - 2));
-            this.pageNumber--;
+        if(this.currentPageNumber > 1){
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber - 2));
+            this.currentPageNumber--;
         }
     }
     
     firstPageTabulate() {
-        if(this.pageNumber > 1){
+        if(this.currentPageNumber > 1){
             this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
-            this.pageNumber = 1;
+            this.currentPageNumber = 1;
         }
     }
     
     lastPageTabulate() {
-        if(this.pageNumber < this.tableContainer.numberOfPages){
+        if(this.currentPageNumber < this.tableContainer.numberOfPages){
             this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1));
-            this.pageNumber = this.tableContainer.numberOfPages;
+            this.currentPageNumber = this.tableContainer.numberOfPages;
         }
     }
     
     filter(event: string) {
-        this.model.getObservableRolesByFilter("").toPromise()
-            .then((role) => {console.log("to You:"+JSON.stringify(role));
-                
+        let page = '{"ROLENAME":"' + event + '"}';       
+        this.model.getObservableRolesByFilter(page).toPromise()
+            .then((role) => {
+                if (role["message"]) {
+                    this.rolesReserve = [];
+                    this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages);
+                    this.roleRows = this.fillInTableService.fillRolesByEmptyColumns();
+                } else {
+                    let rolesValues = Object.values(role["values"]);
+                    this.rolesReserve = rolesValues;
+                    this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages); 
+                    this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));                   
+                }                
+                this.currentPageNumber = 1;
             }).catch((response) => this.checkError(response));
     }
     
-    checkError(errorCode: object) {console.log(JSON.stringify(errorCode))
+    checkError(errorCode: object) {
     }
 }

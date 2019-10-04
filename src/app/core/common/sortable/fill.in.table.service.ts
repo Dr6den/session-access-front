@@ -83,6 +83,11 @@ export class FillInTableService {
         return columns;
     }
     
+    fillRolesByEmptyColumns() {
+        let columns = [];
+        return columns;
+    }
+    
     fillSortingToRolesTable(): any {
         return {column: 'Rolename', descending: false};
     }

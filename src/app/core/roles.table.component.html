@@ -5,7 +5,7 @@
 </div>
 
 <div class="button-home">
-    <input type="text" id="searchInput" placeholder="Search User" (input)="filter($event.target.value)">
+    <input type="text" id="searchInput" placeholder="Search Role" (input)="filter($event.target.value)">
         
     <button (click)="roleInput()" class="create-button">
         Create Role
@@ -28,7 +28,7 @@
 <div class="pagination">
     <span (click)="firstPageTabulate()" class="pagination-elem">&#171;</span>
     <span (click)="previousPageTabulate()" class="pagination-elem"><</span>
-    <span class="page-number">{{pageNumber}}</span>
+    <span class="page-number">{{currentPageNumber}}</span>
     <span (click)="nextPageTabulate()" class="pagination-elem">></span>
     <span (click)="lastPageTabulate()" class="pagination-elem">&#187;</span>
 </div>
