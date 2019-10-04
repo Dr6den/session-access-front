@@ -28,7 +28,6 @@ export class RoleInputPopupComponent implements OnInit {
     dropdownSettings = {};
     dropdownMultiSettings = {};
     errorMessage = "error message";
-    errorTextColor: string = "#FFFFFF";
 
     @ViewChild('dropboxcontainer', { read: ViewContainerRef }) container;
     constructor(private resolver: ComponentFactoryResolver, private model: Model) {  
@@ -57,9 +56,9 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     openModalDialog(role?: object) {
-        if (role) {
-            let promiseRoleData = this.getRoleDataPromise();
-            this.getRoleData(promiseRoleData);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
+        let promiseRoleData = this.getRoleDataPromise();
+        this.getRoleData(promiseRoleData);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
+        if (role) {            
             this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
             this.updateMode = true;
@@ -77,7 +76,7 @@ export class RoleInputPopupComponent implements OnInit {
             this.rolename = "";
             this.clearComponents();
             this.pagetitle = "Create Role";
-        }
+        } 
         this.request = {};
         this.display='block';
     }
@@ -159,7 +158,7 @@ export class RoleInputPopupComponent implements OnInit {
         return this.model.getRole().toPromise();
     }
     
-    onApplicationSelect(item: any) {            
+    onApplicationSelect(item: any) {          
         this.selectApplication(item);
     }
     
@@ -258,7 +257,6 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     checkError(errorCode: number) {
-        this.errorTextColor = "red";
         if (errorCode === 404) {
             this.errorMessage = "Schema doesn't exist";            
         } else if (errorCode === 400) {

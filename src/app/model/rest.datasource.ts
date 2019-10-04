@@ -25,7 +25,7 @@ export class RestDataSource {
     }
     
     getRolesByFilter(page: string): Observable<object[]> {
-        page = '{"ROLENAME":"role", "Application":"*"}';
+        page = '{"ROLENAME":"role"}';
         let url = this.url + "/GetRecords/Roles?parseRoleOpts=true";
         let params = new HttpParams();
         params = params.append('filter', page);console.log("iii"+JSON.stringify(params))

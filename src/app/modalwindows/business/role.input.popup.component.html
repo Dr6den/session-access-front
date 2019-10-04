@@ -7,6 +7,9 @@
             <h6 class="modal-title">{{pagetitle}}</h6>
             <span class="close" (click)="closeModalDialog()"></span>
         </div>  
+        <div [ngStyle]="{'color': errorMessage === 'error message' ? '#FFFFFF' : 'red'}" class="error-message">
+            {{errorMessage}}
+        </div>
         <!-- modal-body -->
         <div class="modal-body">
             <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
