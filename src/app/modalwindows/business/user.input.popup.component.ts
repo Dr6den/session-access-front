@@ -86,6 +86,11 @@ export class UserInputPopupComponent {
                 }
             });
         } else {
+            this.user.USERNAME = "";
+            this.user.USERID = "";
+            this.user.NTSID = "";
+            this.user.NTDOMAINSID = "";
+            this.user.USEREMAIL = "";
             this.getRoleData();
             this.selectedRolesItems = [];
             this.selectedRolesItems.push(this.rolesDropdownList[0]);
