@@ -79,6 +79,7 @@ export class RoleInputPopupComponent implements OnInit {
         } 
         this.request = {};
         this.display='block';
+        this.errorMessage = "error message";
     }
 
     closeModalDialog(){
@@ -257,14 +258,6 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     checkError(errorCode: number) {
-        if (errorCode === 404) {
-            this.errorMessage = "Schema doesn't exist";            
-        } else if (errorCode === 400) {
-            this.errorMessage = "Schema is not specified";
-        } else if (errorCode === 500) {
-            this.errorMessage = "Unknown error";
-        } else if (errorCode === 409) {
-            this.errorMessage = "Record already exist";
-        }
+        this.errorMessage = errorCode.toString();
     }
 }
