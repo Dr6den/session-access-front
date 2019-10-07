@@ -54,6 +54,13 @@ export class RestDataSource {
         return this.globalService.sendRequest<User[]>("GET", url);
     }
     
+    getUsersByFilter(filterParam: string): Observable<User[]> {
+        let url = this.url + "/GetRecords/Users";        
+        let params = new HttpParams();
+        params = params.append('filter', filterParam);
+        return this.globalService.sendRequest<User[]>("GET", url, null, params);
+    }
+    
     insertUser(user: User): Observable<User> {
 	let url = this.url + "/InsertRecord/Users";
         return this.globalService.sendRequest<User>("POST", url, user);

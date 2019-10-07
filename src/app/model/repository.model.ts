@@ -43,6 +43,10 @@ export class Model {
         return this.dataSource.getRolesByFilter(page);
     }
     
+    getObservableUsersByFilter(page: string): Observable<User[]> {
+        return this.dataSource.getUsersByFilter(page);
+    }
+    
     getRolesArray(): Role[] {
         return this.roles;
     }

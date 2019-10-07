@@ -24,7 +24,8 @@ export class UsersTableComponent {
     roleColumns: any[];
     roleSorting: any;    
     roleRows: any[];
-    pageNumber: number;
+    currentPageNumber: number;
+    numberOfPages: number;
     
     tableContainer: TableContainer;
     usersReserve: object[] = [];
@@ -48,7 +49,8 @@ export class UsersTableComponent {
                 vals.forEach((role) => {this.usersReserve.push(role)});
                 this.tableContainer = new TableContainer(this.usersReserve, 100);
             });
-        this.pageNumber = 1;
+        this.currentPageNumber = 1;
+        this.numberOfPages = 100;
     }
     
     resetForm() {
@@ -65,34 +67,51 @@ export class UsersTableComponent {
     }
     
     nextPageTabulate() {
-        if(this.pageNumber < this.tableContainer.numberOfPages){
-            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.pageNumber));
-            this.pageNumber++;
+        if(this.currentPageNumber < this.tableContainer.numberOfPages){
+            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber));
+            this.currentPageNumber++;
         }
     }
     
     previousPageTabulate() {
-        if(this.pageNumber > 1){
-            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.pageNumber - 2));
-            this.pageNumber--;
+        if(this.currentPageNumber > 1){
+            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber - 2));
+            this.currentPageNumber--;
         }
     }
     
     firstPageTabulate() {
-        if(this.pageNumber > 1){
+        if(this.currentPageNumber > 1){
             this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
-            this.pageNumber = 1;
+            this.currentPageNumber = 1;
         }
     }
     
     lastPageTabulate() {
-        if(this.pageNumber < this.tableContainer.numberOfPages){
+        if(this.currentPageNumber < this.tableContainer.numberOfPages){
             this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1));
-            this.pageNumber = this.tableContainer.numberOfPages;
+            this.currentPageNumber = this.tableContainer.numberOfPages;
         }
     }
     
     filter(event: string) {
-        //console.log(event);
+        let page = '[{"USERNAME":"' + event + '"},{"USERID":"' + event + '"}]';    
+        this.model.getObservableUsersByFilter(page).toPromise()
+            .then((user) => {
+                if (user["message"]) {
+                    this.usersReserve = [];
+                    this.tableContainer = new TableContainer(this.usersReserve, this.numberOfPages);
+                    this.userRows = this.fillInTableService.fillUsersByEmptyColumns();
+                } else {
+                    let usersValues = Object.values(user["values"]);
+                    this.usersReserve = usersValues;
+                    this.tableContainer = new TableContainer(this.usersReserve, this.numberOfPages); 
+                    this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));                   
+                }  
+                this.currentPageNumber = 1;
+            }).catch((response) => this.checkError(response));
+    }
+    
+    checkError(errorCode: object) {
     }
 }

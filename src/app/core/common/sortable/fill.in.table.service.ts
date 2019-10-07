@@ -25,6 +25,11 @@ export class FillInTableService {
         return columns;
     }
     
+    fillUsersByEmptyColumns() {
+        let columns = [];
+        return columns;
+    }
+    
     fillSortingToUsersTable(): any {
         return {column: 'USERID', descending: false};
     }
