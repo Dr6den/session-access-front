@@ -200,8 +200,10 @@ export class RoleInputPopupComponent implements OnInit {
             } else {
                 this.model.insertRole(this.request).toPromise().then().catch((response) => this.checkError(response));
             }
-            this.closeModalDialog();
-            window.location.reload();
+            if (this.errorMessage === "error message") {
+                this.closeModalDialog();
+                window.location.reload();
+            }
         }
     }
     
