@@ -18,6 +18,7 @@ export class LoginPopupComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  errorMessage = "error message";
   @Output() disableValueChange = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) { }
@@ -47,6 +48,7 @@ export class LoginPopupComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     openModalDialog(){
+        this.errorMessage = "error message";
         this.display='block'; //Set block css
     }
 
@@ -61,18 +63,23 @@ export class LoginPopupComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         }
-        this.closeModalDialog();
+       // this.closeModalDialog();
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
-                data => {
+                data => {console.log(data['loginSucceed'])
+                    if (data['loginSucceed'] == false) {
+                        this.errorMessage = "Login or Password are incorrect";
+                        return;
+                    }
                     if (this.returnUrl === "/") {
                         this.disableValueChanged();
                     }    
                     this.router.navigate([this.returnUrl]); 
                 },
-                error => {
+                error => {console.log(error)
+                    this.errorMessage = "Login or Password are incorrect";
                     this.error = error;
                     this.loading = false;
                 });

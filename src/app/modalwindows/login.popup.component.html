@@ -25,6 +25,9 @@
                                <div *ngIf="f.password.errors.required">Password is required</div>
                         </div>
                     </div>
+                    <div [ngStyle]="{'color': errorMessage === 'error message' ? '#FFFFFF' : 'red'}" class="error-message float-left">
+                        {{errorMessage}}
+                    </div>
                     <div class="log-sub-div">
                         <input type="submit" class="button-color float-right m-4" value="Log In">
                     </div>

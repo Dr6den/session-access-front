@@ -90,3 +90,8 @@
 .close:after {
     transform: rotate(-45deg);
 }
+
+.error-message {
+    margin-left: 1.1rem;
+    margin-top: 2rem
+}
