@@ -10,9 +10,17 @@ export class FillInTableService {
     fillRowsToUsersTable(): Promise<any> {
         let columns = [];
         return this.model.getObservableUsers().toPromise()
-            .then((ousers) => {let vals = Object.values(ousers["values"]);
+            .then((ousers) => {
+                let vals = Object.values(ousers["values"]);
                 vals.forEach((user) => {
-                columns.push({"Actions":"", "USERID": user.USERID, "USERNAME": user.USERNAME, "NTSID": user.NTSID, "Role": user.ROLES});});
+                let rolesOfUser:string = '';
+                let isFirstRole:boolean = true;
+                user.ROLES.forEach((r) => {
+                    if (!isFirstRole) { rolesOfUser = rolesOfUser + ", "; }
+                    rolesOfUser = rolesOfUser + r.Application + " : " + r.ROLENAME;
+                    isFirstRole = false;
+                });
+                columns.push({"Actions":"", "USERID": user.USERID, "USERNAME": user.USERNAME, "NTSID": user.NTSID, "Role": rolesOfUser});});
                 return columns;
             });         
     }
@@ -20,7 +28,15 @@ export class FillInTableService {
     fillRowsToUsersTableFromOutsideSource(source: object[]) {
         let columns = [];
         source.forEach((user) => {
-            columns.push({"Actions":"", "USERID": user["USERID"], "USERNAME": user["USERNAME"], "NTSID": user["NTSID"], "Role": user["ROLES"]});
+            let rolesOfUser:string = '';
+            let isFirstRole:boolean = true;
+            let userType = user as User;
+            userType.ROLES.forEach((r) => {
+                if (!isFirstRole) { rolesOfUser = rolesOfUser + ", "; }
+                rolesOfUser = rolesOfUser + r.Application + " : " + r.ROLENAME;
+                isFirstRole = false;
+            });
+            columns.push({"Actions":"", "USERID": user["USERID"], "USERNAME": user["USERNAME"], "NTSID": user["NTSID"], "Role": rolesOfUser});
         });
         return columns;
     }

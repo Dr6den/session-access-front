@@ -63,33 +63,33 @@ export class UsersTableComponent {
     
     changeUsersOutputOnPage(event: object) {
         this.tableContainer = new TableContainer(this.usersReserve, Number.parseInt(event.toString()));
-        this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+        this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
     }
     
     nextPageTabulate() {
         if(this.currentPageNumber < this.tableContainer.numberOfPages){
-            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber));
+            this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber));
             this.currentPageNumber++;
         }
     }
     
     previousPageTabulate() {
         if(this.currentPageNumber > 1){
-            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber - 2));
+            this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber - 2));
             this.currentPageNumber--;
         }
     }
     
     firstPageTabulate() {
         if(this.currentPageNumber > 1){
-            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+            this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
             this.currentPageNumber = 1;
         }
     }
     
     lastPageTabulate() {
         if(this.currentPageNumber < this.tableContainer.numberOfPages){
-            this.roleRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1));
+            this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1));
             this.currentPageNumber = this.tableContainer.numberOfPages;
         }
     }

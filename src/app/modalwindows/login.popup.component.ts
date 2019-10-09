@@ -78,7 +78,7 @@ export class LoginPopupComponent implements OnInit {
                     }    
                     this.router.navigate([this.returnUrl]); 
                 },
-                error => {console.log(error)
+                error => {
                     this.errorMessage = "Login or Password are incorrect";
                     this.error = error;
                     this.loading = false;

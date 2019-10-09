@@ -16,7 +16,11 @@
 
         <ng-template #averageColumn><!--fill roles options row-->
             <div *ngIf="(column.variable === 'Options');else average_content">
-                <div *ngFor="let item of object.Options">{{item}}</div>
+                <div *ngFor="let item of object.Options | slice:0:2; let i=index">{{item}}</div>
+                <div *ngFor="let item of object.Options | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
+                    <span (click)="giveMeMore(object.Applications + ':' + object.Rolename + ':' + i)" class="show-more" *ngIf="i == 2">More</span>
+                </div>
+        <!--        <div *ngFor="let item of object.Options">{{item}}</div>-->
                <!-- <div>{{object.Options | split_and_get_one_of_them:'-':'GBU' }}</div>
                 <div>{{object.Options | split_and_get_one_of_them:'-':'REGION' }}</div>
                 <div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>-->

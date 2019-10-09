@@ -67,3 +67,6 @@ tbody td:first-child, thead th:first-child {
     border-left: 0.001rem solid silver;
 }
 
+.show-more {
+    margin-left: 3rem;
+}

@@ -9,7 +9,7 @@ export class SplitStringAndReturnOneOfPipe implements PipeTransform {
       let splitted: string[] = val.split(splitByString);
       result = splitted.find(function(element) {
           return element.includes(containsString);
-      });
+      }); 
       return result;
   }
 }

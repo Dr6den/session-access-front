@@ -28,8 +28,11 @@ export class AuthenticationService {
         let url = this.url + "/RefreshToken";
         this.globalService.sendRequest<any>("GET", url, null, null, headers).subscribe((user) => { 
             if (user && user.access_token) {
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
+                localStorage.setItem('currentUser', JSON.stringify(user));
+            }
+        },
+        error => {
+            this.logout();
         });
     }
        

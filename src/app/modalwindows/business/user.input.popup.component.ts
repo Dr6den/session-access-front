@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { User } from "../../model/user.model";
 import { Role } from "../../model/role.model";
 import { UserUpdate } from "../../model/userUpdate.model";
+import { ShortRole } from "../../model/short.role.model";
 
 @Component({
   selector: 'user-input-popup',
@@ -77,9 +78,10 @@ export class UserInputPopupComponent {
             this.toggleDisable();
             this.reservedUser = this.user;
             this.selectedRolesItems = [];
-            user["Role"].forEach((role) => {
+            let roles:string[] = user["Role"].split(", ");
+            roles.forEach((role) => {
                 for (let el of this.rolesDropdownList) {
-                    if(el.endsWith(role)) {
+                    if(el === role) {
                         this.selectedRolesItems.push(el);
                         break;
                     }
@@ -108,11 +110,14 @@ export class UserInputPopupComponent {
         this.errorMessage = errorCode.toString();
     }
     
-    parseSelectedItem(item: Array<string>):Array<string> {
-        let parsedSi = item.map((element) => {
-            return element.substring(0, element.indexOf(":") -1);
+    parseSelectedItem(item: Array<string>):Array<ShortRole> {
+        let result: ShortRole[] = [];
+        item.map((element) => {
+            let application = element.substring(0, element.indexOf(":") - 1);
+            let role = element.substring(element.indexOf(":") + 2);
+            result.push(new ShortRole(role, application));
         });
-        return parsedSi;
+        return result;
     }
     
     submitForm(form: NgForm) {

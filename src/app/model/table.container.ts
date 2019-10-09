@@ -1,3 +1,5 @@
+import { User } from "../model/user.model";
+
 export class TableContainer {
     public items: object[];
     public itemsOnPage: number;

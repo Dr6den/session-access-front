@@ -71,4 +71,10 @@ export class TableSortable {
       });
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }
+  
+  giveMeMore(showMore: string) {
+      let elem = document.getElementById(showMore) as HTMLElement;
+     // elem.disabled = true;
+      console.log("dlfjie"+JSON.stringify(elem))
+  }
 }

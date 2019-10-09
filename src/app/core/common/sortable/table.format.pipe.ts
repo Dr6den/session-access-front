@@ -12,7 +12,7 @@ export class FormatTablePipe implements PipeTransform  {
     for(var i = 0; i < pipeArgs.length; i++){
       pipeArgs[i] = pipeArgs[i].trim(' ');
     }
-    
+  
     switch(pipeArgs[0].toLowerCase()) {
       case 'text':
         return input;
