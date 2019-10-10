@@ -33,7 +33,7 @@ export class TableOrderByPipe implements PipeTransform {
 
     transform(input:any, config:string = '+'): any{
         if (!input) return;
-        if (config === "Role" || config === "Actions" || config === "-Role" || config === "-Actions") return this.value;
+        if (config === "Role" || config === "Actions" || config === "-Role" || config === "-Actions" || config === "Options" || config === "-Options") return this.value;
 
     	//make a copy of the input's reference
     	this.value = [...input];

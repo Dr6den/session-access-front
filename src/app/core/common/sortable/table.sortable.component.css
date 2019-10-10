@@ -70,3 +70,14 @@ tbody td:first-child, thead th:first-child {
 .show-more {
     margin-left: 3rem;
 }
+
+.arrows {
+    position:relative;
+    margin-left: 1rem;
+}
+
+.silver-arrow {
+    position:absolute;
+    left: 0;
+    top: 0.3rem;
+}

@@ -22,9 +22,12 @@ export class TableSortable {
   @Output() callUserInputPopup = new EventEmitter();
   @Output() callRoleInputPopup = new EventEmitter();
   
+  sortArrowsVisible:string = "";
+  
   constructor(private model: Model){}
   
-  selectedClass(columnName): string{
+  selectedClass(columnName): string {
+      this.sortArrowsVisible = this.sort.column + this.sort.descending;//set up sorting arrows in the header of the table, they indicates acending or descenidng sorting
       return columnName == this.sort.column ? 'sort-' + this.sort.descending : 'sort-' + this.sort.descending;
     //return columnName == this.sort.column ? 'sort-' + this.sort.descending : false;
   }
