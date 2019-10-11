@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ViewChildren, QueryList } from "@angular/core";
 import { TableOrderByPipe } from "./table.sort.orderby.pipe"
 import { FormatTablePipe } from "./table.format.pipe"
 import { Role } from "../../../model/role.model";
 import { User } from "../../../model/user.model";
 import { Model } from "../../../model/repository.model";
 import { UserInputPopupComponent } from "../../../modalwindows/business/user.input.popup.component";
+import { TableFilterPopup } from "../../../modalwindows/business/sortingfilter/table.filter.popup";
 
 @Component({
   selector: 'table-sortable',
@@ -23,6 +24,8 @@ export class TableSortable {
   @Output() callRoleInputPopup = new EventEmitter();
   
   sortArrowsVisible:string = "";
+  openedFilter:string = "";
+  @ViewChildren(TableFilterPopup) tableFilterPopups: QueryList<TableFilterPopup>
   
   constructor(private model: Model){}
   
@@ -73,6 +76,13 @@ export class TableSortable {
           }
       });
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
+  }
+  
+  openFilter(columnName: string, event) {
+      this.openedFilter = columnName;
+      let chosenColumnModalWindow = this.tableFilterPopups.filter((element, index) => element.column === columnName);console.log(this.sortArrowsVisible)
+      chosenColumnModalWindow[0].openModalDialog(this.sortArrowsVisible);
+      event.stopPropagation();
   }
   
   giveMeMore(showMore: string) {

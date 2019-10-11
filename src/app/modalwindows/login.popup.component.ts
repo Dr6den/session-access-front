@@ -77,6 +77,7 @@ export class LoginPopupComponent implements OnInit {
                         this.disableValueChanged();
                     }    
                     this.router.navigate([this.returnUrl]); 
+                    this.closeModalDialog()
                 },
                 error => {
                     this.errorMessage = "Login or Password are incorrect";

@@ -1,0 +1,27 @@
+<div class="modal-table-popup modal-content m-3 shadow rounded" [ngStyle]="{'display':display}">            
+            <div class="pressed-field">
+                <span class="sort-arrows">
+                    <img [style.visibility]="(visibleAscendingIcon) ? 'visible':'hidden'" src="assets/img/sort-ascending-icon.svg"
+                        class="popups-images"/> 
+                    <img [style.visibility]="(visibleSelectedAscendingIcon) ? 'visible':'hidden'" src="assets/img/sort-ascending-selected-icon.svg"
+                        class="popups-images"/>
+                </span>
+                <span class="pressed-text">Sort ascending</span>
+            </div>
+            <div class="pressed-field">
+                <span class="sort-arrows">
+                    <img [style.visibility]="(visibleDescendingIcon) ? 'visible':'hidden'" src="assets/img/sort-descending-icon.svg"
+                        class="popups-images"/> 
+                    <img [style.visibility]="(visibleSelectedDescendingIcon) ? 'visible':'hidden'" src="assets/img/sort-descending-selected-icon.svg"
+                        class="popups-images"/>
+                </span>
+                <span class="pressed-text">Sort descending</span>
+            </div>
+            <div class="search-input">
+                <input type="text" id="searchInputPopup" placeholder="Search">
+            </div>
+            <div class="buttons-block">
+                <input type="submit" (click)="submitForm(form)" class="button-color submit-button float-right" value="Ok">
+                <input type="button" (click)="closeModalDialog()" class="button-cancel float-right" value="Cancel">
+            </div>
+</div>

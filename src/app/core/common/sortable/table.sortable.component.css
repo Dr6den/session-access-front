@@ -81,3 +81,18 @@ tbody td:first-child, thead th:first-child {
     left: 0;
     top: 0.3rem;
 }
+
+.silver-dropdowns-container {
+    position:relative;
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    float: right;
+    width: 2rem;
+    height: 2rem;
+}
+
+.silver-dropdown {
+    position:absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+}
