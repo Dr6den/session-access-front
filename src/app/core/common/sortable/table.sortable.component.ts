@@ -46,6 +46,17 @@ export class TableSortable {
     }
   }
   
+  changeSortingDescending(columnName): void{
+
+    var sort = this.sort;
+    if (sort.column == columnName) {
+      sort.descending = !sort.descending;
+    } else {
+      sort.column = columnName;
+      sort.descending = true;
+    }
+  }
+  
   convertSorting(): string{
     return this.sort.descending ? '-' + this.sort.column : this.sort.column;
   }
@@ -89,5 +100,13 @@ export class TableSortable {
       let elem = document.getElementById(showMore) as HTMLElement;
      // elem.disabled = true;
       console.log("dlfjie"+JSON.stringify(elem))
+  }
+  
+  callSortingOfTable(event) {
+      if (event.order === "asc") {
+          this.changeSortingDescending(event.column);           
+      } else {
+          this.changeSorting(event.column); 
+      }
   }
 }

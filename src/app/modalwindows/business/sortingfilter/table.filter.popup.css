@@ -95,7 +95,10 @@
 }
 
 .buttons-block input {
+    float: right;
     margin-right: 0.5rem;
+    margin-bottom: 0.7rem;
+    margin-top: 0.7rem;
     width: 3rem;
     height: 1rem;
     font-family: Roboto;
@@ -105,4 +108,34 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
+}
+
+.buttons-block {
+    overflow: auto;
+}
+
+.checkBoxLabel {
+    margin-left: 0.5rem;
+}
+
+.checkBox {
+    margin-top: 0.4rem;
+    margin-left: 0.5rem;
+    width: 10px;
+    height: 10px;
+    box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: solid 0.5px #6e8298;
+}
+
+.checkbox-field {
+    overflow-y: scroll;
+    min-height: 4rem;
+    max-height: 8rem;
+    margin-top: 0;
+}
+
+.label-checkbox-container {
+    display: inline-block;
+    margin-top: 0;
+    padding-top: 0;
 }

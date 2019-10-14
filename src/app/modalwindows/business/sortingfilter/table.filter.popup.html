@@ -1,5 +1,5 @@
 <div class="modal-table-popup modal-content m-3 shadow rounded" [ngStyle]="{'display':display}">            
-            <div class="pressed-field">
+            <div class="pressed-field" (click)="sortAscending($event)">
                 <span class="sort-arrows">
                     <img [style.visibility]="(visibleAscendingIcon) ? 'visible':'hidden'" src="assets/img/sort-ascending-icon.svg"
                         class="popups-images"/> 
@@ -8,7 +8,7 @@
                 </span>
                 <span class="pressed-text">Sort ascending</span>
             </div>
-            <div class="pressed-field">
+            <div class="pressed-field" (click)="sortDescending($event)">
                 <span class="sort-arrows">
                     <img [style.visibility]="(visibleDescendingIcon) ? 'visible':'hidden'" src="assets/img/sort-descending-icon.svg"
                         class="popups-images"/> 
@@ -20,8 +20,24 @@
             <div class="search-input">
                 <input type="text" id="searchInputPopup" placeholder="Search">
             </div>
+            <div class="checkbox-field">
+                <div class="pressed-field" (click)="selectAll($event)">
+                    <input type="checkbox" id="selectall" name="selectall" value="selectall" class="checkBox" [(ngModel)]="selectAllChecked" 
+                           [ngModelOptions]="{standalone: true}" (click)="selectAll($event)">
+                    <span class="label-checkbox-container" (click)="selectAll($event)">
+                        <label for="selectall" class="checkBoxLabel" (click)="selectAll($event)">Select All</label>
+                    </span>
+                </div>
+                <div *ngFor="let val of checkboxesText | orderBy; let i=index" class="pressed-field" (click)="selectCheckbox($event, i)">
+                    <input type="checkbox" name="selectall" value="selectall" class="checkBox" [(ngModel)]="checkedCheckboxes[i]" [ngModelOptions]="{standalone: true}"
+                       (click)="selectCheckbox($event, i)">
+                    <span class="label-checkbox-container" (click)="selectCheckbox($event, i)">
+                        <label for="selectall"  class="checkBoxLabel" (click)="selectCheckbox($event, i)">{{val}}</label>
+                    </span>
+                </div>
+            </div>
             <div class="buttons-block">
-                <input type="submit" (click)="submitForm(form)" class="button-color submit-button float-right" value="Ok">
-                <input type="button" (click)="closeModalDialog()" class="button-cancel float-right" value="Cancel">
+                <input type="submit" (click)="submitForm(form)" class="button-color submit-button" value="Ok">
+                <input type="button" (click)="closeModalDialog($event)" class="button-cancel" value="Cancel">
             </div>
 </div>
