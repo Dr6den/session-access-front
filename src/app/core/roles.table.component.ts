@@ -118,9 +118,11 @@ export class RolesTableComponent {
     
     filterByNames(event) {
         let page:string = "[";
-        event.names.forEach((name) => {
-            page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
-        });
+        if (event.column === "Applications") {
+            event.names.forEach((name) => {page = page + '{"Application":"' + name + '"},';});
+        } else {
+            event.names.forEach((name) => {page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';});
+        }
         page = page.replace(/.$/,"]");
         console.log(page)
         this.model.getObservableRolesByFilter(page).toPromise()

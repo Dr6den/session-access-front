@@ -10,16 +10,16 @@
                             [style.visibility]="(sortArrowsVisible == column.display + 'true') ? 'visible':'hidden'" class="user-img silver-arrow"/>
                         <img src="assets/img/sort-down-icon.svg" 
                             [style.visibility]="(sortArrowsVisible == column.display + 'false') ? 'visible':'hidden'" class="user-img silver-arrow"/>
+                    </span>                    
+                    <span *ngIf="column.variable !== 'Role'" class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">
+                        <img src="assets/img/filter-up.svg" 
+                            [style.visibility]="openedFilter ? 'visible':'hidden'" class="user-img silver-dropdown"/>
+                        <img src="assets/img/filter-down.svg" 
+                            [style.visibility]="openedFilter ? 'hidden':'visible'" class="user-img silver-dropdown"/>                        
                     </span>
                     <span>
                         <table-filter-popup [column]="column.display" [data]="data" (filterByName)="filterByName($event)"
-                            (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
-                    </span>
-                    <span class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">
-                        <img src="assets/img/filter-up.svg" 
-                            [style.visibility]="(openedFilter == column.display) ? 'visible':'hidden'" class="user-img silver-dropdown"/>
-                        <img src="assets/img/filter-down.svg" 
-                            [style.visibility]="(openedFilter != column.display) ? 'visible':'hidden'" class="user-img silver-dropdown"/>                        
+                            (closeEvent)="onCloseSearchPopup($event)" (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
                     </span>
                 </span>
             </th>

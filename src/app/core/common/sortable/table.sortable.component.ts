@@ -25,7 +25,7 @@ export class TableSortable {
   @Output() filterByNames = new EventEmitter();
   
   sortArrowsVisible:string = "";
-  openedFilter:string = "";
+  openedFilter:boolean = false;
   @ViewChildren(TableFilterPopup) tableFilterPopups: QueryList<TableFilterPopup>
   
   constructor(private model: Model){}
@@ -90,9 +90,9 @@ export class TableSortable {
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }
   
-  openFilter(columnName: string, event) {
-      this.openedFilter = columnName;
-      let chosenColumnModalWindow = this.tableFilterPopups.filter((element, index) => element.column === columnName);console.log(this.sortArrowsVisible)
+  openFilter(columnName: string, event) {console.log(columnName)
+      this.openedFilter = true;
+      let chosenColumnModalWindow = this.tableFilterPopups.filter((element, index) => element.column === columnName);
       chosenColumnModalWindow[0].openModalDialog(this.sortArrowsVisible);
       event.stopPropagation();
   }
@@ -113,5 +113,9 @@ export class TableSortable {
   
   filterByName(event) {
       this.filterByNames.emit(event);
+  }
+  
+  onCloseSearchPopup(event) {
+      this.openedFilter = false;
   }
 }
