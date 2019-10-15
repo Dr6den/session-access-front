@@ -114,4 +114,27 @@ export class UsersTableComponent {
     
     checkError(errorCode: object) {
     }
+    
+    filterByNames(event) {
+        let page:string = "[";
+        event.names.forEach((name) => {
+            page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
+        });
+        page = page.replace(/.$/,"]");
+        console.log(page)
+        this.model.getObservableUsersByFilter(page).toPromise()
+            .then((user) => {
+                if (user["message"]) {
+                    this.usersReserve = [];
+                    this.tableContainer = new TableContainer(this.usersReserve, this.numberOfPages);
+                    this.userRows = this.fillInTableService.fillUsersByEmptyColumns();
+                } else {
+                    let usersValues = Object.values(user["values"]);
+                    this.usersReserve = usersValues;
+                    this.tableContainer = new TableContainer(this.usersReserve, this.numberOfPages); 
+                    this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));                   
+                }  
+                this.currentPageNumber = 1;
+            }).catch((response) => this.checkError(response));
+    }
 }

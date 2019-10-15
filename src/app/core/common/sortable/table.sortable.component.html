@@ -12,7 +12,8 @@
                             [style.visibility]="(sortArrowsVisible == column.display + 'false') ? 'visible':'hidden'" class="user-img silver-arrow"/>
                     </span>
                     <span>
-                        <table-filter-popup [column]="column.display" [data]="data" (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
+                        <table-filter-popup [column]="column.display" [data]="data" (filterByName)="filterByName($event)"
+                            (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
                     </span>
                     <span class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">
                         <img src="assets/img/filter-up.svg" 

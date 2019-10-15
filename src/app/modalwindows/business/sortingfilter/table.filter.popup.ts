@@ -8,6 +8,7 @@ export class TableFilterPopup {
     display='none'; //default Variable
     @Input() column: string;
     @Output() callSortingOfTheTable = new EventEmitter();
+    @Output() filterByName = new EventEmitter();
     @Input() data: object[];
     checkboxesText: string[] = [];
     checkedCheckboxes: boolean[] = [];
@@ -23,8 +24,8 @@ export class TableFilterPopup {
             this.checkboxesText.push(obj[this.column]);
             this.checkedCheckboxes.push(true);
         }});
+        this.checkboxesText.sort();
         this.manageOfArrowsVisiblity(visiblityOfSortArrows);
-        console.log(JSON.stringify(this.checkboxesText))
         this.display='block'; //Set block css
     }
     
@@ -88,5 +89,26 @@ export class TableFilterPopup {
             this.checkedCheckboxes[i] = false;
             this.selectAllChecked = false;
         }        
+    }
+    
+    filterTable(event) {
+        this.closeModalDialog(event);
+        let filteredNames:string[] = [];
+        for (var i = 0; i < this.checkboxesText.length; i++) {
+            if (this.checkedCheckboxes[i]) {
+                filteredNames.push(this.checkboxesText[i]);
+            }
+        }
+        this.filterByName.emit({column: this.column, names: filteredNames});
+    }
+    
+    filter(event: string) {
+        console.log(JSON.stringify(event))
+
+        
+    }
+    
+    stopPropogation(event) {
+        event.stopPropagation();
     }
 }

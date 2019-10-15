@@ -21,6 +21,7 @@
     [columns]="roleColumns"
     [data]="roleRows"
     [sort]="roleSorting"
+    (filterByNames)="filterByNames($event)"
     (callRoleInputPopup)='roleInput($event)'>
     Loading table...
 </table-sortable>

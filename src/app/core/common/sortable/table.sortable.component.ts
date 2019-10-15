@@ -22,6 +22,7 @@ export class TableSortable {
   @Input() sort: any;
   @Output() callUserInputPopup = new EventEmitter();
   @Output() callRoleInputPopup = new EventEmitter();
+  @Output() filterByNames = new EventEmitter();
   
   sortArrowsVisible:string = "";
   openedFilter:string = "";
@@ -108,5 +109,9 @@ export class TableSortable {
       } else {
           this.changeSorting(event.column); 
       }
+  }
+  
+  filterByName(event) {
+      this.filterByNames.emit(event);
   }
 }

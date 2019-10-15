@@ -21,6 +21,7 @@
     [columns]="userColumns"
     [data]="userRows"
     [sort]="userSorting"
+    (filterByNames)="filterByNames($event)"
     (callUserInputPopup)='userInput($event)'>
     Loading table...
 </table-sortable>   

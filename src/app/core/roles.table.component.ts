@@ -115,4 +115,27 @@ export class RolesTableComponent {
     
     checkError(errorCode: object) {
     }
+    
+    filterByNames(event) {
+        let page:string = "[";
+        event.names.forEach((name) => {
+            page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
+        });
+        page = page.replace(/.$/,"]");
+        console.log(page)
+        this.model.getObservableRolesByFilter(page).toPromise()
+            .then((role) => {console.log(JSON.stringify(role))
+                if (role["message"]) {
+                    this.rolesReserve = [];
+                    this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages);
+                    this.roleRows = this.fillInTableService.fillRolesByEmptyColumns();
+                } else {
+                    let rolesValues = Object.values(role["values"]);
+                    this.rolesReserve = rolesValues;
+                    this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages); 
+                    this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));                   
+                }                
+                this.currentPageNumber = 1;
+            }).catch((response) => this.checkError(response));
+    }
 }
