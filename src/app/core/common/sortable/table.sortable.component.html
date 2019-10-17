@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let object of data | orderBy : convertSorting()">
+        <tr *ngFor="let object of data | orderBy : convertSorting(); let j=index">
       <td *ngFor="let column of columns">
 
         <ng-container *ngIf="(column.variable === 'Actions'); then editColumn; else averageColumn">
@@ -36,8 +36,9 @@
             <div *ngIf="(column.variable === 'Options');else average_content">
                 <div *ngFor="let item of object.Options | slice:0:2; let i=index">{{item}}</div>
                 <div *ngFor="let item of object.Options | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
-                    <span (click)="giveMeMore(object.Applications + ':' + object.Rolename + ':' + i)" class="show-more" *ngIf="i == 2">More</span>
+                    <a *ngIf="i == 2" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a>                    
                 </div>
+                    <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object.Options" [rowIndex]="j"></info-popup>
         <!--        <div *ngFor="let item of object.Options">{{item}}</div>-->
                <!-- <div>{{object.Options | split_and_get_one_of_them:'-':'GBU' }}</div>
                 <div>{{object.Options | split_and_get_one_of_them:'-':'REGION' }}</div>
@@ -45,12 +46,15 @@
             </div>
 
             <ng-template #average_content><!--fill simple for all tables row-->
-                <div>
+                <div *ngIf="(column.variable === 'Role');else others">
                     {{object[column.variable] | format : column.filter}}
                 </div>
-            </ng-template>            
+                <ng-template #others>
+                    {{object[column.variable] | format : column.filter}}
+                </ng-template>
+            </ng-template>          
         </ng-template>
-            
+              
         <ng-template #editColumn> <!--edit columns we have to fill by buttons-->
             <div *ngIf="object.USERNAME" class="table-buttons"> <!--condition for users table-->
 		<div>

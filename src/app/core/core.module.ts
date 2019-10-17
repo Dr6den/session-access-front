@@ -22,6 +22,7 @@ import { FormatTablePipe } from "./common/sortable/table.format.pipe";
 import { SplitStringAndReturnOneOfPipe } from "./common/sortable/split.string.return.one.contained.pipe";
 import { TableOrderByPipe } from "./common/sortable/table.sort.orderby.pipe";
 import { TableSortable } from "./common/sortable/table.sortable.component";
+import { InfoPopupComponent } from "./common/sortable/info.popup.component";
 import { TabsComponent } from "./common/tabs/tabs.component";
 import { TabComponent } from "./common/tabs/tab.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,11 +32,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
          ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
-    declarations: [IndexComponent, RolesTableComponent, UsersTableComponent, HeaderComponent,
+    declarations: [IndexComponent, RolesTableComponent, UsersTableComponent, HeaderComponent, InfoPopupComponent,
          LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
          TabsComponent, TabComponent, TableSortable, UserInputPopupComponent, RoleInputPopupComponent, DynamicDropboxComponent, TableFilterPopup],
     providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
-         IndexComponent, UserInputPopupComponent, RoleInputPopupComponent],
+         IndexComponent, UserInputPopupComponent, RoleInputPopupComponent, InfoPopupComponent],
     exports: [ModelModule, RolesTableComponent, UsersTableComponent],
     bootstrap: [RoleInputPopupComponent],
     entryComponents: [DynamicDropboxComponent, TableFilterPopup]

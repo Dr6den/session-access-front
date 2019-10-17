@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChildren, QueryList } from "@angular/core";
-import { TableOrderByPipe } from "./table.sort.orderby.pipe"
-import { FormatTablePipe } from "./table.format.pipe"
+import { TableOrderByPipe } from "./table.sort.orderby.pipe";
+import { FormatTablePipe } from "./table.format.pipe";
+import { InfoPopupComponent } from "./info.popup.component";
 import { Role } from "../../../model/role.model";
 import { User } from "../../../model/user.model";
 import { Model } from "../../../model/repository.model";
@@ -26,7 +27,8 @@ export class TableSortable {
   
   sortArrowsVisible:string = "";
   openedFilter:boolean = false;
-  @ViewChildren(TableFilterPopup) tableFilterPopups: QueryList<TableFilterPopup>
+  @ViewChildren(TableFilterPopup) tableFilterPopups: QueryList<TableFilterPopup>;
+  @ViewChildren(InfoPopupComponent) infoPopups: QueryList<InfoPopupComponent>;
   
   constructor(private model: Model){}
   
@@ -90,19 +92,27 @@ export class TableSortable {
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }
   
-  openFilter(columnName: string, event) {console.log(columnName)
+  openFilter(columnName: string, event) {
       this.openedFilter = true;
       let chosenColumnModalWindow = this.tableFilterPopups.filter((element, index) => element.column === columnName);
       chosenColumnModalWindow[0].openModalDialog(this.sortArrowsVisible);
       event.stopPropagation();
   }
   
-  giveMeMore(showMore: string) {
-      let elem = document.getElementById(showMore) as HTMLElement;
-     // elem.disabled = true;
-      console.log("dlfjie"+JSON.stringify(elem))
+  displayInfo(columnName: string, rowIndex: number) {
+      let chosenColumnModalWindow = this.infoPopups.filter((element, index) => element.rowIndex === rowIndex && element.column === columnName);
+      //we have to define position of the modal window
+      let rowElement = document.getElementById(columnName + rowIndex);
+      let offsetTop:number = rowElement.offsetTop;
+      let offsetLeft:number = rowElement.offsetLeft;
+      let top:number = rowElement.getBoundingClientRect().top - offsetTop;
+      let left:number = rowElement.getBoundingClientRect().left - offsetLeft * 3;
+      chosenColumnModalWindow[0].openModalDialog(top + "px", left + "px"); 
+
+
+
   }
-  
+
   callSortingOfTable(event) {
       if (event.order === "asc") {
           this.changeSortingDescending(event.column);           
