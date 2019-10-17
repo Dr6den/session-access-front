@@ -38,7 +38,7 @@
                 <div *ngFor="let item of object.Options | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
                     <a *ngIf="i == 2" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a>                    
                 </div>
-                    <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object.Options" [rowIndex]="j"></info-popup>
+                <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object.Options" [rowIndex]="j"></info-popup>
         <!--        <div *ngFor="let item of object.Options">{{item}}</div>-->
                <!-- <div>{{object.Options | split_and_get_one_of_them:'-':'GBU' }}</div>
                 <div>{{object.Options | split_and_get_one_of_them:'-':'REGION' }}</div>
@@ -47,7 +47,13 @@
 
             <ng-template #average_content><!--fill simple for all tables row-->
                 <div *ngIf="(column.variable === 'Role');else others">
-                    {{object[column.variable] | format : column.filter}}
+                    <!-- I have to cut more then one output for Role column of Users table and output others by popup -->
+                    {{object[column.variable] | split_string : ',' | slice:0:1}}
+                    <div *ngFor="let item of object[column.variable] | split_string : ','; let i=index">
+                        <a *ngIf="i == 1" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a> 
+                    </div>
+                    <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object[column.variable] | split_string : ','" 
+                        [rowIndex]="j"></info-popup>
                 </div>
                 <ng-template #others>
                     {{object[column.variable] | format : column.filter}}

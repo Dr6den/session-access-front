@@ -20,7 +20,7 @@ export class InfoPopupComponent {
         this.setLeft = setLeft;
     }
     
-    closeModalDialog() {console.log("hey")
+    closeModalDialog() {
         this.display='none';
     }
 }

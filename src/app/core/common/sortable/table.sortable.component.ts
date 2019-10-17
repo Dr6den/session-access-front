@@ -106,7 +106,7 @@ export class TableSortable {
       let offsetTop:number = rowElement.offsetTop;
       let offsetLeft:number = rowElement.offsetLeft;
       let top:number = rowElement.getBoundingClientRect().top - offsetTop;
-      let left:number = rowElement.getBoundingClientRect().left - offsetLeft * 3;
+      let left:number = rowElement.getBoundingClientRect().left - offsetLeft * 4;
       chosenColumnModalWindow[0].openModalDialog(top + "px", left + "px"); 
 
 
