@@ -124,7 +124,7 @@ export class RolesTableComponent {
             event.names.forEach((name) => {page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';});
         }
         page = page.replace(/.$/,"]");
-        console.log(page)
+
         this.model.getObservableRolesByFilter(page).toPromise()
             .then((role) => {console.log(JSON.stringify(role))
                 if (role["message"]) {

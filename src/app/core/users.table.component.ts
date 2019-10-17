@@ -121,7 +121,7 @@ export class UsersTableComponent {
             page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
         });
         page = page.replace(/.$/,"]");
-        console.log(page)
+
         this.model.getObservableUsersByFilter(page).toPromise()
             .then((user) => {
                 if (user["message"]) {

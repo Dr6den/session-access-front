@@ -59,7 +59,7 @@ export class TableFilterPopup {
     closeModalDialog(event){
         event.stopPropagation();
         this.display='none'; //set none css after close dialog
-        this.closeEvent.emit(true); //emits for change icon on the table on close
+        this.closeEvent.emit(this.column); //emits for change icon on the table on close
     }
     
     sortAscending(event) {

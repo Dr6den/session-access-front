@@ -27,10 +27,19 @@ export class TableSortable {
   
   sortArrowsVisible:string = "";
   openedFilter:boolean = false;
+  openedFilters:object = {};
   @ViewChildren(TableFilterPopup) tableFilterPopups: QueryList<TableFilterPopup>;
   @ViewChildren(InfoPopupComponent) infoPopups: QueryList<InfoPopupComponent>;
   
   constructor(private model: Model){}
+  
+  ngOnInit() {
+      this.columns.forEach((columnName) => {
+          let columnVar = {};
+          columnVar[columnName['variable']] = false;
+          this.openedFilters[columnName['variable']] = false;
+      });
+  }
   
   selectedClass(columnName): string {
       this.sortArrowsVisible = this.sort.column + this.sort.descending;//set up sorting arrows in the header of the table, they indicates acending or descenidng sorting
@@ -93,7 +102,7 @@ export class TableSortable {
   }
   
   openFilter(columnName: string, event) {
-      this.openedFilter = true;
+      this.openedFilters[columnName] = true;
       let chosenColumnModalWindow = this.tableFilterPopups.filter((element, index) => element.column === columnName);
       chosenColumnModalWindow[0].openModalDialog(this.sortArrowsVisible);
       event.stopPropagation();
@@ -108,9 +117,6 @@ export class TableSortable {
       let top:number = rowElement.getBoundingClientRect().top - offsetTop;
       let left:number = rowElement.getBoundingClientRect().left - offsetLeft * 4;
       chosenColumnModalWindow[0].openModalDialog(top + "px", left + "px"); 
-
-
-
   }
 
   callSortingOfTable(event) {
@@ -126,6 +132,6 @@ export class TableSortable {
   }
   
   onCloseSearchPopup(event) {
-      this.openedFilter = false;
+      this.openedFilters[event] = false;
   }
 }
