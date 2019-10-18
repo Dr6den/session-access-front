@@ -10,8 +10,9 @@
                             [style.visibility]="(sortArrowsVisible == column.display + 'true') ? 'visible':'hidden'" class="user-img silver-arrow"/>
                         <img src="assets/img/sort-down-icon.svg" 
                             [style.visibility]="(sortArrowsVisible == column.display + 'false') ? 'visible':'hidden'" class="user-img silver-arrow"/>
-                    </span>                    
-                    <span *ngIf="column.variable !== 'Role'" class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">
+                    </span>    
+                    <span class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">
+                    <!--<span *ngIf="column.variable !== 'Role'" class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">-->
                         <img src="assets/img/filter-up.svg" 
                             [style.visibility]="openedFilters[column.variable] ? 'visible':'hidden'" class="user-img silver-dropdown"/>
                         <img src="assets/img/filter-down.svg" 

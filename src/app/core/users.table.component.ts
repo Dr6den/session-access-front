@@ -117,9 +117,15 @@ export class UsersTableComponent {
     
     filterByNames(event) {
         let page:string = "[";
-        event.names.forEach((name) => {
-            page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
-        });
+        if (event.column === "Role") { 
+            event.names.forEach((name) => {
+                page = page + '{"ROLES":{"Application":"' + name + '"}},';
+            });
+        } else {
+            event.names.forEach((name) => {
+                page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
+            });
+        }
         page = page.replace(/.$/,"]");
 
         this.model.getObservableUsersByFilter(page).toPromise()

@@ -101,12 +101,21 @@ export class TableFilterPopup {
     filterTable(event) {
         this.closeModalDialog(event);
         let filteredNames:string[] = [];
-        for (var i = 0; i < this.checkboxesText.length; i++) {
-            if (this.checkedCheckboxes[i]) {
-                filteredNames.push(this.checkboxesText[i]);
+        if (this.column === "Role") {
+            for (var i = 0; i < this.checkboxesText.length; i++) {
+                if (this.checkedCheckboxes[i]) {
+                    filteredNames.push(this.checkboxesText[i].substring(0, this.checkboxesText[i].indexOf(":") - 1));
+                }
             }
+        } else {
+            for (var i = 0; i < this.checkboxesText.length; i++) {
+                if (this.checkedCheckboxes[i]) {
+                    filteredNames.push(this.checkboxesText[i]);
+                }
+            }
+            
         }
-        this.filterByName.emit({column: this.column, names: filteredNames});
+        this.filterByName.emit({column: this.column, names: filteredNames});        
     }
     
     filter(event: string) {

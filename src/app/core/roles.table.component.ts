@@ -126,7 +126,7 @@ export class RolesTableComponent {
         page = page.replace(/.$/,"]");
 
         this.model.getObservableRolesByFilter(page).toPromise()
-            .then((role) => {console.log(JSON.stringify(role))
+            .then((role) => {
                 if (role["message"]) {
                     this.rolesReserve = [];
                     this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages);
