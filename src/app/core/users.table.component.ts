@@ -44,6 +44,12 @@ export class UsersTableComponent {
             this.userRows = promiserows;
         });
         
+        /*fillInTableService.fillRowsTheTable().then((promiserows) => { 
+            
+        });*/
+        
+        fillInTableService.fillColumnsToSchemeTable(this.title);
+        
         this.model.getObservableUsers().toPromise()
             .then((ousers) => {let vals = Object.values(ousers["values"]);
                 vals.forEach((role) => {this.usersReserve.push(role)});

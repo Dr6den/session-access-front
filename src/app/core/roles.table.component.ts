@@ -1,5 +1,5 @@
 import { Component, Inject, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Model } from "../model/repository.model";
 import { User } from "../model/user.model";
 import { TableSortable } from "./common/sortable/table.sortable.component";
@@ -36,7 +36,7 @@ export class RolesTableComponent {
         {num: 10, name: "10"}
     ];
     
-    constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
+    constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {
         this.model.getRoles();
         this.roleSorting = this.fillInTableService.fillSortingToRolesTable();
         this.roleColumns = fillInTableService.fillColumnsToRolesTable();
@@ -50,7 +50,12 @@ export class RolesTableComponent {
                 this.tableContainer = new TableContainer(this.rolesReserve, 100);
             });
         this.currentPageNumber = 1; 
-        this.numberOfPages = 100;      
+        this.numberOfPages = 100;  
+    }
+    
+    ngOnInit() {
+        this.title = this.activeRouter.snapshot.paramMap.get('schemeName');
+        this.fillInTableService.fillColumnsToSchemeTable(this.title);
     }
     
     resetForm() {

@@ -19,8 +19,23 @@ export class RestDataSource {
         return this.globalService.sendRequest<object>("GET", url);
     }
     
+    getSchemesList(): Observable<string[]> {
+        let url = this.url + "/angular/getDictionariesList";
+        return this.globalService.sendRequest<string[]>("GET", url);
+    }
+    
+    getSchemesInfo(): Observable<object> {
+        let url = this.url + "/angular/getDictionariesInfo";
+        return this.globalService.sendRequest<object>("GET", url);
+    }
+    
     getRoles(): Observable<object[]> {
         let url = this.url + "/GetRecords/Roles?parseRoleOpts=true";
+        return this.globalService.sendRequest<object[]>("GET", url);
+    }
+    
+    getScheme(scheme: string): Observable<object[]> {
+        let url = this.url + "/GetRecords/" + scheme + "?parseRoleOpts=true";
         return this.globalService.sendRequest<object[]>("GET", url);
     }
     

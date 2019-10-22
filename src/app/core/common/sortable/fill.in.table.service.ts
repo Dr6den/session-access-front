@@ -7,6 +7,29 @@ import { Role } from "../../../model/role.model";
 export class FillInTableService {
     constructor(private model: Model) { }
     
+    fillColumnsToSchemeTable(schemeName: string): any[] {
+        let answ: any[] = [];
+        this.model.getSchemesInfo().toPromise()
+            .then((data) => {              
+                let schemeElements = data[schemeName];
+                this.addColumnToJson("Actions", answ);
+                Object.keys(schemeElements).forEach((elem) => {
+                    this.addColumnToJson(elem, answ);
+                })   
+                console.log(JSON.stringify(answ))
+                return answ;             
+        });  
+        return answ;      
+    }
+    
+    private addColumnToJson(value: string, json: any[]): void {
+        json.push("{" +
+            "'display':'" + value + "',"+ //The text to display
+            "'variable':'" + value + "',"+ //The name of the key that's apart of the data array
+            "'filter': 'text'"+ //The type data type of the column (number, text, date, etc.)
+            "}");
+    }
+    
     fillRowsToUsersTable(): Promise<any> {
         let columns = [];
         return this.model.getObservableUsers().toPromise()

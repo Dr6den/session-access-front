@@ -5,8 +5,9 @@ import { RolesTableComponent } from "./core/roles.table.component";
 import { AuthGuard } from "./auth/guards/auth.guard";
 
 const routes: Routes = [
-    { path: "showUsers", component: UsersTableComponent, canActivate: [AuthGuard] },
+    { path: "showRoles/Users", component: UsersTableComponent, canActivate: [AuthGuard] },
     { path: "showRoles", component: RolesTableComponent, canActivate: [AuthGuard] },
+    { path: "showRoles/:schemeName", component: RolesTableComponent, canActivate: [AuthGuard] },
     { path: "", component: IndexComponent },
     { path: '**', redirectTo: '' }]
     

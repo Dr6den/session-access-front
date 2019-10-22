@@ -16,13 +16,13 @@
     letter-spacing: normal;
 }
 
-.users-link {
-    margin-top: 4.3rem;
+.titles-link {
+    margin-top: 3rem;
     margin-left: 2.6rem;
 }
 
-.roles-link {
-    margin-top: 3rem;
+.titles-link:first-child {
+    margin-top: 4.3rem;
     margin-left: 2.6rem;
 }
 

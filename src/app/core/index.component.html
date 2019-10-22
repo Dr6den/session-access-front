@@ -2,26 +2,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 mt-3">
-            <div class="users-link">
-                <a href="javascript:void(0);" class="button-link text-links-color" routerLink="/showUsers" [ngbTooltip]="UsersTooltip" placement="right"
-                   >Users</a>
+            <div class="titles-link" *ngFor="let dict of dictionariesTypes; let i = index">
+                <a href="javascript:void(0);" class="button-link text-links-color" [routerLink]="['showRoles', dict]" [ngbTooltip]="UsersTooltip" placement="right"
+                    >{{dict}}</a>
                 <ng-template #UsersTooltip>
                     <div class="info-popuver"> 
                         <div class="tcontent">In this directory you can find list of
-                        all users with their info. You can
-                        search, edit users and create new
-                        ones.</div>                            
-                    </div>
-                </ng-template>
-            </div>
-            <div class="roles-link">
-                <a href="javascript:void(0);" class="button-link text-links-color" routerLink="/showRoles" [ngbTooltip]="RolesTooltip" placement="right"
-                   >Roles</a>
-                <ng-template #RolesTooltip>
-                    <div class="info-popuver"> 
-                        <div class="tcontent">In this directory you can find list of
-                        all roles with their info. You can
-                        search, edit users and create new
+                        all {{dict}} with their info. You can
+                        search, edit {{dict}} and create new
                         ones.</div>                            
                     </div>
                 </ng-template>

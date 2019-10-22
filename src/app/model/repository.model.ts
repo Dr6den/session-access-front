@@ -24,6 +24,18 @@ export class Model {
         return this.dataSource.getRole();
     }
     
+    getSchemesList(): Observable<string[]> {
+        return this.dataSource.getSchemesList();
+    }
+    
+    getSchemesInfo(): Observable<object> {
+        return this.dataSource.getSchemesInfo();
+    } 
+     
+    getScheme(scheme: string): Observable<object[]> {
+        return this.dataSource.getScheme(scheme);
+    }
+     
     getRoles(): void {
 	this.dataSource.getRoles().subscribe((data) => {
 		if (data[0] != undefined) {                    
