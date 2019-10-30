@@ -32,7 +32,7 @@ export class Model {
         return this.dataSource.getSchemesInfo();
     } 
      
-    getScheme(scheme: string): Observable<object[]> {
+    getScheme(scheme: string): Observable<object> {
         return this.dataSource.getScheme(scheme);
     }
      

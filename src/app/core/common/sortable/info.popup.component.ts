@@ -13,7 +13,7 @@ export class InfoPopupComponent {
     display = 'none';
     setTop = '0px';
     setLeft = '0px';
-    
+        
     openModalDialog(setTop: string, setLeft: string) {
         this.display='block';
         this.setTop = setTop;

@@ -15,12 +15,13 @@ import { RoleUpdate } from "../../model/roleUpdate.model";
 export class RoleInputPopupComponent implements OnInit {
     updateMode = false;
     display='none'; //default Variable
-    title = 'app';
     pagetitle = '';
     rolename = '';
     componentRef: ComponentRef<any>;
     dataRecievedFromRolesTableScreen: object;
-    role: object;
+    schemeName: string;
+    scheme: object;
+    schemeInfo: object; //includes metadata of the scheme
     request: object;
     chosenApplication: object;
     appSelectedDropdownItems = [];
@@ -31,8 +32,8 @@ export class RoleInputPopupComponent implements OnInit {
 
     @ViewChild('dropboxcontainer', { read: ViewContainerRef }) container;
     constructor(private resolver: ComponentFactoryResolver, private model: Model) {  
-        let promise = this.getRoleDataPromise();  
-        this.getRoleData(promise);       
+      //  let promise = this.getSchemaInfoPromise();  
+      //  this.setDropdownListByApplications(promise, null);       
     }
     
     ngOnInit() {        
@@ -55,9 +56,11 @@ export class RoleInputPopupComponent implements OnInit {
         };
     }
     
-    openModalDialog(role?: object) {
-        let promiseRoleData = this.getRoleDataPromise();
-        this.getRoleData(promiseRoleData);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
+    openModalDialog(role?: object, schemeName?: string) {
+        this.schemeName = schemeName;
+        let promiseRoleData = this.getSchemaInfoPromise();
+        this.setDropdownListByApplications(promiseRoleData, schemeName);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
+
         if (role) {            
             this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
@@ -100,7 +103,7 @@ export class RoleInputPopupComponent implements OnInit {
             
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
                 let appName:string = this.chosenApplication["Application"].values[0];
-                this.role[appName][title].values = data;
+                this.schemeInfo[appName][title].values = data;
             });
             if (entryValues[1]) {
                 this.componentRef.instance.dropdownSettings = {
@@ -130,7 +133,7 @@ export class RoleInputPopupComponent implements OnInit {
                         selectedRolesArray.forEach((r) => {
                             this.componentRef.instance.selectedItems.push(r);
                             let appName:string = this.chosenApplication["Application"].values[0];
-                            this.role[appName][title].values = r;
+                            this.schemeInfo[appName][title].values = r;
                         });
 
                         break;
@@ -144,19 +147,20 @@ export class RoleInputPopupComponent implements OnInit {
         this.componentRef.destroy();
     }
     
-    getRoleData(promise: Promise<object>) {
+    setDropdownListByApplications(promise: Promise<object>, schemeName: string) {
             promise.then(data => {
                 let applications: Array<string> = [];
                 if ((data != undefined)) {
-                    this.role = data;
-                    Object.entries(this.role).forEach(entry => applications.push(Object.values(entry)[0]));
+                    this.schemeInfo = data[schemeName];
+                    Object.entries(this.schemeInfo).forEach(entry => applications.push(Object.values(entry)[0]));
                     this.applicationDropdownList = applications;
                 }
             });
     }
     
-    getRoleDataPromise(): Promise<object> {
-        return this.model.getRole().toPromise();
+    getSchemaInfoPromise(): Promise<object> {
+        //return this.model.getRole().toPromise();
+        return this.model.getSchemesInfo().toPromise();
     }
     
     onApplicationSelect(item: any) {          
@@ -164,7 +168,7 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     selectApplication(item: any) {
-        this.chosenApplication = this.role[item];
+        this.chosenApplication = this.schemeInfo[item];console.log(JSON.stringify(this.schemeInfo))
         this.clearComponents();
         Object.entries(this.chosenApplication).forEach(entry => {
             if (entry[0] !== "Application") {
@@ -177,11 +181,11 @@ export class RoleInputPopupComponent implements OnInit {
     submitForm(form: NgForm) {
         if (form.valid) {
             let appName = this.chosenApplication["Application"]["values"][0];
-            let multiselectIndicator = this.bindMultiselectToRoleName(this.role[appName]);
+            let multiselectIndicator = this.bindMultiselectToRoleName(this.schemeInfo[appName]);
             this.request["ROLENAME"] = this.rolename;
             this.request["Application"] = appName;
             delete this.request["Options"];             
-            this.addPropsToJsonObjectFromAdditionalProps(this.role[appName], this.request, multiselectIndicator);
+            this.addPropsToJsonObjectFromAdditionalProps(this.schemeInfo[appName], this.request, multiselectIndicator);
             
             if (this.pagetitle === "Edit Role") {     
                 this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen, multiselectIndicator);

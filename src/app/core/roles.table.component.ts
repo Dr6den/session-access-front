@@ -2,6 +2,7 @@ import { Component, Inject, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Model } from "../model/repository.model";
 import { User } from "../model/user.model";
+import { SchemeMetadata } from "../model/scheme.metadata";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { FillInTableService } from "./common/sortable/fill.in.table.service";
 import { RoleInputPopupComponent } from "../modalwindows/business/role.input.popup.component";
@@ -18,6 +19,7 @@ export class RolesTableComponent {
     levelNum:number;    
      
     //sorting table properties
+    schemeMetadata: SchemeMetadata;
     userColumns: any[];
     userSorting: any;    
     userRows: any[];
@@ -37,12 +39,12 @@ export class RolesTableComponent {
     ];
     
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {
-        this.model.getRoles();
+      /*  this.model.getRoles();
         this.roleSorting = this.fillInTableService.fillSortingToRolesTable();
         this.roleColumns = fillInTableService.fillColumnsToRolesTable();
         fillInTableService.fillRowsToRolesTable().then((promiserows) => { 
             this.roleRows = promiserows;
-        });
+        });*/
         
         this.model.getObservableRoles().toPromise()
             .then((ousers) => {let vals = Object.values(ousers["values"]);
@@ -54,8 +56,20 @@ export class RolesTableComponent {
     }
     
     ngOnInit() {
-        this.title = this.activeRouter.snapshot.paramMap.get('schemeName');
-        this.fillInTableService.fillColumnsToSchemeTable(this.title);
+        let schemeName = this.activeRouter.snapshot.paramMap.get('schemeName');
+        if (schemeName.includes('%20')) {
+            schemeName = schemeName.replace('%20', ' ');
+        }
+        this.title = schemeName;
+        this.model.getSchemesInfo().toPromise().then((sche) => {
+            this.schemeMetadata = new SchemeMetadata(sche[this.title]);
+            this.schemeMetadata.setupMetadata();
+            this.roleSorting = this.fillInTableService.fillSortingToSchemeTable(this.schemeMetadata);
+            this.roleColumns = this.fillInTableService.fillColumnsToSchemeTable(this.title, this.schemeMetadata);
+            this.roleRows = this.fillInTableService.fillRowsToSchemeTable(this.roleColumns, this.title, this.schemeMetadata)/*.then((promiserows) => { 
+                this.roleRows = promiserows;
+            });*/
+        });
     }
     
     resetForm() {
@@ -63,7 +77,7 @@ export class RolesTableComponent {
     }
     
     roleInput(role?: object) {
-        this.roleInputPopup.openModalDialog(role);
+        this.roleInputPopup.openModalDialog(role, this.title);
     }
     
     changeRolesOutputOnPage(event: object) {

@@ -5,6 +5,7 @@ import { InfoPopupComponent } from "./info.popup.component";
 import { Role } from "../../../model/role.model";
 import { User } from "../../../model/user.model";
 import { Model } from "../../../model/repository.model";
+import { SchemeMetadata } from "../../../model/scheme.metadata";
 import { UserInputPopupComponent } from "../../../modalwindows/business/user.input.popup.component";
 import { TableFilterPopup } from "../../../modalwindows/business/sortingfilter/table.filter.popup";
 
@@ -21,6 +22,9 @@ export class TableSortable {
   @Input() columns: any[];
   @Input() data: any[];
   @Input() sort: any;
+  @Input() schemeMetadata: SchemeMetadata;
+  @Input() scheme: object;
+  @Input() schemeName: string;
   @Output() callUserInputPopup = new EventEmitter();
   @Output() callRoleInputPopup = new EventEmitter();
   @Output() filterByNames = new EventEmitter();
@@ -31,14 +35,17 @@ export class TableSortable {
   @ViewChildren(TableFilterPopup) tableFilterPopups: QueryList<TableFilterPopup>;
   @ViewChildren(InfoPopupComponent) infoPopups: QueryList<InfoPopupComponent>;
   
-  constructor(private model: Model){}
+  JSON;
+  constructor(private model: Model){this.JSON = JSON;}
   
-  ngOnInit() {
-      this.columns.forEach((columnName) => {
-          let columnVar = {};
-          columnVar[columnName['variable']] = false;
-          this.openedFilters[columnName['variable']] = false;
-      });
+  ngOnChanges() {
+      if (this.columns) {
+        this.columns.forEach((columnName) => {
+            let columnVar = {};
+            columnVar[columnName['variable']] = false;
+            this.openedFilters[columnName['variable']] = false;console.log(JSON.stringify(this.data))
+        });
+      }
   }
   
   selectedClass(columnName): string {
@@ -94,10 +101,11 @@ export class TableSortable {
   roleInput(role: object) {
       let roleWithAllNeededFields;
       this.data.forEach((rol) => {
-          if ((rol["Applications"] === rol["Applications"]) && (rol["Rolename"] === role["Rolename"])) {
+          if (rol["Rolename"] === role["Rolename"]) {
             roleWithAllNeededFields = rol;
           }
       });
+      roleWithAllNeededFields["schemeName"] = this.schemeName;
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }
   

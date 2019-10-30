@@ -68,7 +68,7 @@ export class LoginPopupComponent implements OnInit {
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
-                data => {console.log(data['loginSucceed'])
+                data => {
                     if (data['loginSucceed'] == false) {
                         this.errorMessage = "Login or Password are incorrect";
                         return;

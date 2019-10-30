@@ -2,32 +2,71 @@ import { Injectable, InjectionToken, Inject } from '@angular/core';
 import { Model } from "../../../model/repository.model";
 import { User } from "../../../model/user.model";
 import { Role } from "../../../model/role.model";
+import { SchemeMetadata } from "../../../model/scheme.metadata";
 
 @Injectable({ providedIn: 'root' })
 export class FillInTableService {
     constructor(private model: Model) { }
+    defaultAppName: string = "GIS";
     
-    fillColumnsToSchemeTable(schemeName: string): any[] {
-        let answ: any[] = [];
-        this.model.getSchemesInfo().toPromise()
-            .then((data) => {              
-                let schemeElements = data[schemeName];
-                this.addColumnToJson("Actions", answ);
-                Object.keys(schemeElements).forEach((elem) => {
-                    this.addColumnToJson(elem, answ);
-                })   
-                console.log(JSON.stringify(answ))
-                return answ;             
-        });  
-        return answ;      
+    fillSortingToSchemeTable(schemeMetadata: SchemeMetadata): any {
+        let answ = {};
+        let sortingColumn = schemeMetadata.getDefaultSortedProperty(this.defaultAppName);
+        answ = {column: sortingColumn, descending: false};
+        return answ;
+    }
+    
+    fillColumnsToSchemeTable(schemeName: string, schemeMetadata: SchemeMetadata): any[] {
+        let answ: any[] = [];             
+        this.addColumnToJson("Actions", answ);
+        schemeMetadata.getSinglePropertiesForShow(this.defaultAppName).forEach((prop) => {this.addColumnToJson(prop, answ)});
+        return answ;     
+    }
+    
+    fillRowsToSchemeTable(columns: any[], schemeName: string, schemeMetadata: SchemeMetadata): any[] {
+        let rows = [];
+
+
+        this.model.getScheme(schemeName).toPromise()
+            .then((schemeData) => {
+                let schemeDataVals: object[] = schemeData["values"];
+                if (schemeDataVals) {
+                    schemeDataVals.forEach((schemeVal) => {                      
+                        let processedRow = {"Actions":""};
+                        Object.keys(schemeVal).forEach((schemeKey) => {
+                            schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeVal[schemeKey], schemeVal["Application"]);
+                           // console.log("+++++++"+JSON.stringify(schemeKey))
+                           /* if (schemeElements[roleKey]) {
+                                if (schemeElements[roleKey]['show'] == 'yes') {
+                                    processedRow[roleKey] = role[roleKey];
+                                } else if (schemeElements[roleKey]['show'] == 'no') {
+                
+                                } else {
+                                    if (!processedRow[schemeElements[roleKey]['show']]) {
+                                        processedRow[schemeElements[roleKey]['show']] = '';                                        
+                                    } else {
+                                        processedRow[schemeElements[roleKey]['show']] = processedRow[schemeElements[roleKey]['show']] + ',';
+                                    }
+                                    processedRow[schemeElements[roleKey]['show']] = processedRow[schemeElements[roleKey]['show']]
+                                             + roleKey + ':' + role[roleKey];
+                                }
+                                
+                            }*/
+                        })                        
+                        rows.push(processedRow);
+                    });                  
+                }
+                return rows;
+            });
+            return rows;     
     }
     
     private addColumnToJson(value: string, json: any[]): void {
-        json.push("{" +
-            "'display':'" + value + "',"+ //The text to display
-            "'variable':'" + value + "',"+ //The name of the key that's apart of the data array
-            "'filter': 'text'"+ //The type data type of the column (number, text, date, etc.)
-            "}");
+        json.push({
+            "display" : value , //The text to display
+            "variable" : value , //The name of the key that's apart of the data array
+            "filter":"text" //The type data type of the column (number, text, date, etc.)
+            });
     }
     
     fillRowsToUsersTable(): Promise<any> {

@@ -21,6 +21,8 @@
     [columns]="roleColumns"
     [data]="roleRows"
     [sort]="roleSorting"
+    [schemeMetadata]="schemeMetadata"
+    [schemeName]="title"
     (filterByNames)="filterByNames($event)"
     (callRoleInputPopup)='roleInput($event)'>
     Loading table...

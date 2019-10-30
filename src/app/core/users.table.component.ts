@@ -18,6 +18,7 @@ export class UsersTableComponent {
     levelNum:number;
     
     //sorting table properties
+    scheme: object = {};
     userColumns: any[];
     userSorting: any;    
     userRows: any[];
@@ -48,7 +49,7 @@ export class UsersTableComponent {
             
         });*/
         
-        fillInTableService.fillColumnsToSchemeTable(this.title);
+        //fillInTableService.fillColumnsToSchemeTable(this.title);
         
         this.model.getObservableUsers().toPromise()
             .then((ousers) => {let vals = Object.values(ousers["values"]);

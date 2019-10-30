@@ -35,7 +35,7 @@ export class RestDataSource {
     }
     
     getScheme(scheme: string): Observable<object[]> {
-        let url = this.url + "/GetRecords/" + scheme + "?parseRoleOpts=true";
+        let url = this.url + "/GetRecords/" + scheme ;
         return this.globalService.sendRequest<object[]>("GET", url);
     }
     
