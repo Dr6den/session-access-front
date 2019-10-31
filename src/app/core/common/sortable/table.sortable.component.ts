@@ -23,7 +23,6 @@ export class TableSortable {
   @Input() data: any[];
   @Input() sort: any;
   @Input() schemeMetadata: SchemeMetadata;
-  @Input() scheme: object;
   @Input() schemeName: string;
   @Input() tdwidth: string;
   @Input() thwidth: string;
@@ -45,7 +44,7 @@ export class TableSortable {
         this.columns.forEach((columnName) => {
             let columnVar = {};
             columnVar[columnName['variable']] = false;
-            this.openedFilters[columnName['variable']] = false;console.log(JSON.stringify(this.data))
+            this.openedFilters[columnName['variable']] = false;
         });
       }
   }

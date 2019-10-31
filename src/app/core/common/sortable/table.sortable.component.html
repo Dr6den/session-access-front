@@ -35,15 +35,16 @@
         </ng-container>
 
         <ng-template #averageColumn><!--fill roles options row-->
-            <!--<div *ngIf="(column.variable === 'Options');else average_content">-->
-            <div *ngIf="(!schemeMetadata['scheme'][column.variable]);else average_content">
-                <!--<div *ngFor="let item of object.Options | slice:0:2; let i=index">{{item}}</div>-->
-                <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:2; let i=index">{{item}}</div>
-                <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
-                    <a *ngIf="i == 2" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a>                    
+            <div *ngIf="schemeMetadata; else average_content">
+                <div *ngIf="(!schemeMetadata['scheme'][column.variable]);else average_content">
+                    <!--<div *ngFor="let item of object.Options | slice:0:2; let i=index">{{item}}</div>-->
+                    <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:2; let i=index">{{item}}</div>
+                    <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
+                        <a *ngIf="i == 2" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a>                    
+                    </div>
+                    <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object[column.variable] | split_string : ';'" [rowIndex]="j"></info-popup>
+                    <!--<div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>-->
                 </div>
-                <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object[column.variable] | split_string : ';'" [rowIndex]="j"></info-popup>
-                <!--<div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>-->
             </div>
 
             <ng-template #average_content><!--fill simple for all tables row-->
