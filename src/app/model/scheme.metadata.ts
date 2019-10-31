@@ -1,5 +1,6 @@
 export class SchemeMetadata {
     public containsNestedProperties?: boolean;
+    public numberOfColumns: number = 1;
     //props for simple scheme without nested applications like Product division 
     public propertiesInOneParentColumn?: object;
     public singlePropsWithoutNesting?: string[] = [];
@@ -66,6 +67,7 @@ export class SchemeMetadata {
         this.containsNestedProperties = (this.nestingDegreeOfObject(this.scheme) > 2);
         
         if (this.containsNestedProperties) {
+            let numberOfIteration = 0;
             for (let app in this.scheme) {
                 for (let prop in this.scheme[app]) {
                     if (this.scheme[app][prop]['defaultSorting']) {
@@ -76,11 +78,12 @@ export class SchemeMetadata {
                             this.compositeSinglePropsWithoutNesting[app] = [];
                         }
                         this.compositeSinglePropsWithoutNesting[app].push(prop);
+                        if (numberOfIteration == 0) this.numberOfColumns++;
                     } else if (this.scheme[app][prop]['show'] == false) {
                         
                     } else {
                         if (this.compositePropertiesInOneParentColumn[app] === undefined) {
-                            this.compositePropertiesInOneParentColumn[app] = {};                        
+                            this.compositePropertiesInOneParentColumn[app] = {};                       
                         }
                         if (this.compositePropertiesInOneParentColumn[app][this.scheme[app][prop]['show']] === undefined) {
                             this.compositePropertiesInOneParentColumn[app][this.scheme[app][prop]['show']] = [];
@@ -88,6 +91,7 @@ export class SchemeMetadata {
                         this.compositePropertiesInOneParentColumn[app][this.scheme[app][prop]['show']].push(prop);
                     }
                 }
+                numberOfIteration++;
             }
         } else {
             for (let prop in this.scheme) {
@@ -96,11 +100,12 @@ export class SchemeMetadata {
                 }
                 if (this.scheme[prop]['show'] == true) {
                     this.singlePropsWithoutNesting.push(prop);
+                    this.numberOfColumns++;
                 } else if (this.scheme[prop]['show'] == false) {
                         
                 } else {
                     if (this.propertiesInOneParentColumn === undefined) {
-                        this.propertiesInOneParentColumn = {};                        
+                        this.propertiesInOneParentColumn = {};                      
                     }
                     if (this.propertiesInOneParentColumn[this.scheme[prop]['show']] === undefined) {
                         this.propertiesInOneParentColumn[this.scheme[prop]['show']] = [];
@@ -109,7 +114,7 @@ export class SchemeMetadata {
                 }
             }
         }
-        //console.log(JSON.stringify(this.compositePropertiesInOneParentColumn))
+        //console.log(JSON.stringify(this.numberOfColumns))
         
     }
     

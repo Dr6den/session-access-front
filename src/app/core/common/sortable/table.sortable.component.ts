@@ -25,6 +25,8 @@ export class TableSortable {
   @Input() schemeMetadata: SchemeMetadata;
   @Input() scheme: object;
   @Input() schemeName: string;
+  @Input() tdwidth: string;
+  @Input() thwidth: string;
   @Output() callUserInputPopup = new EventEmitter();
   @Output() callRoleInputPopup = new EventEmitter();
   @Output() filterByNames = new EventEmitter();

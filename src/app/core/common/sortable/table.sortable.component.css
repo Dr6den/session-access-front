@@ -33,7 +33,8 @@ th {
 
 .table-container {
     margin-left: 2rem;
-    width: 95%; overflow: scroll;
+    width: 95%; 
+    overflow: scroll;
     overflow-y: hidden;
 }
 

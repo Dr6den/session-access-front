@@ -28,6 +28,9 @@ export class RolesTableComponent {
     roleRows: any[];
     currentPageNumber: number;
     numberOfPages: number;
+    tablethwidth: string;
+    tabletdwidth: string;
+    numberOfColumns: number;
     
     tableContainer: TableContainer;
     rolesReserve: object[] = [];
@@ -55,6 +58,19 @@ export class RolesTableComponent {
         this.numberOfPages = 100;  
     }
     
+    accountTableWidthAccordingToColumsNumber() {
+        switch(this.numberOfColumns) {
+            case 9:  
+                this.tablethwidth = "11.7%";
+                this.tabletdwidth = "11.6%";
+            break
+            case 4:  
+                this.tablethwidth = "31.3%";
+                this.tabletdwidth = "31.2%";
+            break
+        }
+    }
+    
     ngOnInit() {
         let schemeName = this.activeRouter.snapshot.paramMap.get('schemeName');
         if (schemeName.includes('%20')) {
@@ -64,6 +80,8 @@ export class RolesTableComponent {
         this.model.getSchemesInfo().toPromise().then((sche) => {
             this.schemeMetadata = new SchemeMetadata(sche[this.title]);
             this.schemeMetadata.setupMetadata();
+            this.numberOfColumns = this.schemeMetadata.numberOfColumns;
+            this.accountTableWidthAccordingToColumsNumber();
             this.roleSorting = this.fillInTableService.fillSortingToSchemeTable(this.schemeMetadata);
             this.roleColumns = this.fillInTableService.fillColumnsToSchemeTable(this.title, this.schemeMetadata);
             this.roleRows = this.fillInTableService.fillRowsToSchemeTable(this.roleColumns, this.title, this.schemeMetadata)/*.then((promiserows) => { 

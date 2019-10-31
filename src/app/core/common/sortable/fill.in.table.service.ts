@@ -25,8 +25,6 @@ export class FillInTableService {
     
     fillRowsToSchemeTable(columns: any[], schemeName: string, schemeMetadata: SchemeMetadata): any[] {
         let rows = [];
-
-
         this.model.getScheme(schemeName).toPromise()
             .then((schemeData) => {
                 let schemeDataVals: object[] = schemeData["values"];
@@ -35,23 +33,6 @@ export class FillInTableService {
                         let processedRow = {"Actions":""};
                         Object.keys(schemeVal).forEach((schemeKey) => {
                             schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeVal[schemeKey], schemeVal["Application"]);
-                           // console.log("+++++++"+JSON.stringify(schemeKey))
-                           /* if (schemeElements[roleKey]) {
-                                if (schemeElements[roleKey]['show'] == 'yes') {
-                                    processedRow[roleKey] = role[roleKey];
-                                } else if (schemeElements[roleKey]['show'] == 'no') {
-                
-                                } else {
-                                    if (!processedRow[schemeElements[roleKey]['show']]) {
-                                        processedRow[schemeElements[roleKey]['show']] = '';                                        
-                                    } else {
-                                        processedRow[schemeElements[roleKey]['show']] = processedRow[schemeElements[roleKey]['show']] + ',';
-                                    }
-                                    processedRow[schemeElements[roleKey]['show']] = processedRow[schemeElements[roleKey]['show']]
-                                             + roleKey + ':' + role[roleKey];
-                                }
-                                
-                            }*/
                         })                        
                         rows.push(processedRow);
                     });                  
@@ -169,34 +150,5 @@ export class FillInTableService {
     fillRolesByEmptyColumns() {
         let columns = [];
         return columns;
-    }
-    
-    fillSortingToRolesTable(): any {
-        return {column: 'Rolename', descending: false};
-    }
-    
-    fillColumnsToRolesTable(): any[] {
-        return [
-            {
-                display: 'Actions', //The text to display
-                variable: 'Actions', //The name of the key that's apart of the data array
-                filter: 'text' //The type data type of the column (number, text, date, etc.)
-            },
-            {
-                display: 'Applications',
-                variable: 'Applications',
-                filter: 'text'
-            },
-            {
-                display: 'Options', //The text to display
-                variable: 'Options', //The name of the key that's apart of the data array
-                filter: 'text' //The type data type of the column (number, text, date, etc.)
-            },
-            {
-                display: 'Rolename', //The text to display
-                variable: 'Rolename', //The name of the key that's apart of the data array
-                filter: 'text' //The type data type of the column (number, text, date, etc.)
-            }
-        ];
     }
 }

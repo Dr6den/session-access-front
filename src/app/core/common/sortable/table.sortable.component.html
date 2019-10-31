@@ -2,7 +2,8 @@
 <table class="table table-striped">
     <thead>
         <tr class="text-left table-header">
-            <th *ngFor="let column of columns" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)">
+            <th *ngFor="let column of columns; let step=index" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)"
+                [ngStyle]="{ 'width': (step>0) ? thwidth : '4.3rem'  }">
                 {{column.display}}
                 <span *ngIf="(column.variable !== 'Actions') && (column.variable !== 'Options')">
                     <span class="arrows">
@@ -28,7 +29,7 @@
     </thead>
     <tbody *ngIf="sort"> <!--if checks if sort is already defined, I need it for avoiding problem with ngOnInit initializaiton in the parent-->
         <tr *ngFor="let object of data | orderBy : convertSorting(); let j=index">
-      <td *ngFor="let column of columns">
+      <td *ngFor="let column of columns; let step=index" [ngStyle]="{  'width': (step>0) ? thwidth : '4.3rem' }">
 
         <ng-container *ngIf="(column.variable === 'Actions'); then editColumn; else averageColumn">
         </ng-container>
