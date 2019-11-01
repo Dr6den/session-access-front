@@ -95,7 +95,7 @@ export class RolesTableComponent {
     }
     
     roleInput(role?: object) {
-        this.roleInputPopup.openModalDialog(role, this.title);
+        this.roleInputPopup.openModalDialog(role, this.title, this.schemeMetadata);
     }
     
     changeRolesOutputOnPage(event: object) {

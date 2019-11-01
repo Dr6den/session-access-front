@@ -12,21 +12,32 @@
         </div>
         <!-- modal-body -->
         <div class="modal-body">
-            <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
-                    <div class="field-of-form">
-                        <label for="rolename" class="user-input-labels">Name of role</label>
+            <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">                
+                <div *ngIf="schemeMetadata">
+                    
+                    <ng-container *ngIf="schemeMetadata['containsNestedProperties']; then nested; else notNested">
+                    </ng-container>
+                
+                    <ng-template #nested>
+                        <div class="field-of-form">
+                            <label for="rolename" class="user-input-labels">Name of role</label>
                         <input type="text" name="rolename" class="textbox float-right" [(ngModel)]="rolename" required/>
-                    </div>      
+                        </div>      
                    
-                    <div class="field-of-form">
-                        <label for="multiselectCogs" class="user-input-labels">Application</label>
-                        <div class="dropdown float-right">
-                            <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'At first select an application'" [data]="applicationDropdownList" 
+                        <div class="field-of-form">
+                            <label for="multiselectCogs" class="user-input-labels">Application</label>
+                            <div class="dropdown float-right">
+                                    <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'At first select an application'" [data]="applicationDropdownList" 
                                              [(ngModel)]="appSelectedDropdownItems" [ngModelOptions]="{standalone: true}"
                                              [settings]="dropdownSettings" (onSelect)="onApplicationSelect($event)" [disabled]='updateMode'>
-                            </ng-multiselect-dropdown>
+                                    </ng-multiselect-dropdown>
+                            </div>
                         </div>
-                    </div>
+                    </ng-template>
+                    <ng-template #notNested>
+                        
+                    </ng-template>
+                </div>
                 <template #dropboxcontainer></template>
                     <div class="log-sub-div">
                         <input type="submit" (click)="submitForm(form)" class="button-color submit-button float-right" value="{{pagetitle}}">

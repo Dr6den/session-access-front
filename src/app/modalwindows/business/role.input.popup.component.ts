@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms
 import { DynamicDropboxComponent } from './dynamic/dynamic.dropbox.component';
 import { Model } from "../../model/repository.model";
 import { Role } from "../../model/role.model";
+import { SchemeMetadata } from "../../model/scheme.metadata";
 import { RoleUpdate } from "../../model/roleUpdate.model";
 
 @Component({
@@ -19,6 +20,7 @@ export class RoleInputPopupComponent implements OnInit {
     rolename = '';
     componentRef: ComponentRef<any>;
     dataRecievedFromRolesTableScreen: object;
+    schemeMetadata: SchemeMetadata;
     schemeName: string;
     scheme: object;
     schemeInfo: object; //includes metadata of the scheme
@@ -56,19 +58,20 @@ export class RoleInputPopupComponent implements OnInit {
         };
     }
     
-    openModalDialog(role?: object, schemeName?: string) {
+    openModalDialog(role?: object, schemeName?: string, schemeMetadata?: SchemeMetadata) {
         this.schemeName = schemeName;
-        let promiseRoleData = this.getSchemaInfoPromise();
-        this.setDropdownListByApplications(promiseRoleData, schemeName);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
+        this.schemeMetadata = schemeMetadata;
+        //let promiseRoleData = this.getSchemaInfoPromise();
+        this.setDropdownListByApplications(this.schemeMetadata['scheme']);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
 
         if (role) {            
             this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
             this.updateMode = true;
             this.rolename = role["Rolename"];      
-            promiseRoleData.then(() => {                
+            //promiseRoleData.then(() => {                
                 this.selectApplication(role["Applications"]); 
-            });
+            //});
 
             this.appSelectedDropdownItems = [];
             this.appSelectedDropdownItems.push(role["Applications"]);            
@@ -93,7 +96,7 @@ export class RoleInputPopupComponent implements OnInit {
         this.container.clear(); 
     }
     
-    createComponent(title, entryValues) {
+    createComponent(title, entryValues) {console.log(title +":"+JSON.stringify( entryValues))
         if (entryValues[0] !== "text" && entryValues[0] !== "options")  {
             const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(DynamicDropboxComponent);
             this.componentRef = this.container.createComponent(factory);           
@@ -147,7 +150,16 @@ export class RoleInputPopupComponent implements OnInit {
         this.componentRef.destroy();
     }
     
-    setDropdownListByApplications(promise: Promise<object>, schemeName: string) {
+    setDropdownListByApplications(schemeData: object) {
+        let applications: Array<string> = [];
+        if ((schemeData != undefined)) {
+            this.schemeInfo = schemeData;//deprecate
+            Object.entries(schemeData).forEach(entry => applications.push(Object.values(entry)[0]));
+            this.applicationDropdownList = applications;
+        }
+    }
+    //deprecated, should be deleted in next release
+    setDropdownListByApplicationsWithPromise(promise: Promise<object>, schemeName: string) {
             promise.then(data => {
                 let applications: Array<string> = [];
                 if ((data != undefined)) {
@@ -168,11 +180,11 @@ export class RoleInputPopupComponent implements OnInit {
     }
     
     selectApplication(item: any) {
-        this.chosenApplication = this.schemeInfo[item];console.log(JSON.stringify(this.schemeInfo))
+        this.chosenApplication = this.schemeMetadata.scheme[item];
         this.clearComponents();
         Object.entries(this.chosenApplication).forEach(entry => {
             if (entry[0] !== "Application") {
-                let entryValues = Object.values(this.chosenApplication[entry[0]]);
+                let entryValues = Object.values(this.chosenApplication[entry[0]].values);
                 this.createComponent(entry[0], entryValues);
             }
         });
