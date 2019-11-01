@@ -63,7 +63,7 @@ export class RoleInputPopupComponent implements OnInit {
         this.schemeMetadata = schemeMetadata;
         this.setDropdownListByApplications(this.schemeMetadata['scheme']);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
 
-        if (role) {       console.log(JSON.stringify(role))
+        if (role) {    
             this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
             this.updateMode = true;
@@ -123,13 +123,13 @@ export class RoleInputPopupComponent implements OnInit {
                     itemsShowLimit: 9,
                     allowSearchFilter: false
                 };
-            }
+            }   
             //if role received from edit talbe (Edit mode) we have to set seted properties that are choosen
             if (this.dataRecievedFromRolesTableScreen) {
-                let opts = this.dataRecievedFromRolesTableScreen["Options"];
-                for (let el of opts) {                 
+                let opts = this.dataRecievedFromRolesTableScreen["Options"].split(";");
+                for (let el of opts) {  console.log(JSON.stringify(el))               
                     if (el.startsWith(title)) {
-                        let selectedRolesArray = el.substring(el.indexOf(":") + 2).split(",");
+                        let selectedRolesArray = el.substring(el.indexOf(":") + 1).split(",");
                         selectedRolesArray.forEach((r) => {
                             this.componentRef.instance.selectedItems.push(r);
                             let appName:string = this.chosenApplication["Application"].values[0];
