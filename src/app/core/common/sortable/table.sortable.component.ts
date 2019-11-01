@@ -102,7 +102,7 @@ export class TableSortable {
   roleInput(role: object) {
       let roleWithAllNeededFields;
       this.data.forEach((rol) => {
-          if (rol["Rolename"] === role["Rolename"]) {
+          if (rol["ROLENAME"] === role["ROLENAME"]) {
             roleWithAllNeededFields = rol;
           }
       });

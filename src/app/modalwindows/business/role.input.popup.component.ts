@@ -61,20 +61,17 @@ export class RoleInputPopupComponent implements OnInit {
     openModalDialog(role?: object, schemeName?: string, schemeMetadata?: SchemeMetadata) {
         this.schemeName = schemeName;
         this.schemeMetadata = schemeMetadata;
-        //let promiseRoleData = this.getSchemaInfoPromise();
         this.setDropdownListByApplications(this.schemeMetadata['scheme']);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
 
-        if (role) {            
+        if (role) {       console.log(JSON.stringify(role))
             this.dataRecievedFromRolesTableScreen = role;
             this.pagetitle = "Edit Role";
             this.updateMode = true;
-            this.rolename = role["Rolename"];      
-            //promiseRoleData.then(() => {                
-                this.selectApplication(role["Applications"]); 
-            //});
+            this.rolename = role["Rolename"];                      
+            this.selectApplication(role["Application"]); 
 
             this.appSelectedDropdownItems = [];
-            this.appSelectedDropdownItems.push(role["Applications"]);            
+            this.appSelectedDropdownItems.push(role["Application"]);            
         } else {
             this.dataRecievedFromRolesTableScreen = undefined;
             this.updateMode = false;
@@ -185,7 +182,7 @@ export class RoleInputPopupComponent implements OnInit {
         Object.entries(this.chosenApplication).forEach(entry => {
             if (entry[0] !== "Application") {
                 let entryValues = Object.values(this.chosenApplication[entry[0]].values);
-                let multiselect = false;
+                let multiselect;
                 if (this.chosenApplication[entry[0]].multiselect) {
                     multiselect = Object.values(this.chosenApplication[entry[0]].multiselect);
                 }
