@@ -96,19 +96,19 @@ export class RoleInputPopupComponent implements OnInit {
         this.container.clear(); 
     }
     
-    createComponent(title, entryValues) {console.log(title +":"+JSON.stringify( entryValues))
-        if (entryValues[0] !== "text" && entryValues[0] !== "options")  {
+    createComponent(title, entryValues, multiselect) {
+        if (title !== "ROLENAME" && title !== "Options")  {
             const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(DynamicDropboxComponent);
             this.componentRef = this.container.createComponent(factory);           
             this.componentRef.instance.title = title;
-            this.componentRef.instance.dropdownList = entryValues[0];
+            this.componentRef.instance.dropdownList = entryValues;
             this.componentRef.instance.selectedItems = [];
-            
+           
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
                 let appName:string = this.chosenApplication["Application"].values[0];
-                this.schemeInfo[appName][title].values = data;
-            });
-            if (entryValues[1]) {
+                this.schemeMetadata.scheme[appName][title].values = data;
+            }); 
+            if (multiselect) {
                 this.componentRef.instance.dropdownSettings = {
                     singleSelection: false,
                     idField: 'item_id',
@@ -185,7 +185,11 @@ export class RoleInputPopupComponent implements OnInit {
         Object.entries(this.chosenApplication).forEach(entry => {
             if (entry[0] !== "Application") {
                 let entryValues = Object.values(this.chosenApplication[entry[0]].values);
-                this.createComponent(entry[0], entryValues);
+                let multiselect = false;
+                if (this.chosenApplication[entry[0]].multiselect) {
+                    multiselect = Object.values(this.chosenApplication[entry[0]].multiselect);
+                }
+                this.createComponent(entry[0], entryValues, multiselect);
             }
         });
     }
