@@ -84,9 +84,7 @@ export class RolesTableComponent {
             this.accountTableWidthAccordingToColumsNumber();
             this.roleSorting = this.fillInTableService.fillSortingToSchemeTable(this.schemeMetadata);
             this.roleColumns = this.fillInTableService.fillColumnsToSchemeTable(this.title, this.schemeMetadata);
-            this.roleRows = this.fillInTableService.fillRowsToSchemeTable(this.roleColumns, this.title, this.schemeMetadata)/*.then((promiserows) => { 
-                this.roleRows = promiserows;
-            });*/
+            this.roleRows = this.fillInTableService.fillRowsToSchemeTable(this.roleColumns, this.title, this.schemeMetadata);
         });
     }
     

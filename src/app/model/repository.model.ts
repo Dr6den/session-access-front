@@ -67,8 +67,16 @@ export class Model {
         return this.dataSource.insertRole(role);
     }
     
+    insertScheme(scheme: object, schemeName: string) {
+        return this.dataSource.insertScheme(scheme, schemeName);
+    }
+    
     updateRole(role: RoleUpdate): Observable<RoleUpdate> {
         return this.dataSource.updateRole(role);
+    }
+    
+    updateScheme(scheme: RoleUpdate, schemeName: string) {
+        return this.dataSource.updateScheme(scheme, schemeName);
     }
     
     getUser(username: string): Observable<User> {

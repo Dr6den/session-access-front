@@ -51,9 +51,19 @@ export class RestDataSource {
         return this.globalService.sendRequest<object>("POST", url, role);
     }
     
+    insertScheme(scheme: object, schemeName: string) {
+        let url = this.url + "/InsertRecord/" + schemeName;
+        return this.globalService.sendRequest<object>("POST", url, scheme);
+    }
+    
     updateRole(role: RoleUpdate): Observable<RoleUpdate> {
 	let url = this.url + "/UpdateRecords/Roles";
         return this.globalService.sendRequest<RoleUpdate>("PUT", url, role);
+    }
+    
+    updateScheme(roleUpdate: RoleUpdate, schemeName: string): Observable<RoleUpdate> {
+	let url = this.url + "/UpdateRecords/" + schemeName;
+        return this.globalService.sendRequest<RoleUpdate>("PUT", url, roleUpdate);
     }
     
     getUser(username: string): Observable<User> {

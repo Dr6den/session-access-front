@@ -15,6 +15,7 @@ import { RoleUpdate } from "../../model/roleUpdate.model";
   styleUrls: ['./role.input.popup.component.css']
 })
 export class RoleInputPopupComponent implements OnInit {
+    updateMode=false;
     display='none'; //default Variable
     pagetitle = '';
     rolename = '';
@@ -61,13 +62,14 @@ export class RoleInputPopupComponent implements OnInit {
     
     openModalDialog(directory?: object, schemeName?: string, schemeMetadata?: SchemeMetadata) {
         this.schemeName = schemeName;
-        this.schemeMetadata = schemeMetadata;
+        this.schemeMetadata = JSON.parse(JSON.stringify(schemeMetadata));//deep copy of the object, avoids change
         if (schemeMetadata.containsNestedProperties) {
             this.setDropdownListByApplications(this.schemeMetadata['scheme']);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
 
             if (directory) {    
                 this.dataRecievedFromRolesTableScreen = directory;
                 this.pagetitle = "Edit " + schemeName;
+                this.updateMode = true;
                 this.rolename = directory["ROLENAME"];                      
                 this.selectApplication(directory["Application"]); 
 
@@ -79,13 +81,16 @@ export class RoleInputPopupComponent implements OnInit {
                 this.rolename = "";
                 this.clearComponents();
                 this.pagetitle = "Create " + schemeName;
+                this.updateMode = false;
             } 
         } else {
             if (directory) {
                 this.pagetitle = "Edit " + schemeName;
+                this.updateMode = true;
                 this.dataRecievedFromRolesTableScreen = directory;
             } else {
                 this.pagetitle = "Create " + schemeName;
+                this.updateMode = false;
                 this.dataRecievedFromRolesTableScreen = undefined;
                 this.clearComponents();
             }
@@ -154,7 +159,7 @@ export class RoleInputPopupComponent implements OnInit {
                             selectedRolesArray.forEach((r) => {
                                 this.componentRef.instance.selectedItems.push(r);
                                 let appName:string = this.chosenApplication["Application"].values[0];
-                                this.schemeInfo[appName][title].values = r;
+                                this.schemeMetadata.scheme[appName][title].values = r;
                             });
 
                             break;
@@ -237,33 +242,36 @@ export class RoleInputPopupComponent implements OnInit {
     
     submitForm(form: NgForm) {
         if (form.valid) {
-            let appName = this.chosenApplication["Application"]["values"][0];
-            let multiselectIndicator = this.bindMultiselectToRoleName(this.schemeInfo[appName]);
-            this.request["ROLENAME"] = this.rolename;
-            this.request["Application"] = appName;
-            delete this.request["Options"];             
-            this.addPropsToJsonObjectFromAdditionalProps(this.schemeInfo[appName], this.request, multiselectIndicator);
-            
-            if (this.pagetitle === "Edit Role") {     
-                this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen, multiselectIndicator);
-                let oldRoleName = this.dataRecievedFromRolesTableScreen["Rolename"];
-                this.dataRecievedFromRolesTableScreen["ROLENAME"] = oldRoleName;
-                this.dataRecievedFromRolesTableScreen["Application"] = appName;
+            if (this.schemeMetadata.containsNestedProperties) {
+                let appName = this.chosenApplication["Application"]["values"][0];
+                let multiselectIndicator = this.bindMultiselectToRoleName(this.schemeMetadata.scheme[appName]);
+                this.request["ROLENAME"] = this.rolename;
+                this.request["Application"] = appName;
+                delete this.request["Options"];             
+                this.addPropsToJsonObjectFromAdditionalProps(this.schemeMetadata.scheme[appName], this.request, multiselectIndicator);
+         
+                if (this.pagetitle.startsWith("Edit")) { 
+                    this.addPropsToJsonObjectFromOptions(this.dataRecievedFromRolesTableScreen, multiselectIndicator);
+                     
+                    let oldRoleName = this.dataRecievedFromRolesTableScreen["ROLENAME"];
+                    this.dataRecievedFromRolesTableScreen["Application"] = appName;
                 
-                delete this.dataRecievedFromRolesTableScreen["Options"];
-                delete this.dataRecievedFromRolesTableScreen["Actions"];
-                delete this.dataRecievedFromRolesTableScreen["Applications"];
-                delete this.dataRecievedFromRolesTableScreen["Rolename"];
+                    delete this.dataRecievedFromRolesTableScreen["Options"];
+                    delete this.dataRecievedFromRolesTableScreen["Actions"];
+                    delete this.dataRecievedFromRolesTableScreen["Applications"];
+                    delete this.dataRecievedFromRolesTableScreen["Rolename"];
                 
-                let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
-                this.model.updateRole(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
-                this.dataRecievedFromRolesTableScreen["Rolename"] = oldRoleName;
+                    let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
+                    this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                } else {
+                    this.model.insertScheme(this.request, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                }
+                if (this.errorMessage === "error message") {
+                    this.closeModalDialog();
+                    window.location.reload();
+                }
             } else {
-                this.model.insertRole(this.request).toPromise().then().catch((response) => this.checkError(response));
-            }
-            if (this.errorMessage === "error message") {
-                this.closeModalDialog();
-                window.location.reload();
+                
             }
         }
     }
@@ -304,17 +312,24 @@ export class RoleInputPopupComponent implements OnInit {
     
     //function fills properties to json object from Options single property
     private addPropsToJsonObjectFromOptions(roleObj: object, multiselectIndicator: object) {
-        if (roleObj["Options"]) {
-            Object.entries(roleObj["Options"]).forEach((entry)=>{
-                let entryString = entry[1].toString();
-                let isMultiselect = multiselectIndicator[entryString.substring(0, entryString.indexOf(":"))]; 
-                if (isMultiselect === true) {
-                    let splittedValues =  entryString.substring(entryString.indexOf(":") + 2).split(",");
-                    let valuesArray = [];
-                    splittedValues.forEach((val) => valuesArray.push(val));
-                    roleObj[entryString.substring(0, entryString.indexOf(":"))] = valuesArray;
+        let app = this.chosenApplication["Application"]["values"][0];
+        let replaceVals = [];
+        let appSchemeData = this.schemeMetadata.scheme[app];
+        for(let entry in appSchemeData) {
+            if (this.schemeMetadata.scheme[app][entry]['show'] !== false && this.schemeMetadata.scheme[app][entry]['show'] !== true) {
+                if (!replaceVals.includes(this.schemeMetadata.scheme[app][entry]['show']))
+                    replaceVals.push(this.schemeMetadata.scheme[app][entry]['show']);
+            }
+        }
+        for (let val in replaceVals) {
+            let optsArray = roleObj[replaceVals[val]].split(';');
+            optsArray.forEach((opt) => {
+                if (multiselectIndicator[opt.substring(0, opt.indexOf(":"))]) {
+                    roleObj[opt.substring(0, opt.indexOf(":"))] = [];
+                    let splittedOpts = opt.substring(opt.indexOf(":") + 1).split(',');
+                    splittedOpts.forEach((o) => roleObj[opt.substring(0, opt.indexOf(":"))].push(o));
                 } else {
-                    roleObj[entryString.substring(0, entryString.indexOf(":"))] = entry[1].toString().substring(entryString.indexOf(":") + 2);
+                    roleObj[opt.substring(0, opt.indexOf(":"))] = opt.substring(opt.indexOf(":") + 1);
                 }
             });
         }
