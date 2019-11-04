@@ -101,12 +101,21 @@ export class TableSortable {
   /*role that arrives from from html table doesn't have enough fields, thats why I have to find real objects in table and send them*/
   roleInput(role: object) {
       let roleWithAllNeededFields;
-      this.data.forEach((rol) => {
+      if (this.schemeMetadata.containsNestedProperties) {        
+        this.data.forEach((rol) => {
           if (rol["ROLENAME"] === role["ROLENAME"]) {
             roleWithAllNeededFields = rol;
           }
-      });
-      roleWithAllNeededFields["schemeName"] = this.schemeName;
+        });
+        roleWithAllNeededFields["schemeName"] = this.schemeName;
+      } else {
+        this.data.forEach((rol) => {
+          if (rol["Roll Up"] === role["Roll Up"]) {
+            roleWithAllNeededFields = rol;
+          }
+        });
+        roleWithAllNeededFields["schemeName"] = this.schemeName;
+      }
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }
   

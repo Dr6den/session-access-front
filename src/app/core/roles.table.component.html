@@ -5,10 +5,10 @@
 </div>
 
 <div class="button-home">
-    <input type="text" id="searchInput" placeholder="Search Role" (input)="filter($event.target.value)">
+    <input type="text" id="searchInput" placeholder="Search {{title}}" (input)="filter($event.target.value)">
         
     <button (click)="roleInput()" class="create-button">
-        Create Role
+        Create {{title}}
     </button>
     
     <select type="number" name="show" class="select-items" (change)="changeRolesOutputOnPage($event.target.value)">

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgForm } from "@angular/forms";
 import { FormBuilder, FormGroup, FormControl, Validators }  from '@angular/forms';
 import { DynamicDropboxComponent } from './dynamic/dynamic.dropbox.component';
+import { DynamicInputComponent } from './dynamic/dynamic.input.component';
 import { Model } from "../../model/repository.model";
 import { Role } from "../../model/role.model";
 import { SchemeMetadata } from "../../model/scheme.metadata";
@@ -14,11 +15,11 @@ import { RoleUpdate } from "../../model/roleUpdate.model";
   styleUrls: ['./role.input.popup.component.css']
 })
 export class RoleInputPopupComponent implements OnInit {
-    updateMode = false;
     display='none'; //default Variable
     pagetitle = '';
     rolename = '';
     componentRef: ComponentRef<any>;
+    inputComponentRef: ComponentRef<any>;
     dataRecievedFromRolesTableScreen: object;
     schemeMetadata: SchemeMetadata;
     schemeName: string;
@@ -58,28 +59,38 @@ export class RoleInputPopupComponent implements OnInit {
         };
     }
     
-    openModalDialog(role?: object, schemeName?: string, schemeMetadata?: SchemeMetadata) {
+    openModalDialog(directory?: object, schemeName?: string, schemeMetadata?: SchemeMetadata) {
         this.schemeName = schemeName;
         this.schemeMetadata = schemeMetadata;
-        this.setDropdownListByApplications(this.schemeMetadata['scheme']);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
+        if (schemeMetadata.containsNestedProperties) {
+            this.setDropdownListByApplications(this.schemeMetadata['scheme']);   //if update we have to get all roles every time when window is open, becouse all chosen items impacts role model
 
-        if (role) {    
-            this.dataRecievedFromRolesTableScreen = role;
-            this.pagetitle = "Edit Role";
-            this.updateMode = true;
-            this.rolename = role["Rolename"];                      
-            this.selectApplication(role["Application"]); 
+            if (directory) {    
+                this.dataRecievedFromRolesTableScreen = directory;
+                this.pagetitle = "Edit " + schemeName;
+                this.rolename = directory["ROLENAME"];                      
+                this.selectApplication(directory["Application"]); 
 
-            this.appSelectedDropdownItems = [];
-            this.appSelectedDropdownItems.push(role["Application"]);            
+                this.appSelectedDropdownItems = [];
+                this.appSelectedDropdownItems.push(directory["Application"]);            
+            } else {
+                this.dataRecievedFromRolesTableScreen = undefined;
+                this.appSelectedDropdownItems = [];
+                this.rolename = "";
+                this.clearComponents();
+                this.pagetitle = "Create " + schemeName;
+            } 
         } else {
-            this.dataRecievedFromRolesTableScreen = undefined;
-            this.updateMode = false;
-            this.appSelectedDropdownItems = [];
-            this.rolename = "";
-            this.clearComponents();
-            this.pagetitle = "Create Role";
-        } 
+            if (directory) {
+                this.pagetitle = "Edit " + schemeName;
+                this.dataRecievedFromRolesTableScreen = directory;
+            } else {
+                this.pagetitle = "Create " + schemeName;
+                this.dataRecievedFromRolesTableScreen = undefined;
+                this.clearComponents();
+            }
+            this.autogenerateComponentsInSimplePopup(directory);
+        }
         this.request = {};
         this.display='block';
         this.errorMessage = "error message";
@@ -93,7 +104,14 @@ export class RoleInputPopupComponent implements OnInit {
         this.container.clear(); 
     }
     
-    createComponent(title, entryValues, multiselect) {
+    createDynamicInput(title, value) {
+        const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(DynamicInputComponent);
+        this.inputComponentRef = this.container.createComponent(factory);
+        this.inputComponentRef.instance.title = title;
+        this.inputComponentRef.instance.value = value;
+    }
+    
+    createComponent(title, entryValues, multiselect, show) {
         if (title !== "ROLENAME" && title !== "Options")  {
             const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(DynamicDropboxComponent);
             this.componentRef = this.container.createComponent(factory);           
@@ -126,17 +144,21 @@ export class RoleInputPopupComponent implements OnInit {
             }   
             //if role received from edit talbe (Edit mode) we have to set seted properties that are choosen
             if (this.dataRecievedFromRolesTableScreen) {
-                let opts = this.dataRecievedFromRolesTableScreen["Options"].split(";");
-                for (let el of opts) {  console.log(JSON.stringify(el))               
-                    if (el.startsWith(title)) {
-                        let selectedRolesArray = el.substring(el.indexOf(":") + 1).split(",");
-                        selectedRolesArray.forEach((r) => {
-                            this.componentRef.instance.selectedItems.push(r);
-                            let appName:string = this.chosenApplication["Application"].values[0];
-                            this.schemeInfo[appName][title].values = r;
-                        });
+                if (show === true || show === false) {
+                    this.componentRef.instance.selectedItems.push(this.dataRecievedFromRolesTableScreen[title]);
+                } else {                
+                    let opts = this.dataRecievedFromRolesTableScreen[show].split(";");
+                    for (let el of opts) {               
+                        if (el.startsWith(title)) {
+                            let selectedRolesArray = el.substring(el.indexOf(":") + 1).split(",");
+                            selectedRolesArray.forEach((r) => {
+                                this.componentRef.instance.selectedItems.push(r);
+                                let appName:string = this.chosenApplication["Application"].values[0];
+                                this.schemeInfo[appName][title].values = r;
+                            });
 
-                        break;
+                            break;
+                        }
                     }
                 }
             }
@@ -186,7 +208,29 @@ export class RoleInputPopupComponent implements OnInit {
                 if (this.chosenApplication[entry[0]].multiselect) {
                     multiselect = Object.values(this.chosenApplication[entry[0]].multiselect);
                 }
-                this.createComponent(entry[0], entryValues, multiselect);
+                this.createComponent(entry[0], entryValues, multiselect, this.chosenApplication[entry[0]].show);
+            }
+        });
+    }
+    
+    autogenerateComponentsInSimplePopup(item: any) {
+        let schemeMeta = this.schemeMetadata.scheme;
+        this.clearComponents();
+        Object.entries(schemeMeta).forEach(entry => {
+            if(schemeMeta[entry[0]].values === 'text') {
+                let val = schemeMeta[entry[0]].values;
+                if (item) {
+                    this.createDynamicInput(entry[0], this.dataRecievedFromRolesTableScreen[entry[0]]);
+                } else {
+                    this.createDynamicInput(entry[0], "");
+                }
+            } else {
+                let entryValues = Object.values(schemeMeta[entry[0]].values);
+                let multiselect;
+                if (schemeMeta[entry[0]].multiselect) {
+                    multiselect = Object.values(schemeMeta[entry[0]].multiselect);
+                }
+                this.createComponent(entry[0], entryValues, multiselect, schemeMeta[entry[0]].show);
             }
         });
     }
