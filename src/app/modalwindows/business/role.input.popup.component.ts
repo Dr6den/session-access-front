@@ -25,7 +25,6 @@ export class RoleInputPopupComponent implements OnInit {
     schemeMetadata: SchemeMetadata;
     schemeName: string;
     scheme: object;
-    schemeInfo: object; //includes metadata of the scheme
     request: object;
     chosenApplication: object;
     appSelectedDropdownItems = [];
@@ -114,6 +113,9 @@ export class RoleInputPopupComponent implements OnInit {
         this.inputComponentRef = this.container.createComponent(factory);
         this.inputComponentRef.instance.title = title;
         this.inputComponentRef.instance.value = value;
+        this.inputComponentRef.instance.changedValue.subscribe(data => { 
+            this.schemeMetadata.scheme[title].values = data;
+        });
     }
     
     createComponent(title, entryValues, multiselect, show) {
@@ -125,9 +127,14 @@ export class RoleInputPopupComponent implements OnInit {
             this.componentRef.instance.selectedItems = [];
            
             this.componentRef.instance.chosenSelectedItems.subscribe(data => {
-                let appName:string = this.chosenApplication["Application"].values[0];
-                this.schemeMetadata.scheme[appName][title].values = data;
+                if (this.schemeMetadata.containsNestedProperties) {
+                    let appName:string = this.chosenApplication["Application"].values[0];
+                    this.schemeMetadata.scheme[appName][title].values = data;
+                } else {
+                    this.schemeMetadata.scheme[title].values = data;
+                }
             }); 
+            
             if (multiselect) {
                 this.componentRef.instance.dropdownSettings = {
                     singleSelection: false,
@@ -151,6 +158,12 @@ export class RoleInputPopupComponent implements OnInit {
             if (this.dataRecievedFromRolesTableScreen) {
                 if (show === true || show === false) {
                     this.componentRef.instance.selectedItems.push(this.dataRecievedFromRolesTableScreen[title]);
+                    if (this.schemeMetadata.containsNestedProperties) {
+                        let appName:string = this.chosenApplication["Application"].values[0];
+                        this.schemeMetadata.scheme[appName][title].values = this.dataRecievedFromRolesTableScreen[appName][title];
+                    } else {
+                        this.schemeMetadata.scheme[title].values = this.dataRecievedFromRolesTableScreen[title];
+                    }
                 } else {                
                     let opts = this.dataRecievedFromRolesTableScreen[show].split(";");
                     for (let el of opts) {               
@@ -176,22 +189,10 @@ export class RoleInputPopupComponent implements OnInit {
     
     setDropdownListByApplications(schemeData: object) {
         let applications: Array<string> = [];
-        if ((schemeData != undefined)) {
-            this.schemeInfo = schemeData;//deprecate
+        if (schemeData != undefined) {
             Object.entries(schemeData).forEach(entry => applications.push(Object.values(entry)[0]));
             this.applicationDropdownList = applications;
         }
-    }
-    //deprecated, should be deleted in next release
-    setDropdownListByApplicationsWithPromise(promise: Promise<object>, schemeName: string) {
-            promise.then(data => {
-                let applications: Array<string> = [];
-                if ((data != undefined)) {
-                    this.schemeInfo = data[schemeName];
-                    Object.entries(this.schemeInfo).forEach(entry => applications.push(Object.values(entry)[0]));
-                    this.applicationDropdownList = applications;
-                }
-            });
     }
     
     getSchemaInfoPromise(): Promise<object> {
@@ -226,8 +227,10 @@ export class RoleInputPopupComponent implements OnInit {
                 let val = schemeMeta[entry[0]].values;
                 if (item) {
                     this.createDynamicInput(entry[0], this.dataRecievedFromRolesTableScreen[entry[0]]);
+                    this.schemeMetadata.scheme[entry[0]].values = this.dataRecievedFromRolesTableScreen[entry[0]];
                 } else {
                     this.createDynamicInput(entry[0], "");
+                    this.schemeMetadata.scheme[entry[0]].values = "";
                 }
             } else {
                 let entryValues = Object.values(schemeMeta[entry[0]].values);
@@ -260,20 +263,41 @@ export class RoleInputPopupComponent implements OnInit {
                     delete this.dataRecievedFromRolesTableScreen["Actions"];
                     delete this.dataRecievedFromRolesTableScreen["Applications"];
                     delete this.dataRecievedFromRolesTableScreen["Rolename"];
-                
+                    delete this.dataRecievedFromRolesTableScreen["schemeName"];
+                    
                     let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
                     this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
                 } else {
                     this.model.insertScheme(this.request, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
-                }
-                if (this.errorMessage === "error message") {
-                    this.closeModalDialog();
-                    window.location.reload();
-                }
+                }                
             } else {
-                
+                this.request = this.generateInsertRequestForUnnesetdDictionary(this.schemeMetadata.scheme);
+                if (this.pagetitle.startsWith("Edit")) { 
+                    delete this.dataRecievedFromRolesTableScreen["Actions"];
+                    delete this.dataRecievedFromRolesTableScreen["schemeName"];
+                    let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
+                    this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                } else {
+                    this.model.insertScheme(this.request, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                }                
+            }
+            if (this.errorMessage === "error message") {
+                this.closeModalDialog();
+                window.location.reload();
             }
         }
+    }
+    
+    private generateInsertRequestForUnnesetdDictionary(scheme: object): object {
+        let request: object = {};
+        for(let entry in scheme) {
+            if (scheme[entry]['multiselect']) {
+                request[entry] = scheme[entry]['values'];
+            } else {
+                request[entry] = (Array.isArray(scheme[entry]['values'])) ? scheme[entry]['values'][0] : scheme[entry]['values'];
+            }
+        }
+        return request;
     }
     
     //returns object of all roles of the applications role if it contains single select ability or multi select ability

@@ -7,5 +7,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class DynamicInputComponent {
     @Input() title: string;
     @Input() value: string;
-   // @Output() chosenSelectedItems = new EventEmitter();
+    @Output() changedValue = new EventEmitter();
+    
+    onValueChange(item: any) {
+        this.changedValue.emit(this.value);
+    }
 }
