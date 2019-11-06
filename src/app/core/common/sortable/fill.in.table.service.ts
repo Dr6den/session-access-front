@@ -136,15 +136,19 @@ export class FillInTableService {
             });       
     }
     
-    fillRowsToRolesTableFromOutsideSource(source: object[]) {
-        let columns = [];
-        source.forEach((role) => {
-            //console.log(JSON.stringify(role))
-            let roleStr = new Role(role);
-            let opt = roleStr.getArrayOfOptionsObject();
-            columns.push({"Actions": "", "Applications": roleStr.application, "Options": opt, "Rolename": roleStr.rolename});
+    fillRowsToRolesTableFromOutsideSource(source: object[], schemeMetadata: SchemeMetadata) {        
+        let rows = [];
+        source.forEach((schemeData) => {
+            if (schemeData) {                      
+                let processedRow = {"Actions":""};
+                Object.keys(schemeData).forEach((schemeKey) => {
+                    schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeData[schemeKey], schemeData["Application"]);
+                });                        
+                rows.push(processedRow);               
+            }
+            return rows;
         });
-        return columns;
+        return rows; 
     }
     
     fillRolesByEmptyColumns() {

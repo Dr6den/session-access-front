@@ -91,34 +91,37 @@ export class RolesTableComponent {
     
     changeRolesOutputOnPage(event: object) {
         this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
-        this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+        this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0), this.schemeMetadata);
         this.numberOfPages =  Number.parseInt(event.toString());
     }
     
     nextPageTabulate() {
         if(this.currentPageNumber < this.tableContainer.numberOfPages){
-            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber));
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber),
+                this.schemeMetadata);
             this.currentPageNumber++;
         }
     }
     
     previousPageTabulate() {
         if(this.currentPageNumber > 1){
-            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber - 2));
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.currentPageNumber - 2), 
+                this.schemeMetadata);
             this.currentPageNumber--;
         }
     }
     
     firstPageTabulate() {
         if(this.currentPageNumber > 1){
-            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0), this.schemeMetadata);
             this.currentPageNumber = 1;
         }
     }
     
     lastPageTabulate() {
         if(this.currentPageNumber < this.tableContainer.numberOfPages){
-            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1));
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(this.tableContainer.numberOfPages - 1), 
+                this.schemeMetadata);
             this.currentPageNumber = this.tableContainer.numberOfPages;
         }
     }
@@ -135,7 +138,8 @@ export class RolesTableComponent {
                     let rolesValues = Object.values(role["values"]);
                     this.rolesReserve = rolesValues;
                     this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages); 
-                    this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));                   
+                    this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0),
+                        this.schemeMetadata);                   
                 }                
                 this.currentPageNumber = 1;
             }).catch((response) => this.checkError(response));
@@ -163,7 +167,7 @@ export class RolesTableComponent {
                     let rolesValues = Object.values(role["values"]);
                     this.rolesReserve = rolesValues;
                     this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages); 
-                    this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));                   
+                    this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0),  this.schemeMetadata);                   
                 }                
                 this.currentPageNumber = 1;
             }).catch((response) => this.checkError(response));
