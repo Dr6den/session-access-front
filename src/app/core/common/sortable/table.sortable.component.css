@@ -27,6 +27,10 @@ th {
     background-color: #6e8298;
 }
 
+.table-header th {
+    position: relative;
+}
+
 .table-buttons {
     width: 2.3rem;
 }
@@ -79,8 +83,8 @@ tbody td:first-child, thead th:first-child {
 
 .silver-arrow {
     position:absolute;
-    left: 0;
-    top: 0.3rem;
+    left: 0.9rem;
+    top: -0.3rem;
 }
 
 .silver-dropdowns-container {
@@ -90,6 +94,15 @@ tbody td:first-child, thead th:first-child {
     float: right;
     width: 2rem;
     height: 2rem;
+}
+
+.images-content {
+    position:absolute;
+    right: 1rem;
+}
+
+.header-text {
+    position: relative;
 }
 
 .silver-dropdown {

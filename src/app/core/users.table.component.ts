@@ -21,9 +21,6 @@ export class UsersTableComponent {
     userColumns: any[];
     userSorting: any;    
     userRows: any[];
-    roleColumns: any[];
-    roleSorting: any;    
-    roleRows: any[];
     currentPageNumber: number;
     numberOfPages: number;
     

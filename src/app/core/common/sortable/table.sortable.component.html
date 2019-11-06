@@ -4,8 +4,8 @@
         <tr class="text-left table-header">
             <th *ngFor="let column of columns; let step=index" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)"
                 [ngStyle]="{ 'width': (step>0) ? thwidth : '4.3rem'  }">
-                {{column.display}}
-                <span *ngIf="(column.variable !== 'Actions') && (column.variable !== 'Options')">
+                <span class="header-text">{{column.display}}</span>
+                <span *ngIf="(column.variable !== 'Actions') && (column.variable !== 'Options')" class="images-content">
                     <span class="arrows">
                         <img src="assets/img/sort-up-icon.svg" 
                             [style.visibility]="(sortArrowsVisible == column.display + 'true') ? 'visible':'hidden'" class="user-img silver-arrow"/>

@@ -41,14 +41,7 @@ export class RolesTableComponent {
         {num: 10, name: "10"}
     ];
     
-    constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {
-      /*  this.model.getRoles();
-        this.roleSorting = this.fillInTableService.fillSortingToRolesTable();
-        this.roleColumns = fillInTableService.fillColumnsToRolesTable();
-        fillInTableService.fillRowsToRolesTable().then((promiserows) => { 
-            this.roleRows = promiserows;
-        });*/
-        
+    constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
         this.model.getObservableRoles().toPromise()
             .then((ousers) => {let vals = Object.values(ousers["values"]);
                 vals.forEach((role) => {this.rolesReserve.push(role)});

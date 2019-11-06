@@ -93,7 +93,7 @@ export class TableSortable {
       if (this.schemeName === 'Users') {
         this.model.deleteUser(item.NTSID);
       } else if (this.schemeName === 'Roles') {
-        this.model.deleteRole(item.Rolename);	
+        this.model.deleteRole(item.ROLENAME);	
       } else {
         delete item["Actions"];
         this.model.deleteScheme(item, this.schemeName);
