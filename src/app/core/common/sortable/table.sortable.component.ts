@@ -39,6 +39,11 @@ export class TableSortable {
   JSON;
   constructor(private model: Model){this.JSON = JSON;}
   
+  ngOnInit() {
+      this.popoverTitle = 'Delete the ' + this.schemeName;
+      this.popoverMessage = 'Are you sure you want delete the ' + this.schemeName + '?';
+  }
+  
   ngOnChanges() {
       if (this.columns) {
         this.columns.forEach((columnName) => {
@@ -85,13 +90,15 @@ export class TableSortable {
    * delete item is universal method, so you can use it with User and Role
    */
   deleteItem(item: any) {
-      if ("NTSID" in item) {
+      if (this.schemeName === 'Users') {
         this.model.deleteUser(item.NTSID);
-	window.location.reload();
-      } else if ("Rolename" in item) {
-        this.model.deleteRole(item.Rolename);
-	window.location.reload();
+      } else if (this.schemeName === 'Roles') {
+        this.model.deleteRole(item.Rolename);	
+      } else {
+        delete item["Actions"];
+        this.model.deleteScheme(item, this.schemeName);
       }
+      window.location.reload();
   }
   
   userInput(user: User) {

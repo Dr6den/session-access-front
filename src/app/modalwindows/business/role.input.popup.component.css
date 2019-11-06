@@ -22,6 +22,8 @@
 .modal-body {
     margin-top: 0rem;
     padding-top: 0rem;
+    height: 35rem;
+    overflow-y: scroll;
 }
 
 .textbox, .dropdown {    

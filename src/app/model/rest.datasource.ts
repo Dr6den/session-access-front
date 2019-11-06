@@ -105,4 +105,9 @@ export class RestDataSource {
 	let url = this.url + '/DeleteRecords/Roles?filter={"ROLENAME":"'+rolename+'"}';
         return this.globalService.sendRequest<string>("DELETE", url);
     }
+    
+    deleteScheme(scheme: object, schemeName: string): Observable<string> {
+	let url = this.url + '/DeleteRecords/' + schemeName + '?filter=' + JSON.stringify(scheme);
+        return this.globalService.sendRequest<string>("DELETE", url);
+    }
 }

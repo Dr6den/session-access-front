@@ -114,4 +114,8 @@ export class Model {
     deleteRole(rolename: string) {
         this.dataSource.deleteRole(rolename).subscribe();
     }
+    
+    deleteScheme(scheme: object, schemeName: string) {
+        this.dataSource.deleteScheme(scheme, schemeName).subscribe();
+    }
 }
