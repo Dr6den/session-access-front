@@ -94,7 +94,6 @@ export class RolesTableComponent {
         this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
         this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0), this.schemeMetadata);
         this.numberOfPages =  Number.parseInt(event.toString());
-                console.log(this.numberOfPages + JSON.stringify(this.roleRows))
     }
     
     nextPageTabulate() {
