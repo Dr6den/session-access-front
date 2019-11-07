@@ -39,8 +39,8 @@ export class RestDataSource {
         return this.globalService.sendRequest<object[]>("GET", url);
     }
     
-    getRolesByFilter(page: string): Observable<object[]> {
-        let url = this.url + "/GetRecords/Roles?parseRoleOpts=true";        
+    getSchemeByFilter(page: string, schemeName: string): Observable<object[]> {
+        let url = this.url + "/GetRecords/" + schemeName + "?parseRoleOpts=true";        
         let params = new HttpParams();
         params = params.append('filter', page);
         return this.globalService.sendRequest<object[]>("GET", url, null, params);

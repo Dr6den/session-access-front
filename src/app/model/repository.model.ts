@@ -51,8 +51,8 @@ export class Model {
         return this.dataSource.getRoles();
     }
     
-    getObservableRolesByFilter(page: string): Observable<object[]> {
-        return this.dataSource.getRolesByFilter(page);
+    getObservableSchemeByFilter(page: string, schemeName: string): Observable<object[]> {
+        return this.dataSource.getSchemeByFilter(page, schemeName);
     }
     
     getObservableUsersByFilter(page: string): Observable<User[]> {

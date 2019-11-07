@@ -19,10 +19,7 @@ export class RolesTableComponent {
     levelNum:number;    
      
     //sorting table properties
-    schemeMetadata: SchemeMetadata;
-    userColumns: any[];
-    userSorting: any;    
-    userRows: any[];
+    schemeMetadata: SchemeMetadata;  
     roleColumns: any[];
     roleSorting: any;    
     roleRows: any[];
@@ -128,9 +125,13 @@ export class RolesTableComponent {
     }
     
     filter(event: string) {
-        let page = '{"ROLENAME":"' + event + '"}';       
-        this.model.getObservableRolesByFilter(page).toPromise()
-            .then((role) => {
+        let page = '';
+        if (this.schemeMetadata.containsNestedProperties) {
+            page = '{"ROLENAME":"' + event + '"}'; 
+        } else {
+            page = '{"Entity":"' + event + '"}';
+        }    
+            this.model.getObservableSchemeByFilter(page, this.title).toPromise().then((role) => {
                 if (role["message"]) {
                     this.rolesReserve = [];
                     this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages);
@@ -158,7 +159,7 @@ export class RolesTableComponent {
         }
         page = page.replace(/.$/,"]");
 
-        this.model.getObservableRolesByFilter(page).toPromise()
+        this.model.getObservableSchemeByFilter(page, this.title).toPromise()
             .then((role) => {
                 if (role["message"]) {
                     this.rolesReserve = [];
