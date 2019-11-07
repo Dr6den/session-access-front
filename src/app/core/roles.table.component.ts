@@ -42,13 +42,13 @@ export class RolesTableComponent {
     ];
     
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
-        this.model.getObservableRoles().toPromise()
+        /*this.model.getObservableRoles().toPromise()
             .then((ousers) => {let vals = Object.values(ousers["values"]);
                 vals.forEach((role) => {this.rolesReserve.push(role)});
                 this.tableContainer = new TableContainer(this.rolesReserve, 100);
-            });
+            });*/
         this.currentPageNumber = 1; 
-        this.numberOfPages = 100;  
+        this.numberOfPages = 100;
     }
     
     accountTableWidthAccordingToColumsNumber() {
@@ -90,9 +90,11 @@ export class RolesTableComponent {
     }
     
     changeRolesOutputOnPage(event: object) {
+        this.rolesReserve = JSON.parse(JSON.stringify(this.roleRows));
         this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
         this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0), this.schemeMetadata);
         this.numberOfPages =  Number.parseInt(event.toString());
+                console.log(this.numberOfPages + JSON.stringify(this.roleRows))
     }
     
     nextPageTabulate() {
