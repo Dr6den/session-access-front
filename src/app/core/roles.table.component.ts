@@ -28,6 +28,7 @@ export class RolesTableComponent {
     tablethwidth: string;
     tabletdwidth: string;
     numberOfColumns: number;
+    previousFilter: object = {};
     
     tableContainer: TableContainer;
     rolesReserve: object[] = [];
@@ -150,13 +151,35 @@ export class RolesTableComponent {
     checkError(errorCode: object) {
     }
     
-    filterByNames(event) {
-        let page:string = "[";
-        if (event.column === "Applications") {
-            event.names.forEach((name) => {page = page + '{"Application":"' + name + '"},';});
-        } else {
-            event.names.forEach((name) => {page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';});
+    setPreviousFilter(column: string, name: string) {
+        if (!this.previousFilter[column]) {
+            this.previousFilter[column] = [];
         }
+        this.previousFilter[column].push(name);
+    }
+    
+    getPreviousFilter(): string {
+        let result = '';
+        for (let el in this.previousFilter) {
+            this.previousFilter[el].forEach((n) => {
+                result = result + '{"' + el + '":"' + n + '"},';
+            });
+            
+        }
+        return result
+    }
+    
+    filterByNames(event) {
+        let page:string = "["; 
+        if (this.previousFilter[event.column]) { 
+            if (this.previousFilter[event.column].length > 0) {
+                this.previousFilter[event.column] = [];
+            }  
+        }   
+        event.names.forEach((name) => {
+                this.setPreviousFilter(event.column, name);   
+        });
+        page = page + this.getPreviousFilter();
         page = page.replace(/.$/,"]");
 
         this.model.getObservableSchemeByFilter(page, this.title).toPromise()

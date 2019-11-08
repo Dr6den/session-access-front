@@ -26,7 +26,7 @@ export class UsersTableComponent {
     
     tableContainer: TableContainer;
     usersReserve: object[] = [];
-    
+    previousFilter: object = {};
     levels:Array<Object> = [
         {num: 100, name: "100"},
         {num: 50, name: "50"},
@@ -112,17 +112,39 @@ export class UsersTableComponent {
     checkError(errorCode: object) {
     }
     
+    setPreviousFilter(column: string, name: string) {
+        if (!this.previousFilter[column]) {
+            this.previousFilter[column] = [];
+        }
+        this.previousFilter[column].push(name);
+    }
+    
+    getPreviousFilter(): string {
+        let result = '';
+        for (let el in this.previousFilter) {
+            this.previousFilter[el].forEach((n) => {
+                if (el === "Role") {
+                    result = result + '{"ROLES":{"Application":"' + n + '"}},';
+                } else {
+                    result = result + '{"' + el + '":"' + n + '"},';
+                }
+            });
+            
+        }
+        return result
+    }
+    
     filterByNames(event) {
         let page:string = "[";
-        if (event.column === "Role") { 
-            event.names.forEach((name) => {
-                page = page + '{"ROLES":{"Application":"' + name + '"}},';
-            });
-        } else {
-            event.names.forEach((name) => {
-                page = page + '{"' + event.column.toUpperCase() + '":"' + name + '"},';
-            });
-        }
+        if (this.previousFilter[event.column]) { 
+            if (this.previousFilter[event.column].length > 0) {
+                this.previousFilter[event.column] = [];
+            }  
+        }   
+        event.names.forEach((name) => {
+                this.setPreviousFilter(event.column, name);   
+        });
+        page = page + this.getPreviousFilter();
         page = page.replace(/.$/,"]");
 
         this.model.getObservableUsersByFilter(page).toPromise()
