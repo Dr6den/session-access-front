@@ -10,6 +10,10 @@
     color: #323232;
 }
 
+input[type="text"] {
+    padding: 0.7rem;
+}
+
 .field-of-form {
     margin-top: 1.5rem;
 }

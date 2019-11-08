@@ -18,6 +18,10 @@
     overflow-x: hidden;
 }
 
+input[type="text"] {
+    padding: 0.7rem;
+}
+
 .error-message {
     margin-left: 35%;
 }
