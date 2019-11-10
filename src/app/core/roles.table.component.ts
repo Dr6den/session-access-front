@@ -166,7 +166,40 @@ export class RolesTableComponent {
             });
             
         }
-        return result
+        return result;
+    }
+    
+    getRestrictivePreviousFilter(): string {
+        let hasMoreThanOneFiltered = Object.keys(this.previousFilter).length > 1;
+        let result = '';
+        if (!hasMoreThanOneFiltered) {            
+            for (let el in this.previousFilter) {
+                this.previousFilter[el].forEach((n) => {
+                    result = result + '{"' + el + '":"' + n + '"},';
+                });            
+            }
+            result = result.replace(/.$/,"");
+        } else {
+            //need form query like this: [ {"Entity":"", "NOT Entity":["", "not entity 5"], "GBU":["MED","SU"]}]
+            let filObj = this.previousFilter;
+            let firstObj = Object.keys(filObj)[0];
+            let firstObjVals = filObj[Object.keys(filObj)[0]];
+            firstObjVals.forEach((foVals) => {
+                result = result + '{"' + firstObj + '":"' + foVals + '",';
+                Object.keys(filObj).filter(function(k, i) {
+                    return i >= 1 && i < Object.keys(filObj).length;
+                    }).forEach(function(k) {
+                        result = result + '"' + k + '":[';
+                        filObj[k].forEach((r) => {
+                            result = result + '"' + r + '",';
+                        });
+                        result = result.replace(/.$/,"]");
+                    });
+                result = result + '},';
+            })
+            result = result.replace(/.$/,"");
+        }        
+        return result;
     }
     
     filterByNames(event) {
@@ -179,8 +212,7 @@ export class RolesTableComponent {
         event.names.forEach((name) => {
                 this.setPreviousFilter(event.column, name);   
         });
-        page = page + this.getPreviousFilter();
-        page = page.replace(/.$/,"]");
+        page = page + this.getRestrictivePreviousFilter() + "]";
 
         this.model.getObservableSchemeByFilter(page, this.title).toPromise()
             .then((role) => {

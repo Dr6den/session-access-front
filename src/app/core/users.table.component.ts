@@ -134,6 +134,56 @@ export class UsersTableComponent {
         return result
     }
     
+    getRestrictivePreviousFilter(): string {
+        let hasMoreThanOneFiltered = Object.keys(this.previousFilter).length > 1;
+        let result = '';
+        if (!hasMoreThanOneFiltered) {            
+            for (let el in this.previousFilter) {
+                this.previousFilter[el].forEach((n) => {
+                    if (el === "Role") {
+                        result = result + '{"ROLES":{"Application":"' + n + '"}},';
+                    } else {
+                        result = result + '{"' + el + '":"' + n + '"},';
+                    }
+                });            
+            }
+            result = result.replace(/.$/,"");
+        } else {
+            //need form query like this: [ {"Entity":"", "NOT Entity":["", "not entity 5"], "GBU":["MED","SU"]}]
+            let filObj = this.previousFilter;
+            let firstObj = Object.keys(filObj)[0];
+            let firstObjVals = filObj[Object.keys(filObj)[0]];
+            firstObjVals.forEach((foVals) => {
+                if (firstObj === "Role") {
+                        result = result + '{"ROLES":{"Application":"' + foVals + '"},';
+                    } else {
+                        result = result + '{"' + firstObj + '":"' + foVals + '",';
+                    }                
+                Object.keys(filObj).filter(function(k, i) {
+                    return i >= 1 && i < Object.keys(filObj).length;
+                    }).forEach(function(k) {
+                        if (k === "Role") {
+                            result = result + '"ROLES":{"Application":[';
+                            filObj[k].forEach((r) => {
+                                result = result + '"' + r + '",';
+                            });
+                            result = result.replace(/.$/,"]}");
+                        } else {
+                            result = result + '"' + k + '":[';
+                            filObj[k].forEach((r) => {
+                                result = result + '"' + r + '",';
+                            });
+                            result = result.replace(/.$/,"]");
+                        }
+                        
+                    });
+                result = result + '},';
+            })
+            result = result.replace(/.$/,"");
+        }        
+        return result;
+    }
+    
     filterByNames(event) {
         let page:string = "[";
         if (this.previousFilter[event.column]) { 
@@ -144,9 +194,8 @@ export class UsersTableComponent {
         event.names.forEach((name) => {
                 this.setPreviousFilter(event.column, name);   
         });
-        page = page + this.getPreviousFilter();
-        page = page.replace(/.$/,"]");
-
+        page = page  + this.getRestrictivePreviousFilter() + "]";
+console.log(page)
         this.model.getObservableUsersByFilter(page).toPromise()
             .then((user) => {
                 if (user["message"]) {
