@@ -27,7 +27,7 @@ export class RolesTableComponent {
     numberOfPages: number;
     tablethwidth: string;
     tabletdwidth: string;
-    numberOfColumns: number;
+    tableNumberOfColumns: number;
     previousFilter: object = {};
     
     tableContainer: TableContainer;
@@ -40,26 +40,8 @@ export class RolesTableComponent {
     ];
     
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
-        /*this.model.getObservableRoles().toPromise()
-            .then((ousers) => {let vals = Object.values(ousers["values"]);
-                vals.forEach((role) => {this.rolesReserve.push(role)});
-                this.tableContainer = new TableContainer(this.rolesReserve, 100);
-            });*/
         this.currentPageNumber = 1; 
         this.numberOfPages = 100;
-    }
-    
-    accountTableWidthAccordingToColumsNumber() {
-        switch(this.numberOfColumns) {
-            case 9:  
-                this.tablethwidth = "11.7%";
-                this.tabletdwidth = "11.6%";
-            break
-            case 4:  
-                this.tablethwidth = "31.3%";
-                this.tabletdwidth = "31.2%";
-            break
-        }
     }
     
     ngOnInit() {
@@ -71,8 +53,7 @@ export class RolesTableComponent {
         this.model.getSchemesInfo().toPromise().then((sche) => {
             this.schemeMetadata = new SchemeMetadata(sche[this.title]);
             this.schemeMetadata.setupMetadata();
-            this.numberOfColumns = this.schemeMetadata.numberOfColumns;
-            this.accountTableWidthAccordingToColumsNumber();
+            this.tableNumberOfColumns = this.schemeMetadata.numberOfColumns;
             this.roleSorting = this.fillInTableService.fillSortingToSchemeTable(this.schemeMetadata);
             this.roleColumns = this.fillInTableService.fillColumnsToSchemeTable(this.title, this.schemeMetadata);
             this.roleRows = this.fillInTableService.fillRowsToSchemeTable(this.roleColumns, this.title, this.schemeMetadata);

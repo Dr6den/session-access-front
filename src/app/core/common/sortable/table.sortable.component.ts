@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChildren, QueryList } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ViewChildren, QueryList, HostListener } from "@angular/core";
 import { TableOrderByPipe } from "./table.sort.orderby.pipe";
 import { FormatTablePipe } from "./table.format.pipe";
 import { InfoPopupComponent } from "./info.popup.component";
@@ -24,12 +24,14 @@ export class TableSortable {
   @Input() sort: any;
   @Input() schemeMetadata: SchemeMetadata;
   @Input() schemeName: string;
-  @Input() tdwidth: string;
-  @Input() thwidth: string;
+  @Input() numberOfColumns: number;
   @Output() callUserInputPopup = new EventEmitter();
   @Output() callRoleInputPopup = new EventEmitter();
   @Output() filterByNames = new EventEmitter();
   
+  windowWidth: number = window.innerWidth;  
+  tdwidth: string;
+  thwidth: string;
   sortArrowsVisible:string = "";
   openedFilter:boolean = false;
   openedFilters:object = {};
@@ -45,6 +47,9 @@ export class TableSortable {
   }
   
   ngOnChanges() {
+      if (this.numberOfColumns) {
+          this.accountTableWidthAccordingToColumsNumber(this.windowWidth);
+      }
       if (this.columns) {
         this.columns.forEach((columnName) => {
             let columnVar = {};
@@ -53,7 +58,7 @@ export class TableSortable {
         });
       }
   }
-  
+ 
   selectedClass(columnName): string {
       this.sortArrowsVisible = this.sort.column + this.sort.descending;//set up sorting arrows in the header of the table, they indicates acending or descenidng sorting
       return columnName == this.sort.column ? 'sort-' + this.sort.descending : 'sort-' + this.sort.descending;
@@ -165,4 +170,70 @@ export class TableSortable {
   onCloseSearchPopup(event) {
       this.openedFilters[event] = false;
   }
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+      //console.log(event.target.innerWidth);
+      this.accountTableWidthAccordingToColumsNumber(event.target.innerWidth);
+  }  
+   
+  accountTableWidthAccordingToColumsNumber(width: number) {
+      if (width > 1230) {
+        switch(this.numberOfColumns) {
+            case 9:  
+                this.thwidth = "11.7%";
+                this.tdwidth = "11.6%";
+            break
+            case 4:  
+                this.thwidth = "31.3%";
+                this.tdwidth = "31.2%";
+            break
+        }
+      } else if (width > 1160) {
+        switch(this.numberOfColumns) {
+            case 9:  
+                this.thwidth = "11.7%";
+                this.tdwidth = "11.6%";
+            break
+            case 4:  
+                this.thwidth = "31%";
+                this.tdwidth = "30.9%";
+            break
+        }
+      } else if (width > 1060) {
+        switch(this.numberOfColumns) {
+            case 9:  
+                this.thwidth = "11.4%";
+                this.tdwidth = "11.2%";
+            break
+            case 4:  
+                this.thwidth = "30.6%";
+                this.tdwidth = "30.5%";
+            break
+        }
+      } else if (width > 860) {
+        switch(this.numberOfColumns) {
+            case 9:  
+                this.thwidth = "11%";
+                this.tdwidth = "10.9%";
+            break
+            case 4:  
+                this.thwidth = "30.3%";
+                this.tdwidth = "30.2%";
+            break
+        }
+      } else if (width > 860) {
+        switch(this.numberOfColumns) {
+            case 9:  
+                this.thwidth = "10.6%";
+                this.tdwidth = "10.5%";
+            break
+            case 4:  
+                this.thwidth = "29.7%";
+                this.tdwidth = "29.6%";
+            break
+        }
+      }
+  }
+  
 }
