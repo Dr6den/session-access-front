@@ -195,7 +195,7 @@ export class UsersTableComponent {
                 this.setPreviousFilter(event.column, name);   
         });
         page = page  + this.getRestrictivePreviousFilter() + "]";
-console.log(page)
+
         this.model.getObservableUsersByFilter(page).toPromise()
             .then((user) => {
                 if (user["message"]) {
