@@ -57,7 +57,9 @@ export class TableFilterPopup {
     }
 
     closeModalDialog(event){
-        event.stopPropagation();
+        if (event) {
+            event.stopPropagation();
+        }
         this.display='none'; //set none css after close dialog
         this.closeEvent.emit(this.column); //emits for change icon on the table on close
     }
@@ -133,5 +135,9 @@ export class TableFilterPopup {
     
     stopPropogation(event) {
         event.stopPropagation();
+    }
+    
+    onClickedOutside(event: Event) {
+        this.closeModalDialog(event);
     }
 }

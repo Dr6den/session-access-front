@@ -128,6 +128,11 @@ export class TableSortable {
   }
   
   openFilter(columnName: string, event) {
+      for (let f in this.openedFilters) {
+         this.openedFilters[f] = false;
+      }
+      this.tableFilterPopups.forEach((filt) => filt.closeModalDialog(undefined));
+
       this.openedFilters[columnName] = true;
       let chosenColumnModalWindow = this.tableFilterPopups.filter((element, index) => element.column === columnName);
       chosenColumnModalWindow[0].openModalDialog(this.sortArrowsVisible);

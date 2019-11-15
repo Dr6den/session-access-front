@@ -1,4 +1,4 @@
-<div class="modal-table-popup modal-content m-3 shadow rounded" [ngStyle]="{'display':display}" (click)="stopPropogation($event)">            
+<div class="modal-table-popup modal-content m-3 shadow rounded" [ngStyle]="{'display':display}" (click)="stopPropogation($event)" (clickOutside)="onClickedOutside($event)">            
             <div class="pressed-field" (click)="sortAscending($event)">
                 <span class="sort-arrows">
                     <img [style.visibility]="(visibleAscendingIcon) ? 'visible':'hidden'" src="assets/img/sort-ascending-icon.svg"

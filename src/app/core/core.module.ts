@@ -9,6 +9,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
+import { ClickOutsideModule } from 'ng-click-outside';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { HeaderComponent } from "./common/app.header.component";
 import { TableFooterComponent } from "./common/footers/table.footer.component";
@@ -31,7 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [BrowserModule, NgbModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
-         ConfirmationPopoverModule.forRoot({
+        ClickOutsideModule, ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],
     declarations: [IndexComponent, RolesTableComponent, UsersTableComponent, HeaderComponent, InfoPopupComponent, SplitStringPipe, DynamicInputComponent,
