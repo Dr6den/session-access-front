@@ -19,10 +19,11 @@
                         <img src="assets/img/filter-down.svg" 
                             [style.visibility]="openedFilters[column.variable] ? 'hidden':'visible'" class="user-img silver-dropdown"/>                        
                     </span>
-                    <span>
-                        <table-filter-popup [column]="column.display" [data]="data" (filterByName)="filterByName($event)"
-                            (closeEvent)="onCloseSearchPopup($event)" (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
-                    </span>
+                   
+                </span>
+                <span>
+                    <table-filter-popup [column]="column.display" [data]="data" (filterByName)="filterByName($event)"
+                        (closeEvent)="onCloseSearchPopup($event)" (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
                 </span>
             </th>
         </tr>
