@@ -3,6 +3,30 @@
     border: solid 1px #6e8298;
 }
 
+:host ::ng-deep div.application .multiselect-item-checkbox[_ngcontent-c8] input[type=checkbox][_ngcontent-c8] + div[_ngcontent-c8]:before {
+	border-radius:50%;
+}
+
+:host ::ng-deep div.application .multiselect-item-checkbox[_ngcontent-c8] input[type=checkbox][_ngcontent-c8]:checked + div[_ngcontent-c8]:before {
+	background: white;
+}
+:host ::ng-deep div.application .multiselect-item-checkbox[_ngcontent-c8] input[type=checkbox][_ngcontent-c8]:checked + div[_ngcontent-c8]:after {
+	box-sizing: content-box;
+    content: '';
+    color: #337ab7;
+    position: absolute;
+    top: 65%;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    margin-top: -9px;
+    border: none;
+    text-align: center;
+    transition: all .4s ease;
+	border-radius:50%;
+	background-color: #337ab7;
+}
+
 .roles-input-labels {
     margin-left: 2rem;
     font-family: Roboto;
@@ -37,8 +61,8 @@ input[type="text"] {
 }
 
 .textbox {
-    border-radius: 6px;
-    border: solid 1px #6e8298;
+   border-radius: 6px;
+   border: solid 1px #6e8298;
 }
 
 .field-of-form {
