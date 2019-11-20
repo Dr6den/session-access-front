@@ -177,7 +177,7 @@ export class TableSortable {
       this.accountTableWidthAccordingToColumsNumber(event.target.innerWidth);
   }  
    
-  accountTableWidthAccordingToColumsNumber(width: number) {
+  accountTableWidthAccordingToColumsNumber(width: number) {console.log(this.numberOfColumns)
       if (width > 1230) {
         switch(this.numberOfColumns) {
             case 9:  
@@ -187,6 +187,10 @@ export class TableSortable {
             case 4:  
                 this.thwidth = "31.3%";
                 this.tdwidth = "31.2%";
+            break
+            case 6:  
+                this.thwidth = "18.7%";
+                this.tdwidth = "18.6%";
             break
         }
       } else if (width > 1160) {
@@ -199,6 +203,10 @@ export class TableSortable {
                 this.thwidth = "31%";
                 this.tdwidth = "30.9%";
             break
+            case 6:  
+                this.thwidth = "18.4%";
+                this.tdwidth = "18.3%";
+            break
         }
       } else if (width > 1060) {
         switch(this.numberOfColumns) {
@@ -209,6 +217,10 @@ export class TableSortable {
             case 4:  
                 this.thwidth = "30.6%";
                 this.tdwidth = "30.5%";
+            break
+            case 6:  
+                this.thwidth = "18.1%";
+                this.tdwidth = "18%";
             break
         }
       } else if (width > 860) {
@@ -221,6 +233,10 @@ export class TableSortable {
                 this.thwidth = "30.3%";
                 this.tdwidth = "30.2%";
             break
+            case 6:  
+                this.thwidth = "17.8%";
+                this.tdwidth = "17.7%";
+            break
         }
       } else if (width > 860) {
         switch(this.numberOfColumns) {
@@ -231,6 +247,10 @@ export class TableSortable {
             case 4:  
                 this.thwidth = "29.7%";
                 this.tdwidth = "29.6%";
+            break
+            case 6:  
+                this.thwidth = "17.4%";
+                this.tdwidth = "17.3%";
             break
         }
       }
