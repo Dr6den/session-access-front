@@ -1,13 +1,7 @@
 .roles-input-labels {
-    margin-left: 2rem;
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #323232;
+    max-width: 7.5rem;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 input[type="text"] {
