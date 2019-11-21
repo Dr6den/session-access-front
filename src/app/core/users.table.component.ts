@@ -28,6 +28,7 @@ export class UsersTableComponent {
     usersReserve: object[] = [];
     previousFilter: object = {};
     levels:Array<Object> = [
+        {num: 0, name: "All"},
         {num: 100, name: "100"},
         {num: 50, name: "50"},
         {num: 10, name: "10"}
@@ -59,8 +60,12 @@ export class UsersTableComponent {
     }
     
     changeUsersOutputOnPage(event: object) {
-        this.tableContainer = new TableContainer(this.usersReserve, Number.parseInt(event.toString()));
-        this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+        if (event.toString() === "All") {
+            window.location.reload();
+        } else {
+            this.tableContainer = new TableContainer(this.usersReserve, Number.parseInt(event.toString()));
+            this.userRows = this.fillInTableService.fillRowsToUsersTableFromOutsideSource(this.tableContainer.getRolesOnPage(0));
+        }
     }
     
     nextPageTabulate() {

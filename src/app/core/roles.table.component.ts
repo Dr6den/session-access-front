@@ -34,6 +34,7 @@ export class RolesTableComponent {
     rolesReserve: object[] = [];
     
     levels:Array<Object> = [
+        {num: 0, name: "All"},
         {num: 100, name: "100"},
         {num: 50, name: "50"},
         {num: 10, name: "10"}
@@ -69,10 +70,14 @@ export class RolesTableComponent {
     }
     
     changeRolesOutputOnPage(event: object) {
-        this.rolesReserve = JSON.parse(JSON.stringify(this.roleRows));
-        this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
-        this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0), this.schemeMetadata);
-        this.numberOfPages =  Number.parseInt(event.toString());
+        if (event.toString() === "All") {
+            window.location.reload();
+        } else {
+            this.rolesReserve = JSON.parse(JSON.stringify(this.roleRows));
+            this.tableContainer = new TableContainer(this.rolesReserve, Number.parseInt(event.toString()));
+            this.roleRows = this.fillInTableService.fillRowsToRolesTableFromOutsideSource(this.tableContainer.getRolesOnPage(0), this.schemeMetadata);
+            this.numberOfPages =  Number.parseInt(event.toString());
+        }
     }
     
     nextPageTabulate() {
