@@ -21,7 +21,7 @@ export class AuthenticationService {
     }
     
     authUserClick(clickToken: string): Observable<any> {
-        let authUrl = this.url + "/qlik/ConvertAuth/" + clickToken;console.log(JSON.stringify(authUrl))
+        let authUrl = this.url + "/qlik/ConvertAuth/" + clickToken;
         return this.globalService.sendRequest<any>("GET", authUrl, null, null, null);
     }  
     
@@ -55,7 +55,7 @@ export class AuthenticationService {
     
     loginForClick(clickToken: string) {  
         return this.authUserClick(clickToken)
-            .pipe(map(user => {console.log(JSON.stringify(user))
+            .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.access_token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes

@@ -19,21 +19,14 @@ export class IndexComponent {
           if (token) {
               this.authenticationService.loginForClick(token).pipe(first())
             .subscribe(
-                data => {console.log("OLD"+JSON.stringify(data))
+                data => {
                     if (data['loginSucceed'] == false) {
                         //this.errorMessage = "Login or Password are incorrect";
                         return;
                     }
-                    /*if (this.returnUrl === "/") {
-                        this.disableValueChanged();
-                    }    
-                    this.router.navigate([this.returnUrl]); 
-                    this.closeModalDialog()*/
+                    this.router.navigate(["/"]);
                 },
                 error => {
-                   // this.errorMessage = "Login or Password are incorrect";
-                   // this.error = error;
-                   // this.loading = false;
                 });
           }   
      }
