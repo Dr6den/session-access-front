@@ -116,7 +116,16 @@ export class RolesTableComponent {
         if (this.schemeMetadata.containsNestedProperties) {
             page = '{"ROLENAME":"' + event + '"}'; 
         } else {
-            page = '{"Entity":"' + event + '"}';
+            page = page + '{'
+            for (let el in this.schemeMetadata.scheme) {                
+                if (this.schemeMetadata.scheme[el]["primarySearch"]) {
+                    if (page !== '{') {
+                        page = page + ',';
+                    }
+                    page = page + '"' + el + '":"' + event + '"';
+                }
+            }        
+            page = page + '}';
         }    
             this.model.getObservableSchemeByFilter(page, this.title).toPromise().then((role) => {
                 if (role["message"]) {

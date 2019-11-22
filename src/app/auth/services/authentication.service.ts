@@ -18,7 +18,12 @@ export class AuthenticationService {
         headers = headers.set("Content-Type", "application/json");
         headers = headers.set("Authorization", username + ":" + password);
         return this.globalService.sendRequest<any>("POST", authUrl, null, null, headers);
-    } 
+    }
+    
+    authUserClick(clickToken: string): Observable<any> {
+        let authUrl = this.url + "/qlik/ConvertAuth/" + clickToken;console.log(JSON.stringify(authUrl))
+        return this.globalService.sendRequest<any>("GET", authUrl, null, null, null);
+    }  
     
     refreshToken(): void {
         let authToken = JSON.parse(localStorage.getItem('currentUser'));
@@ -39,6 +44,18 @@ export class AuthenticationService {
     login(username: string, password: string) {  
         return this.authUser(username, password)
             .pipe(map(user => {
+                // login successful if there's a jwt token in the response
+                if (user && user.access_token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+                return user;
+            })); 
+    }
+    
+    loginForClick(clickToken: string) {  
+        return this.authUserClick(clickToken)
+            .pipe(map(user => {console.log(JSON.stringify(user))
                 // login successful if there's a jwt token in the response
                 if (user && user.access_token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes

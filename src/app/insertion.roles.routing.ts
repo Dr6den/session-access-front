@@ -9,6 +9,7 @@ const routes: Routes = [
     { path: "showRoles", component: RolesTableComponent, canActivate: [AuthGuard] },
     { path: "showRoles/:schemeName", component: RolesTableComponent, canActivate: [AuthGuard] },
     { path: "", component: IndexComponent },
+    { path: "token/:token", component: IndexComponent },
     { path: '**', redirectTo: '' }]
     
 export const routing = RouterModule.forRoot(routes);
