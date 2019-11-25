@@ -177,9 +177,13 @@ export class TableSortable {
       this.accountTableWidthAccordingToColumsNumber(event.target.innerWidth);
   }  
    
-  accountTableWidthAccordingToColumsNumber(width: number) {console.log(this.numberOfColumns)
+  accountTableWidthAccordingToColumsNumber(width: number) {
       if (width > 1230) {
         switch(this.numberOfColumns) {
+            case 13:  
+                this.thwidth = "7.8%";
+                this.tdwidth = "7.7%";
+            break
             case 9:  
                 this.thwidth = "11.7%";
                 this.tdwidth = "11.6%";
@@ -195,6 +199,10 @@ export class TableSortable {
         }
       } else if (width > 1160) {
         switch(this.numberOfColumns) {
+            case 13:  
+                this.thwidth = "7.6%";
+                this.tdwidth = "7.5%";
+            break
             case 9:  
                 this.thwidth = "11.7%";
                 this.tdwidth = "11.6%";
@@ -210,6 +218,10 @@ export class TableSortable {
         }
       } else if (width > 1060) {
         switch(this.numberOfColumns) {
+            case 13:  
+                this.thwidth = "7.4%";
+                this.tdwidth = "7.3%";
+            break
             case 9:  
                 this.thwidth = "11.4%";
                 this.tdwidth = "11.2%";
@@ -225,6 +237,10 @@ export class TableSortable {
         }
       } else if (width > 860) {
         switch(this.numberOfColumns) {
+            case 13:  
+                this.thwidth = "7.1%";
+                this.tdwidth = "7%";
+            break
             case 9:  
                 this.thwidth = "11%";
                 this.tdwidth = "10.9%";
@@ -240,6 +256,10 @@ export class TableSortable {
         }
       } else if (width > 860) {
         switch(this.numberOfColumns) {
+            case 13:  
+                this.thwidth = "6.8%";
+                this.tdwidth = "6.7%";
+            break
             case 9:  
                 this.thwidth = "10.6%";
                 this.tdwidth = "10.5%";
