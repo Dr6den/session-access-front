@@ -13,6 +13,8 @@ import { first } from 'rxjs/operators';
 export class IndexComponent {
      public title: string = "Directories";
      public dictionariesTypes: string[] = [];
+     error = '';
+     errorMessage = "error message";
      
      constructor(private model: Model, private router: Router, private activatedRoute: ActivatedRoute, private authenticationService: AuthenticationService) {
           let token = activatedRoute.snapshot.params['token'];
@@ -21,14 +23,15 @@ export class IndexComponent {
             .subscribe(
                 data => {
                     if (data['loginSucceed'] == false) {
-                        //this.errorMessage = "Login or Password are incorrect";
+                        this.errorMessage = "Authentification tokent does not exist. Please, try login to the application";
                         return;
                     }
                     this.router.navigate(["/"]);
                 },
                 error => {
+                    this.errorMessage = "Authentification tokent does not exist. Please, try login to the application";
                 });
-          }   
+          }
      }
      
      ngOnInit() {

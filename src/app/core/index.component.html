@@ -1,4 +1,7 @@
 <app-header [title]="title"></app-header>
+    <div [ngStyle]="{'color': errorMessage === 'error message' ? '#FFFFFF' : 'red'}" class="error-message">
+        {{errorMessage}}
+    </div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 mt-3">
@@ -14,7 +17,7 @@
                     </div>
                 </ng-template>
             </div>
-        </div>
+        </div>       
         <div id="folders-image">
             <img src="assets/img/Folders-bloor.png"  alt="assets/img/Folders.png" class="user-img float-right mr-1 mt-1"/>
         </div>
