@@ -4,6 +4,8 @@ tbody td, thead th {
 }
 
 table {
+    position: relative;
+    border-collapse: collapse;
     margin-right: 0.5%;
     margin-left: 0.5%;
     width: 99%;
@@ -27,22 +29,17 @@ th {
     background-color: #6e8298;
 }
 
-.table-header th {
-    position: relative;
-}
-
 .table-buttons {
     width: 2.3rem;
 }
 
 .table-container {
+    height: 40rem;
     margin-left: 2rem;
     width: 95%; 
     overflow: scroll;
-    overflow-y: hidden;
+    position: relative;
 }
-
-thead, tbody, tr, td, th { display: block; }
 
 tr:after {
     content: ' ';
@@ -54,11 +51,20 @@ tr:after {
 thead th {
     height: 50px;
     text-align: left;
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+    background-color: #6e8298;
+}
+
+tbody th {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    left: 0;
 }
 
 tbody {
-    height: 23rem;
-    overflow-y: auto;
+    height: 35rem;
 }
 
 tbody td {
