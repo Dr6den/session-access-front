@@ -129,3 +129,76 @@ input[type="text"] {
 .close:after {
     transform: rotate(-45deg);
 }
+
+@media screen and (max-width: 850px) { 
+    .modal-content {
+        width: 36rem;
+    }
+    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+        width: 24rem;
+        margin-left: 4rem;
+    }
+    .textbox {
+        width: 24rem;
+    }
+    .user-textbox {
+        width: 17.5rem;
+    }
+    :host ::ng-deep .user-input-labels[_ngcontent-c3] {
+        margin-left: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 650px) { 
+    .modal-content {
+        width: 28rem;
+    }
+    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+        width: 18rem;
+        margin-left: 0rem;
+    }
+    .textbox {
+        width: 18rem;
+    }
+    .user-textbox {
+        width: 11.5rem;
+    }
+    :host ::ng-deep .user-input-labels[_ngcontent-c3] {
+        margin-left: 0.5rem;
+        width: 2rem;
+        overflow-x: hidden;
+    }
+    :host ::ng-deep .textbox[_ngcontent-c3], .dropdown[_ngcontent-c3] {
+        width: 18rem;
+    }
+    :host ::ng-deep .modal[_ngcontent-c3] {
+        left:0;
+    }
+}
+
+@media screen and (max-width: 450px) { 
+    .modal-content {
+        width: 22rem;
+    }
+    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+        width: 14rem;
+        margin-left: 0rem;
+    }
+    .textbox {
+        width: 14rem;
+    }
+    .user-textbox {
+        width: 7rem;
+    }
+    :host ::ng-deep .user-input-labels[_ngcontent-c3] {
+        margin-left: 0.5rem;
+        width: 2rem;
+        overflow-x: hidden;
+    }
+    :host ::ng-deep .textbox[_ngcontent-c3], .dropdown[_ngcontent-c3] {
+        width: 14rem;
+    }
+    :host ::ng-deep .modal[_ngcontent-c3] {
+        left:0;
+    }
+}
