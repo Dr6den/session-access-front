@@ -16,6 +16,8 @@ export class UsersTableComponent {
     public title: string = "Users";
     @ViewChild(UserInputPopupComponent) userInputPopup:UserInputPopupComponent;
     levelNum:number;
+     tableNumberOfColumns: number = 5;
+
     
     //sorting table properties
     userColumns: any[];
@@ -33,7 +35,7 @@ export class UsersTableComponent {
         {num: 50, name: "50"},
         {num: 10, name: "10"}
     ];
-
+    
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
         this.model.getUsers();
         this.userSorting = this.fillInTableService.fillSortingToUsersTable();
