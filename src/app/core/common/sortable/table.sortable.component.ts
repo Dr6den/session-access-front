@@ -32,6 +32,7 @@ export class TableSortable {
   windowWidth: number = window.innerWidth;  
   tdwidth: string;
   thwidth: string;
+  tableMinWidth: string;
   sortArrowsVisible:string = "";
   openedFilter:boolean = false;
   openedFilters:object = {};
@@ -178,102 +179,10 @@ export class TableSortable {
   }  
    
   accountTableWidthAccordingToColumsNumber(width: number) {
-      if (width > 1230) {
-        switch(this.numberOfColumns) {
-            case 13:  
-                this.thwidth = "7.8%";
-                this.tdwidth = "7.7%";
-            break
-            case 9:  
-                this.thwidth = "11.7%";
-                this.tdwidth = "11.6%";
-            break
-            case 4:  
-                this.thwidth = "31.3%";
-                this.tdwidth = "31.2%";
-            break
-            case 6:  
-                this.thwidth = "18.7%";
-                this.tdwidth = "18.6%";
-            break
-        }
-      } else if (width > 1160) {
-        switch(this.numberOfColumns) {
-            case 13:  
-                this.thwidth = "7.6%";
-                this.tdwidth = "7.5%";
-            break
-            case 9:  
-                this.thwidth = "11.7%";
-                this.tdwidth = "11.6%";
-            break
-            case 4:  
-                this.thwidth = "31%";
-                this.tdwidth = "30.9%";
-            break
-            case 6:  
-                this.thwidth = "18.4%";
-                this.tdwidth = "18.3%";
-            break
-        }
-      } else if (width > 1060) {
-        switch(this.numberOfColumns) {
-            case 13:  
-                this.thwidth = "7.4%";
-                this.tdwidth = "7.3%";
-            break
-            case 9:  
-                this.thwidth = "11.4%";
-                this.tdwidth = "11.2%";
-            break
-            case 4:  
-                this.thwidth = "30.6%";
-                this.tdwidth = "30.5%";
-            break
-            case 6:  
-                this.thwidth = "18.1%";
-                this.tdwidth = "18%";
-            break
-        }
-      } else if (width > 860) {
-        switch(this.numberOfColumns) {
-            case 13:  
-                this.thwidth = "7.1%";
-                this.tdwidth = "7%";
-            break
-            case 9:  
-                this.thwidth = "11%";
-                this.tdwidth = "10.9%";
-            break
-            case 4:  
-                this.thwidth = "30.3%";
-                this.tdwidth = "30.2%";
-            break
-            case 6:  
-                this.thwidth = "17.8%";
-                this.tdwidth = "17.7%";
-            break
-        }
-      } else if (width > 860) {
-        switch(this.numberOfColumns) {
-            case 13:  
-                this.thwidth = "6.8%";
-                this.tdwidth = "6.7%";
-            break
-            case 9:  
-                this.thwidth = "10.6%";
-                this.tdwidth = "10.5%";
-            break
-            case 4:  
-                this.thwidth = "29.7%";
-                this.tdwidth = "29.6%";
-            break
-            case 6:  
-                this.thwidth = "17.4%";
-                this.tdwidth = "17.3%";
-            break
-        }
-      }
+      this.tableMinWidth = (20 * (this.numberOfColumns - 1) + 4.3 + 0.125) + "rem"; 
+      let twidth = (width  - 4.3*16 - 80) / (this.numberOfColumns - 1) + "px";
+      this.thwidth = twidth;
+      this.tdwidth = twidth;
   }
   
 }

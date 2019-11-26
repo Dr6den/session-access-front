@@ -1,5 +1,5 @@
 <div class="table-container mt-4">
-<table class="table table-striped">
+<table class="table table-striped" [ngStyle]="{ 'min-width': tableMinWidth }">
     <thead>
         <tr class="text-left table-header">
             <th *ngFor="let column of columns; let step=index" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)"
