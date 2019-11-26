@@ -132,3 +132,56 @@ input[type="text"] {
 .close:after {
     transform: rotate(-45deg);
 }
+
+@media screen and (max-width: 850px) { 
+    .modal-content {
+        width: 36rem;
+    }
+    :host ::ng-deep .roles-input-labels[_ngcontent-c9] {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    :host ::ng-deep .field-of-form[_ngcontent-c10] label {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+}
+
+@media screen and (max-width: 700px) { 
+    .modal-content {
+        width: 30rem;
+    }
+    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+        width: 20rem;
+        margin-left: 6rem;
+    }
+    :host ::ng-deep .input-dynamic[_ngcontent-c9] input[_ngcontent-c9] {
+        width: 20rem;
+        margin-left: 6rem;
+    }
+    :host ::ng-deep .field-of-form[_ngcontent-c10] label {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+}
+
+@media screen and (max-width: 580px) { 
+    .modal-content {
+        width: 22rem;
+    }
+    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+        width: 15rem;
+        margin-left: 14rem;
+    }
+    :host ::ng-deep .input-dynamic[_ngcontent-c9] input[_ngcontent-c9] {
+        width: 15rem;
+        margin-left: 14rem;
+    }
+    :host ::ng-deep .field-of-form[_ngcontent-c10] label {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    :host ::ng-deep .modal[_ngcontent-c3] {
+        left:0;
+    }
+}

@@ -60,3 +60,31 @@
     font-stretch: normal;
     float: right;
 }
+
+@media screen and (max-width: 1320px) { 
+    .error-message {
+        margin-right: 5rem;
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 1050px) { 
+    .error-message {
+        margin-right: 2rem;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 850px) { 
+    .error-message {
+        margin-right: 2rem;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 550px) { 
+    .error-message {
+        margin-right: 1rem;
+        font-size: 10px;
+    }
+}
