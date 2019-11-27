@@ -180,7 +180,7 @@ export class TableSortable {
    
   accountTableWidthAccordingToColumsNumber(width: number) {
       this.tableMinWidth = (20 * (this.numberOfColumns - 1) + 4.3 + 0.125) + "rem"; 
-      let twidth = (width  - 4.3*16 - 80) / (this.numberOfColumns - 1) + "px";
+      let twidth = (width  - 4.3*16 - 100) / (this.numberOfColumns - 1) + "px";
       this.thwidth = twidth;
       this.tdwidth = twidth;
   }
