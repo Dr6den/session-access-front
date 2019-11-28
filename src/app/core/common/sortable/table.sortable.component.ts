@@ -122,11 +122,6 @@ export class TableSortable {
         });
         roleWithAllNeededFields["schemeName"] = this.schemeName;
       } else {
-        /*this.data.forEach((rol) => {
-          if (rol["Roll Up"] === role["Roll Up"]) {
-            roleWithAllNeededFields = rol;
-          }
-        });*/
         roleWithAllNeededFields = {...role};
         roleWithAllNeededFields["schemeName"] = this.schemeName;
       }

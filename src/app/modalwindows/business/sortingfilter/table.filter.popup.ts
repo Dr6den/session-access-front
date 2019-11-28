@@ -14,6 +14,7 @@ export class TableFilterPopup {
     checkboxesText: string[] = [];
     checkedCheckboxes: boolean[] = [];
     selectAllChecked: boolean = true;
+    deselectAllChecked: boolean = false;
     //I use this reserved to store filters for search filtering field, they will save data while we are working with search input field
     reservedCheckboxesText: string[] = [];
     reservedCheckedCheckboxes: boolean[] = [];
@@ -83,6 +84,7 @@ export class TableFilterPopup {
     selectAll(event) {
         if (!this.selectAllChecked) {
             this.selectAllChecked = true;
+            this.deselectAllChecked = false;
             this.checkedCheckboxes = this.checkedCheckboxes.map((val) => val=true);
         } else {
             this.selectAllChecked = false;
@@ -90,10 +92,22 @@ export class TableFilterPopup {
         event.stopPropagation();
     }
     
+    deselectAll(event) {
+        if (!this.deselectAllChecked) {
+            this.selectAllChecked = false;
+            this.deselectAllChecked = true;
+            this.checkedCheckboxes = this.checkedCheckboxes.map((val) => val=false);
+        } else {
+            this.deselectAllChecked = false;
+        }
+        event.stopPropagation();
+    }
+    
     selectCheckbox(event, i) {
         event.stopPropagation();
         if (!this.checkedCheckboxes[i]) {
-            this.checkedCheckboxes[i] = true;            
+            this.checkedCheckboxes[i] = true;  
+            this.deselectAllChecked = false;          
         } else {
             this.checkedCheckboxes[i] = false;
             this.selectAllChecked = false;

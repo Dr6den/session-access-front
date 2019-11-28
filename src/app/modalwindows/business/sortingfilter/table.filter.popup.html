@@ -28,6 +28,13 @@
                         <label for="selectall" class="checkBoxLabel" (click)="selectAll($event)">Select All</label>
                     </span>
                 </div>
+                <div class="pressed-field" (click)="deselectAll($event)"> 
+                    <input type="checkbox" id="selectall" name="deselectall" value="deselectall" class="checkBox" [(ngModel)]="deselectAllChecked" 
+                           [ngModelOptions]="{standalone: true}" (click)="deselectAll($event)">
+                    <span class="label-checkbox-container" (click)="deselectAll($event)">
+                        <label for="deselectall" class="checkBoxLabel" (click)="deselectAll($event)">Deselect All</label>
+                    </span>
+                </div>
                 <div *ngFor="let val of checkboxesText; let i=index" class="pressed-field" (click)="selectCheckbox($event, i)">
                     <input type="checkbox" name="selectall" value="selectall" class="checkBox" [(ngModel)]="checkedCheckboxes[i]"
                        [ngModelOptions]="{standalone: true}" (click)="selectCheckbox($event, i)">
