@@ -110,4 +110,12 @@ export class RestDataSource {
 	let url = this.url + '/DeleteRecords/' + schemeName + '?filter=' + JSON.stringify(scheme);
         return this.globalService.sendRequest<string>("DELETE", url);
     }
+    
+    downloadScheme(schemeName: string): Observable<Blob> {		
+	let params = new HttpParams();
+        params = params.append('type', 'excel');
+
+        let url = this.url + "/ExportData/" + schemeName;
+        return this.globalService.sendRequest<Blob>("GET", url, null, params, null, "blob");
+    }
 }

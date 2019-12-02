@@ -87,21 +87,64 @@
     height: 2.3rem;
 }
 
-@media screen and (max-width: 1050px) { 
+@media screen and (max-width: 1400px) { 
     #searchInputUsers {
         width: 30rem;
     }
 }
 
-@media screen and (max-width: 900px) { 
+@media screen and (max-width: 1200px) { 
     #searchInputUsers {
-        width: 20rem;
+        width: 35rem;
+        display: block;
+    }
+    .create-button, #selectItems {
+        margin-top: 2rem;
+    }
+    #selectItemsLabel {
+        margin-top: 2.6rem;
+    }
+    #create-user {
+        margin-left: 3.6rem;
     }
 }
 
-@media screen and (max-width: 730px) { 
+@media screen and (max-width: 720px) { 
     #searchInputUsers {
-        width: 10rem;
+        width: 25rem;
+        display: block;
+    }
+    .first-button-block {
+        display: block;
+    }
+    #create-user, #table-lable {
+        margin-left: 3.6rem;
+    }
+}
+
+@media screen and (max-width: 500px) { 
+    #searchInputUsers {
+        width: 19rem;
+        display: block;
+    }
+    .first-button-block {
+        display: block;
+    }
+    #create-user, #table-lable {
+        margin-left: 3.6rem;
+    }
+}
+
+@media screen and (max-width: 400px) { 
+    #searchInputUsers {
+        width: 19rem;
+        display: block;
+    }
+    .first-button-block {
+        display: block;
+    }
+    #create-user, #table-lable, #searchInputUsers {
+        margin-left: 2rem;
     }
 }
 
@@ -140,4 +183,16 @@
   background-image: url(../../assets/img/icons8-ios-filled-50.png);
   background-position: 1% 50%;
   background-repeat: no-repeat; 
+}
+
+[type=file] {
+  display: none;
+}
+
+.btn-label {
+  padding-top: 0.5rem;
+  padding-left: 1.3rem;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
 }

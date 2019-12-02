@@ -17,16 +17,18 @@ export class TableOrderByPipe implements PipeTransform {
         if(a === null || typeof a === 'undefined') a = 0;
         if(b === null || typeof b === 'undefined') b = 0;
 
-		if((isNaN(parseFloat(a)) || !isFinite(a)) || (isNaN(parseFloat(b)) || !isFinite(b))){
+		if((isNaN(parseFloat(a)) || !isFinite(a) || (a!=0)) || (isNaN(parseFloat(b)) || !isFinite(b) || (b != 0))){
+                    //did so becouse compiler didn' work correct. You should use only below if, not under if
+                    if(a!=0 && b!=0) {
 			//Isn't a number so lowercase the string to properly compare
 			if(a.toLowerCase() < b.toLowerCase()) return -1;
 			if(a.toLowerCase() > b.toLowerCase()) return 1;
+                    }
 		}
-		else{
 			//Parse strings as numbers to compare properly
 			if(parseFloat(a) < parseFloat(b)) return -1;
 			if(parseFloat(a) > parseFloat(b)) return 1;
-		}
+		
 
 		return 0; //equal each other
 	}

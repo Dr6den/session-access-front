@@ -6,15 +6,25 @@
 
 <div class="button-home">
     <input (input)="filter($event.target.value)" type="text" id="searchInputUsers" placeholder="Search User">
-        
-    <button (click)="userInput()" class="create-button">
-        Create User
-    </button>
     
-    <select type="number" class="select-items" (change)="changeUsersOutputOnPage($event.target.value)">
+    <span class="first-button-block">
+        <button (click)="userInput()" class="create-button" id="create-user">
+            Create User
+        </button>
+    
+        <button id="downloadFile" class="create-button" (click)="downloadScheme()"><i></i>
+            Download Table
+        </button>
+    </span>
+    
+    <label class="create-button btn-label" id="table-lable"> Upload Table
+        <input type="file" name="uploadScheme" (change)="selectSchemeForUpload($event)"/>
+    </label>
+    
+    <select id="selectItems" type="number" class="select-items" (change)="changeUsersOutputOnPage($event.target.value)">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
     </select>
-    <label class="label-show" for="show">Show</label>
+    <label id="selectItemsLabel" class="label-show" for="selectItems">Show</label>
 </div>
 
 <table-sortable

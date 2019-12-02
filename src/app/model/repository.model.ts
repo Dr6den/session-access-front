@@ -118,4 +118,17 @@ export class Model {
     deleteScheme(scheme: object, schemeName: string) {
         this.dataSource.deleteScheme(scheme, schemeName).subscribe();
     }
+    
+    downloadScheme(schemeName: string): void {
+	this.dataSource.downloadScheme(schemeName).subscribe((data) => {
+            this.blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+            
+            var downloadURL = window.URL.createObjectURL(data);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = "Users.xlsx";
+            link.click();
+
+	});
+    }
 }

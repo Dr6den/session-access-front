@@ -9,8 +9,10 @@ export class GlobalService {
     
     public REST_URL: string = `http://localhost:4502/api`;
 
-    public sendRequest<T>(verb: string, url: string, body?: Object, params?: HttpParams, headersPar?: HttpHeaders) : Observable<T> {
+    public sendRequest<T>(verb: string, url: string, body?: Object, params?: HttpParams, headersPar?: HttpHeaders,
+            responseType?: string) : Observable<T> {
         let myHeaders = new HttpHeaders();
+        let resType = (responseType) ? responseType : "json"; 
         
         let authToken = JSON.parse(localStorage.getItem('currentUser'));
         if (authToken) {
@@ -20,10 +22,12 @@ export class GlobalService {
         if (headersPar) {
             myHeaders = headersPar;
         }
+
         return this.http.request<T>(verb, url, {
             body: body,
             headers: myHeaders,
-            params: params
+            params: params,
+            responseType: resType as 'json'
         }).pipe(catchError(err => {
             return throwError(err)}));
     }    

@@ -218,4 +218,20 @@ export class UsersTableComponent {
                 this.currentPageNumber = 1;
             }).catch((response) => this.checkError(response));
     }
+    
+    downloadScheme() {
+        this.model.downloadScheme("Users");
+    }
+    
+    uploadScheme() {
+        console.log("upload")
+    }
+    
+    selectSchemeForUpload(event: any) {
+        let file = event.target.files;
+        if (!file) {
+            let file = event.srcElement.files;
+        }
+        
+    }
 }
