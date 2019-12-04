@@ -226,9 +226,7 @@ export class UsersTableComponent {
     }
     
     uploadScheme(event) {
-        this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
-            console.log(data)
-        }).catch((response) => console.log(response));
+       
     }
     
     selectSchemeForUpload(event: any) {
@@ -236,6 +234,8 @@ export class UsersTableComponent {
         if (!this.fileForUpload) {
             this.fileForUpload = event.srcElement.files[0];
         }
-        
+        this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
+            console.log(data)
+        }).catch((response) => console.log(response));
     }
 }
