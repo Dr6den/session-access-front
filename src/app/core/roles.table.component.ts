@@ -40,6 +40,8 @@ export class RolesTableComponent {
         {num: 10, name: "10"}
     ];
     
+    fileForUpload: File;
+    
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
         this.currentPageNumber = 1; 
         this.numberOfPages = 100;
@@ -223,5 +225,23 @@ export class RolesTableComponent {
                 }                
                 this.currentPageNumber = 1;
             }).catch((response) => this.checkError(response));
+    }
+    
+    downloadScheme() {
+        this.model.downloadScheme(this.title);
+    }
+    
+    uploadScheme(event) {
+        this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
+            console.log(data)
+        }).catch((response) => console.log(response));
+    }
+    
+    selectSchemeForUpload(event: any) {
+        this.fileForUpload = event.target.files[0];
+        if (!this.fileForUpload) {
+            this.fileForUpload = event.srcElement.files[0];
+        }
+        
     }
 }

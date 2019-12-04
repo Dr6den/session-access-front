@@ -10,13 +10,15 @@ export class GlobalService {
     public REST_URL: string = `http://localhost:4502/api`;
 
     public sendRequest<T>(verb: string, url: string, body?: Object, params?: HttpParams, headersPar?: HttpHeaders,
-            responseType?: string) : Observable<T> {
+            responseType?: string, withoutContentType?: boolean) : Observable<T> {
         let myHeaders = new HttpHeaders();
         let resType = (responseType) ? responseType : "json"; 
         
         let authToken = JSON.parse(localStorage.getItem('currentUser'));
         if (authToken) {
-            myHeaders = myHeaders.set("Content-Type", "application/json");
+            if(!withoutContentType) {
+                myHeaders = myHeaders.set("Content-Type", "application/json");
+            }
             myHeaders = myHeaders.set("Authorization", authToken.access_token);
         }
         if (headersPar) {

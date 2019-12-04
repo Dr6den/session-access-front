@@ -121,14 +121,17 @@ export class Model {
     
     downloadScheme(schemeName: string): void {
 	this.dataSource.downloadScheme(schemeName).subscribe((data) => {
-            this.blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+            let blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
             
             var downloadURL = window.URL.createObjectURL(data);
             var link = document.createElement('a');
             link.href = downloadURL;
-            link.download = "Users.xlsx";
+            link.download = schemeName + ".xlsx";
             link.click();
-
 	});
+    }
+    
+    uploadScheme(scheme: File, schemeName: string): Observable<object> {
+        return this.dataSource.uploadScheme(scheme, schemeName);
     }
 }

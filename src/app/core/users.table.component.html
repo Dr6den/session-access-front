@@ -17,9 +17,10 @@
         </button>
     </span>
     
-    <label class="create-button btn-label" id="table-lable"> Upload Table
-        <input type="file" name="uploadScheme" (change)="selectSchemeForUpload($event)"/>
-    </label>
+    <input type="file" name="uploadScheme" id="upload-input" (change)="selectSchemeForUpload($event)" accept=".xlsx"/>
+    <button id="uploadButton" class="create-button" (click)="uploadScheme($event)" >
+        Upload Table
+    </button>
     
     <select id="selectItems" type="number" class="select-items" (change)="changeUsersOutputOnPage($event.target.value)">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>

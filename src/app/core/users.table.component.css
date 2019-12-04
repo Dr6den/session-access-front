@@ -83,19 +83,13 @@
 #searchInputUsers {
     margin-left: 3.6rem;
     margin-top: 3.6rem;
-    width: 40rem;
+    width: 30rem;
     height: 2.3rem;
 }
 
 @media screen and (max-width: 1400px) { 
     #searchInputUsers {
-        width: 30rem;
-    }
-}
-
-@media screen and (max-width: 1200px) { 
-    #searchInputUsers {
-        width: 35rem;
+        width: 45rem;
         display: block;
     }
     .create-button, #selectItems {
@@ -109,9 +103,9 @@
     }
 }
 
-@media screen and (max-width: 720px) { 
+@media screen and (max-width: 1000px) { 
     #searchInputUsers {
-        width: 25rem;
+        width: 35rem;
         display: block;
     }
     .first-button-block {
@@ -120,9 +114,12 @@
     #create-user, #table-lable {
         margin-left: 3.6rem;
     }
+    #upload-input {
+        margin-left: 2.6rem;
+    }
 }
 
-@media screen and (max-width: 500px) { 
+@media screen and (max-width: 670px) { 
     #searchInputUsers {
         width: 19rem;
         display: block;
@@ -130,8 +127,22 @@
     .first-button-block {
         display: block;
     }
-    #create-user, #table-lable {
+    #create-user, #table-lable, #uploadButton {
         margin-left: 3.6rem;
+    }
+    #upload-input {
+        margin-left: 2.6rem;
+        display: block;
+        margin-top: 1rem;
+    }
+    #selectItemsLabel {
+        margin-top: 0.6rem;
+    }
+    #selectItems {
+        margin-top: 0;
+    }
+    #uploadButton {
+        margin-top: 0;
     }
 }
 
@@ -143,8 +154,11 @@
     .first-button-block {
         display: block;
     }
-    #create-user, #table-lable, #searchInputUsers {
+    #create-user, #table-lable, #searchInputUsers, #uploadButton {
         margin-left: 2rem;
+    }
+    #upload-input {
+        margin-left: 1rem;
     }
 }
 
@@ -186,7 +200,40 @@
 }
 
 [type=file] {
-  display: none;
+  position: relative;
+  padding-left: 6rem;
+  top: -5px;
+  height: 2.5rem;
+  width: 17.5rem;
+  font-size: 14px;
+}
+
+#upload-input::before {
+  content: 'Select Table Template';
+  position: absolute;
+  left: 1rem;
+  display: inline-block;
+  padding: 0.5rem 0.5rem;
+  outline: none;
+  cursor: pointer;
+  width: 10.2rem;
+  height: 2.3rem;
+  background-color: #00a28f;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+}
+
+#upload-input::-webkit-file-upload-button {
+  visibility: hidden;
 }
 
 .btn-label {

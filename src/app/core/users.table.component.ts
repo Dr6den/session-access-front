@@ -36,6 +36,8 @@ export class UsersTableComponent {
         {num: 10, name: "10"}
     ];
     
+    fileForUpload: File;
+    
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
         this.model.getUsers();
         this.userSorting = this.fillInTableService.fillSortingToUsersTable();
@@ -220,17 +222,19 @@ export class UsersTableComponent {
     }
     
     downloadScheme() {
-        this.model.downloadScheme("Users");
+        this.model.downloadScheme(this.title);
     }
     
-    uploadScheme() {
-        console.log("upload")
+    uploadScheme(event) {
+        this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
+            console.log(data)
+        }).catch((response) => console.log(response));
     }
     
     selectSchemeForUpload(event: any) {
-        let file = event.target.files;
-        if (!file) {
-            let file = event.srcElement.files;
+        this.fileForUpload = event.target.files[0];
+        if (!this.fileForUpload) {
+            this.fileForUpload = event.srcElement.files[0];
         }
         
     }

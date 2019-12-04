@@ -1,5 +1,5 @@
 import { Injectable, Inject, InjectionToken } from "@angular/core";
-import { HttpClient, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders} from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "../model/user.model";
 import { UserUpdate } from "../model/userUpdate.model";
@@ -117,5 +117,13 @@ export class RestDataSource {
 
         let url = this.url + "/ExportData/" + schemeName;
         return this.globalService.sendRequest<Blob>("GET", url, null, params, null, "blob");
+    }
+    
+    uploadScheme(scheme: File, schemeName: string): Observable<object> {
+        let url = this.url + "/ImportData/" + schemeName + "?type=excel";        
+        let formData: FormData = new FormData();
+        formData.append("excel", scheme, "files");
+        
+        return this.globalService.sendRequest<object>("POST", url, formData, null, null, null, true);
     }
 }
