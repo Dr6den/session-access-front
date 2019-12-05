@@ -22,7 +22,7 @@
         Upload Table
     </button>
     
-    <select id="selectItems" type="number" class="select-items" (change)="changeUsersOutputOnPage($event.target.value)">
+    <select id="selectItems" type="number" class="select-items" (change)="changeRolesOutputOnPage($event.target.value)">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
     </select>
     <label id="selectItemsLabel" class="label-show" for="selectItems">Show</label>

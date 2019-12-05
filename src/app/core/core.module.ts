@@ -6,7 +6,6 @@ import { IndexComponent } from "./index.component";
 import { UsersTableComponent } from "./users.table.component";
 import { RolesTableComponent } from "./roles.table.component";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { NgSelectModule } from 'ng-custom-select';
 import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ClickOutsideModule } from 'ng-click-outside';
@@ -31,7 +30,7 @@ import { TabComponent } from "./common/tabs/tab.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-    imports: [BrowserModule, NgbModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), NgSelectModule, ReactiveFormsModule,
+    imports: [BrowserModule, NgbModule, FormsModule, ModelModule, RouterModule, NgMultiSelectDropDownModule.forRoot(), ReactiveFormsModule,
         ClickOutsideModule, ConfirmationPopoverModule.forRoot({
              confirmButtonType: 'danger'
     })],

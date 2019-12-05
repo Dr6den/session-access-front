@@ -1,4 +1,4 @@
-:host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] .selected-item[_ngcontent-c6] {
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item {
     font-family: sans-serif;
     font-size: 14px;
     font-weight: normal;
@@ -10,7 +10,7 @@
     margin-bottom: 0.1rem;
 }
 
-:host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] {
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
     border-radius: 6px;
     border: solid 1px #6e8298;
     max-height: 5rem;
@@ -134,7 +134,7 @@ input[type="text"] {
     .modal-content {
         width: 36rem;
     }
-    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+    :host ::ng-deep .multiselect-dropdown {
         width: 24rem;
         margin-left: 4rem;
     }
@@ -144,7 +144,7 @@ input[type="text"] {
     .user-textbox {
         width: 17.5rem;
     }
-    :host ::ng-deep .user-input-labels[_ngcontent-c3] {
+    :host ::ng-deep .user-input-labels {
         margin-left: 1.5rem;
     }
 }
@@ -153,7 +153,7 @@ input[type="text"] {
     .modal-content {
         width: 28rem;
     }
-    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+    :host ::ng-deep .multiselect-dropdown {
         width: 18rem;
         margin-left: 0rem;
     }
@@ -163,15 +163,15 @@ input[type="text"] {
     .user-textbox {
         width: 11.5rem;
     }
-    :host ::ng-deep .user-input-labels[_ngcontent-c3] {
+    :host ::ng-deep .user-input-labels {
         margin-left: 0.5rem;
         width: 2rem;
         overflow-x: hidden;
     }
-    :host ::ng-deep .textbox[_ngcontent-c3], .dropdown[_ngcontent-c3] {
+    :host ::ng-deep .textbox, .dropdown {
         width: 18rem;
     }
-    :host ::ng-deep .modal[_ngcontent-c3] {
+    :host ::ng-deep .modal {
         left:0;
     }
 }
@@ -180,7 +180,7 @@ input[type="text"] {
     .modal-content {
         width: 22rem;
     }
-    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+    :host ::ng-deep .multiselect-dropdown {
         width: 14rem;
         margin-left: 0rem;
     }
@@ -190,15 +190,15 @@ input[type="text"] {
     .user-textbox {
         width: 7rem;
     }
-    :host ::ng-deep .user-input-labels[_ngcontent-c3] {
+    :host ::ng-deep .user-input-labels {
         margin-left: 0.5rem;
         width: 2rem;
         overflow-x: hidden;
     }
-    :host ::ng-deep .textbox[_ngcontent-c3], .dropdown[_ngcontent-c3] {
+    :host ::ng-deep .textbox, .dropdown {
         width: 14rem;
     }
-    :host ::ng-deep .modal[_ngcontent-c3] {
+    :host ::ng-deep .modal {
         left:0;
     }
 }

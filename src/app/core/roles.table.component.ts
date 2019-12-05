@@ -15,7 +15,7 @@ import { TableContainer } from "../model/table.container";
 })
 export class RolesTableComponent {
     public title: string = "Roles";
-    @ViewChild(RoleInputPopupComponent) roleInputPopup:RoleInputPopupComponent;
+    @ViewChild(RoleInputPopupComponent, {static: false}) roleInputPopup:RoleInputPopupComponent;
     levelNum:number;    
      
     //sorting table properties

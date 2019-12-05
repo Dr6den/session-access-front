@@ -33,7 +33,7 @@ export class RoleInputPopupComponent implements OnInit {
     dropdownMultiSettings = {};
     errorMessage = "error message";
 
-    @ViewChild('dropboxcontainer', { read: ViewContainerRef }) container;
+    @ViewChild('dropboxcontainer', { read: ViewContainerRef, static: false }) container;
     constructor(private resolver: ComponentFactoryResolver, private model: Model) {  
       //  let promise = this.getSchemaInfoPromise();  
       //  this.setDropdownListByApplications(promise, null);       

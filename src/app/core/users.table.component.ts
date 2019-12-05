@@ -14,7 +14,7 @@ import { TableContainer } from "../model/table.container";
 })
 export class UsersTableComponent {
     public title: string = "Users";
-    @ViewChild(UserInputPopupComponent) userInputPopup:UserInputPopupComponent;
+    @ViewChild(UserInputPopupComponent, {static: false}) userInputPopup:UserInputPopupComponent;
     levelNum:number;
      tableNumberOfColumns: number = 5;
 

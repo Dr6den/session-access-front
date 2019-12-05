@@ -1,17 +1,17 @@
-:host ::ng-deep .multiselect-dropdown[_ngcontent-c6] .dropdown-btn[_ngcontent-c6] {
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
     border-radius: 6px;
     border: solid 1px #6e8298;
 }
 
-:host ::ng-deep div.application .multiselect-item-checkbox[_ngcontent-c8] input[type=checkbox][_ngcontent-c8] + div[_ngcontent-c8]:before {
-	border-radius:50%;
+:host ::ng-deep div.application .multiselect-item-checkbox input[type=checkbox] + div:before {
+    border-radius:50%;
 }
 
-:host ::ng-deep div.application .multiselect-item-checkbox[_ngcontent-c8] input[type=checkbox][_ngcontent-c8]:checked + div[_ngcontent-c8]:before {
-	background: white;
+:host ::ng-deep div.application .multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+    background: white;
 }
-:host ::ng-deep div.application .multiselect-item-checkbox[_ngcontent-c8] input[type=checkbox][_ngcontent-c8]:checked + div[_ngcontent-c8]:after {
-	box-sizing: content-box;
+:host ::ng-deep div.application .multiselect-item-checkbox input[type=checkbox]:checked + div:after {
+    box-sizing: content-box;
     content: '';
     color: #337ab7;
     position: absolute;
@@ -23,8 +23,8 @@
     border: none;
     text-align: center;
     transition: all .4s ease;
-	border-radius:50%;
-	background-color: #337ab7;
+    border-radius:50%;
+    background-color: #337ab7;
 }
 
 .roles-input-labels {
@@ -137,11 +137,11 @@ input[type="text"] {
     .modal-content {
         width: 36rem;
     }
-    :host ::ng-deep .roles-input-labels[_ngcontent-c9] {
+    :host ::ng-deep .roles-input-labels {
         margin-top: 1rem;
         margin-left: 3rem;
     }
-    :host ::ng-deep .field-of-form[_ngcontent-c10] label {
+    :host ::ng-deep .field-of-form label {
         margin-top: 1rem;
         margin-left: 3rem;
     }
@@ -151,15 +151,15 @@ input[type="text"] {
     .modal-content {
         width: 30rem;
     }
-    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+    :host ::ng-deep .multiselect-dropdown {
         width: 20rem;
         margin-left: 6rem;
     }
-    :host ::ng-deep .input-dynamic[_ngcontent-c9] input[_ngcontent-c9] {
+    :host ::ng-deep .input-dynamic input {
         width: 20rem;
         margin-left: 6rem;
     }
-    :host ::ng-deep .field-of-form[_ngcontent-c10] label {
+    :host ::ng-deep .field-of-form label {
         margin-top: 1rem;
         margin-left: 3rem;
     }
@@ -169,19 +169,19 @@ input[type="text"] {
     .modal-content {
         width: 22rem;
     }
-    :host ::ng-deep .multiselect-dropdown[_ngcontent-c8] {
+    :host ::ng-deep .multiselect-dropdown {
         width: 15rem;
         margin-left: 14rem;
     }
-    :host ::ng-deep .input-dynamic[_ngcontent-c9] input[_ngcontent-c9] {
+    :host ::ng-deep .input-dynamic input {
         width: 15rem;
         margin-left: 14rem;
     }
-    :host ::ng-deep .field-of-form[_ngcontent-c10] label {
+    :host ::ng-deep .field-of-form label {
         margin-top: 1rem;
         margin-left: 3rem;
     }
-    :host ::ng-deep .modal[_ngcontent-c3] {
+    :host ::ng-deep .modal {
         left:0;
     }
 }
