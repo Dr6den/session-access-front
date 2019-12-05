@@ -41,6 +41,7 @@ export class RolesTableComponent {
     ];
     
     fileForUpload: File;
+    uploadError: string = "error message";
     
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
         this.currentPageNumber = 1; 
@@ -233,8 +234,12 @@ export class RolesTableComponent {
     
     uploadScheme(event) {
         this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
-            console.log(data)
-        }).catch((response) => console.log(response));
+            if(data["errors"].length !== 0) {
+                this.uploadError = "Upload Table Error: " + data["errors"][0].__ValidationErrors;
+            } else {
+                this.uploadError = "error message";
+            }
+        }).catch((response) => this.uploadError = response);
     }
     
     selectSchemeForUpload(event: any) {

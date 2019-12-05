@@ -37,6 +37,7 @@ export class UsersTableComponent {
     ];
     
     fileForUpload: File;
+    uploadError: string = "error message";
     
     constructor(private model: Model, private router: Router, private fillInTableService: FillInTableService) {
         this.model.getUsers();
@@ -235,7 +236,13 @@ export class UsersTableComponent {
             this.fileForUpload = event.srcElement.files[0];
         }
         this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
-            console.log(data)
-        }).catch((response) => console.log(response));
+            if(data["errors"].length !== 0) {
+                this.uploadError = "Upload Table Error: " + data["errors"][0].__ValidationErrors;
+            } else {
+                this.uploadError = "error message";
+            }
+        }).catch((response) => {
+            this.uploadError = response;
+        });
     }
 }

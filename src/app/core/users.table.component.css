@@ -245,3 +245,9 @@
   border-style: outset;
   border-color: buttonface;
 }
+
+.error-message {
+    margin-left: 2.5rem;
+    margin-top: 0.8rem;
+    position: absolute;
+}

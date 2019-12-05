@@ -4,6 +4,10 @@
     <a href="javascript:void(0);" (click)="resetForm()">&lt; - Back to Home</a>
 </div>
 
+<div [ngStyle]="{'color': uploadError === 'error message' ? '#FFFFFF' : 'red'}" class="error-message">
+        {{uploadError}}
+</div>
+
 <div class="button-home">
     <input type="text" id="searchInput" placeholder="Search {{title}}" (input)="filter($event.target.value)">
        
