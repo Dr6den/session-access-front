@@ -73,6 +73,15 @@ tbody td {
     overflow-y: auto;
 }
 
+@-moz-document url-prefix() {
+  tbody td {
+    word-break: break-all;
+  }  
+  tbody tr {
+    display: block;
+  }
+}
+
 tbody td:not(:first-child), thead th:not(:first-child) {
     min-width: 20rem;
 }
