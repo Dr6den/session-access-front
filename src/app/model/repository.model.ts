@@ -131,7 +131,11 @@ export class Model {
 	});
     }
     
-    uploadScheme(scheme: File, schemeName: string): Observable<object> {
-        return this.dataSource.uploadScheme(scheme, schemeName);
+    uploadSchemeFile(scheme: File, schemeName: string, stage: string): Observable<object> {
+        return this.dataSource.uploadSchemeFile(scheme, schemeName, stage);
+    }
+    
+    uploadScheme(scheme: object, schemeName: string, stage: string): Observable<object> {
+        return this.dataSource.uploadScheme(scheme, schemeName, stage);
     }
 }

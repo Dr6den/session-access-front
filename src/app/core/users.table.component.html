@@ -12,11 +12,11 @@
     <input (input)="filter($event.target.value)" type="text" id="searchInputUsers" placeholder="Search User">
     
     <span class="first-button-block">
-        <button (click)="userInput()" class="create-button" id="create-user">
+        <button (click)="userInput()" class="standard-button" id="create-user">
             Create User
         </button>
     
-        <button id="downloadFile" class="create-button" (click)="downloadScheme()"><i></i>
+        <button id="downloadFile" class="standard-button" (click)="downloadScheme()"><i></i>
             Download Table
         </button>
     </span>
@@ -49,3 +49,5 @@
 </div>
 
 <user-input-popup></user-input-popup>
+
+<upload-popup></upload-popup>

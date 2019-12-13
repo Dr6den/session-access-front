@@ -9,11 +9,11 @@ import { RoleInputPopupComponent } from "../modalwindows/business/role.input.pop
 import { TableContainer } from "../model/table.container";
 
 @Component({
-    selector: "rolesTable",
-    templateUrl: "roles.table.component.html",
-    styleUrls: ["roles.table.component.css"]
+    selector: "temporaryTable",
+    templateUrl: "temporary.table.component.html",
+    styleUrls: ["temporary.table.component.css"]
 })
-export class RolesTableComponent {
+export class TemporaryTableComponent {
     public title: string = "Roles";
     @ViewChild(RoleInputPopupComponent, {static: false}) roleInputPopup:RoleInputPopupComponent;
     levelNum:number;    

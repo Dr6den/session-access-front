@@ -5,6 +5,7 @@ import { User } from "../model/user.model";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { FillInTableService } from "./common/sortable/fill.in.table.service";
 import { UserInputPopupComponent } from "../modalwindows/business/user.input.popup.component";
+import { UploadPopupComponent } from "../modalwindows/business/uploadmodal/upload.popup.component";
 import { TableContainer } from "../model/table.container";
 
 @Component({
@@ -15,9 +16,9 @@ import { TableContainer } from "../model/table.container";
 export class UsersTableComponent {
     public title: string = "Users";
     @ViewChild(UserInputPopupComponent, {static: false}) userInputPopup:UserInputPopupComponent;
+    @ViewChild(UploadPopupComponent, {static: false}) uploadPopup:UploadPopupComponent;
     levelNum:number;
-     tableNumberOfColumns: number = 5;
-
+    tableNumberOfColumns: number = 5;
     
     //sorting table properties
     userColumns: any[];
@@ -235,12 +236,9 @@ export class UsersTableComponent {
         if (!this.fileForUpload) {
             this.fileForUpload = event.srcElement.files[0];
         }
-        this.model.uploadScheme(this.fileForUpload, this.title).toPromise().then((data) => {
-            if(data["errors"].length !== 0) {
-                this.uploadError = "Upload Table Error: " + data["errors"][0].__ValidationErrors;
-            } else {
-                this.uploadError = "error message";
-            }
+  
+        this.model.uploadSchemeFile(this.fileForUpload, this.title, "upload").toPromise().then((data) => {
+            this.uploadPopup.openModalDialog(data, this.fileForUpload.name, this.title);
         }).catch((response) => {
             this.uploadError = response;
         });

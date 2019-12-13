@@ -23,22 +23,19 @@
     background-color: aquamarine;
 }
 
-.button-aqua { 
-    border-radius: 0.4rem;
-    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
-    text-align: left;
-    background-color: darkturquoise;
-    color: #fff7f8;
-    padding-top: 0rem;
-}
-
-.button-halt { 
-    border-radius: 0.4rem;
-    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
-    text-align: left;
-    background-color: #dc3545;
-    color: #fff7f8;
-    padding-top: 0rem;
+.standard-button {
+    width: 9.1rem;
+    height: 2.3rem;
+    margin-left: 0.9rem;
+    background-color: #00a28f;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
 }
 
 .header-color {

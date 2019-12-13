@@ -1,4 +1,6 @@
-<div class="ml-2" *ngFor="let tab of tabs">
-    <a class="float-left mr-2 mb-5" [routerLink]="" (click)="selectTab(tab)">{{tab.tabTitle}}</a>
+<div class="tabs-header" *ngFor="let tab of tabs" [style.background-color]="selectedTabName === tab.tabTitle ? '#D2E0E6' : 'white'">
+    <a class="tabs-header-links" [routerLink]="">{{tab.tabTitle}}</a>
+    <!--<a class="tabs-header-links" [routerLink]="" (click)="selectTab(tab)">{{tab.tabTitle}}</a>-->
+
 </div>
 <ng-content></ng-content>

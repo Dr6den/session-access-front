@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ModelModule } from "./model/model.module";
 import { CoreModule } from "./core/core.module";
 import { InsertionRolesComponent } from './insertion.roles.component';
-import { routing } from "./insertion.roles.routing";
+import { routing } from "./application.routing";
 
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';

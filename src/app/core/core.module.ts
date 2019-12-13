@@ -5,6 +5,7 @@ import { ModelModule } from "../model/model.module";
 import { IndexComponent } from "./index.component";
 import { UsersTableComponent } from "./users.table.component";
 import { RolesTableComponent } from "./roles.table.component";
+import { TemporaryTableComponent } from "./temporary.table.component"
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { RouterModule } from "@angular/router";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,6 +20,7 @@ import { RoleInputPopupComponent } from '../modalwindows/business/role.input.pop
 import { DynamicDropboxComponent } from '../modalwindows/business/dynamic/dynamic.dropbox.component';
 import { DynamicInputComponent } from '../modalwindows/business/dynamic/dynamic.input.component';
 import { TableFilterPopup } from "../modalwindows/business/sortingfilter/table.filter.popup";
+import { UploadPopupComponent } from '../modalwindows/business/uploadmodal/upload.popup.component';
 import { FormatTablePipe } from "./common/sortable/table.format.pipe";
 import { SplitStringAndReturnOneOfPipe } from "./common/sortable/split.string.return.one.contained.pipe";
 import { SplitStringPipe } from "./common/sortable/split.string.pipe";
@@ -36,10 +38,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     })],
     declarations: [IndexComponent, RolesTableComponent, UsersTableComponent, HeaderComponent, InfoPopupComponent, SplitStringPipe, DynamicInputComponent,
          LoginPopupComponent, ProfilePopupComponent, TableFooterComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe,
-         TabsComponent, TabComponent, TableSortable, UserInputPopupComponent, RoleInputPopupComponent, DynamicDropboxComponent, TableFilterPopup],
+         TabsComponent, TabComponent, TableSortable, UserInputPopupComponent, RoleInputPopupComponent, DynamicDropboxComponent, TableFilterPopup, UploadPopupComponent,
+         TemporaryTableComponent],
     providers: [LoginPopupComponent, ProfilePopupComponent, FormatTablePipe, TableOrderByPipe, SplitStringAndReturnOneOfPipe, SplitStringPipe,
-         IndexComponent, UserInputPopupComponent, RoleInputPopupComponent, InfoPopupComponent],
-    exports: [ModelModule, RolesTableComponent, UsersTableComponent],
+         IndexComponent, UserInputPopupComponent, RoleInputPopupComponent, InfoPopupComponent, UploadPopupComponent],
+    exports: [ModelModule, RolesTableComponent, UsersTableComponent, TemporaryTableComponent],
     bootstrap: [RoleInputPopupComponent],
     entryComponents: [DynamicInputComponent, DynamicDropboxComponent, TableFilterPopup]
 })

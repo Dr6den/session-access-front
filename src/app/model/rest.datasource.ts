@@ -119,11 +119,16 @@ export class RestDataSource {
         return this.globalService.sendRequest<Blob>("GET", url, null, params, null, "blob");
     }
     
-    uploadScheme(scheme: File, schemeName: string): Observable<object> {
-        let url = this.url + "/ImportData/" + schemeName + "?type=excel";        
+    uploadSchemeFile(scheme: File, schemeName: string, stage: string): Observable<object> {
+        let url = this.url + "/ImportData/" + schemeName + "?type=excel&stage=" + stage;        
         let formData: FormData = new FormData();
         formData.append("excel", scheme, "files");
         
         return this.globalService.sendRequest<object>("POST", url, formData, null, null, null, true);
+    }
+    
+    uploadScheme(scheme: object, schemeName: string, stage: string): Observable<object> {
+        let url = this.url + "/ImportData/" + schemeName + "?type=excel&stage=" + stage;                
+        return this.globalService.sendRequest<object>("POST", url, scheme, null, null, null, true);
     }
 }

@@ -1,10 +1,16 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Aug 25, 2019, 8:25:15 PM
-    Author     : a.denysenko
-*/
+.tabs-header {
+    margin-left: 0.5rem;
+    display: inline;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.1rem;
+    border-top: solid 1px rgba(110, 130, 152, 0.5);
+    border-right: solid 1px rgba(110, 130, 152, 0.5);
+    border-left: solid 1px rgba(110, 130, 152, 0.5);
+    border-radius: 5px;
+}
+
+.tabs-header-links {
+    display: inline;
+}
 
