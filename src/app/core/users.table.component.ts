@@ -238,7 +238,7 @@ export class UsersTableComponent {
         }
   
         this.model.uploadSchemeFile(this.fileForUpload, this.title, "upload").toPromise().then((data) => {
-            this.uploadPopup.openModalDialog(data, this.fileForUpload.name, this.title);
+            this.uploadPopup.openModalDialog(data, this.fileForUpload.name);
         }).catch((response) => {
             this.uploadError = response;
         });

@@ -12,19 +12,10 @@
     <input type="text" id="searchInput" placeholder="Search {{title}}" (input)="filter($event.target.value)">
        
     <span class="first-button-block">
-        <button (click)="roleInput()" class="standard-button" id="create-user">
-            Create {{title}}
-        </button>
-        
-        <button id="downloadFile" class="standard-button" (click)="downloadScheme()"><i></i>
-            Download Table
+        <button (click)="push()" class="standard-button" id="create-user">
+            Push
         </button>
     </span>
-    
-    <input type="file" name="uploadScheme" id="upload-input" (change)="selectSchemeForUpload($event)" accept=".xlsx"/>
-    <button id="uploadButton" class="standard-button" (click)="uploadScheme($event)" >
-        Upload Table
-    </button>
     
     <select id="selectItems" type="number" class="select-items" (change)="changeRolesOutputOnPage($event.target.value)">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
@@ -51,5 +42,3 @@
     <span (click)="nextPageTabulate()" class="pagination-elem">></span>
     <span (click)="lastPageTabulate()" class="pagination-elem">&#187;</span>
 </div>
-
-<role-input-popup></role-input-popup>

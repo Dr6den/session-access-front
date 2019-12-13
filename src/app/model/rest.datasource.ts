@@ -129,6 +129,6 @@ export class RestDataSource {
     
     uploadScheme(scheme: object, schemeName: string, stage: string): Observable<object> {
         let url = this.url + "/ImportData/" + schemeName + "?type=excel&stage=" + stage;                
-        return this.globalService.sendRequest<object>("POST", url, scheme, null, null, null, true);
+        return this.globalService.sendRequest<object>("POST", url, scheme);
     }
 }

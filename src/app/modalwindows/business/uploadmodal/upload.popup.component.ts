@@ -24,12 +24,12 @@ export class UploadPopupComponent {
     
     constructor(private model: Model, private router: Router){}
     
-    openModalDialog(response: object, fileName: string, directoryName: string){
+    openModalDialog(response: object, fileName: string) {
         this.display='block'; //Set block css
         this.documentName = fileName;
         this.levels = response["sheets"];
         this.uploadResponse = response;
-        this.directoryName = directoryName;
+        this.directoryName = fileName.substring(0, fileName.indexOf("."));
         this.selectedSheet = this.levels[0];
     }
     
@@ -41,6 +41,7 @@ export class UploadPopupComponent {
     
     selectSheet() {
         this.uploadResponse["sheet"] = this.selectedSheet;
+        delete this.uploadResponse["sheets"];
         this.model.uploadScheme(this.uploadResponse, this.directoryName, "sheet").toPromise().then((data) => {
             if(data["message"]) {
                 this.uploadPopupError = data["message"];
@@ -58,15 +59,8 @@ export class UploadPopupComponent {
     
     validate() {
         this.model.uploadScheme(this.chooseSheetResponse, this.directoryName, "insert").toPromise().then((data) => {
-            /*if(data["message"]) {
-                this.uploadPopupError = data["message"];
-            } else {
-                this.tabs.nextTab();
-                this.progressValue = 100;
-                this.chooseSheetResponse = data;
-                this.linesLoaded = data["records"];
-                this.linesSucceeded = data["records"];
-            }*/
+            this.router.navigateByUrl("/temporaryTable/" + this.directoryName);
+            this.closeModalDialog();
         }).catch((response) => {
             this.uploadPopupError = response;
         }); 
