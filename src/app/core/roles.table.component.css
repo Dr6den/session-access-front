@@ -112,7 +112,7 @@
     .first-button-block {
         display: block;
     }
-    #create-user, #table-lable, #uploadButton {
+    #create-user, #table-lable {
         margin-left: 3.6rem;
     }
     #upload-input {
@@ -126,9 +126,6 @@
     #selectItems {
         margin-top: 0;
     }
-    #uploadButton {
-        margin-top: 0;
-    }
 }
 
 @media screen and (max-width: 400px) { 
@@ -139,7 +136,7 @@
     .first-button-block {
         display: block;
     }
-    #create-user, #table-lable, #searchInputUsers, #uploadButton {
+    #create-user, #table-lable, #searchInputUsers {
         margin-left: 2rem;
     }
     #upload-input {
@@ -193,15 +190,23 @@
   font-size: 14px;
 }
 
+.error-message {
+    margin-left: 2.5rem;
+    margin-top: 0.8rem;
+    position: absolute;
+}
+
+
 #upload-input::before {
-  content: 'Select Table Template';
+  content: 'Upload Table';
   position: absolute;
+  visibility: visible;
   left: 1rem;
   display: inline-block;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 1.5rem;
   outline: none;
   cursor: pointer;
-  width: 10.2rem;
+  width: 9.1rem;
   height: 2.3rem;
   background-color: #00a28f;
   font-family: Roboto;
@@ -219,10 +224,4 @@
 
 #upload-input::-webkit-file-upload-button {
   visibility: hidden;
-}
-
-.error-message {
-    margin-left: 2.5rem;
-    margin-top: 0.8rem;
-    position: absolute;
 }

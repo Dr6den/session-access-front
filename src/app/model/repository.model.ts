@@ -142,4 +142,8 @@ export class Model {
     getTemporaryTable(temporaryId: string): Observable<object> {
         return this.dataSource.getTemporaryScheme(temporaryId);
     }
+    
+    deleteElemFromTemporaryScheme(tempId: string) {
+        this.dataSource.deleteElemFromTemporaryScheme(tempId).subscribe();
+    }
 }

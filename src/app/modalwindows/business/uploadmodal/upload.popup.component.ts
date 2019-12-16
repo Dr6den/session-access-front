@@ -23,13 +23,14 @@ export class UploadPopupComponent {
     
     constructor(private model: Model, private router: Router){}
     
-    openModalDialog(response: object, fileName: string) {
+    openModalDialog(response: object, fileName: string, schemeTitle: string) {
         this.display='block'; //Set block css
         this.documentName = fileName;
         this.levels = response["sheets"];
         this.uploadResponse = response;
-        this.directoryName = fileName.substring(0, fileName.indexOf("."));
+        this.directoryName = schemeTitle;
         this.selectedSheet = this.levels[0];
+        this.uploadPopupError = "error message";
     }
     
     closeModalDialog(){

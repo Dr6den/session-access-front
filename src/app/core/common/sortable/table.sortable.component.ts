@@ -25,6 +25,7 @@ export class TableSortable {
   @Input() schemeMetadata: SchemeMetadata;
   @Input() schemeName: string;
   @Input() numberOfColumns: number;
+  @Input() tempId: string;
   @Output() callUserInputPopup = new EventEmitter();
   @Output() callRoleInputPopup = new EventEmitter();
   @Output() filterByNames = new EventEmitter();
@@ -96,7 +97,9 @@ export class TableSortable {
    * delete item is universal method, so you can use it with User and Role
    */
   deleteItem(item: any) {
-      if (this.schemeName === 'Users') {
+      if (this.tempId) {
+        this.model.deleteElemFromTemporaryScheme(this.tempId);
+      } else if (this.schemeName === 'Users') {
         this.model.deleteUser(item.NTSID);
       } else if (this.schemeName === 'Roles') {
         this.model.deleteRole(item.ROLENAME);	

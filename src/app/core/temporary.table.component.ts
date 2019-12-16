@@ -39,6 +39,7 @@ export class TemporaryTableComponent {
     ];
     
     validationResponse: string;
+    isTemplate: boolean = true;
     
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
         this.currentPageNumber = 1; 

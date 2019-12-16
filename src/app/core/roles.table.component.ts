@@ -6,6 +6,7 @@ import { SchemeMetadata } from "../model/scheme.metadata";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { FillInTableService } from "./common/sortable/fill.in.table.service";
 import { RoleInputPopupComponent } from "../modalwindows/business/role.input.popup.component";
+import { UploadPopupComponent } from "../modalwindows/business/uploadmodal/upload.popup.component";
 import { TableContainer } from "../model/table.container";
 
 @Component({
@@ -16,6 +17,7 @@ import { TableContainer } from "../model/table.container";
 export class RolesTableComponent {
     public title: string = "Roles";
     @ViewChild(RoleInputPopupComponent, {static: false}) roleInputPopup:RoleInputPopupComponent;
+    @ViewChild(UploadPopupComponent, {static: false}) uploadPopup:UploadPopupComponent;
     levelNum:number;    
      
     //sorting table properties
@@ -231,22 +233,17 @@ export class RolesTableComponent {
     downloadScheme() {
         this.model.downloadScheme(this.title);
     }
-    
-    uploadScheme(event) {
-        this.model.uploadScheme(this.fileForUpload, this.title, "upload").toPromise().then((data) => {
-            if(data["errors"].length !== 0) {
-                this.uploadError = "Upload Table Error: " + data["errors"][0].__ValidationErrors;
-            } else {
-                this.uploadError = "error message";
-            }
-        }).catch((response) => this.uploadError = response);
-    }
-    
+
     selectSchemeForUpload(event: any) {
         this.fileForUpload = event.target.files[0];
         if (!this.fileForUpload) {
             this.fileForUpload = event.srcElement.files[0];
         }
-        
+  
+        this.model.uploadSchemeFile(this.fileForUpload, this.title, "upload").toPromise().then((data) => {
+            this.uploadPopup.openModalDialog(data, this.fileForUpload.name, this.title);
+        }).catch((response) => {
+            this.uploadError = response;
+        });
     }
 }

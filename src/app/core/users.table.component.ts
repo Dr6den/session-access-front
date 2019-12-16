@@ -227,10 +227,6 @@ export class UsersTableComponent {
         this.model.downloadScheme(this.title);
     }
     
-    uploadScheme(event) {
-       
-    }
-    
     selectSchemeForUpload(event: any) {
         this.fileForUpload = event.target.files[0];
         if (!this.fileForUpload) {
@@ -238,7 +234,7 @@ export class UsersTableComponent {
         }
   
         this.model.uploadSchemeFile(this.fileForUpload, this.title, "upload").toPromise().then((data) => {
-            this.uploadPopup.openModalDialog(data, this.fileForUpload.name);
+            this.uploadPopup.openModalDialog(data, this.fileForUpload.name, this.title);
         }).catch((response) => {
             this.uploadError = response;
         });
