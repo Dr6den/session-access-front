@@ -38,8 +38,7 @@ export class TemporaryTableComponent {
         {num: 10, name: "10"}
     ];
     
-    fileForUpload: File;
-    uploadError: string = "error message";
+    validationResponse: string;
     
     constructor(private model: Model, private router: Router, private activeRouter: ActivatedRoute, private fillInTableService: FillInTableService) {        
         this.currentPageNumber = 1; 
@@ -47,7 +46,8 @@ export class TemporaryTableComponent {
     }
     
     ngOnInit() {
-        let schemeName = this.activeRouter.snapshot.paramMap.get('schemeName');console.log(schemeName)
+        let schemeName = this.activeRouter.snapshot.paramMap.get('schemeName');
+        this.validationResponse = this.activeRouter.snapshot.paramMap.get('temporaryId');
         if (schemeName.includes('%20')) {
             schemeName = schemeName.replace('%20', ' ');
         }
@@ -55,10 +55,10 @@ export class TemporaryTableComponent {
         this.model.getSchemesInfo().toPromise().then((sche) => {
             this.schemeMetadata = new SchemeMetadata(sche[this.title]);
             this.schemeMetadata.setupMetadata();
-            this.tableNumberOfColumns = this.schemeMetadata.numberOfColumns;
+            this.tableNumberOfColumns = this.schemeMetadata.numberOfColumns + 1;
             this.roleSorting = this.fillInTableService.fillSortingToSchemeTable(this.schemeMetadata);
-            this.roleColumns = this.fillInTableService.fillColumnsToSchemeTable(this.title, this.schemeMetadata);
-            this.roleRows = this.fillInTableService.fillRowsToSchemeTable(this.roleColumns, this.title, this.schemeMetadata);
+            this.roleColumns = this.fillInTableService.fillColumnsToTemporaryTable(this.title, this.schemeMetadata);
+            this.roleRows = this.fillInTableService.fillRowsToTemporaryTable(this.roleColumns, this.title, this.schemeMetadata, this.validationResponse);
         });
     }
     
@@ -67,7 +67,12 @@ export class TemporaryTableComponent {
     }
     
     push() {
-        
+        let resp = {"importId":this.validationResponse}
+        this.model.uploadScheme(resp, this.title, "push").toPromise().then((data) => {
+            let url = "/showRoles/" + this.title;            
+            this.router.navigateByUrl(url);
+        }).catch((response) => {console.log(JSON.stringify(response))
+        }); 
     }
     
     changeRolesOutputOnPage(event: object) {

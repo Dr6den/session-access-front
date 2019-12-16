@@ -138,4 +138,8 @@ export class Model {
     uploadScheme(scheme: object, schemeName: string, stage: string): Observable<object> {
         return this.dataSource.uploadScheme(scheme, schemeName, stage);
     }
+    
+    getTemporaryTable(temporaryId: string): Observable<object> {
+        return this.dataSource.getTemporaryScheme(temporaryId);
+    }
 }

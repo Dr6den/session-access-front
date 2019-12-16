@@ -131,4 +131,11 @@ export class RestDataSource {
         let url = this.url + "/ImportData/" + schemeName + "?type=excel&stage=" + stage;                
         return this.globalService.sendRequest<object>("POST", url, scheme);
     }
+    
+    getTemporaryScheme(tempId: string): Observable<object[]> {
+        let url = this.url + "/GetRecords/__TemporaryTables";
+        let params = new HttpParams();
+        params = params.append('filter', '{"__TemporaryId":"' + tempId + '"}');
+        return this.globalService.sendRequest<User[]>("GET", url, null, params);
+    }
 }

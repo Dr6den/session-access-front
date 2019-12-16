@@ -9,7 +9,8 @@ const routes: Routes = [
     { path: "showRoles/Users", component: UsersTableComponent, canActivate: [AuthGuard] },
     { path: "showRoles", component: RolesTableComponent, canActivate: [AuthGuard] },
     { path: "showRoles/:schemeName", component: RolesTableComponent, canActivate: [AuthGuard] },
-    { path: "temporaryTable/:schemeName", component: TemporaryTableComponent, canActivate: [AuthGuard] },
+    { path: "temporaryTable/:schemeName/:temporaryId", component: TemporaryTableComponent, canActivate: [AuthGuard] },
+   // { path: "temporaryTable", component: TemporaryTableComponent, canActivate: [AuthGuard],  data :{  validationResponse: "data", scheme: "day"} },
     { path: "", component: IndexComponent },
     { path: "token/:token", component: IndexComponent },
     { path: '**', redirectTo: '' }]

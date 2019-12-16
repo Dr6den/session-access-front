@@ -1,5 +1,4 @@
 import { Component, Input, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService } from "../../auth/services/authentication.service";
 import { LoginPopupComponent } from "../../modalwindows/login.popup.component";
 import { ProfilePopupComponent } from "../../modalwindows/profile.popup.component";
@@ -18,7 +17,7 @@ export class HeaderComponent {
     disableUsername = true;
     username = "Nadia";
 
-    constructor(private activeRoute: ActivatedRoute, private router: Router, private authService: AuthenticationService) {
+    constructor(private authService: AuthenticationService) {
          
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser) {

@@ -123,19 +123,6 @@ export class FillInTableService {
         ];
     }
     
-    fillRowsToRolesTable(): Promise<any> {
-        let columns = [];
-        return this.model.getObservableRoles().toPromise()
-            .then((ousers) => {let vals = Object.values(ousers["values"]);
-                vals.forEach((role) => {
-                let roleStr = new Role(role);
-                let opt = roleStr.getArrayOfOptionsObject();
-                columns.push({"Actions": "", "Applications": roleStr.application, "Options": opt, "Rolename": roleStr.rolename});
-            });
-                return columns;
-            });       
-    }
-    
     fillRowsToRolesTableFromOutsideSource(source: object[], schemeMetadata: SchemeMetadata) {        
         let rows = [];
         source.forEach((schemeData) => {
@@ -154,5 +141,33 @@ export class FillInTableService {
     fillRolesByEmptyColumns() {
         let columns = [];
         return columns;
+    }
+    
+    fillColumnsToTemporaryTable(schemeName: string, schemeMetadata: SchemeMetadata): any[] {
+        let answ: any[] = [];   
+        this.addColumnToJson("Actions", answ);          
+        this.addColumnToJson("Error Status", answ);
+        schemeMetadata.getSinglePropertiesForShow(this.defaultAppName).forEach((prop) => {this.addColumnToJson(prop, answ)});
+        return answ;     
+    }
+    
+    fillRowsToTemporaryTable(columns: any[], schemeName: string, schemeMetadata: SchemeMetadata, temporaryId: string): any[] {
+        let rows = [];
+        
+        this.model.getTemporaryTable(temporaryId).toPromise()
+            .then((schemeData) => {
+                let schemeDataVals: object[] = schemeData["values"];
+                if (schemeDataVals) {
+                    schemeDataVals.forEach((schemeVal) => {                      
+                        let processedRow = {"Actions":"", "Error Status":schemeVal["__Validation Errors"]};                        
+                        Object.keys(schemeVal).forEach((schemeKey) => {
+                            schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeVal[schemeKey], schemeVal["Application"]);
+                        })                        
+                        rows.push(processedRow);
+                    });                  
+                }
+                return rows;
+            });
+            return rows;     
     }
 }

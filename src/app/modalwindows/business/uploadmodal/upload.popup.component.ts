@@ -15,7 +15,6 @@ export class UploadPopupComponent {
     levels:Array<string>;
     @ViewChild(TabsComponent, {static: false}) tabs:TabsComponent;
     linesLoaded: number = 100;
-    linesSucceeded: number = 100;
     documentName: string;
     uploadResponse: object;
     chooseSheetResponse: object;
@@ -50,7 +49,6 @@ export class UploadPopupComponent {
                 this.progressValue = 100;
                 this.chooseSheetResponse = data;
                 this.linesLoaded = data["records"];
-                this.linesSucceeded = data["records"];
             }
         }).catch((response) => {
             this.uploadPopupError = response;
@@ -59,7 +57,9 @@ export class UploadPopupComponent {
     
     validate() {
         this.model.uploadScheme(this.chooseSheetResponse, this.directoryName, "insert").toPromise().then((data) => {
-            this.router.navigateByUrl("/temporaryTable/" + this.directoryName);
+            let url = "/temporaryTable/" + this.directoryName + "/" + this.chooseSheetResponse["importId"];
+            
+            this.router.navigateByUrl(url);
             this.closeModalDialog();
         }).catch((response) => {
             this.uploadPopupError = response;
