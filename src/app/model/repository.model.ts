@@ -143,7 +143,7 @@ export class Model {
         return this.dataSource.getTemporaryScheme(temporaryId);
     }
     
-    deleteElemFromTemporaryScheme(tempId: string) {
-        this.dataSource.deleteElemFromTemporaryScheme(tempId).subscribe();
+    deleteElemFromTemporaryScheme(item: any) {
+        this.dataSource.deleteElemFromTemporaryScheme(item).subscribe();
     }
 }

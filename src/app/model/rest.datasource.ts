@@ -139,8 +139,8 @@ export class RestDataSource {
         return this.globalService.sendRequest<User[]>("GET", url, null, params);
     }
     
-    deleteElemFromTemporaryScheme(tempId: string) {
-        let url = this.url + '/DeleteRecords/__TemporaryTables?filter={"__TemporaryId":"' + tempId + '"}';
+    deleteElemFromTemporaryScheme(item: any) {
+        let url = this.url + '/DeleteRecords/__TemporaryTables?filter=' + JSON.stringify(item);
         return this.globalService.sendRequest<string>("DELETE", url);
     }
 }

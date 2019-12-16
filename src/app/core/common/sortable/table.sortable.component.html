@@ -3,7 +3,7 @@
     <thead>
         <tr class="text-left table-header">
             <th *ngFor="let column of columns; let step=index" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)"
-                [ngStyle]="{ 'width': (step>0) ? thwidth : '4.3rem'  }">
+                [ngStyle]="{ 'width': (step>0) ? thwidth : '4.3rem', 'display': (column.variable === '_id') ? 'none' : 'inline-block' }">
                 <span class="header-text">{{column.display}}</span>
                 <span *ngIf="(column.variable !== 'Actions') && (column.variable !== 'Options')" class="images-content">
                     <span class="arrows">
@@ -30,7 +30,8 @@
     </thead>
     <tbody *ngIf="sort"> <!--if checks if sort is already defined, I need it for avoiding problem with ngOnInit initializaiton in the parent-->
         <tr *ngFor="let object of data | orderBy : convertSorting(); let j=index">
-      <td *ngFor="let column of columns; let step=index" [ngStyle]="{  'width': (step>0) ? thwidth : '4.3rem' }">
+        <!--hiding the _id column it uses for transfer data in template table-->
+      <td *ngFor="let column of columns; let step=index" [ngStyle]="{  'width': (step>0) ? thwidth : '4.3rem', 'display': (column.variable === '_id') ? 'none' : 'inline-block' }">
 
         <ng-container *ngIf="(column.variable === 'Actions'); then editColumn; else averageColumn">
         </ng-container>

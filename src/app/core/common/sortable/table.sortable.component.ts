@@ -98,7 +98,10 @@ export class TableSortable {
    */
   deleteItem(item: any) {
       if (this.tempId) {
-        this.model.deleteElemFromTemporaryScheme(this.tempId);
+            let itemForDelete = {};
+            itemForDelete["__TemporaryId"] = this.tempId;
+            itemForDelete["_id"] = item["_id"]; 
+            this.model.deleteElemFromTemporaryScheme(itemForDelete);
       } else if (this.schemeName === 'Users') {
         this.model.deleteUser(item.NTSID);
       } else if (this.schemeName === 'Roles') {

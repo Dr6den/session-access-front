@@ -147,6 +147,7 @@ export class FillInTableService {
         let answ: any[] = [];   
         this.addColumnToJson("Actions", answ);          
         this.addColumnToJson("Error Status", answ);
+        this.addColumnToJson("_id", answ);
         schemeMetadata.getSinglePropertiesForShow(this.defaultAppName).forEach((prop) => {this.addColumnToJson(prop, answ)});
         return answ;     
     }
@@ -158,8 +159,8 @@ export class FillInTableService {
             .then((schemeData) => {
                 let schemeDataVals: object[] = schemeData["values"];
                 if (schemeDataVals) {
-                    schemeDataVals.forEach((schemeVal) => {                      
-                        let processedRow = {"Actions":"", "Error Status":schemeVal["__Validation Errors"]};                        
+                    schemeDataVals.forEach((schemeVal) => {                  
+                        let processedRow = {"Actions":"", "Error Status":schemeVal["__Validation Errors"], "_id": schemeVal["_id"]};                        
                         Object.keys(schemeVal).forEach((schemeKey) => {
                             schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeVal[schemeKey], schemeVal["Application"]);
                         })                        
