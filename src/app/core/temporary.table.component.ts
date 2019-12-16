@@ -5,6 +5,8 @@ import { User } from "../model/user.model";
 import { SchemeMetadata } from "../model/scheme.metadata";
 import { TableSortable } from "./common/sortable/table.sortable.component";
 import { FillInTableService } from "./common/sortable/fill.in.table.service";
+import { RoleInputPopupComponent } from "../modalwindows/business/role.input.popup.component";
+import { UserInputPopupComponent } from "../modalwindows/business/user.input.popup.component";
 import { TableContainer } from "../model/table.container";
 
 @Component({
@@ -15,7 +17,8 @@ import { TableContainer } from "../model/table.container";
 export class TemporaryTableComponent {
     public title: string = "Roles";
     levelNum:number;    
-     
+    @ViewChild(RoleInputPopupComponent, {static: false}) roleInputPopup:RoleInputPopupComponent;
+    @ViewChild(UserInputPopupComponent, {static: false}) userInputPopup:UserInputPopupComponent;
     //sorting table properties
     schemeMetadata: SchemeMetadata;  
     roleColumns: any[];
@@ -232,4 +235,11 @@ export class TemporaryTableComponent {
             }).catch((response) => this.checkError(response));
     }
     
+    roleInput(role?: object) {
+        this.roleInputPopup.openModalDialog(role, this.title, this.schemeMetadata);
+    }
+    
+    userInput(user?: User) {
+        this.userInputPopup.openModalDialog(user);
+    }
 }

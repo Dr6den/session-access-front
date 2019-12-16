@@ -148,7 +148,12 @@ export class FillInTableService {
         this.addColumnToJson("Actions", answ);          
         this.addColumnToJson("Error Status", answ);
         this.addColumnToJson("_id", answ);
-        schemeMetadata.getSinglePropertiesForShow(this.defaultAppName).forEach((prop) => {this.addColumnToJson(prop, answ)});
+        schemeMetadata.getSinglePropertiesForShow(this.defaultAppName).forEach((prop) => {
+            if(prop === "ROLES") {
+                prop = "Role";
+            }
+            this.addColumnToJson(prop, answ)
+        });
         return answ;     
     }
     
@@ -162,11 +167,23 @@ export class FillInTableService {
                     schemeDataVals.forEach((schemeVal) => {                  
                         let processedRow = {"Actions":"", "Error Status":schemeVal["__Validation Errors"], "_id": schemeVal["_id"]};                        
                         Object.keys(schemeVal).forEach((schemeKey) => {
-                            schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeVal[schemeKey], schemeVal["Application"]);
-                        })                        
+                            if (schemeKey === "ROLES") {
+                                let rolesOfUser:string = '';
+                                let isFirstRole:boolean = true;
+                                schemeVal[schemeKey].forEach((r) => {
+                                    if (!isFirstRole) { rolesOfUser = rolesOfUser + ", "; }
+                                    rolesOfUser = rolesOfUser + r.Application + " : " + r.ROLENAME;
+                                    isFirstRole = false;
+                                });
+                                schemeVal[schemeKey] = rolesOfUser;
+                                schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, "Role", schemeVal[schemeKey], schemeVal["Application"]);
+                            } else {
+                                schemeMetadata.putColumnValueAccordingMetadataToTable(processedRow, schemeKey, schemeVal[schemeKey], schemeVal["Application"]);
+                            }
+                        });                        
                         rows.push(processedRow);
                     });                  
-                }
+                }console.log(JSON.stringify(rows))
                 return rows;
             });
             return rows;     

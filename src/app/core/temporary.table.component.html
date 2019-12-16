@@ -32,6 +32,7 @@
     [numberOfColumns]="tableNumberOfColumns"
     [tempId]="validationResponse"
     (filterByNames)="filterByNames($event)"
+    (callUserInputPopup)='userInput($event)'
     (callRoleInputPopup)='roleInput($event)'>
     Loading table...
 </table-sortable>
@@ -43,3 +44,6 @@
     <span (click)="nextPageTabulate()" class="pagination-elem">></span>
     <span (click)="lastPageTabulate()" class="pagination-elem">&#187;</span>
 </div>
+
+<user-input-popup></user-input-popup>
+<role-input-popup></role-input-popup>

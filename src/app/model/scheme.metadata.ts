@@ -51,6 +51,11 @@ export class SchemeMetadata {
                     processedRow[curentPropName] = value;
                     break;
                 }
+                //overload of getting Role and Roles names from server
+                if(columnName === "Role" && curentPropName === "ROLES" && processedRow[curentPropName] === undefined) {
+                    processedRow[columnName] = value;
+                    break;
+                }
             }
         }
     }
