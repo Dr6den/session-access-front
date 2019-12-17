@@ -74,6 +74,11 @@ export class UserInputPopupComponent {
             this.user.USERID = user.USERID;
             this.user.NTSID = user.NTSID;
             this.user.NTDOMAINSID = user.NTDOMAINSID;
+            //we have send data for template table, it works for templates only
+            if (user["__TemporaryId"]) {
+                this.user["__TemporaryId"] = user["__TemporaryId"];
+                this.user["_id"] = user["_id"];
+            }
             
             this.toggleDisable();
             this.reservedUser = this.user;
@@ -125,8 +130,11 @@ export class UserInputPopupComponent {
             let editedUser = new User();
             editedUser = this.user;
             editedUser.ROLES = this.parseSelectedItem(this.selectedRolesItems);
-       
-            if (this.title === "Edit User") {
+    
+            if (editedUser["__TemporaryId"]) {//another endpoint esspecially for the temporary tables
+                let userUpdate = new UserUpdate(this.reservedUser, this.user);
+                this.model.updateElemFromTemporaryScheme(userUpdate).toPromise().then().catch((response) => this.checkError(response));
+            } else if (this.title === "Edit User") {
                 let userUpdate = new UserUpdate(this.reservedUser, this.user);
                 this.model.updateUser(userUpdate).toPromise().then().catch((response) => this.checkError(response));
             } else {
@@ -134,7 +142,7 @@ export class UserInputPopupComponent {
             }
             if (this.errorMessage === "error message") {
                 this.closeModalDialog();
-                window.location.reload();
+      //          window.location.reload();
             }
         }
     }

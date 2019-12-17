@@ -111,14 +111,14 @@ export class RestDataSource {
         return this.globalService.sendRequest<string>("DELETE", url);
     }
     
-    downloadScheme(schemeName: string): Observable<Blob> {		
+    downloadScheme(schemeName: string, schemeType: string): Observable<Blob> {		
 	let params = new HttpParams();
-        params = params.append('type', 'excel');
+        params = params.append('type', schemeType);
 
         let url = this.url + "/ExportData/" + schemeName;
         return this.globalService.sendRequest<Blob>("GET", url, null, params, null, "blob");
     }
-    
+ 
     uploadSchemeFile(scheme: File, schemeName: string, stage: string): Observable<object> {
         let url = this.url + "/ImportData/" + schemeName + "?type=excel&stage=" + stage;        
         let formData: FormData = new FormData();
@@ -142,5 +142,10 @@ export class RestDataSource {
     deleteElemFromTemporaryScheme(item: any) {
         let url = this.url + '/DeleteRecords/__TemporaryTables?filter=' + JSON.stringify(item);
         return this.globalService.sendRequest<string>("DELETE", url);
+    }
+    
+    updateElemFromTemporaryScheme(item: any): Observable<any> {
+        let url = this.url + "/UpdateRecord/__TemporaryTables";
+        return this.globalService.sendRequest<User>("PUT", url, item);
     }
 }

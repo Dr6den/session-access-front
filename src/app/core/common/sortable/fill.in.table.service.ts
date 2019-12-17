@@ -183,7 +183,7 @@ export class FillInTableService {
                         });                        
                         rows.push(processedRow);
                     });                  
-                }console.log(JSON.stringify(rows))
+                }
                 return rows;
             });
             return rows;     

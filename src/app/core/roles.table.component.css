@@ -225,3 +225,7 @@
 #upload-input::-webkit-file-upload-button {
   visibility: hidden;
 }
+
+#downloadTemplate {
+    width: 10rem;
+}

@@ -21,7 +21,12 @@
         </button>
     </span>
     
-    <input type="file" name="uploadScheme" id="upload-input" (change)="selectSchemeForUpload($event)" accept=".xlsx"/>
+    <span class="first-button-block">
+        <button id="downloadTemplate" class="standard-button" (click)="downloadTemplate()"><i></i>
+            Download Template
+        </button>
+        <input type="file" name="uploadScheme" id="upload-input" (change)="selectSchemeForUpload($event)" accept=".xlsx"/>
+    </span>
     
     <select id="selectItems" type="number" class="select-items" (change)="changeRolesOutputOnPage($event.target.value)">
       <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>

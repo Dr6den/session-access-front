@@ -119,8 +119,8 @@ export class Model {
         this.dataSource.deleteScheme(scheme, schemeName).subscribe();
     }
     
-    downloadScheme(schemeName: string): void {
-	this.dataSource.downloadScheme(schemeName).subscribe((data) => {
+    downloadScheme(schemeName: string, schemeType: string): void {
+	this.dataSource.downloadScheme(schemeName, schemeType).subscribe((data) => {
             let blob = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
             
             var downloadURL = window.URL.createObjectURL(data);
@@ -145,5 +145,9 @@ export class Model {
     
     deleteElemFromTemporaryScheme(item: any) {
         this.dataSource.deleteElemFromTemporaryScheme(item).subscribe();
+    }
+    
+    updateElemFromTemporaryScheme(item: any): Observable<any> {
+        return this.dataSource.updateElemFromTemporaryScheme(item);
     }
 }

@@ -236,3 +236,7 @@
     margin-top: 0.8rem;
     position: absolute;
 }
+
+#downloadTemplate {
+    width: 10rem;
+}

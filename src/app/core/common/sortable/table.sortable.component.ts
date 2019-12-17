@@ -113,7 +113,11 @@ export class TableSortable {
       window.location.reload();
   }
   
-  userInput(user: User) {
+  userInput(user: User) {      
+      //for temporary tables only
+      if(this.tempId) {
+          user["__TemporaryId"] = this.tempId;
+      }
       this.callUserInputPopup.emit(user);
   }
   
@@ -130,6 +134,10 @@ export class TableSortable {
       } else {
         roleWithAllNeededFields = {...role};
         roleWithAllNeededFields["schemeName"] = this.schemeName;
+      }
+      //for temporary tables only
+      if(this.tempId) {
+          roleWithAllNeededFields["__TemporaryId"] = this.tempId;
       }
       this.callRoleInputPopup.emit(roleWithAllNeededFields);
   }

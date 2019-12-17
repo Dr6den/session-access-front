@@ -224,7 +224,11 @@ export class UsersTableComponent {
     }
     
     downloadScheme() {
-        this.model.downloadScheme(this.title);
+        this.model.downloadScheme(this.title, "excel");
+    }
+    
+    downloadTemplate() {
+        this.model.downloadScheme(this.title, "excel-template");
     }
     
     selectSchemeForUpload(event: any) {

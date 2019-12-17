@@ -266,7 +266,11 @@ export class RoleInputPopupComponent implements OnInit {
                     delete this.dataRecievedFromRolesTableScreen["schemeName"];
                     
                     let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
-                    this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                    if (roleUpdate.oldValues["__TemporaryId"]) {//another endpoint esspecially for the temporary tables
+                        this.model.updateElemFromTemporaryScheme(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
+                    } else {
+                        this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                    }
                 } else {
                     this.model.insertScheme(this.request, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
                 }                
@@ -276,14 +280,18 @@ export class RoleInputPopupComponent implements OnInit {
                     delete this.dataRecievedFromRolesTableScreen["Actions"];
                     delete this.dataRecievedFromRolesTableScreen["schemeName"];
                     let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
-                    this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                    if (roleUpdate.oldValues["__TemporaryId"]) {//another endpoint esspecially for the temporary tables
+                        this.model.updateElemFromTemporaryScheme(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
+                    } else {
+                        this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
+                    }
                 } else {
                     this.model.insertScheme(this.request, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
                 }                
             }
             if (this.errorMessage === "error message") {
                 this.closeModalDialog();
-                window.location.reload();
+           //     window.location.reload();
             }
         }
     }
@@ -346,16 +354,18 @@ export class RoleInputPopupComponent implements OnInit {
             }
         }
         for (let val in replaceVals) {
-            let optsArray = roleObj[replaceVals[val]].split(';');
-            optsArray.forEach((opt) => {
-                if (multiselectIndicator[opt.substring(0, opt.indexOf(":"))]) {
-                    roleObj[opt.substring(0, opt.indexOf(":"))] = [];
-                    let splittedOpts = opt.substring(opt.indexOf(":") + 1).split(',');
-                    splittedOpts.forEach((o) => roleObj[opt.substring(0, opt.indexOf(":"))].push(o));
-                } else {
-                    roleObj[opt.substring(0, opt.indexOf(":"))] = opt.substring(opt.indexOf(":") + 1);
-                }
-            });
+            if(roleObj[replaceVals[val]]) {
+                let optsArray = roleObj[replaceVals[val]].split(';');
+                optsArray.forEach((opt) => {
+                    if (multiselectIndicator[opt.substring(0, opt.indexOf(":"))]) {
+                        roleObj[opt.substring(0, opt.indexOf(":"))] = [];
+                        let splittedOpts = opt.substring(opt.indexOf(":") + 1).split(',');
+                        splittedOpts.forEach((o) => roleObj[opt.substring(0, opt.indexOf(":"))].push(o));
+                    } else {
+                        roleObj[opt.substring(0, opt.indexOf(":"))] = opt.substring(opt.indexOf(":") + 1);
+                    }
+                });
+            }
         }
     }
     
