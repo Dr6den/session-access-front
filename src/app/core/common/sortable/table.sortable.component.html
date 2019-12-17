@@ -38,7 +38,7 @@
 
         <ng-template #averageColumn><!--fill roles options row-->
             <div *ngIf="schemeMetadata; else average_content">
-                <div *ngIf="(!schemeMetadata['scheme'][column.variable]);else average_content">
+                <div *ngIf="(!schemeMetadata['scheme'][column.variable]);else average_content" [style.color]="column.variable === 'Error Status' ? 'red':'#212529'">
                     <!--<div *ngFor="let item of object.Options | slice:0:2; let i=index">{{item}}</div>-->
                     <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:2; let i=index">{{item}}</div>
                     <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
@@ -60,7 +60,7 @@
                         [rowIndex]="j"></info-popup>
                 </div>
                 <ng-template #others>
-                    {{object[column.variable] | format : column.filter}}
+                        {{object[column.variable] | format : column.filter}}
                 </ng-template>
             </ng-template>          
         </ng-template>
