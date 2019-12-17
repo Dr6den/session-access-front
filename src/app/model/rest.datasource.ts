@@ -145,7 +145,7 @@ export class RestDataSource {
     }
     
     updateElemFromTemporaryScheme(item: any): Observable<any> {
-        let url = this.url + "/UpdateRecord/__TemporaryTables";
+        let url = this.url + "/UpdateRecords/__TemporaryTables";
         return this.globalService.sendRequest<User>("PUT", url, item);
     }
 }

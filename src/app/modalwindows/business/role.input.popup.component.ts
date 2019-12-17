@@ -267,6 +267,9 @@ export class RoleInputPopupComponent implements OnInit {
                     
                     let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
                     if (roleUpdate.oldValues["__TemporaryId"]) {//another endpoint esspecially for the temporary tables
+                        roleUpdate.newValues["__TemporaryId"] = roleUpdate.oldValues["__TemporaryId"];
+                        roleUpdate.newValues["_id"] = roleUpdate.oldValues["_id"];
+                        roleUpdate.newValues["__Schema"] = this.schemeName;
                         this.model.updateElemFromTemporaryScheme(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
                     } else {
                         this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
@@ -281,6 +284,9 @@ export class RoleInputPopupComponent implements OnInit {
                     delete this.dataRecievedFromRolesTableScreen["schemeName"];
                     let roleUpdate = new RoleUpdate(this.dataRecievedFromRolesTableScreen, this.request);
                     if (roleUpdate.oldValues["__TemporaryId"]) {//another endpoint esspecially for the temporary tables
+                        roleUpdate.newValues["__TemporaryId"] = roleUpdate.oldValues["__TemporaryId"];
+                        roleUpdate.newValues["_id"] = roleUpdate.oldValues["_id"];
+                        roleUpdate.newValues["__Schema"] = this.schemeName;
                         this.model.updateElemFromTemporaryScheme(roleUpdate).toPromise().then().catch((response) => this.checkError(response));
                     } else {
                         this.model.updateScheme(roleUpdate, this.schemeName).toPromise().then().catch((response) => this.checkError(response));
@@ -291,7 +297,7 @@ export class RoleInputPopupComponent implements OnInit {
             }
             if (this.errorMessage === "error message") {
                 this.closeModalDialog();
-           //     window.location.reload();
+                window.location.reload();
             }
         }
     }

@@ -132,6 +132,7 @@ export class UserInputPopupComponent {
             editedUser.ROLES = this.parseSelectedItem(this.selectedRolesItems);
     
             if (editedUser["__TemporaryId"]) {//another endpoint esspecially for the temporary tables
+                this.user["__Schema"]="Users";
                 let userUpdate = new UserUpdate(this.reservedUser, this.user);
                 this.model.updateElemFromTemporaryScheme(userUpdate).toPromise().then().catch((response) => this.checkError(response));
             } else if (this.title === "Edit User") {
@@ -142,7 +143,7 @@ export class UserInputPopupComponent {
             }
             if (this.errorMessage === "error message") {
                 this.closeModalDialog();
-      //          window.location.reload();
+                window.location.reload();
             }
         }
     }
