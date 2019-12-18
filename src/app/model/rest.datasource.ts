@@ -139,6 +139,15 @@ export class RestDataSource {
         return this.globalService.sendRequest<User[]>("GET", url, null, params);
     }
     
+    getTemporaryByFilter(page: string, schemeName: string, tempId: string): Observable<object[]> {
+        let url = this.url + "/GetRecords/__TemporaryTables?parseRoleOpts=true";        
+        let params = new HttpParams();
+        let paramsObj = JSON.parse(page);
+        paramsObj["__TemporaryId"] = tempId;
+        params = params.append('filter', JSON.stringify(paramsObj));
+        return this.globalService.sendRequest<object[]>("GET", url, null, params);
+    }
+    
     deleteElemFromTemporaryScheme(item: any) {
         let url = this.url + '/DeleteRecords/__TemporaryTables?filter=' + JSON.stringify(item);
         return this.globalService.sendRequest<string>("DELETE", url);

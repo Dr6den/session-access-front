@@ -59,6 +59,10 @@ export class Model {
         return this.dataSource.getUsersByFilter(page);
     }
     
+    getObservableTemporaryByFilter(page: string, schemeName: string, tempId: string): Observable<object[]> {
+        return this.dataSource.getTemporaryByFilter(page, schemeName, tempId);
+    }
+    
     getRolesArray(): Role[] {
         return this.roles;
     }

@@ -137,7 +137,7 @@ export class TemporaryTableComponent {
             }        
             page = page + '}';
         }    
-            this.model.getObservableSchemeByFilter(page, this.title).toPromise().then((role) => {
+            this.model.getObservableTemporaryByFilter(page, this.title, this.validationResponse).toPromise().then((role) => {
                 if (role["message"]) {
                     this.rolesReserve = [];
                     this.tableContainer = new TableContainer(this.rolesReserve, this.numberOfPages);
