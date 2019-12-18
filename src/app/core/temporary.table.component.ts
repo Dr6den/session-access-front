@@ -75,7 +75,7 @@ export class TemporaryTableComponent {
         this.model.uploadScheme(resp, this.title, "push").toPromise().then((data) => {
             let url = "/showRoles/" + this.title;            
             this.router.navigateByUrl(url);
-        }).catch((response) => {console.log(JSON.stringify(response))
+        }).catch((response) => {
         }); 
     }
     
