@@ -219,7 +219,7 @@ export class TemporaryTableComponent {
         });
         page = page + this.getRestrictivePreviousFilter() + "]";
 
-        this.model.getObservableSchemeByFilter(page, this.title).toPromise()
+        this.model.getObservableTemporaryByFilter(page, this.title, this.validationResponse).toPromise()
             .then((role) => {
                 if (role["message"]) {
                     this.rolesReserve = [];

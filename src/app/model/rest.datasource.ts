@@ -142,8 +142,8 @@ export class RestDataSource {
     getTemporaryByFilter(page: string, schemeName: string, tempId: string): Observable<object[]> {
         let url = this.url + "/GetRecords/__TemporaryTables?parseRoleOpts=true";        
         let params = new HttpParams();
-        let paramsObj = JSON.parse(page);
-        paramsObj["__TemporaryId"] = tempId;
+        let paramsObj = JSON.parse(page);console.log(JSON.stringify(paramsObj))
+        paramsObj.forEach((obj) => obj["__TemporaryId"] = tempId);
         params = params.append('filter', JSON.stringify(paramsObj));
         return this.globalService.sendRequest<object[]>("GET", url, null, params);
     }
