@@ -1,0 +1,27 @@
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    <!-- modal-dialog -->
+    <div class="modal-dialog" role="document">
+        <!-- modal-content -->
+        <div class="modal-content m-3 shadow rounded">
+            <!-- modal-header -->
+            <div class="modal-header color-class">
+                <h6 class="modal-title">User Profile</h6>
+                <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="row m-4">
+                <div class="col-2 m3-4">
+                    <img src="assets/img/kisspng-user-profile.jpg"  alt="" class="img-fluid img-responsive"/>
+                </div>
+                <div class="col-8 float-right">
+                    <h4>{{username}}</h4>                    
+                </div>
+                <div class="col-1 float-right ml-3">
+                    <button type="button" class="btn btn-primary float-right">Ok</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+<div class="table-container mt-4">
+<table class="table table-striped" [ngStyle]="{ 'min-width': tableMinWidth }">
+    <thead>
+        <tr class="text-left table-header">
+            <th *ngFor="let column of columns; let step=index" [class]="selectedClass(column.variable)" (click)="changeSorting(column.variable)"
+                [ngStyle]="{ 'width': (step>0) ? thwidth : '4.3rem', 'display': (column.variable === '_id') ? 'none' : 'inline-block' }">
+                <span class="header-text">{{column.display}}</span>
+                <span *ngIf="(column.variable !== 'Actions') && (column.variable !== 'Options')" class="images-content">
+                    <span class="arrows">
+                        <img src="assets/img/sort-up-icon.svg" 
+                            [style.visibility]="(sortArrowsVisible == column.display + 'true') ? 'visible':'hidden'" class="user-img silver-arrow"/>
+                        <img src="assets/img/sort-down-icon.svg" 
+                            [style.visibility]="(sortArrowsVisible == column.display + 'false') ? 'visible':'hidden'" class="user-img silver-arrow"/>
+                    </span>    
+                    <span class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">
+                    <!--<span *ngIf="column.variable !== 'Role'" class="silver-dropdowns-container" (click)="openFilter(column.variable, $event)">-->
+                        <img src="assets/img/filter-up.svg" 
+                            [style.visibility]="openedFilters[column.variable] ? 'visible':'hidden'" class="user-img silver-dropdown"/>
+                        <img src="assets/img/filter-down.svg" 
+                            [style.visibility]="openedFilters[column.variable] ? 'hidden':'visible'" class="user-img silver-dropdown"/>                        
+                    </span>
+                   
+                </span>
+                <span>
+                    <table-filter-popup [column]="column.display" [data]="data" (filterByName)="filterByName($event)"
+                        (closeEvent)="onCloseSearchPopup($event)" (callSortingOfTheTable)='callSortingOfTable($event)'></table-filter-popup>
+                </span>
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngIf="sort"> <!--if checks if sort is already defined, I need it for avoiding problem with ngOnInit initializaiton in the parent-->
+        <tr *ngFor="let object of data | orderBy : convertSorting(); let j=index">
+        <!--hiding the _id column it uses for transfer data in template table-->
+      <td *ngFor="let column of columns; let step=index" [ngStyle]="{  'width': (step>0) ? thwidth : '4.3rem', 'display': (column.variable === '_id') ? 'none' : 'inline-block' }">
+
+        <ng-container *ngIf="(column.variable === 'Actions'); then editColumn; else averageColumn">
+        </ng-container>
+
+        <ng-template #averageColumn><!--fill roles options row-->
+            <div *ngIf="schemeMetadata; else average_content">
+                <div *ngIf="(!schemeMetadata['scheme'][column.variable]);else average_content" [style.color]="column.variable === 'Error Status' ? 'red':'#212529'">
+                    <!--<div *ngFor="let item of object.Options | slice:0:2; let i=index">{{item}}</div>-->
+                    <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:2; let i=index">{{item}}</div>
+                    <div *ngFor="let item of object[column.variable] | split_string : ';' | slice:0:3; let i=index" [attr.id]="object.Applications + ':' + object.Rolename + ':' + i">
+                        <a *ngIf="i == 2" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a>                    
+                    </div>
+                    <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object[column.variable] | split_string : ';'" [rowIndex]="j"></info-popup>
+                    <!--<div>{{object.Options | split_and_get_one_of_them:'-':'COGS' }}</div>-->
+                </div>
+            </div>
+
+            <ng-template #average_content><!--fill simple for all tables row-->
+                <div *ngIf="(column.variable === 'Role' || column.variable === 'ROLES');else others">
+                    <!-- I have to cut more then one output for Role column of Users table and output others by popup -->
+                    {{object[column.variable] | split_string : ',' | slice:0:1}}
+                    <div *ngFor="let item of object[column.variable] | split_string : ','; let i=index">
+                        <a *ngIf="i == 1" href="javascript:void(0);" (click)="displayInfo(column.variable, j)" class="show-more">Show more . . .</a> 
+                    </div>
+                    <info-popup [column]="column.display" id="{{column.variable}}{{j}}" [data]="object[column.variable] | split_string : ','" 
+                        [rowIndex]="j"></info-popup>
+                </div>
+                <ng-template #others>
+                        {{object[column.variable] | format : column.filter}}
+                </ng-template>
+            </ng-template>          
+        </ng-template>
+              
+        <ng-template #editColumn> <!--edit columns we have to fill by buttons-->
+            <div *ngIf="object.NTSID" class="table-buttons"> <!--condition for users table-->
+		<div>
+                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2" (click)="userInput(object)"/>
+                         <!--[routerLink]="['/createUser', 'edit', object.USERID, {name: object.USERNAME}]"/>-->
+                    <img src="assets/img/Close.png" alt="" class="my-2 ml-2 float-right"
+                         mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right"
+                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true"/>
+                </div>
+            </div>
+            <!--condition for roles table-->
+            <div *ngIf="!object.NTSID" class="table-buttons">
+                    <img src="assets/img/edit-icon.png"  alt="" class="user-img  my-2" (click)="roleInput(object)"/>
+                         <!-- [routerLink]="['/createRole', 'edit', object.Rolename, {options: object.Options, rolename: object.Rolename}]"/>-->
+                    <img src="assets/img/Close.png" alt="" class="my-2 ml-2 float-right"
+                        mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="right"
+                        (confirm)="deleteItem(object)" (cancel)="cancelClicked = true"/>
+            </div>
+        </ng-template>
+      </td>
+    </tr>
+    </tbody>
+</table>
+</div>

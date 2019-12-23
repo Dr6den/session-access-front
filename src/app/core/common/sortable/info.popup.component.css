@@ -1,0 +1,51 @@
+.info-modal {
+    position: fixed;
+    width: 18rem;
+    height: 17rem; 
+}
+
+.modal-dialog {
+    border: solid 1px rgba(110, 130, 152, 0.5);
+    border-radius: 8px;
+    margin-top: 0;
+    padding-top: 0;
+  /*  height: 17rem; */
+}
+
+.modal-body {
+    background-color: #FFFFFF;
+   /* height: 13.8rem;*/
+}
+
+.modal-header {
+    height: 3rem;
+    background-color: #6e8298;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    width: 15px;
+    height: 15px;
+}
+.close:hover {
+    opacity: 0;
+}
+.close:before, .close:after {
+    position: absolute;
+    top: 0rem;
+    left: 15px;
+    content: ' ';
+    height: 30px;
+    width: 2px;
+    background-color: #ffffff;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}

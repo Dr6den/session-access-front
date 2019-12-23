@@ -1,24 +1,58 @@
-<div class="button-home m-1 mt-4">
-    <button type="reset" (click)="resetForm()" class="button-gohome btn btn-block btn-outline-dark h-100 py-3 mb-5 col-4">
-        To homepage
-    </button>
+<app-header [title]="title"></app-header>
+
+<div class="to-homepage">
+    <a href="javascript:void(0);" (click)="resetForm()">&lt; - Back to Home</a>
 </div>
 
-<table class="table table-hover text-center ml-1">
-    <thead>
-        <tr>
-		<th>USERID</th>
-		<th>USERNAME</th>
-                <th>NTSID</th>
-                <th>Role</th>
-	</tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of getItems()">
-            <td><div class="my-3">{{item.USERID}}</div></td>
-            <td><div class="my-3">{{item.USERNAME}}</div></td>
-            <td><div class="my-3">{{item.NTSID}}</div></td>
-	    <td><div class="my-3">{{item.ROLES}}</div></td>
-        </tr>         
-    </tbody>
-</table>
+<div [ngStyle]="{'color': uploadError === 'error message' ? '#FFFFFF' : 'red'}" class="error-message">
+        {{uploadError}}
+</div>
+
+<div class="button-home">
+    <input (input)="filter($event.target.value)" type="text" id="searchInputUsers" placeholder="Search User">
+    
+    <span class="first-button-block">
+        <button (click)="userInput()" class="standard-button" id="create-user">
+            Create User
+        </button>
+    
+        <button id="downloadFile" class="standard-button" (click)="downloadScheme()"><i></i>
+            Download Table
+        </button>
+    </span>
+    
+    <span class="first-button-block">
+        <button id="downloadTemplate" class="standard-button" (click)="downloadTemplate()"><i></i>
+            Download Template
+        </button>
+        <input type="file" name="uploadScheme" id="upload-input" (change)="selectSchemeForUpload($event)" accept=".xlsx"/>
+    </span>
+    
+    <select id="selectItems" type="number" class="select-items" (change)="changeUsersOutputOnPage($event.target.value)">
+      <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
+    </select>
+    <label id="selectItemsLabel" class="label-show" for="selectItems">Show</label>
+</div>
+
+<table-sortable
+    [columns]="userColumns"
+    [data]="userRows"
+    [sort]="userSorting"
+    [schemeName]="title"
+    [numberOfColumns]="tableNumberOfColumns"
+    (filterByNames)="filterByNames($event)"
+    (callUserInputPopup)='userInput($event)'>
+    Loading table...
+</table-sortable>   
+
+<div class="pagination">
+    <span (click)="firstPageTabulate()" class="pagination-elem">&#171;</span>
+    <span (click)="previousPageTabulate()" class="pagination-elem"><</span>
+    <span class="page-number">{{currentPageNumber}}</span>
+    <span (click)="nextPageTabulate()" class="pagination-elem">></span>
+    <span (click)="lastPageTabulate()" class="pagination-elem">&#187;</span>
+</div>
+
+<user-input-popup></user-input-popup>
+
+<upload-popup></upload-popup>

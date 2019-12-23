@@ -1,6 +1,90 @@
-.btn {
-    font-size: 1rem;
-    font-weight: bolder;
-    background-color: darkturquoise;
+:host ::ng-deep  .tooltip-inner {
+    background-color: #eeeeee;
 }
 
+:host ::ng-deep .arrow::before {
+    border-right-color: #eeeeee;
+}
+
+.button-link {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.titles-link {
+    margin-top: 3rem;
+    margin-left: 2.6rem;
+}
+
+.titles-link:first-child {
+    margin-top: 4.3rem;
+    margin-left: 2.6rem;
+}
+
+.info-popuver {    
+    color: #323232;
+    font-family: Asap;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.tcontent {
+    margin-left: 0.3rem;
+}
+
+#folders-image {
+    position: relative;
+}
+#folders-image {
+    position: absolute;
+    bottom: 0rem;
+    right: 0rem;
+}
+
+.error-message {
+    margin-right: 8rem;
+    margin-top: 2rem;
+    font-size: 26px;
+    font-weight: 500;
+    font-style: italic;
+    font-stretch: normal;
+    float: right;
+}
+
+@media screen and (max-width: 1320px) { 
+    .error-message {
+        margin-right: 5rem;
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 1050px) { 
+    .error-message {
+        margin-right: 2rem;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 850px) { 
+    .error-message {
+        margin-right: 2rem;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 550px) { 
+    .error-message {
+        margin-right: 1rem;
+        font-size: 10px;
+    }
+}

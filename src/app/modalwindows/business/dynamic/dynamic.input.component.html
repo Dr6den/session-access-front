@@ -1,0 +1,6 @@
+<div class="field-of-form">
+    <label for="generatedInput" class="user-input-labels roles-input-labels">{{title}}</label>
+    <div class="input-dynamic float-right">
+        <input type="text" name="generatedInput" [(ngModel)]="value" (change)="onValueChange($event)" required/>
+    </div>
+</div>

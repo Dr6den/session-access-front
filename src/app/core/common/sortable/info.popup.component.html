@@ -1,0 +1,19 @@
+<div class="modal info-modal" [ngStyle]="{ 'display': display, 'top': setTop, 'left': setLeft }" >
+    
+    <!-- modal-dialog -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- modal-content -->
+
+            <!-- modal-header -->
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="closeModalDialog()"></button>
+            </div>
+
+            <div class="modal-body">
+                <div *ngFor="let item of data">{{item}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>

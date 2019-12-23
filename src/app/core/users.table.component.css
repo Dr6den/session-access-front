@@ -1,12 +1,242 @@
-.button-gohome {    
-    text-align: left;
-    background-color: darkturquoise;
+:host ::ng-deep thead th {
+    width: 23.4%;
 }
 
-th {
-    background-color: darkturquoise;
+:host ::ng-deep tbody td {
+    width: 23.3%;
 }
 
-td {
-    border: 2px solid;
+.pagination {
+    color: #6e8298;
+    margin-top: 1rem;
+    margin-left: 45%;
+}
+
+.pagination-elem {
+    margin-left: 1rem;
+}
+
+.page-number {
+    margin-left: 2rem;
+    margin-right: 1rem;
+}
+
+.to-homepage {
+    margin-top: 0.75rem;
+}
+
+.to-homepage a {
+    margin-left: 2.5rem;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6e8298;
+}
+
+.mainLoginInput{
+  height: 40px;
+  padding: 0px;
+  font-size: 30px;
+  margin: 5px 0;
+}
+
+.label-show {
+    float: right;
+    margin-right: 1rem;
+    margin-top: 4.3rem;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #6e8298;
+}
+
+.select-items {
+    height: 2.3rem;
+    float: right;
+    margin-right: 4rem;
+    margin-top: 3.6rem;
+}
+
+#searchInputUsers {
+    margin-left: 3.6rem;
+    margin-top: 3.6rem;
+    width: 30rem;
+    height: 2.3rem;
+}
+
+@media screen and (max-width: 1400px) { 
+    #searchInputUsers {
+        width: 45rem;
+        display: block;
+    }
+    .standard-button, #selectItems {
+        margin-top: 2rem;
+    }
+    #selectItemsLabel {
+        margin-top: 2.6rem;
+    }
+    #create-user {
+        margin-left: 3.6rem;
+    }
+}
+
+@media screen and (max-width: 1000px) { 
+    #searchInputUsers {
+        width: 35rem;
+        display: block;
+    }
+    .first-button-block {
+        display: block;
+    }
+    #create-user, #table-lable {
+        margin-left: 3.6rem;
+    }
+    #upload-input {
+        margin-left: 2.6rem;
+    }
+}
+
+@media screen and (max-width: 670px) { 
+    #searchInputUsers {
+        width: 19rem;
+        display: block;
+    }
+    .first-button-block {
+        display: block;
+    }
+    #create-user, #table-lable, #uploadButton {
+        margin-left: 3.6rem;
+    }
+    #upload-input {
+        margin-left: 2.6rem;
+        display: block;
+        margin-top: 1rem;
+    }
+    #selectItemsLabel {
+        margin-top: 0.6rem;
+    }
+    #selectItems {
+        margin-top: 0;
+    }
+    #uploadButton {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 400px) { 
+    #searchInputUsers {
+        width: 19rem;
+        display: block;
+    }
+    .first-button-block {
+        display: block;
+    }
+    #create-user, #table-lable, #searchInputUsers, #uploadButton {
+        margin-left: 2rem;
+    }
+    #upload-input {
+        margin-left: 1rem;
+    }
+}
+
+#searchInputUsers::-webkit-input-placeholder {
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  background-size: 3%;
+  text-indent: 5%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+#searchInputUsers::-moz-placeholder {
+  /* Firefox 19+ */
+  text-indent: 5%;
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  text-indent: 5%;
+  background-size: 3%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+#searchInputUsers:-moz-placeholder {
+  /* Firefox 18- */
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  background-size: 3%;
+  text-indent: 5%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+#searchInputUsers:-ms-input-placeholder {
+  /* IE 10- */
+  border: solid 1px rgba(110, 130, 152, 0.5);
+  background-size: 3%;
+  text-indent: 5%;
+  background-image: url(../../assets/img/icons8-ios-filled-50.png);
+  background-position: 1% 50%;
+  background-repeat: no-repeat; 
+}
+
+[type=file] {
+  visibility: hidden;
+  position: relative;
+  padding-left: 6rem;
+  top: -5px;
+  height: 2.5rem;
+  width: 17.5rem;
+  font-size: 14px;
+}
+
+#upload-input::before {
+  content: 'Upload Table';
+  position: absolute;
+  visibility: visible;
+  left: 1rem;
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  outline: none;
+  cursor: pointer;
+  width: 9.1rem;
+  height: 2.3rem;
+  background-color: #00a28f;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+}
+
+#upload-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.btn-label {
+  padding-top: 0.5rem;
+  padding-left: 1.3rem;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+}
+
+.error-message {
+    margin-left: 2.5rem;
+    margin-top: 0.8rem;
+    position: absolute;
+}
+
+#downloadTemplate {
+    width: 10rem;
 }

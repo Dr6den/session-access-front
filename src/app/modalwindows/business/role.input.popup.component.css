@@ -1,0 +1,187 @@
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+}
+
+:host ::ng-deep div.application .multiselect-item-checkbox input[type=checkbox] + div:before {
+    border-radius:50%;
+}
+
+:host ::ng-deep div.application .multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+    background: white !important;
+}
+:host ::ng-deep div.application .multiselect-item-checkbox input[type=checkbox]:checked + div:after {
+    box-sizing: content-box;
+    content: '';
+    color: #337ab7;
+    position: absolute;
+    top: 65%;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    margin-top: -9px;
+    border: none;
+    text-align: center;
+    transition: all .4s ease;
+    border-radius:50%;
+    background-color: #337ab7;
+}
+
+.roles-input-labels {
+    margin-left: 2rem;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #323232;
+}
+
+input[type="text"] {
+    padding: 0.7rem;
+}
+
+.error-message {
+    margin-left: 35%;
+}
+
+.modal-body {
+    margin-top: 0rem;
+    padding-top: 0rem;
+    max-height: 35rem;
+    overflow-y: scroll;
+}
+
+.textbox, .dropdown {    
+    margin-right: 2rem;
+    height: 2.3rem;
+    width: 28rem;
+}
+
+.textbox {
+   border-radius: 6px;
+   border: solid 1px #6e8298;
+}
+
+.field-of-form {
+    margin-top: 1.5rem;
+}
+
+.submit-button {
+   margin-right: 2rem;
+   margin-left: 1.4rem;
+}
+
+.log-sub-div input {
+    margin-bottom: 2.8rem;
+    margin-top: 2.8rem;
+}
+
+.log-sub-div {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.modal {
+    left: -10%;
+}
+
+.modal-title {
+    margin-left: 1rem;
+    font-family: Roboto;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.modal-content {
+    width: 41rem;
+    margin: 0rem;
+    padding: 0rem;
+    border: solid 1px #6e8298;
+}
+
+.close {
+    position: absolute;
+    right: 1.8rem;
+    top: 1.8rem;
+    width: 20px;
+    height: 20px;
+}
+.close:hover {
+    opacity: 0;
+}
+.close:before, .close:after {
+    position: absolute;
+    top: 0rem;
+    left: 15px;
+    content: ' ';
+    height: 30px;
+    width: 2px;
+    background-color: #ffffff;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 850px) { 
+    .modal-content {
+        width: 36rem;
+    }
+    :host ::ng-deep .roles-input-labels {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    :host ::ng-deep .field-of-form label {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+}
+
+@media screen and (max-width: 700px) { 
+    .modal-content {
+        width: 30rem;
+    }
+    :host ::ng-deep .multiselect-dropdown {
+        width: 20rem;
+        margin-left: 6rem;
+    }
+    :host ::ng-deep .input-dynamic input {
+        width: 20rem;
+        margin-left: 6rem;
+    }
+    :host ::ng-deep .field-of-form label {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+}
+
+@media screen and (max-width: 580px) { 
+    .modal-content {
+        width: 22rem;
+    }
+    :host ::ng-deep .multiselect-dropdown {
+        width: 15rem;
+        margin-left: 14rem;
+    }
+    :host ::ng-deep .input-dynamic input {
+        width: 15rem;
+        margin-left: 14rem;
+    }
+    :host ::ng-deep .field-of-form label {
+        margin-top: 1rem;
+        margin-left: 3rem;
+    }
+    :host ::ng-deep .modal {
+        left:0;
+    }
+}

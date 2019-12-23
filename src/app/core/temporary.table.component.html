@@ -1,0 +1,49 @@
+<app-header [title]="title"></app-header>
+
+<div class="to-homepage">
+    <a href="javascript:void(0);" (click)="resetForm()">&lt; - Back to Home</a>
+</div>
+
+<div [ngStyle]="{'color': uploadError === 'error message' ? '#FFFFFF' : 'red'}" class="error-message">
+        {{uploadError}}
+</div>
+
+<div class="button-home">
+    <input type="text" id="searchInput" placeholder="Search {{title}}" (input)="filter($event.target.value)">
+       
+    <span class="first-button-block">
+        <button (click)="push()" class="standard-button" id="create-user">
+            Push
+        </button>
+    </span>
+    
+    <select id="selectItems" type="number" class="select-items" (change)="changeRolesOutputOnPage($event.target.value)">
+      <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
+    </select>
+    <label id="selectItemsLabel" class="label-show" for="selectItems">Show</label>
+</div>
+
+<table-sortable
+    [columns]="roleColumns"
+    [data]="roleRows"
+    [sort]="roleSorting"
+    [schemeMetadata]="schemeMetadata"
+    [schemeName]="title"
+    [numberOfColumns]="tableNumberOfColumns"
+    [tempId]="validationResponse"
+    (filterByNames)="filterByNames($event)"
+    (callUserInputPopup)='userInput($event)'
+    (callRoleInputPopup)='roleInput($event)'>
+    Loading table...
+</table-sortable>
+
+<div class="pagination">
+    <span (click)="firstPageTabulate()" class="pagination-elem">&#171;</span>
+    <span (click)="previousPageTabulate()" class="pagination-elem"><</span>
+    <span class="page-number">{{currentPageNumber}}</span>
+    <span (click)="nextPageTabulate()" class="pagination-elem">></span>
+    <span (click)="lastPageTabulate()" class="pagination-elem">&#187;</span>
+</div>
+
+<user-input-popup></user-input-popup>
+<role-input-popup></role-input-popup>

@@ -1,0 +1,50 @@
+<div class="modal-table-popup modal-content m-3 shadow rounded" [ngStyle]="{'display':display}" (click)="stopPropogation($event)" (clickOutside)="onClickedOutside($event)">            
+            <div class="pressed-field" (click)="sortAscending($event)">
+                <span class="sort-arrows">
+                    <img [style.visibility]="(visibleAscendingIcon) ? 'visible':'hidden'" src="assets/img/sort-ascending-icon.svg"
+                        class="popups-images"/> 
+                    <img [style.visibility]="(visibleSelectedAscendingIcon) ? 'visible':'hidden'" src="assets/img/sort-ascending-selected-icon.svg"
+                        class="popups-images"/>
+                </span>
+                <span class="pressed-text">Sort ascending</span>
+            </div>
+            <div class="pressed-field" (click)="sortDescending($event)">
+                <span class="sort-arrows">
+                    <img [style.visibility]="(visibleDescendingIcon) ? 'visible':'hidden'" src="assets/img/sort-descending-icon.svg"
+                        class="popups-images"/> 
+                    <img [style.visibility]="(visibleSelectedDescendingIcon) ? 'visible':'hidden'" src="assets/img/sort-descending-selected-icon.svg"
+                        class="popups-images"/>
+                </span>
+                <span class="pressed-text">Sort descending</span>
+            </div>
+            <div class="search-input" (click)="stopPropogation($event)">
+                <input type="text" class="searchInputPopup" placeholder="Search" (click)="stopPropogation($event)" (input)="filter($event.target.value)">
+            </div>
+            <div class="checkbox-field" (click)="stopPropogation($event)">
+                <div class="pressed-field" (click)="selectAll($event)"> 
+                    <input type="checkbox" id="selectall" name="selectall" value="selectall" class="checkBox" [(ngModel)]="selectAllChecked" 
+                           [ngModelOptions]="{standalone: true}" (click)="selectAll($event)">
+                    <span class="label-checkbox-container" (click)="selectAll($event)">
+                        <label for="selectall" class="checkBoxLabel" (click)="selectAll($event)">Select All</label>
+                    </span>
+                </div>
+                <div class="pressed-field" (click)="deselectAll($event)"> 
+                    <input type="checkbox" id="selectall" name="deselectall" value="deselectall" class="checkBox" [(ngModel)]="deselectAllChecked" 
+                           [ngModelOptions]="{standalone: true}" (click)="deselectAll($event)">
+                    <span class="label-checkbox-container" (click)="deselectAll($event)">
+                        <label for="deselectall" class="checkBoxLabel" (click)="deselectAll($event)">Deselect All</label>
+                    </span>
+                </div>
+                <div *ngFor="let val of checkboxesText; let i=index" class="pressed-field" (click)="selectCheckbox($event, i)">
+                    <input type="checkbox" name="selectall" value="selectall" class="checkBox" [(ngModel)]="checkedCheckboxes[i]"
+                       [ngModelOptions]="{standalone: true}" (click)="selectCheckbox($event, i)">
+                    <span class="label-checkbox-container" (click)="selectCheckbox($event, i)">
+                        <label for="selectall"  class="checkBoxLabel" (click)="selectCheckbox($event, i)">{{val}}</label>
+                    </span>
+                </div>
+            </div>
+            <div class="buttons-block" (click)="stopPropogation($event)">
+                <input type="submit" (click)="filterTable($event)" class="button-color submit-button" value="Ok">
+                <input type="button" (click)="closeModalDialog($event)" class="button-cancel" value="Cancel">
+            </div>
+</div>

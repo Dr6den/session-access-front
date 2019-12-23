@@ -1,0 +1,50 @@
+<div class="modal" [ngStyle]="{'display':display}">
+    <!-- modal-dialog -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- modal-header -->
+        <div class="modal-header color-class">
+            <h6 class="modal-title">{{pagetitle}}</h6>
+            <span class="close" (click)="closeModalDialog()"></span>
+        </div>  
+        <div [ngStyle]="{'color': errorMessage === 'error message' ? '#FFFFFF' : 'red'}" class="error-message">
+            {{errorMessage}}
+        </div>
+        <!-- modal-body -->
+        <div class="modal-body">
+            <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">                
+                <div *ngIf="schemeMetadata">
+                    
+                    <ng-container *ngIf="schemeMetadata['containsNestedProperties']; then nested; else notNested">
+                    </ng-container>
+                
+                    <ng-template #nested>
+                        <div class="field-of-form">
+                            <label for="rolename" class="user-input-labels">Name of role</label>
+                        <input type="text" name="rolename" class="textbox float-right" [(ngModel)]="rolename" required/>
+                        </div>      
+                   
+                        <div class="field-of-form application">
+                            <label for="multiselectCogs" class="user-input-labels">Application</label>
+                            <div class="dropdown float-right">
+                                    <ng-multiselect-dropdown id="rolesDropdown" [placeholder]="'At first select an application'" [data]="applicationDropdownList" 
+                                             [(ngModel)]="appSelectedDropdownItems" [ngModelOptions]="{standalone: true}"
+                                             [settings]="dropdownSettings" (onSelect)="onApplicationSelect($event)" [disabled]='updateMode'>
+                                    </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <ng-template #notNested>
+                        
+                    </ng-template>
+                </div>
+                <template #dropboxcontainer></template>
+                    <div class="log-sub-div">
+                        <input type="submit" (click)="submitForm(form)" class="button-color submit-button float-right" value="Save {{schemeName}}">
+                        <input type="button" (click)="closeModalDialog()" class="button-cancel float-right" value="Cancel">
+                    </div>
+                </form>
+        </div> 
+        </div>
+    </div>
+</div>

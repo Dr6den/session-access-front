@@ -1,0 +1,26 @@
+.roles-input-labels {
+    max-width: 7.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+input[type="text"] {
+    padding: 0.7rem;
+}
+
+.field-of-form {
+    margin-top: 1.5rem;
+}
+
+.input-dynamic {
+    margin-right: 2rem;
+    height: 2.3rem;
+    width: 28rem;
+}
+
+.input-dynamic input {
+    width: 28rem;
+    height: 2.3rem;
+    border-radius: 6px;
+    border: solid 1px #adadad;
+}

@@ -1,1 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
+.color-class {
+    background-color: #006eb5;
+}
+
+.button-color {
+    background-color: rgba(0, 162, 143, 0.8);
+    color: #ffffff;
+    border: solid 1px #eeeeee;
+}
+
+.button-cancel {
+    background-color: #ffffff;
+    color: rgba(0, 162, 143, 0.8);
+    border: solid 1px #00a28f;
+}
+
+.color-text {
+    color: darkturquoise;
+}
+
+.role-name {
+    background-color: aquamarine;
+}
+
+.standard-button {
+    width: 9.1rem;
+    height: 2.3rem;
+    margin-left: 0.9rem;
+    background-color: #00a28f;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.header-color {
+  box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+  background-image:
+    linear-gradient(
+      to top right, 
+      #006eb5, #004069
+    );
+}
+
+.header-color-without-shadow {
+  background-image:
+    linear-gradient(
+      to top right, 
+      #006eb5, #004069
+    );
+}
+
+.table-footer-color {
+  box-shadow: 0.1em 0.1em 1px rgba(122,122,122,0.5);
+  background-image:
+    linear-gradient(
+      to top right, 
+      #DCDCDC, #E6E6FA
+    );
+}
+
+.text-headers-color {
+    color: #ffffff;
+}
+
+.text-links-color {
+    color: #323232;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(assets/fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: Asap;
+    src: url(assets/fonts/Asap-Regular.ttf);
+}

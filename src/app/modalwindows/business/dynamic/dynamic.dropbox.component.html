@@ -1,0 +1,9 @@
+<div class="field-of-form">
+    <label for="multiselectAccess" class="user-input-labels">{{title}}</label>
+    <div class="dropdown float-right">
+        <ng-multiselect-dropdown id="dropbox" [placeholder]="'Please, Select Item'" [data]="dropdownList" 
+                                 [(ngModel)]="selectedItems" [ngModelOptions]="{standalone: true}"
+                                 [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeselect($event)">
+        </ng-multiselect-dropdown>
+    </div>
+</div>

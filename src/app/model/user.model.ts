@@ -1,20 +1,19 @@
+import { ShortRole } from "../model/short.role.model";
+
 export class User {
     public USERNAME?: string;
     public USERID?: string;
     public NTSID?: string;
     public NTDOMAINSID?: string;
-    public ROLES?: Array<string>;
+    public ROLES?: Array<ShortRole>;
+    public USEREMAIL: string;
 
-    constructor(public username?: string,
-                public userid?: string,
-                public ntsid?: string,
-                public ntdomainsid?: string,
-                public roles?: Array<string>) {
-	this.USERNAME = username;
-	this.USERID = userid;
-	this.NTSID = ntsid;
-        this.NTDOMAINSID = ntdomainsid;
-	this.ROLES = roles;
+    constructor(USERNAME?: string,
+                USERID?: string,
+                NTSID?: string,
+                NTDOMAINSID?: string,
+                USEREMAIL?: string,
+                ROLES?: Array<ShortRole>) {	
     }
 }
 

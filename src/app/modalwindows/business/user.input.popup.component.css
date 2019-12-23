@@ -1,0 +1,204 @@
+:host ::ng-deep .multiselect-dropdown .dropdown-btn .selected-item {
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+    margin-bottom: 0.1rem;
+}
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+    max-height: 5rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+input[type="text"] {
+    padding: 0.7rem;
+}
+
+.error-message {
+    margin-left: 35%;
+}
+
+.modal-body {
+    margin-top: 0rem;
+    padding-top: 0rem;
+}
+
+.user-input-labels {
+    margin-left: 2rem;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #323232;
+}
+
+.textbox, .dropdown {
+    margin-right: 2rem;
+    height: 2.3rem;
+    width: 28rem;
+}
+
+.textbox {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+}
+
+.user-textbox {
+    border-radius: 6px;
+    border: solid 1px #6e8298;
+    margin-right: 0.2rem;
+    height: 2.3rem;
+    width: 21.5rem;
+}
+
+.field-of-form {
+    margin-top: 1.5rem;
+}
+
+.submit-button {
+   margin-right: 2rem;
+   margin-left: 1.4rem;
+}
+
+.log-sub-div input {
+    margin-bottom: 2.8rem;
+    margin-top: 2.8rem;
+}
+
+.log-sub-div {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.modal {
+    left: -10%;
+}
+
+.modal-title {
+    margin-left: 1rem;
+    font-family: Roboto;
+    font-size: 28px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
+}
+
+.modal-content {
+    width: 41rem;
+    margin: 0rem;
+    padding: 0rem;
+    border: solid 1px #6e8298;
+}
+
+.close {
+    position: absolute;
+    right: 1.8rem;
+    top: 1.8rem;
+    width: 20px;
+    height: 20px;
+}
+.close:hover {
+    opacity: 0;
+}
+.close:before, .close:after {
+    position: absolute;
+    top: 0rem;
+    left: 15px;
+    content: ' ';
+    height: 30px;
+    width: 2px;
+    background-color: #ffffff;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 850px) { 
+    .modal-content {
+        width: 36rem;
+    }
+    :host ::ng-deep .multiselect-dropdown {
+        width: 24rem;
+        margin-left: 4rem;
+    }
+    .textbox {
+        width: 24rem;
+    }
+    .user-textbox {
+        width: 17.5rem;
+    }
+    :host ::ng-deep .user-input-labels {
+        margin-left: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 650px) { 
+    .modal-content {
+        width: 28rem;
+    }
+    :host ::ng-deep .multiselect-dropdown {
+        width: 18rem;
+        margin-left: 0rem;
+    }
+    .textbox {
+        width: 18rem;
+    }
+    .user-textbox {
+        width: 11.5rem;
+    }
+    :host ::ng-deep .user-input-labels {
+        margin-left: 0.5rem;
+        width: 2rem;
+        overflow-x: hidden;
+    }
+    :host ::ng-deep .textbox, .dropdown {
+        width: 18rem;
+    }
+    :host ::ng-deep .modal {
+        left:0;
+    }
+}
+
+@media screen and (max-width: 450px) { 
+    .modal-content {
+        width: 22rem;
+    }
+    :host ::ng-deep .multiselect-dropdown {
+        width: 14rem;
+        margin-left: 0rem;
+    }
+    .textbox {
+        width: 14rem;
+    }
+    .user-textbox {
+        width: 7rem;
+    }
+    :host ::ng-deep .user-input-labels {
+        margin-left: 0.5rem;
+        width: 2rem;
+        overflow-x: hidden;
+    }
+    :host ::ng-deep .textbox, .dropdown {
+        width: 14rem;
+    }
+    :host ::ng-deep .modal {
+        left:0;
+    }
+}

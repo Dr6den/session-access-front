@@ -1,0 +1,57 @@
+<div class="modal"  [ngStyle]="{'display':display}">
+    <!-- modal-dialog -->
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- modal-header -->
+        <div class="modal-header color-class">
+            <h6 class="modal-title">Upload Table</h6>
+            <span class="close" (click)="closeModalDialog()"></span>
+        </div>      
+
+            <!-- modal-body -->
+            <div class="modal-body">
+                <div class="progress-div">
+                    <label for="progress-bar" class="progress-label">Upload Progress:</label>
+                    <progress id="progress-bar" max="100" [value]="progressValue"> </progress>
+                </div>
+                <tabs>
+                    <tab tabTitle="Choose the sheet">
+                        <div class="tabs-content" >
+                            <div class="single-tab">
+                                <div [ngStyle]="{'color': uploadPopupError === 'error message' ? '#D2E0E6' : 'red'}" class="upload-error-message">
+                                    {{uploadPopupError}}
+                                </div>
+                                <div class="text-field">
+                                    Document: {{documentName}}
+                                </div>
+                                <div class="select-upload-block">
+                                    <label id="selectSheetItemsLabel" class="label-show" for="selectSheetItems">Please, choose tab</label>
+                                    <select id="selectSheetItems" type="number" class="select-items" (change)="changeSheet($event.target.value)">
+                                        <option *ngFor="let level of levels" [value]="level">{{level}}</option>
+                                    </select>
+                                </div>
+                                
+                                <button (click)="selectSheet()" class="validate-button standard-button">Send</button>
+                                <div></div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab tabTitle="Information">
+                        <div class="tabs-content" >
+                            <div class="single-tab">
+                                <div [ngStyle]="{'color': uploadPopupError === 'error message' ? '#D2E0E6' : 'red'}" class="upload-error-message">
+                                    {{uploadPopupError}}
+                                </div>
+                                <div class="text-field">
+                                    Lines Loaded:{{linesLoaded}}
+                                </div>
+                                <button (click)="validate()" class="validate-button standard-button">Send</button>
+                                <div></div>
+                            </div>
+                        </div>
+                    </tab>
+                </tabs>
+            </div>
+        </div>
+    </div>
+</div>
